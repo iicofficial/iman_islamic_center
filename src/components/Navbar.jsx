@@ -109,9 +109,9 @@ function Navbar() {
 
                     {/* Social Icons */}
                     <ul className="navbar-nav ms-lg-1 mt-3 mt-lg-0 navbar-right-items align-items-center">
-                        <li className="nav-item me-2"><a href="https://facebook.com" target="_blank" className="social-icon facebook"><FaFacebookF /></a></li>
-                        <li className="nav-item me-2"><a href="https://twitter.com" target="_blank" className="social-icon twitter"><FaTwitter /></a></li>
-                        <li className="nav-item me-2"><a href="https://youtube.com" target="_blank" className="social-icon youtube"><FaYoutube /></a></li>
+                        <li className="nav-item me-1"><a href="https://facebook.com" target="_blank" className="social-icon facebook"><FaFacebookF /></a></li>
+                        <li className="nav-item me-1"><a href="https://twitter.com" target="_blank" className="social-icon twitter"><FaTwitter /></a></li>
+                        <li className="nav-item me-1"><a href="https://youtube.com" target="_blank" className="social-icon youtube"><FaYoutube /></a></li>
                         <li className="nav-item"><a href="https://linkedin.com" target="_blank" className="social-icon linkedin"><FaLinkedinIn /></a></li>
                     </ul>
                 </div>
