@@ -210,7 +210,8 @@
 
 /* Right items wrapper */
 .navbar-right-items {
-  display: flex;
+  display: flex !important;
+  /* Ensure it stays visible on desktop */
   align-items: center;
 }
 
@@ -274,10 +275,13 @@
 
 @media (max-width: 991px) {
   .navbar-logo {
-    height: 45px;
-    transform: scale(1) !important;
+    height: 55px;
+    /* Slightly larger base height for mobile */
+    transform: scale(1.6) !important;
+    /* Increased scale for mobile prominence */
     transform-origin: left center;
-    margin-right: 15px !important;
+    margin-right: 25px !important;
+    /* Adjusted margin for the new scale */
   }
 
   .navbar-brand-text {
