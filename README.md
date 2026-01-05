@@ -1,141 +1,93 @@
-# iman_islamic_center
+# Iman Islamic Center Website
 
-Iman Islamic Center Website
-Project Overview
+A premium, fully responsive website for Iman Islamic Center, built with React and Vite. This platform is designed to connect the community, provide essential religious services, and offer a modern user experience.
 
-This is a fully responsive website for Iman Islamic Center, built with React and Vite.
-It replicates the requested client theme and features:
+## ✨ Key Features
 
-Hero section with Donate button
+*   **Premium Visual Identity**: High-end modern design using the **'Outfit'** typography and a professional **#27569b** color palette.
+*   **Dynamic Hero Section**: Stunning architectural visuals with direct "Donate" action and localized branding for Lincoln, NE.
+*   **Real-time Prayer Times**: Integrated Hijri and Gregorian calendar dates with styled daily and Jumu'ah iqamah tables.
+*   **Interactive Reservation System**: Dedicated "Book a Visit" system for visitors to schedule meetings with the team.
+*   **Dedicated Contact Center**: A separate, full-featured contact page with modern form validation and glassmorphism styling.
+*   **Responsive Navigation**: Optimized navbar featuring a unique "Action Pod" for quick contact access.
+*   **Event Management**: Browse upcoming and past community events with dedicated detail views.
 
-Navbar with smooth scrolling
+## 📂 Project Structure
 
-Prayer Times section with dynamic Hijri & Gregorian dates
-
-Daily and Jumu'ah prayer tables
-
-Events section with detail pages
-
-Footer with contact info
-
-Fully styled to match client’s color theme (#27569b)
-
-
-```
+```text
 iman_islamic_center/
 │
 ├─ public/
-│   └─ index.html                  # Main HTML file
+│   └─ forms/                      # Downloadable PDF/DOCX forms
 │
 ├─ src/
+│   ├─ assets/                     # High-resolution images and logos
 │   ├─ components/
-│   │   ├─ Navbar.jsx               # Navbar with Donate button
-│   │   ├─ Hero.jsx                 # Hero section
-│   │   ├─ PrayerTimes.jsx          # Daily & Jumu'ah prayer tables with current dates
-│   │   ├─ Events.jsx               # Events list
-│   │   ├─ EventDetails.jsx         # Single event details page
-│   │   ├─ Donate.jsx               # Donate section
-│   │   └─ Footer.jsx               # Footer section
+│   │   ├─ Navbar.jsx              # Optimized Navbar with Action Pod
+│   │   ├─ Hero.jsx                # Cinematic entry section
+│   │   ├─ Reservation.jsx         # Modern visiting/booking system
+│   │   ├─ ContactPage.jsx         # Dedicated Contact Hub
+│   │   ├─ Contact.jsx             # Reusable Contact Form component
+│   │   ├─ PrayerTimes.jsx         # Dynamic iqamah scheduling
+│   │   ├─ Events.jsx              # Community events viewer
+│   │   ├─ Donate.jsx              # High-contrast donation section
+│   │   └─ Footer.jsx              # Branded site footer
 │   │
-│   ├─ PrayerTimes.css              # Styles for PrayerTimes component
-│   ├─ App.jsx                      # Main app with routes
-│   ├─ main.jsx                     # ReactDOM render
-│   └─ index.css                    # Global styles
+│   ├─ App.jsx                     # Centralized Routing
+│   ├─ index.css                   # Global Design System
+│   └─ main.jsx                    # Entry point
 │
-├─ package.json                     # Project dependencies
-├─ vite.config.js                   # Vite configuration
-└─ README.md                        # This file
+├─ package.json                    # Configuration & Dependencies
+└─ README.md                       # Documentation
 ```
-Technologies Used
 
-Frontend: React, Vite, JSX, CSS, Bootstrap
+## 🚀 Technologies Used
 
-Routing: react-router-dom
+*   **Core**: [React 19](https://react.dev/), [Vite](https://vitejs.dev/)
+*   **Routing**: [React Router 7](https://reactrouter.com/)
+*   **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+*   **Styling**: Vanilla CSS (Custom Design System), [Bootstrap 5](https://getbootstrap.com/)
+*   **Dates**: [Moment.js](https://momentjs.com/) with Hijri support
 
-Dates: JavaScript Date for Gregorian, Hijri calculated using JS conversion
+## 🛠️ Installation & Setup
 
-Styling: Client theme color #27569b
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd iman_islamic_center
+   ```
 
-Backend (optional): JSON Server (for events data)
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Features
+3. **Development Mode**
+   ```bash
+   npm run dev
+   ```
 
-Responsive Navbar
+4. **Production Build**
+   ```bash
+   npm run build
+   ```
 
-Includes smooth scrolling
+## 🎨 Color Palette & Design System
 
-Donate button linking to donate section
+| Element | Color |
+| :--- | :--- |
+| **Primary Theme** | `#27569b` |
+| **Secondary Accord** | `#1e467f` |
+| **Highlight Blue** | `#87CEEB` |
+| **Typography** | `Outfit`, `Poppins` |
 
-Hero Section
+## 📝 Notes for the Client
 
-Client-branded hero image and text
+*   **SEO Optimized**: Semantic HTML and descriptive meta-tags are used throughout the site.
+*   **High Performance**: Built with Vite for ultra-fast loading speeds.
+*   **Ready for Vercel**: Fully configured for one-click deployment to Vercel or Netlify.
+*   **User Friendly**: All forms include visual feedback and modern validation states.
+*   **Scalable**: New events or forms can be added easily by updating the respective JSON or assets.
 
-Prayer Times Section
-
-Shows today’s Gregorian and Hijri dates
-
-Daily prayers table
-
-Jumu'ah prayers table
-
-Events Section
-
-List of events
-
-Clicking on an event shows event details
-
-Donate Section
-
-Styled with client theme
-
-Footer
-
-Contact info, address, and links
-
-Installation & Running
-1. Clone the repository
-git clone <your-repo-url>
-cd iman_islamic_center
-
-2. Install dependencies
-npm install
-
-3. Run development server
-npm run dev
-
-
-Open the displayed URL (usually http://localhost:5173) in your browser
-
-4. Build for production
-npm run build
-
-
-This will create a dist/ folder ready to deploy on any web server
-
-Usage Notes
-
-The current date (Gregorian & Hijri) is shown dynamically above the prayer tables.
-
-All sections are fully responsive and follow the client’s color theme.
-
-Events can be extended via JSON server or API.
-
-Only the developer needs Vite/Node.js to run locally; the client can view the built site from dist/ on any server.
-
-Color Theme
-Element	Color
-Primary Theme	#27569b
-Table Header	#27569b
-Table Row Hover	#d0e4f8
-Background	#f8f9fa
-Text	#333
-Notes for the Client
-
-The site is fully functional and responsive.
-
-No special software required to view the site — only a web browser.
-
-Developer can update prayer times or events by editing PrayerTimes.jsx or Events.jsx.
-
-Donate button can be linked to any payment processor.
-
+---
+*Created with care for Iman Islamic Center.*
