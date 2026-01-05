@@ -61,13 +61,22 @@
   /* Keep black on hover */
 }
 
+/* Remove dropdown arrows (carets) for a modern look */
+.dropdown-toggle::after {
+  display: none !important;
+}
+
 /* =========================
    Donate button
 ========================= */
 .btn-donate {
   background: linear-gradient(135deg, #ff9f00, #ffb733);
   color: #fff;
-  font-weight: 600;
+  font-weight: 900 !important;
+  text-shadow: 0.5px 0px 0px #fff, -0.5px 0px 0px #fff;
+  /* Extra thickness shadow */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   padding: 8px 22px;
   border-radius: 999px;
   border: none;

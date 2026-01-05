@@ -38,17 +38,20 @@
 
 .hero-content h1,
 .hero-content p {
-  color: #1E2A38;
-  /* Dark text for contrast against white mosque */
-  text-shadow: none;
+  color: #000000;
+  /* Pure black */
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+    0 0 5px rgba(255, 255, 255, 0.9);
+  /* White halo effect for readability */
 }
 
 .hero-content h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 800;
   margin-bottom: 0.75rem;
 }
 
 .hero-content p {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
 }

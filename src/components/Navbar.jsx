@@ -47,9 +47,8 @@ function Navbar() {
                                 Home
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/test1">test1</Link></li>
-                                <li><Link className="dropdown-item" to="/test2">test2</Link></li>
-                                <li><Link className="dropdown-item" to="/test3">test3</Link></li>
+                                <li><Link className="dropdown-item" to="/">Main Page</Link></li>
+                                <li><a className="dropdown-item" href="#contact">Contact Us</a></li>
                             </ul>
                         </li>
 

@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import Events from "./components/Events";
 import Donate from "./components/Donate";
 import PrayerTimes from "./components/PrayerTimes";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 </div>
               </div>
               <Donate />
+              <Contact />
             </>
           }
         />
