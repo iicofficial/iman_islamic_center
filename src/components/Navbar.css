@@ -217,15 +217,14 @@
 /* =========================
    Responsive tweaks
 ========================= */
-/* =========================
-   Responsive tweaks
-========================= */
 
-/* Show dropdown on hover for all screen sizes */
-.nav-item.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-  animation: fadeInUp 0.3s ease forwards;
+/* Show dropdown on hover only for devices that support hover (Desktops) */
+@media (hover: hover) {
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    animation: fadeInUp 0.3s ease forwards;
+  }
 }
 
 /* Dropdown styling */
@@ -274,43 +273,100 @@
 }
 
 @media (max-width: 991px) {
+  .navbar-logo {
+    height: 45px;
+    transform: scale(1) !important;
+    transform-origin: left center;
+    margin-right: 15px !important;
+  }
+
+  .navbar-brand-text {
+    font-size: 1.2rem;
+  }
+
+  /* Premium Hamburger Styling - Bulletproof for Portrait */
+  .navbar-toggler {
+    z-index: 1050 !important;
+    position: relative;
+    border: 2px solid #000 !important;
+    padding: 6px 8px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+
+  /* Structural Stacking for Portrait Expansion */
+  .navbar-collapse {
+    background-color: #f8f9fa !important;
+    padding: 20px;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    /* Ensure visibility and height on mobile */
+    overflow-y: auto;
+    max-height: 80vh;
+    transition: none !important;
+    /* Disable transitions on mobile to avoid Android height bugs */
+  }
+
+  .navbar-collapse.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Make dropdowns work better on mobile (static stacking) */
+  .custom-navbar .dropdown-menu {
+    position: static !important;
+    float: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding-left: 20px !important;
+    background-color: transparent !important;
+    display: none;
+    /* Hidden by default on mobile */
+    overflow: visible !important;
+  }
+
+  .custom-navbar .dropdown-menu.show {
+    display: block !important;
+  }
+
+  .navbar-nav {
+    align-items: flex-start !important;
+    /* Left align items on mobile */
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    padding: 12px 0 !important;
+    width: 100%;
+  }
+
+  .middle-phone-modern {
+    flex-direction: column;
+    padding: 15px;
+    width: 100%;
+    margin: 15px 0 !important;
+    gap: 10px;
+  }
+
+  .pod-divider {
+    display: none;
+  }
 
   .social-icons,
   .navbar-right-items {
     margin-top: 1rem;
     flex-wrap: wrap;
-  }
-
-  .phone-number {
-    font-size: 1rem;
-  }
-
-  .navbar-logo {
-    height: 50px;
-  }
-
-  .navbar-brand-text {
-    font-size: 1.3rem;
-  }
-
-  /* Premium Hamburger Styling */
-  .navbar-toggler {
-    border: 2px solid #000 !important;
-    padding: 8px 10px !important;
-    border-radius: 12px !important;
-    transition: all 0.3s ease !important;
-    background: rgba(255, 255, 255, 0.2) !important;
-  }
-
-  .navbar-toggler:focus {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) !important;
-    outline: none !important;
-  }
-
-  .navbar-toggler-icon {
-    /* Custom dark hamburger bars */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    width: 24px !important;
-    height: 24px !important;
+    justify-content: center;
   }
 }

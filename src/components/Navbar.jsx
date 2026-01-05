@@ -45,7 +45,7 @@ function Navbar() {
                     <ul className="navbar-nav ms-auto align-items-center">
                         <li className="nav-item dropdown">
                             {/* Removed closeMenu from header so it can open sublinks on mobile */}
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 Home
                             </a>
                             <ul className="dropdown-menu">
@@ -55,7 +55,7 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 Events
                             </a>
                             <ul className="dropdown-menu">
@@ -65,7 +65,7 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 Prayer Times
                             </a>
                             <ul className="dropdown-menu">
@@ -75,7 +75,7 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 Forms
                             </a>
                             <ul className="dropdown-menu">
@@ -108,7 +108,7 @@ function Navbar() {
                     </div>
 
                     {/* Social Icons */}
-                    <ul className="navbar-nav ms-lg-1 mt-3 mt-lg-0 navbar-right-items align-items-center mob-hide-flex">
+                    <ul className="navbar-nav ms-lg-1 mt-3 mt-lg-0 navbar-right-items align-items-center d-none d-lg-flex">
                         <li className="nav-item me-2"><a href="https://facebook.com" target="_blank" className="social-icon facebook"><FaFacebookF /></a></li>
                         <li className="nav-item me-2"><a href="https://twitter.com" target="_blank" className="social-icon twitter"><FaTwitter /></a></li>
                         <li className="nav-item me-2"><a href="https://youtube.com" target="_blank" className="social-icon youtube"><FaYoutube /></a></li>
