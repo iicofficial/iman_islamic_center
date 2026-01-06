@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import Contact from "./Contact";
 import "./ContactPage.css";
 
 function ContactPage() {
+    const { t } = useLanguage();
     // Scroll to top when the page loads
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -13,8 +15,8 @@ function ContactPage() {
             {/* Minimalist Header for the dedicated page */}
             <div className="contact-page-header">
                 <div className="container">
-                    <h1>Contact Us</h1>
-                    <p>We are here to help and answer any questions you may have.</p>
+                    <h1>{t('contact.title')}</h1>
+                    <p>{t('contact.text')}</p>
                 </div>
             </div>
 
