@@ -12,7 +12,7 @@ export const translations = {
             prayerTimes: "Prayer Times",
             dailyPrayers: "Daily Prayers",
             jummahPrayers: "Jumu'ah Prayers",
-            constitution: "Constitution",
+            constitution: "Bylaws and Constitution",
             forms: "Forms",
             donate: "Donate",
             callUs: "Call Us"
