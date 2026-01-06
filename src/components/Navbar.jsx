@@ -85,8 +85,8 @@ function Navbar() {
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.marriageContracts')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.coupleReconciliation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.divorceFormalization')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.documentsTranslation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.certifiedTranslation')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.documentsTranslation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.funeralServices')}</a></li>
                             </ul>
                         </li>
