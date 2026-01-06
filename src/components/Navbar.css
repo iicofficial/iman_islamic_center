@@ -2,9 +2,9 @@
    Sticky + Dark Navbar
 ========================= */
 .custom-navbar {
-  background-color: #87CEEB !important;
-  /* Light/Sky Blue */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff !important;
+  /* Clean White */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 999;
   width: 100%;
 }
@@ -40,12 +40,13 @@
 }
 
 .navbar-brand-text {
-  color: #000000 !important;
+  color: #27569b !important;
+  /* Match logo blue */
   font-weight: 900;
   font-size: 1.15rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-shadow: 0.5px 0px 0px #000, -0.5px 0px 0px #000;
+  text-shadow: none;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -259,9 +260,9 @@
 }
 
 .custom-navbar .dropdown-item:hover {
-  background-color: #87CEEB !important;
-  /* Keep your theme blue */
-  color: #000000 !important;
+  background-color: #e3f2fd !important;
+  /* Light blue tint */
+  color: #27569b !important;
   transform: translateX(8px) scale(1.02);
   /* Modern slide and slight grow */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
