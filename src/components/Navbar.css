@@ -1,10 +1,11 @@
-/* =========================
-   Sticky + Dark Navbar
-========================= */
 .custom-navbar {
-  background-color: #ffffff !important;
-  /* Clean White */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #b5d8ff !important;
+  /* Softened Light Blue */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid #27569b;
+  /* Client Logo Blue Border */
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
   z-index: 999;
   width: 100%;
 
