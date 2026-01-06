@@ -5,23 +5,30 @@ import "./DownloadForms.css";
 function DownloadForms() {
     const forms = [
         {
-            title: "Membership Form",
-            description: "Apply to become a formal member of the Iman Islamic Center community.",
-            fileName: "membership.pdf",
-            icon: <FaFilePdf className="pdf-icon" />,
-            format: "PDF"
+            title: "Constitution and Bylaws",
+            description: "Official constitution and bylaws of the Iman Islamic Center.",
+            fileName: "Constitution and bylaws.docx",
+            icon: <FaFileWord className="word-icon" />,
+            format: "DOCX"
         },
         {
-            title: "Donation Form",
-            description: "Manual form for recurring donations or specific project contributions.",
-            fileName: "donation.pdf",
-            icon: <FaFilePdf className="pdf-icon" />,
-            format: "PDF"
+            title: "Monthly Commitment Form",
+            description: "Pledge your monthly contribution to support the Islamic Center.",
+            fileName: "Islamic_Center_Monthly_Commitment_Form.docx",
+            icon: <FaFileWord className="word-icon" />,
+            format: "DOCX"
         },
         {
-            title: "Volunteer Application",
-            description: "Join our team of volunteers and help us serve the community.",
-            fileName: "volunteer.docx",
+            title: "ELC Member Work Form",
+            description: "Application form for Executive Leadership Committee member positions.",
+            fileName: "ELC Member work form.docx",
+            icon: <FaFileWord className="word-icon" />,
+            format: "DOCX"
+        },
+        {
+            title: "Board of Directors Work Form",
+            description: "Application form for Board of Directors member positions.",
+            fileName: "board of directors member work form.docx",
             icon: <FaFileWord className="word-icon" />,
             format: "DOCX"
         }
