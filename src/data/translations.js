@@ -19,7 +19,7 @@ export const translations = {
             coupleReconciliation: "Couple Reconciliation",
             divorceFormalization: "Divorce Formalization",
             documentsTranslation: "Documents Translation",
-            certifiedTranslation: "Certified Translation",
+            certifiedTranslation: "Certified Document Translation",
             funeralServices: "Funeral Services",
             donate: "Donate",
             callUs: "Call Us"
@@ -133,7 +133,7 @@ export const translations = {
             coupleReconciliation: "المصالحة الزوجية",
             divorceFormalization: "إضفاء الطابع الرسمي على الطلاق",
             documentsTranslation: "ترجمة الوثائق",
-            certifiedTranslation: "الترجمة المعتمدة",
+            certifiedTranslation: "الترجمة المعتمدة للوثائق",
             funeralServices: "خدمات الجنازة",
             donate: "تبرع",
             callUs: "اتصل بنا"
