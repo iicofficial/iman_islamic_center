@@ -31,6 +31,28 @@ function Navbar() {
                     </div>
                 </Link>
 
+                {/* Language Toggle - Moved here between logo and menu */}
+                <button
+                    className="btn btn-link text-decoration-none fw-bold language-toggle ms-3"
+                    onClick={toggleLanguage}
+                    style={{
+                        color: '#000',
+                        fontSize: '1.15rem',
+                        border: '2px solid #000',
+                        borderRadius: '8px',
+                        padding: '6px 16px',
+                        minWidth: '200px',
+                        textAlign: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    <span>English</span>
+                    <span className="mx-2" style={{ opacity: 0.5 }}>|</span>
+                    <span>العربية</span>
+                </button>
+
                 {/* Hamburger Toggler */}
                 <button
                     className="navbar-toggler"
@@ -102,7 +124,6 @@ function Navbar() {
                                 {t('navbar.forms')}
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="/forms/Constitution and bylaws.docx" download onClick={closeMenu}>{t('downloadForms.constitutionTitle')}</a></li>
                                 <li><a className="dropdown-item" href="/forms/Islamic_Center_Monthly_Commitment_Form.docx" download onClick={closeMenu}>{t('downloadForms.commitmentTitle')}</a></li>
                                 <li><a className="dropdown-item" href="/forms/ELC Member work form.docx" download onClick={closeMenu}>{t('downloadForms.elcTitle')}</a></li>
                                 <li><a className="dropdown-item" href="/forms/board of directors member work form.docx" download onClick={closeMenu}>{t('downloadForms.boardTitle')}</a></li>
@@ -131,37 +152,14 @@ function Navbar() {
                         </div>
                     </div>
 
-                    {/* Language Switcher & Social Icons */}
+                    {/* Social Icons */}
                     <div className="d-flex align-items-center mt-3 mt-lg-0 ms-lg-3">
-                        {/* Social Icons */}
-                        <ul className="navbar-nav navbar-right-items align-items-center d-flex flex-row me-3">
+                        <ul className="navbar-nav navbar-right-items align-items-center d-flex flex-row">
                             <li className="nav-item me-1"><a href="https://facebook.com" target="_blank" className="social-icon facebook"><FaFacebookF /></a></li>
                             <li className="nav-item me-1"><a href="https://twitter.com" target="_blank" className="social-icon twitter"><FaTwitter /></a></li>
                             <li className="nav-item me-1"><a href="https://youtube.com" target="_blank" className="social-icon youtube"><FaYoutube /></a></li>
                             <li className="nav-item"><a href="https://linkedin.com" target="_blank" className="social-icon linkedin"><FaLinkedinIn /></a></li>
                         </ul>
-
-                        {/* Language Toggle */}
-                        <button
-                            className="btn btn-link text-decoration-none fw-bold language-toggle"
-                            onClick={toggleLanguage}
-                            style={{
-                                color: '#000',
-                                fontSize: '1.15rem',
-                                border: '2px solid #000',
-                                borderRadius: '8px',
-                                padding: '6px 16px',
-                                minWidth: '200px',
-                                textAlign: 'center',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <span>English</span>
-                            <span className="mx-2" style={{ opacity: 0.5 }}>|</span>
-                            <span>العربية</span>
-                        </button>
                     </div>
                 </div>
             </div>
