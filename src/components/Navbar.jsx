@@ -144,7 +144,6 @@ function Navbar() {
                                 justifyContent: 'center'
                             }}
                         >
-                            <IoLanguage className="me-2" style={{ fontSize: '1.3rem' }} />
                             <span>English</span>
                             <span className="mx-2" style={{ opacity: 0.5 }}>|</span>
                             <span>العربية</span>
