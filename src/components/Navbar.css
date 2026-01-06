@@ -139,6 +139,11 @@ html[dir="rtl"] .btn-donate {
 /* =========================
    Social + Phone icons
 ========================= */
+/* Arabic only: Add gap between social icons and language switcher */
+html[dir="rtl"] .language-toggle {
+  margin-right: 15px !important;
+}
+
 .social-icon {
   display: inline-flex;
   justify-content: center;
@@ -221,6 +226,13 @@ html[dir="rtl"] .btn-donate {
   margin-left: 10px;
   font-size: 0.9rem;
   letter-spacing: 0.2px;
+}
+
+/* Arabic Navbar Phone & Contact - Larger Text */
+html[dir="rtl"] .phone-number,
+html[dir="rtl"] .contact-link-modern {
+  font-size: 1.2rem !important;
+  font-weight: 800;
 }
 
 .contact-link-modern {
