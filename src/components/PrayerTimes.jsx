@@ -1,49 +1,52 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import "./PrayerTimes.css";
 
 function PrayerTimes() {
+    const { language, t } = useLanguage();
     const [gregorianDate, setGregorianDate] = useState("");
     const [hijriDate, setHijriDate] = useState("");
 
     useEffect(() => {
         const today = new Date();
+        const locale = language === 'ar' ? 'ar-SA' : 'en-GB';
 
         // Gregorian Date
         setGregorianDate(
-            today.toLocaleDateString("en-GB", {
+            today.toLocaleDateString(locale, {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
             })
         );
 
-        // Hijri Date (accurate – browser Islamic calendar)
+        // Hijri Date
         setHijriDate(
-            today.toLocaleDateString("en-TN-u-ca-islamic", {
+            today.toLocaleDateString(locale + "-u-ca-islamic", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
-            }) + " Hijri"
+            }) + (language === 'en' ? " Hijri" : " هجري")
         );
-    }, []);
+    }, [language]);
 
     const dailyPrayers = [
-        { prayer: "Fajr", adhaan: "06:17 AM", iqamah: "06:30 AM" },
-        { prayer: "Sunrise", adhaan: "07:29 AM", iqamah: "" },
-        { prayer: "Dhuhr", adhaan: "12:31 PM", iqamah: "02:00 PM" },
-        { prayer: "Asr", adhaan: "03:14 PM", iqamah: "04:00 PM" },
-        { prayer: "Maghrib", adhaan: "05:32 PM", iqamah: "05:42 PM" },
-        { prayer: "Isha", adhaan: "06:45 PM", iqamah: "08:00 PM" },
+        { prayer: t('prayer.fajr'), adhaan: "06:17 AM", iqamah: "06:30 AM" },
+        { prayer: t('prayer.sunrise'), adhaan: "07:29 AM", iqamah: "" },
+        { prayer: t('prayer.dhuhr'), adhaan: "12:31 PM", iqamah: "02:00 PM" },
+        { prayer: t('prayer.asr'), adhaan: "03:14 PM", iqamah: "04:00 PM" },
+        { prayer: t('prayer.maghrib'), adhaan: "05:32 PM", iqamah: "05:42 PM" },
+        { prayer: t('prayer.isha'), adhaan: "06:45 PM", iqamah: "08:00 PM" },
     ];
 
     const jumuah = [
-        { prayer: "1st Jumu'ah", khutba: "01:00 PM" },
-        { prayer: "2nd Jumu'ah", khutba: "02:30 PM" },
+        { prayer: t('prayer.jummah1'), khutba: "01:00 PM" },
+        { prayer: t('prayer.jummah2'), khutba: "02:30 PM" },
     ];
 
     return (
         <section className="prayer-section" id="prayer">
-            <h2 className="prayer-heading">Prayer Times</h2>
+            <h2 className="prayer-heading">{t('prayer.heading')}</h2>
 
             {/* Dates */}
             <div className="prayer-date-container">
@@ -57,9 +60,9 @@ function PrayerTimes() {
                 <table className="table daily-table">
                     <thead>
                         <tr>
-                            <th>Prayer</th>
-                            <th>Adhaan</th>
-                            <th>Iqamah</th>
+                            <th>{t('prayer.prayer')}</th>
+                            <th>{t('prayer.adhaan')}</th>
+                            <th>{t('prayer.iqamah')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,8 +82,8 @@ function PrayerTimes() {
                 <table className="table jumuah-table">
                     <thead>
                         <tr>
-                            <th>Jumu'ah</th>
-                            <th>Khutba</th>
+                            <th>{t('prayer.jummahPrayers')}</th>
+                            <th>{t('prayer.khutba')}</th>
                         </tr>
                     </thead>
                     <tbody>

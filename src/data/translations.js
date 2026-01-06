@@ -22,6 +22,71 @@ export const translations = {
             subtext: "A place of peace, prayer, and community.",
             prayerSchedule: "Prayer Schedule",
             bookVisit: "Book a Visit"
+        },
+        events: {
+            heading: "Announcements & Events",
+            learnMore: "Learn More",
+            quranTitle: "Quran Memorization and Teaching Sessions",
+            quranDesc: "The Quran memorization halaqas run three days a week for two hours each day. Both boys and girls, from children to youth, have the opportunity to memorize the entire Holy Quran and learn the fundamentals of Islam. All sessions are led by trained teachers.",
+            daycareTitle: "Part-Time Daycare Services",
+            daycareDesc: "Providing a nurturing and religious environment for children while supporting working parents.",
+            marriageTitle: "Marriage Contract",
+            marriageDesc: "Initiation of Marriage contracts based on the Holy Quran and the Sunnah of the Prophet (ﷺ)",
+            eduTitle: "Educational Programs",
+            eduDesc: "Engaging the community with Quran sessions and lectures."
+        },
+        prayer: {
+            heading: "Prayer Times",
+            prayer: "Prayer",
+            adhaan: "Adhaan",
+            iqamah: "Iqamah",
+            fajr: "Fajr",
+            sunrise: "Sunrise",
+            dhuhr: "Dhuhr",
+            asr: "Asr",
+            maghrib: "Maghrib",
+            isha: "Isha",
+            jummah1: "1st Jumu'ah",
+            jummah2: "2nd Jumu'ah",
+            khutba: "Khutba"
+        },
+        donate: {
+            heading: "Support Iman Islamic Center",
+            desc: "Your generous contributions help us run educational programs, Quran classes, and community services.",
+            button: "Donate Now"
+        },
+        reservation: {
+            title: "Book a Visit",
+            subtitle: "Meet our team to learn more about our community and services.",
+            fullName: "Full Name",
+            enterName: "Enter your name",
+            email: "Email Address",
+            enterEmail: "your@email.com",
+            date: "Preferred Date",
+            time: "Preferred Time",
+            reason: "Reason for Visit (Optional)",
+            reasonPlaceholder: "Tell us a bit about your visit...",
+            submit: "Schedule Visit",
+            hint: "We'll send a confirmation to your email once the team reviews your request."
+        },
+        contact: {
+            title: "Get in Touch",
+            text: "Whether you have a question about our services, events, or simply want to say hello, we'd love to hear from you.",
+            callUs: "Call Us",
+            emailUs: "Email Us",
+            visitUs: "Visit Us",
+            formTitle: "Send a Message",
+            nameLabel: "Full Name",
+            emailLabel: "Email Address",
+            phoneLabel: "Phone Number",
+            messageLabel: "Your Message",
+            send: "Send Message"
+        },
+        footer: {
+            mission: "Serving the Lincoln, NE community with religious guidance, education, and community programs.",
+            quickLinks: "Quick Links",
+            contactUs: "Contact Us",
+            rights: "Iman Islamic Center. All Rights Reserved."
         }
     },
     ar: {
@@ -47,6 +112,71 @@ export const translations = {
             subtext: "مكان للسلام والصلاة والمجتمع.",
             prayerSchedule: "جدول الصلاة",
             bookVisit: "احجز زيارة"
+        },
+        events: {
+            heading: "الإعلانات والفعاليات",
+            learnMore: "اعرف المزيد",
+            quranTitle: "حلقات تحفيظ وتعليم القرآن",
+            quranDesc: "تعمل حلقات تحفيظ القرآن ثلاثة أيام في الأسبوع لمدة ساعتين كل يوم. تتاح الفرصة للبنين والبنات، من الأطفال إلى الشباب، لحفظ القرآن الكريم كاملاً وتعلم أساسيات الإسلام. جميع الجلسات يقودها معلمون مدربون.",
+            daycareTitle: "خدمات رعاية الأطفال",
+            daycareDesc: "توفير بيئة تربوية ودينية للأطفال مع دعم الآباء العاملين.",
+            marriageTitle: "عقود الزواج",
+            marriageDesc: "إبرام عقود الزواج بناءً على القرآن الكريم وسنة النبي (ﷺ)",
+            eduTitle: "البرامج التعليمية",
+            eduDesc: "إشراك المجتمع في جلسات القرآن والمحاضرات."
+        },
+        prayer: {
+            heading: "مواقيت الصلاة",
+            prayer: "الصلاة",
+            adhaan: "الأذان",
+            iqamah: "الإقامة",
+            fajr: "الفجر",
+            sunrise: "الشروق",
+            dhuhr: "الظهر",
+            asr: "العصر",
+            maghrib: "المغرب",
+            isha: "العشاء",
+            jummah1: "الجمعة الأولى",
+            jummah2: "الجمعة الثانية",
+            khutba: "الخطبة"
+        },
+        donate: {
+            heading: "ادعم مركز الإيمان الإسلامي",
+            desc: "مساهماتكم السخية تساعدنا في إدارة البرامج التعليمية وفصول القرآن وخدمات المجتمع.",
+            button: "تبرع الآن"
+        },
+        reservation: {
+            title: "احجز زيارة",
+            subtitle: "قابل فريقنا لمعرفة المزيد عن مجتمعنا وخدماتنا.",
+            fullName: "الاسم الكامل",
+            enterName: "أدخل اسمك",
+            email: "البريد الإلكتروني",
+            enterEmail: "your@email.com",
+            date: "التاريخ المفضل",
+            time: "الوقت المفضل",
+            reason: "سبب الزيارة (اختياري)",
+            reasonPlaceholder: "أخبرنا قليلاً عن زيارتك...",
+            submit: "تأكيد الحجز",
+            hint: "سنرسل تأكيدًا إلى بريدك الإلكتروني بمجرد مراجعة الفريق لطلبك."
+        },
+        contact: {
+            title: "تواصل معنا",
+            text: "سواء كان لديك سؤال حول خدماتنا أو فعالياتنا أو ترغب فقط في إلقاء التحية، نود أن نسمع منك.",
+            callUs: "اتصل بنا",
+            emailUs: "راسلنا",
+            visitUs: "زورنا",
+            formTitle: "أرسل رسالة",
+            nameLabel: "الاسم الكامل",
+            emailLabel: "البريد الإلكتروني",
+            phoneLabel: "رقم الهاتف",
+            messageLabel: "رسالتك",
+            send: "إرسال الرسالة"
+        },
+        footer: {
+            mission: "خدمة مجتمع لينكون، نبراسكا بالإرشاد الديني والتعليم والبرامج المجتمعية.",
+            quickLinks: "روابط سريعة",
+            contactUs: "اتصل بنا",
+            rights: "مركز الإيمان الإسلامي. جميع الحقوق محفوظة."
         }
     }
 };

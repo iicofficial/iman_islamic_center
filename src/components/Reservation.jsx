@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import "./Reservation.css";
 import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle } from "react-icons/fa";
 
 function Reservation() {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -29,8 +31,8 @@ function Reservation() {
                     <div className="col-lg-8">
                         <div className="reservation-card">
                             <div className="reservation-header text-center">
-                                <h2 className="section-title">Book a Visit</h2>
-                                <p className="section-subtitle">Meet our team to learn more about our community and services.</p>
+                                <h2 className="section-title">{t('reservation.title')}</h2>
+                                <p className="section-subtitle">{t('reservation.subtitle')}</p>
                             </div>
 
                             <form className="reservation-form" onSubmit={handleSubmit}>
@@ -38,12 +40,12 @@ function Reservation() {
                                     {/* Name */}
                                     <div className="col-md-6">
                                         <div className="input-group-modern">
-                                            <label><FaUser className="me-2" /> Full Name</label>
+                                            <label><FaUser className="me-2" /> {t('reservation.fullName')}</label>
                                             <input
                                                 type="text"
                                                 name="name"
                                                 className="form-control-modern"
-                                                placeholder="Enter your name"
+                                                placeholder={t('reservation.enterName')}
                                                 required
                                                 onChange={handleChange}
                                             />
@@ -53,12 +55,12 @@ function Reservation() {
                                     {/* Email */}
                                     <div className="col-md-6">
                                         <div className="input-group-modern">
-                                            <label><FaEnvelope className="me-2" /> Email Address</label>
+                                            <label><FaEnvelope className="me-2" /> {t('reservation.email')}</label>
                                             <input
                                                 type="email"
                                                 name="email"
                                                 className="form-control-modern"
-                                                placeholder="your@email.com"
+                                                placeholder={t('reservation.enterEmail')}
                                                 required
                                                 onChange={handleChange}
                                             />
@@ -68,7 +70,7 @@ function Reservation() {
                                     {/* Date */}
                                     <div className="col-md-6">
                                         <div className="input-group-modern">
-                                            <label><FaCalendarAlt className="me-2" /> Preferred Date</label>
+                                            <label><FaCalendarAlt className="me-2" /> {t('reservation.date')}</label>
                                             <input
                                                 type="date"
                                                 name="date"
@@ -82,7 +84,7 @@ function Reservation() {
                                     {/* Time */}
                                     <div className="col-md-6">
                                         <div className="input-group-modern">
-                                            <label><FaClock className="me-2" /> Preferred Time</label>
+                                            <label><FaClock className="me-2" /> {t('reservation.time')}</label>
                                             <input
                                                 type="time"
                                                 name="time"
@@ -96,12 +98,12 @@ function Reservation() {
                                     {/* Message */}
                                     <div className="col-12">
                                         <div className="input-group-modern">
-                                            <label>Reason for Visit (Optional)</label>
+                                            <label>{t('reservation.reason')}</label>
                                             <textarea
                                                 name="message"
                                                 className="form-control-modern"
                                                 rows="3"
-                                                placeholder="Tell us a bit about your visit..."
+                                                placeholder={t('reservation.reasonPlaceholder')}
                                                 onChange={handleChange}
                                             ></textarea>
                                         </div>
@@ -109,11 +111,11 @@ function Reservation() {
 
                                     <div className="col-12 text-center mt-4">
                                         <button type="submit" className="btn-modern-reservation">
-                                            <span>Schedule Visit</span>
+                                            <span>{t('reservation.submit')}</span>
                                             <FaCheckCircle className="ms-2" />
                                         </button>
                                         <p className="form-hint mt-3">
-                                            We'll send a confirmation to your email once the team reviews your request.
+                                            {t('reservation.hint')}
                                         </p>
                                     </div>
                                 </div>
