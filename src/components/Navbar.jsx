@@ -79,9 +79,11 @@ function Navbar() {
                                 Forms
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="/forms/membership.pdf" download onClick={closeMenu}>Membership Form</a></li>
-                                <li><a className="dropdown-item" href="/forms/donation.pdf" download onClick={closeMenu}>Donation Form</a></li>
-                                <li><a className="dropdown-item" href="/forms/volunteer.docx" download onClick={closeMenu}>Volunteer Application</a></li>
+                                <li><a className="dropdown-item" href="/forms/Constitution and bylaws.docx" download onClick={closeMenu}>Constitution and Bylaws</a></li>
+                                <li><a className="dropdown-item" href="/forms/Islamic_Center_Monthly_Commitment_Form.docx" download onClick={closeMenu}>Monthly Commitment Form</a></li>
+                                <li><a className="dropdown-item" href="/forms/ELC Member work form.docx" download onClick={closeMenu}>ELC Member Work Form</a></li>
+                                <li><a className="dropdown-item" href="/forms/board of directors member work form.docx" download onClick={closeMenu}>Board of Directors Work Form</a></li>
+
                             </ul>
                         </li>
 

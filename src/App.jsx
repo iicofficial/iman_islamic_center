@@ -9,6 +9,7 @@ import Donate from "./components/Donate";
 import PrayerTimes from "./components/PrayerTimes";
 import Contact from "./components/Contact";
 import Reservation from "./components/Reservation";
+import DownloadForms from "./components/DownloadForms";
 import ContactPage from "./components/ContactPage";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               </div>
               <Donate />
               <Reservation />
+              <DownloadForms />
             </>
           }
         />
