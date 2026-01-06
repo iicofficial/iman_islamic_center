@@ -83,8 +83,9 @@
   color: #000 !important;
   font-weight: 700;
   /* Bold for clarity */
-  margin-right: 0.2rem;
-  font-size: 0.95rem;
+  margin-right: 0.5rem;
+  /* Increased margin slightly for bigger links */
+  font-size: 1.15rem;
   text-shadow: none;
   /* Removed shadow for crisp text */
   position: relative;
