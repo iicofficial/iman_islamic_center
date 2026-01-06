@@ -2,7 +2,7 @@ export const translations = {
     en: {
         navbar: {
             brandName: "Iman Islamic Center",
-            location: "Lincoln, NE",
+            location: "Lincoln, NE, USA",
             home: "Home",
             mainPage: "Main Page",
             contactUs: "Contact Us",
@@ -109,7 +109,7 @@ export const translations = {
     ar: {
         navbar: {
             brandName: "مركز الإيمان الإسلامي",
-            location: "لينكون، نبراسكا",
+            location: "لينكون، نبراسكا، الولايات المتحدة",
             home: "الرئيسية",
             mainPage: "الصفحة الرئيسية",
             contactUs: "اتصل بنا",

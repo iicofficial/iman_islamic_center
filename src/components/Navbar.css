@@ -51,8 +51,8 @@
 }
 
 .navbar-brand-location {
-  color: #27569b !important;
-  /* Using the primary blue */
+  color: #6c757d !important;
+  /* Gray to match logo */
   font-weight: 700;
   font-size: 0.75rem;
   letter-spacing: 2px;
