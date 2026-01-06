@@ -87,8 +87,8 @@
 
 .navbar-nav .nav-link {
   color: #000 !important;
-  font-weight: 700;
-  /* Bold for clarity */
+  font-weight: 600;
+  /* Semi-bold for space efficiency */
   margin-right: 0.5rem;
   /* Increased margin slightly for bigger links */
   font-size: 1.5rem;
@@ -102,7 +102,7 @@
 /* Arabic navbar links – larger for readability */
 html[dir="rtl"] .navbar-nav .nav-link {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .navbar-nav .nav-link:hover,
@@ -228,7 +228,7 @@ html[dir="rtl"] .language-toggle {
 
 .phone-number {
   color: #000;
-  font-weight: 700;
+  font-weight: 600;
   margin-left: 10px;
   font-size: 1.5rem;
   /* Bigger size */
@@ -238,7 +238,7 @@ html[dir="rtl"] .language-toggle {
 /* Removed specific RTL override as we now apply big size universally */
 .contact-link-modern {
   color: #27569b !important;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.5rem;
   /* Bigger size */
   text-transform: uppercase;
