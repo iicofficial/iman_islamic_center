@@ -22,6 +22,7 @@ function Footer() {
                             <li><a href="#prayer" className="footer-link">Prayer Times</a></li>
                             <li><a href="#events" className="footer-link">Events</a></li>
                             <li><a href="#footer" className="footer-link">Contact</a></li>
+                            <li><a href="/forms/Constitution and bylaws.docx" className="footer-link" download>Constitution & Bylaws</a></li>
                         </ul>
                     </div>
 

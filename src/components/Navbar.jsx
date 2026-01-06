@@ -74,6 +74,12 @@ function Navbar() {
                             </ul>
                         </li>
 
+                        <li className="nav-item">
+                            <a href="/forms/Constitution and bylaws.docx" className="nav-link" download onClick={closeMenu}>
+                                Constitution
+                            </a>
+                        </li>
+
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 Forms
