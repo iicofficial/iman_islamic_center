@@ -133,11 +133,11 @@ function Navbar() {
                             onClick={toggleLanguage}
                             style={{
                                 color: '#27569b',
-                                fontSize: '0.9rem',
-                                border: '1px solid #27569b',
-                                borderRadius: '4px',
-                                padding: '4px 12px',
-                                minWidth: '160px',
+                                fontSize: '1.15rem',
+                                border: '2px solid #27569b',
+                                borderRadius: '8px',
+                                padding: '6px 16px',
+                                minWidth: '200px',
                                 textAlign: 'center',
                                 display: 'flex',
                                 alignItems: 'center',
