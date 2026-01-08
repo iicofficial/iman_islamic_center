@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import "./Footer.css";
 
@@ -24,7 +25,7 @@ function Footer() {
                             <li><a href="/" className="footer-link">{t('navbar.home')}</a></li>
                             <li><a href="#prayer" className="footer-link">{t('navbar.prayerTimes')}</a></li>
                             <li><a href="#events" className="footer-link">{t('navbar.events')}</a></li>
-                            <li><a href="#footer" className="footer-link">{t('navbar.contactUs')}</a></li>
+                            <li><Link to="/contact" className="footer-link">{t('navbar.contactUs')}</Link></li>
                             <li><a href="/forms/Constitution and bylaws.docx" className="footer-link" download>{t('navbar.constitution')}</a></li>
                         </ul>
                     </div>

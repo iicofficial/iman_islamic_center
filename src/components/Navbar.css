@@ -9,15 +9,14 @@
   z-index: 999;
   width: 100%;
 
-  /* FIXED HEIGHT - Logo won't affect this */
-  height: 100px;
+  /* FIXED HEIGHT - Large enough to hold the logo */
+  height: 160px;
   padding-top: 0;
   padding-bottom: 0;
   display: flex;
   align-items: center;
   /* Center everything vertically */
   overflow: visible;
-  /* Allow logo to extend beyond navbar */
 }
 
 /* =========================
@@ -30,17 +29,14 @@
 }
 
 .navbar-logo {
-  height: 160px;
-  /* Large logo on desktop */
+  height: 150px;
+  /* Slightly smaller than container for padding */
   width: auto;
   transition: all 0.3s ease;
-  margin-right: -15px;
-  /* Negative margin - text overlaps logo slightly */
+  margin-right: -35px;
   margin-left: 0;
-  /* No left margin - touches edge */
-  /* Adjusted margins - less negative on top to prevent cutoff */
-  margin-top: -20px;
-  margin-bottom: -40px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navbar-logo:hover {
@@ -51,6 +47,11 @@
   line-height: 1.1;
   margin-left: 0;
   /* Locked to the logo's scaled margin */
+}
+
+[dir="rtl"] .brand-text-wrapper {
+  margin-right: -25px !important;
+  /* Move text left */
 }
 
 .navbar-brand-text {
@@ -571,8 +572,8 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
 
 /* Ensure content doesn't hide under fixed navbar */
 body {
-  padding-top: 140px;
-  /* 40px top bar (if exists) + 100px navbar */
+  padding-top: 200px;
+  /* 40px top bar (if exists) + 160px navbar */
 }
 
 @media (max-width: 767px) {
