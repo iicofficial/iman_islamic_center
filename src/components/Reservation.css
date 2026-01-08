@@ -8,7 +8,7 @@
 .reservation-card {
     background: #ffffff;
     border-radius: 30px;
-    padding: 60px;
+    padding: 40px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
     border: 2px solid #27569b;
     /* Solid blue border all around */
@@ -31,7 +31,7 @@
     font-family: 'Outfit', sans-serif;
     color: #1e467f;
     font-weight: 800;
-    font-size: 2.8rem;
+    font-size: 2rem;
     margin-bottom: 10px;
 }
 
@@ -86,7 +86,7 @@
     position: relative;
     background: #27569b;
     color: #ffffff !important;
-    padding: 20px 50px;
+    padding: 16px 40px;
     border-radius: 50px;
     font-family: 'Outfit', sans-serif;
     font-weight: 800;

@@ -33,7 +33,7 @@
 
 .donate-content h2 {
     font-family: 'Outfit', sans-serif;
-    font-size: 3.2rem;
+    font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 25px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -42,7 +42,7 @@
 }
 
 .donate-content p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 35px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     font-weight: 500;
