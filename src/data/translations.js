@@ -146,6 +146,10 @@ export const translations = {
             appointmentDate: "Preferred Date",
             appointmentTime: "Preferred Time",
             appointmentNote: "Please select a date and time to finalize your application.",
+            appointmentLocation: "Appointment Location",
+            masjidOption: "Make an appointment at the masjid",
+            homeOption: "Request a home visit",
+            homeAddressLabel: "Enter your home address",
             imamPlaceholder: "To be filled by Imam",
             imamNameValue: "Abdelaziz Al Abbasi"
         },
@@ -313,6 +317,10 @@ export const translations = {
             appointmentDate: "التاريخ المفضل",
             appointmentTime: "الوقت المفضل",
             appointmentNote: "يرجى تحديد تاريخ ووقت لإتمام طلبك.",
+            appointmentLocation: "مكان الموعد",
+            masjidOption: "حجز موعد في المسجد",
+            homeOption: "طلب زيارة منزلية",
+            homeAddressLabel: "أدخل عنوان منزلك",
             imamPlaceholder: "سيتم ملؤها من قبل الإمام",
             imamNameValue: "عبد العزيز العباسي"
         },

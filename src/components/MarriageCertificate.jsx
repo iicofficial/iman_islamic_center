@@ -31,7 +31,9 @@ function MarriageCertificate() {
         dowryAmount: "",
         nikaahDate: "",
         appointmentDate: "",
-        appointmentTime: ""
+        appointmentTime: "",
+        appointmentLocation: "masjid",
+        homeAddress: ""
     });
 
     const handleChange = (e) => {
@@ -459,6 +461,54 @@ function MarriageCertificate() {
                                                     />
                                                 </div>
                                             </div>
+
+                                            <div className="mb-4">
+                                                <label className="form-label d-block mb-3">{t('marriageCertificate.appointmentLocation')}</label>
+
+                                                <div className="form-check mb-2">
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="radio"
+                                                        name="appointmentLocation"
+                                                        id="locationMasjid"
+                                                        value="masjid"
+                                                        checked={formData.appointmentLocation === 'masjid'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="locationMasjid">
+                                                        {t('marriageCertificate.masjidOption')}
+                                                    </label>
+                                                </div>
+
+                                                <div className="form-check">
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="radio"
+                                                        name="appointmentLocation"
+                                                        id="locationHome"
+                                                        value="home"
+                                                        checked={formData.appointmentLocation === 'home'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="locationHome">
+                                                        {t('marriageCertificate.homeOption')}
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            {formData.appointmentLocation === 'home' && (
+                                                <div className="mb-4 fade-in">
+                                                    <label className="form-label">{t('marriageCertificate.homeAddressLabel')}</label>
+                                                    <input
+                                                        type="text"
+                                                        name="homeAddress"
+                                                        className="form-control form-control-lg"
+                                                        required={formData.appointmentLocation === 'home'}
+                                                        onChange={handleChange}
+                                                        value={formData.homeAddress}
+                                                    />
+                                                </div>
+                                            )}
 
                                             <div className="d-flex justify-content-between mt-5">
                                                 <button
