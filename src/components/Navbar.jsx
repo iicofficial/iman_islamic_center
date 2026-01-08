@@ -8,6 +8,7 @@ import "./Navbar.css";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [activeSubmenu, setActiveSubmenu] = useState(null);
     const { language, toggleLanguage, t } = useLanguage();
 
     const toggleMenu = () => {
@@ -16,6 +17,13 @@ function Navbar() {
 
     const closeMenu = () => {
         setIsOpen(false);
+        setActiveSubmenu(null);
+    };
+
+    const toggleSubmenu = (menuName, e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveSubmenu(prev => prev === menuName ? null : menuName);
     };
 
     return (
@@ -109,10 +117,14 @@ function Navbar() {
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.eduPrograms')}</a></li>
                                 {/* Marriage Contracts Submenu */}
                                 <li className="dropdown-submenu">
-                                    <a className="dropdown-item dropdown-toggle" href="#" onClick={(e) => e.preventDefault()}>
+                                    <a
+                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'marriage' ? 'show' : ''}`}
+                                        href="#"
+                                        onClick={(e) => toggleSubmenu('marriage', e)}
+                                    >
                                         {t('navbar.marriageContracts')}
                                     </a>
-                                    <ul className="dropdown-menu">
+                                    <ul className={`dropdown-menu ${activeSubmenu === 'marriage' ? 'show' : ''}`}>
                                         <li><Link className="dropdown-item" to="/marriage-certificate" onClick={closeMenu}>{t('navbar.applyOnlineForm')}</Link></li>
                                         <li><a className="dropdown-item" href="#" download onClick={closeMenu}>{t('navbar.downloadForm')}</a></li>
                                     </ul>
@@ -137,10 +149,14 @@ function Navbar() {
                             <ul className="dropdown-menu">
                                 {/* Membership Forms Submenu */}
                                 <li className="dropdown-submenu">
-                                    <a className="dropdown-item dropdown-toggle" href="#" onClick={(e) => e.preventDefault()}>
+                                    <a
+                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'membership' ? 'show' : ''}`}
+                                        href="#"
+                                        onClick={(e) => toggleSubmenu('membership', e)}
+                                    >
                                         {t('navbar.membershipForms')}
                                     </a>
-                                    <ul className="dropdown-menu">
+                                    <ul className={`dropdown-menu ${activeSubmenu === 'membership' ? 'show' : ''}`}>
                                         <li><a className="dropdown-item" href="/forms/Islamic_Center_Monthly_Commitment_Form.docx" download onClick={closeMenu}>{t('downloadForms.commitmentTitle')}</a></li>
                                         <li><a className="dropdown-item" href="/forms/ELC Member work form.docx" download onClick={closeMenu}>{t('downloadForms.elcTitle')}</a></li>
                                     </ul>
@@ -148,10 +164,14 @@ function Navbar() {
 
                                 {/* Donation Forms Submenu */}
                                 <li className="dropdown-submenu">
-                                    <a className="dropdown-item dropdown-toggle" href="#" onClick={(e) => e.preventDefault()}>
+                                    <a
+                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'donation' ? 'show' : ''}`}
+                                        href="#"
+                                        onClick={(e) => toggleSubmenu('donation', e)}
+                                    >
                                         {t('navbar.donationForms')}
                                     </a>
-                                    <ul className="dropdown-menu">
+                                    <ul className={`dropdown-menu ${activeSubmenu === 'donation' ? 'show' : ''}`}>
                                         <li><a className="dropdown-item" href="/forms/board of directors member work form.docx" download onClick={closeMenu}>{t('downloadForms.boardTitle')}</a></li>
                                         <li><a className="dropdown-item" href="/forms/Sponsor_Quran_Student.docx" download onClick={closeMenu}>{t('downloadForms.sponsorTitle')}</a></li>
                                     </ul>
