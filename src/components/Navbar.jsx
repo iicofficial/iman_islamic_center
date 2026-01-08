@@ -106,6 +106,12 @@ function Navbar() {
                             </ul>
                         </li>
 
+                        <li className="nav-item">
+                            <a href="/forms/Constitution and bylaws.docx" className="nav-link" download onClick={closeMenu}>
+                                {t('navbar.constitution')}
+                            </a>
+                        </li>
+
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 {t('navbar.services')}
@@ -135,12 +141,6 @@ function Navbar() {
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.certifiedTranslation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.funeralServices')}</a></li>
                             </ul>
-                        </li>
-
-                        <li className="nav-item">
-                            <a href="/forms/Constitution and bylaws.docx" className="nav-link" download onClick={closeMenu}>
-                                {t('navbar.constitution')}
-                            </a>
                         </li>
 
                         <li className="nav-item dropdown">
