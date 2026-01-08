@@ -12,6 +12,7 @@ A premium, fully responsive website for Iman Islamic Center, built with React an
 *   **Dedicated Contact Center**: A separate, full-featured contact page with modern form validation and glassmorphism styling.
 *   **Responsive Navigation**: Optimized navbar featuring a unique "Action Pod" for quick contact access.
 *   **Event Management**: Browse upcoming and past community events with dedicated detail views.
+*   **Digital Marriage Services**: Comprehensive two-step digitized marriage application with integrated appointment scheduling (Masjid or Home visit).
 
 ## 📂 Project Structure
 
@@ -32,6 +33,8 @@ iman_islamic_center/
 │   │   ├─ PrayerTimes.jsx         # Dynamic iqamah scheduling
 │   │   ├─ Events.jsx              # Community events viewer
 │   │   ├─ Donate.jsx              # High-contrast donation section
+│   │   ├─ MarriageCertificate.jsx # Two-step digital marriage application
+│   │   ├─ DownloadForms.jsx       # Downloadable resources center
 │   │   └─ Footer.jsx              # Branded site footer
 │   │
 │   ├─ App.jsx                     # Centralized Routing
