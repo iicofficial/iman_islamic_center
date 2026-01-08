@@ -415,10 +415,18 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
     width: auto;
     margin-right: 0 !important;
     /* Reset negative margin to prevent overflow */
-    margin-left: 0 !important;
+    margin-left: -10px !important;
+    /* Move logo more to left on mobile */
     margin-top: 0;
     margin-bottom: 0;
     transform: none !important;
+  }
+
+  /* RTL Mobile Logo */
+  [dir="rtl"] .navbar-logo {
+    margin-left: 0 !important;
+    margin-right: -30px !important;
+    /* Move logo right on mobile */
   }
 
   /* Ensure buttons stay visible and aligned */
