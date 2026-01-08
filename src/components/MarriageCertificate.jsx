@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import "./MarriageCertificate.css";
 
 function MarriageCertificate() {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState({
         groomName: "",
         groomLicenseId: "",
@@ -59,17 +61,17 @@ function MarriageCertificate() {
                         <div className="col-lg-10">
                             <div className="marriage-certificate-card">
                                 <div className="text-center mb-4">
-                                    <h2 className="marriage-title">Official Marriage Certificate</h2>
-                                    <p className="marriage-subtitle">Please fill out all required information accurately</p>
+                                    <h2 className="marriage-title">{t('marriageCertificate.title')}</h2>
+                                    <p className="marriage-subtitle">{t('marriageCertificate.subtitle')}</p>
                                 </div>
 
                                 <form onSubmit={handleSubmit}>
                                     {/* Groom's Information */}
-                                    <h4 className="section-heading">Groom's Information</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.groomInfo')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-12">
-                                            <label className="form-label">Groom's Full Name</label>
+                                            <label className="form-label">{t('marriageCertificate.groomName')}</label>
                                             <input
                                                 type="text"
                                                 name="groomName"
@@ -82,7 +84,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">License ID Number</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseId')}</label>
                                             <input
                                                 type="text"
                                                 name="groomLicenseId"
@@ -92,7 +94,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">State</label>
+                                            <label className="form-label">{t('marriageCertificate.state')}</label>
                                             <select
                                                 name="groomLicenseState"
                                                 className="form-control"
@@ -100,7 +102,7 @@ function MarriageCertificate() {
                                                 onChange={handleChange}
                                                 value={formData.groomLicenseState}
                                             >
-                                                <option value="">Select State</option>
+                                                <option value="">{t('marriageCertificate.selectState')}</option>
                                                 {usStates.map(state => (
                                                     <option key={state} value={state}>{state}</option>
                                                 ))}
@@ -110,7 +112,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Place of Birth</label>
+                                            <label className="form-label">{t('marriageCertificate.placeOfBirth')}</label>
                                             <input
                                                 type="text"
                                                 name="groomBirthPlace"
@@ -120,7 +122,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Date of Birth</label>
+                                            <label className="form-label">{t('marriageCertificate.dateOfBirth')}</label>
                                             <input
                                                 type="date"
                                                 name="groomBirthDate"
@@ -132,11 +134,11 @@ function MarriageCertificate() {
                                     </div>
 
                                     {/* Bride's Information */}
-                                    <h4 className="section-heading">Bride's Information</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.brideInfo')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-12">
-                                            <label className="form-label">Bride's Full Name</label>
+                                            <label className="form-label">{t('marriageCertificate.brideName')}</label>
                                             <input
                                                 type="text"
                                                 name="brideName"
@@ -149,7 +151,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">License ID Number</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseId')}</label>
                                             <input
                                                 type="text"
                                                 name="brideLicenseId"
@@ -159,7 +161,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">State</label>
+                                            <label className="form-label">{t('marriageCertificate.state')}</label>
                                             <select
                                                 name="brideLicenseState"
                                                 className="form-control"
@@ -167,7 +169,7 @@ function MarriageCertificate() {
                                                 onChange={handleChange}
                                                 value={formData.brideLicenseState}
                                             >
-                                                <option value="">Select State</option>
+                                                <option value="">{t('marriageCertificate.selectState')}</option>
                                                 {usStates.map(state => (
                                                     <option key={state} value={state}>{state}</option>
                                                 ))}
@@ -177,7 +179,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Place of Birth</label>
+                                            <label className="form-label">{t('marriageCertificate.placeOfBirth')}</label>
                                             <input
                                                 type="text"
                                                 name="brideBirthPlace"
@@ -187,7 +189,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Date of Birth</label>
+                                            <label className="form-label">{t('marriageCertificate.dateOfBirth')}</label>
                                             <input
                                                 type="date"
                                                 name="brideBirthDate"
@@ -199,11 +201,11 @@ function MarriageCertificate() {
                                     </div>
 
                                     {/* Signatures */}
-                                    <h4 className="section-heading">Signatures</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.signatures')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Groom's Signature (Print name)</label>
+                                            <label className="form-label">{t('marriageCertificate.groomSignature')}</label>
                                             <input
                                                 type="text"
                                                 name="groomSignature"
@@ -213,7 +215,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Date</label>
+                                            <label className="form-label">{t('marriageCertificate.date')}</label>
                                             <input
                                                 type="date"
                                                 name="groomSignatureDate"
@@ -226,7 +228,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-4">
-                                            <label className="form-label">Bride's Representative Signature</label>
+                                            <label className="form-label">{t('marriageCertificate.brideRepSignature')}</label>
                                             <input
                                                 type="text"
                                                 name="brideRepSignature"
@@ -236,7 +238,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-2">
-                                            <label className="form-label">Date</label>
+                                            <label className="form-label">{t('marriageCertificate.date')}</label>
                                             <input
                                                 type="date"
                                                 name="brideRepSignatureDate"
@@ -246,7 +248,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-3">
-                                            <label className="form-label">License ID</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                             <input
                                                 type="text"
                                                 name="brideRepLicenseId"
@@ -256,7 +258,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-3">
-                                            <label className="form-label">State</label>
+                                            <label className="form-label">{t('marriageCertificate.state')}</label>
                                             <select
                                                 name="brideRepLicenseState"
                                                 className="form-control"
@@ -264,7 +266,7 @@ function MarriageCertificate() {
                                                 onChange={handleChange}
                                                 value={formData.brideRepLicenseState}
                                             >
-                                                <option value="">Select State</option>
+                                                <option value="">{t('marriageCertificate.selectState')}</option>
                                                 {usStates.map(state => (
                                                     <option key={state} value={state}>{state}</option>
                                                 ))}
@@ -273,11 +275,11 @@ function MarriageCertificate() {
                                     </div>
 
                                     {/* Witnesses */}
-                                    <h4 className="section-heading">Witnesses</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.witnesses')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Witness 1 Name</label>
+                                            <label className="form-label">{t('marriageCertificate.witness1Name')}</label>
                                             <input
                                                 type="text"
                                                 name="witness1Name"
@@ -287,7 +289,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">License ID</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                             <input
                                                 type="text"
                                                 name="witness1Id"
@@ -300,7 +302,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Witness 2 Name</label>
+                                            <label className="form-label">{t('marriageCertificate.witness2Name')}</label>
                                             <input
                                                 type="text"
                                                 name="witness2Name"
@@ -310,7 +312,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">License ID</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                             <input
                                                 type="text"
                                                 name="witness2Id"
@@ -322,11 +324,11 @@ function MarriageCertificate() {
                                     </div>
 
                                     {/* IIC Officials */}
-                                    <h4 className="section-heading">IIC Officials</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.iicOfficials')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Authorized Person Name</label>
+                                            <label className="form-label">{t('marriageCertificate.authorizedPerson')}</label>
                                             <input
                                                 type="text"
                                                 name="authorizedPersonName"
@@ -336,7 +338,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">License ID</label>
+                                            <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                             <input
                                                 type="text"
                                                 name="authorizedPersonId"
@@ -349,7 +351,7 @@ function MarriageCertificate() {
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Assigned Imam Name</label>
+                                            <label className="form-label">{t('marriageCertificate.imamName')}</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -358,22 +360,22 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Imam License ID</label>
+                                            <label className="form-label">{t('marriageCertificate.imamLicenseId')}</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                placeholder="To be filled by Imam"
+                                                placeholder={t('marriageCertificate.imamPlaceholder')}
                                                 readOnly
                                             />
                                         </div>
                                     </div>
 
                                     {/* Additional Information */}
-                                    <h4 className="section-heading">Additional Information</h4>
+                                    <h4 className="section-heading">{t('marriageCertificate.additionalInfo')}</h4>
 
                                     <div className="row mb-3">
                                         <div className="col-md-6">
-                                            <label className="form-label">Amount of Dowry</label>
+                                            <label className="form-label">{t('marriageCertificate.dowryAmount')}</label>
                                             <input
                                                 type="text"
                                                 name="dowryAmount"
@@ -383,7 +385,7 @@ function MarriageCertificate() {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label className="form-label">Date of Nikaah</label>
+                                            <label className="form-label">{t('marriageCertificate.nikaahDate')}</label>
                                             <input
                                                 type="date"
                                                 name="nikaahDate"
@@ -396,7 +398,7 @@ function MarriageCertificate() {
 
                                     <div className="text-center mt-4">
                                         <button type="submit" className="btn btn-primary btn-lg">
-                                            Submit Application
+                                            {t('marriageCertificate.submitButton')}
                                         </button>
                                     </div>
                                 </form>
