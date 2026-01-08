@@ -27,25 +27,15 @@
 }
 
 .navbar-logo {
-  height: 60px;
+  height: 220px;
   width: auto;
-  transition: transform 0.3s ease;
-
-  /* Scale purely from center */
-  transform: scale(4.4);
-  transform-origin: center center;
-
-  /* Adjusted margins for the new scale */
-  margin-top: 40px;
-  margin-bottom: 0;
-  margin-right: 40px;
-  /* Tighter spacing */
-  margin-left: 60px;
-  /* Push logo inward */
+  transition: all 0.3s ease;
+  margin-right: 20px;
+  margin-left: 0;
 }
 
 .navbar-logo:hover {
-  transform: scale(4.8);
+  transform: scale(1.02);
 }
 
 .brand-text-wrapper {
@@ -385,13 +375,11 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
 
 @media (max-width: 1199px) {
   .navbar-logo {
-    height: 55px;
-    /* Slightly larger base height for mobile */
-    transform: scale(1.6) !important;
-    /* Increased scale for mobile prominence */
-    transform-origin: left center;
-    margin-right: 25px !important;
-    /* Adjusted margin for the new scale */
+    height: 90px;
+    width: auto;
+    margin-right: 15px !important;
+    margin-left: 0 !important;
+    transform: none !important;
   }
 
   .navbar-brand-text {
@@ -496,8 +484,9 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
 
   .navbar-logo {
     margin-left: 10px;
-    margin-right: 10px;
-    transform: scale(1.8);
+    margin-right: 15px;
+    height: 110px;
+    transform: none;
   }
 
   .btn-donate {
