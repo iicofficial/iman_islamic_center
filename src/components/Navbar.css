@@ -1,16 +1,17 @@
 .custom-navbar {
-  background-color: #b5d8ff !important;
-  /* Softened Light Blue */
+  background-color: #ffffff !important;
+  /* Pure White */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 2px solid #27569b;
   /* Client Logo Blue Border */
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  /* Softer shadow for white bg */
   z-index: 999;
   width: 100%;
 
   /* FIXED HEIGHT - Large enough to hold the logo */
-  height: 160px;
+  height: 220px;
   padding-top: 0;
   padding-bottom: 0;
   display: flex;
@@ -28,65 +29,30 @@
   /* Remove padding so logo touches edge */
 }
 
+.navbar-brand {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .navbar-logo {
-  height: 150px;
-  /* Slightly smaller than container for padding */
+  height: 200px;
+  /* Slightly smaller than container (220px) for perfect centering */
   width: auto;
   transition: all 0.3s ease;
-  margin-right: -35px;
-  margin-left: 0;
+  margin-right: 25px;
+  margin-left: 15px;
   margin-top: 0;
   margin-bottom: 0;
+  /* mix-blend-mode removed for white bg */
 }
 
 .navbar-logo:hover {
   transform: scale(1.02);
 }
 
-.brand-text-wrapper {
-  line-height: 1.1;
-  margin-left: 0;
-  /* Locked to the logo's scaled margin */
-}
-
-[dir="rtl"] .brand-text-wrapper {
-  margin-right: -25px !important;
-  /* Move text left */
-}
-
-.navbar-brand-text {
-  color: #27569b !important;
-  font-weight: 900;
-  font-size: 1.2rem;
-  /* Reduced to balance with larger logo */
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: none;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Arabic Specific Overrides */
-[dir="rtl"] .navbar-brand-text {
-  font-size: 1.6rem;
-  /* Larger for Arabic legibility */
-}
-
-[dir="rtl"] .navbar-brand-location {
-  font-size: 1rem;
-  /* Larger for Arabic legibility */
-  letter-spacing: 0;
-  /* Arabic connects letters, so less tracking */
-}
-
-.navbar-brand-location {
-  color: #6c757d !important;
-  font-weight: 700;
-  font-size: 0.75rem;
-  /* Reduced to balance with larger logo */
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 2px;
-  opacity: 0.9;
+/* Maintain consistency on Hover in RTL */
+html[dir="rtl"] .navbar-logo:hover {
+  transform: scale(1.02);
 }
 
 /* =========================
@@ -98,7 +64,8 @@
 }
 
 .navbar-nav .nav-link {
-  color: #000 !important;
+  color: #333 !important;
+  /* Dark grey for softer look on white */
   font-weight: 600;
   /* Semi-bold for space efficiency */
   margin-right: 0.5rem;
@@ -108,7 +75,7 @@
   text-shadow: none;
   /* Removed shadow for crisp text */
   position: relative;
-  transition: color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 /* Arabic navbar links – larger for readability */
@@ -119,8 +86,9 @@ html[dir="rtl"] .navbar-nav .nav-link {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-  color: #000 !important;
-  /* Keep black on hover */
+  color: #27569b !important;
+  /* Brand Blue on hover */
+  transform: translateY(-1px);
 }
 
 /* Remove dropdown arrows (carets) for a modern look */
@@ -200,6 +168,11 @@ html[dir="rtl"] .language-toggle {
 .social-icon.phone-icon {
   background-color: #ffb733;
   color: #fff;
+}
+
+/* Mirror Phone Icon in RTL */
+html[dir="rtl"] .social-icon.phone-icon svg {
+  transform: scaleX(-1);
 }
 
 /* Modern Independent Pod (Phone + Contact) */
@@ -409,24 +382,26 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
     align-items: center;
   }
 
+  .custom-navbar {
+    height: 170px;
+    /* Fit 160px logo */
+  }
+
   .navbar-logo {
-    height: 100px;
-    /* Slightly smaller to ensure fit on phone */
+    height: 160px;
+    /* Reduced for mobile */
     width: auto;
     margin-right: 0 !important;
-    /* Reset negative margin to prevent overflow */
-    margin-left: -10px !important;
-    /* Move logo more to left on mobile */
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-left: 0 !important;
     transform: none !important;
   }
 
   /* RTL Mobile Logo */
   [dir="rtl"] .navbar-logo {
     margin-left: 0 !important;
-    margin-right: -30px !important;
-    /* Move logo right on mobile */
+    margin-right: -10px !important;
+    /* Adjusted for specific Arabic logo */
+    transform: none !important;
   }
 
   /* Ensure buttons stay visible and aligned */
@@ -439,25 +414,7 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
     /* Prevent shrinking */
   }
 
-  .navbar-brand-text {
-    font-size: 1rem;
-    /* Adjust text for mobile fit */
-  }
 
-  .navbar-brand-text {
-    font-size: 1rem;
-    display: none !important;
-    /* Hide text on mobile to fit buttons */
-  }
-
-  .brand-text-wrapper {
-    display: none !important;
-    /* Hide label wrapper on mobile */
-  }
-
-  .navbar-brand-location {
-    display: none !important;
-  }
 
   /* Premium Hamburger Styling - Bulletproof for Portrait */
   .navbar-toggler {
@@ -555,10 +512,15 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
     margin-right: 0.3rem;
   }
 
+  .custom-navbar {
+    height: 170px;
+    /* Fit 160px logo */
+  }
+
   .navbar-logo {
     margin-left: 10px;
     margin-right: 15px;
-    height: 80px;
+    height: 160px;
     transform: none;
   }
 
@@ -580,13 +542,20 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
 
 /* Ensure content doesn't hide under fixed navbar */
 body {
-  padding-top: 200px;
+  padding-top: 220px;
   /* 40px top bar (if exists) + 160px navbar */
+}
+
+@media (max-width: 1399px) {
+  body {
+    padding-top: 170px;
+    /* Adjust for tablet/laptop navbar height */
+  }
 }
 
 @media (max-width: 767px) {
   body {
-    padding-top: 110px;
+    padding-top: 170px;
     /* Adjust for mobile navbar height */
   }
 }

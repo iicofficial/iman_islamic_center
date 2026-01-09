@@ -23,6 +23,11 @@
     object-fit: cover;
 }
 
+/* Mirror Event Images in RTL */
+html[dir="rtl"] .event-card .card-img-top {
+    transform: scaleX(-1);
+}
+
 .event-card .card-body {
     display: flex;
     flex-direction: column;

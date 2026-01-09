@@ -253,6 +253,20 @@ textarea.form-control {
     transform: translateX(6px) translateY(-4px) rotate(-15deg);
 }
 
+/* RTL Specific Overrides */
+[dir="rtl"] .form-title::after {
+    left: auto;
+    right: 0;
+}
+
+[dir="rtl"] .btn-modern-submit svg {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .btn-modern-submit:hover svg {
+    transform: scaleX(-1) translateX(6px) translateY(-4px) rotate(-15deg);
+}
+
 /* RESPONSIVE */
 @media (max-width: 1199px) {
 

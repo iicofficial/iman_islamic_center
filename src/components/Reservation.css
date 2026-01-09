@@ -150,6 +150,20 @@
     color: #87CEEB;
 }
 
+/* RTL Specific Overrides */
+[dir="rtl"] .input-group-modern {
+    text-align: right;
+}
+
+[dir="rtl"] .input-group-modern label svg {
+    margin-right: 0 !important;
+    margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .btn-modern-reservation:hover svg {
+    transform: translateX(-8px) rotate(10deg) scale(1.2);
+}
+
 .form-hint {
     font-size: 0.9rem;
     color: #868e96;

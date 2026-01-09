@@ -4,6 +4,7 @@ import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaPhoneAlt, FaEnvelope
 import { IoLanguage } from "react-icons/io5";
 import { useLanguage } from "../context/LanguageContext";
 import logo from "../assets/logo.png";
+import arabicLogo from "../assets/arabic_logo.png";
 import "./Navbar.css";
 
 function Navbar() {
@@ -28,32 +29,37 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-xl custom-navbar fixed-top">
-            <div className="container-fluid px-4">
+            <div className="container-fluid px-4 position-relative">
 
                 {/* Brand Section */}
                 <Link className="navbar-brand d-flex align-items-center" to="/" onClick={closeMenu}>
-                    <img src={logo} alt="Iman Islamic Center Logo" className="navbar-logo" />
-                    <div className="brand-text-wrapper d-flex flex-column">
-                        <span className="navbar-brand-text">{t('navbar.brandName')}</span>
-                        <span className="navbar-brand-location">{t('navbar.location')}</span>
-                    </div>
+                    <img
+                        src={language === 'ar' ? arabicLogo : logo}
+                        alt="Iman Islamic Center Logo"
+                        className="navbar-logo"
+                    />
                 </Link>
 
-                {/* Language Toggle - Text Style */}
+                {/* Language Toggle - Positioned Top Center */}
                 <button
-                    className="btn btn-link text-decoration-none fw-bold language-toggle ms-3"
+                    className="btn btn-link text-decoration-none fw-bold language-toggle-top"
                     onClick={toggleLanguage}
                     style={{
+                        position: 'absolute',
+                        top: '15px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
                         color: '#000',
-                        fontSize: '1.15rem',
+                        fontSize: '0.95rem',
                         border: '2px solid #000',
                         borderRadius: '8px',
-                        padding: '6px 16px',
-                        minWidth: '200px',
+                        padding: '4px 12px',
+                        minWidth: '160px',
                         textAlign: 'center',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        zIndex: 1100
                     }}
                 >
                     <span>English</span>
