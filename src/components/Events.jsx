@@ -12,6 +12,8 @@ import QuranImage from "../assets/quran_memorization.png";
 import DaycareImage from "../assets/daycare.png";
 import MarriageImage from "../assets/marriage_contract.png";
 import EducationImage from "../assets/educational_programs.png";
+import QuranCarrierImage from "../assets/quran_carrier.png";
+import MarriageDetailImage from "../assets/marriage.png";
 
 // Carousel Events (Grand Opening and Taraweeh only)
 const carouselEvents = [
@@ -37,7 +39,12 @@ const cardEvents = [
         titleKey: "events.quranTitle",
         descKey: "events.quranDesc",
         image: QuranImage,
-        link: "/event/quran"
+        detailImage: QuranCarrierImage,
+        link: "/event/quran",
+        links: [
+            { labelKey: "navbar.quranBoys", url: "/quran-boys-application" },
+            { labelKey: "navbar.quranGirls", url: "/quran-girls-application" }
+        ]
     },
     {
         titleKey: "events.daycareTitle",
@@ -49,7 +56,11 @@ const cardEvents = [
         titleKey: "events.marriageTitle",
         descKey: "events.marriageDesc",
         image: MarriageImage,
-        link: "/event/marriage"
+        detailImage: MarriageDetailImage,
+        link: "/event/marriage",
+        links: [
+            { labelKey: "navbar.applyOnlineForm", url: "/marriage-certificate" }
+        ]
     },
     {
         titleKey: "events.eduTitle",
@@ -63,7 +74,7 @@ function Events() {
     const { t } = useLanguage();
     const [currentSlide, setCurrentSlide] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalImage, setModalImage] = useState(null);
+    const [modalData, setModalData] = useState({ image: null, links: null });
 
     // Auto-advance slides every 8 seconds (slower)
     useEffect(() => {
@@ -85,14 +96,17 @@ function Events() {
         setCurrentSlide(index);
     };
 
-    const openModal = (image) => {
-        setModalImage(image);
+    const openModal = (event) => {
+        setModalData({
+            image: event.detailImage || event.image,
+            links: event.links || null
+        });
         setModalOpen(true);
     };
 
     const closeModal = () => {
         setModalOpen(false);
-        setModalImage(null);
+        setModalData({ image: null, links: null });
     };
 
     return (
@@ -118,7 +132,7 @@ function Events() {
                                     <p>{t(event.descKey)}</p>
                                     <button
                                         className="btn btn-primary"
-                                        onClick={() => openModal(event.detailImage || event.image)}
+                                        onClick={() => openModal(event)}
                                     >
                                         {t('events.learnMore')}
                                     </button>
@@ -161,7 +175,7 @@ function Events() {
                                         <p>{t(event.descKey)}</p>
                                         <button
                                             className="btn btn-outline-primary btn-sm"
-                                            onClick={() => openModal(event.image)}
+                                            onClick={() => openModal(event)}
                                         >
                                             {t('events.learnMore')}
                                         </button>
@@ -178,7 +192,23 @@ function Events() {
                 <div className="image-modal" onClick={closeModal}>
                     <div className="modal-content">
                         <span className="modal-close" onClick={closeModal}>&times;</span>
-                        <img src={modalImage} alt="Event" className="modal-image" />
+                        <img src={modalData.image} alt="Event" className="modal-image" />
+
+                        {/* Render Links if available */}
+                        {modalData.links && (
+                            <div className="modal-actions">
+                                {modalData.links.map((link, idx) => (
+                                    <Link
+                                        key={idx}
+                                        to={link.url}
+                                        className="modal-btn"
+                                        onClick={closeModal}
+                                    >
+                                        {t(link.labelKey)}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
