@@ -22,19 +22,20 @@
 }
 
 .header-logo {
-    height: 140px;
-    /* Increased size (~1.5x - 2x) */
+    height: 280px;
+    /* Doubled from 140px */
     width: auto;
 }
 
 .header-program-logo {
-    height: 180px;
-    /* Increased size (~1.5x - 2x) */
+    height: 360px;
+    /* Doubled from 180px */
     width: auto;
 }
 
+
 .header-middle-icon {
-    height: 140px;
+    height: 210px;
     width: auto;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -132,11 +133,43 @@ html[dir="rtl"] .program-list li {
 }
 
 @media (max-width: 768px) {
+    .quran-page-container {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
     .quran-content-wrapper {
-        padding: 25px;
+        padding: 20px;
+    }
+
+    .header-images {
+        gap: 10px;
+        justify-content: center !important;
+        flex-wrap: wrap;
+    }
+
+    .header-logo {
+        height: 80px;
+    }
+
+    .header-program-logo {
+        height: 100px;
+    }
+
+    .header-middle-icon {
+        height: 60px;
+    }
+
+    .quran-page-title {
+        font-size: 1.8rem !important;
     }
 
     .section-subheading {
         font-size: 1.5rem;
+    }
+
+    .apply-btn {
+        min-width: 100%;
+        padding: 12px 20px;
     }
 }

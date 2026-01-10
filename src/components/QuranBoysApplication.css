@@ -144,8 +144,13 @@ html[dir="rtl"] .form-control {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .quran-boys-application-page {
+        padding: 100px 10px 40px 10px;
+    }
+
     .quran-application-card {
-        padding: 25px 20px;
+        padding: 25px 15px;
+        border-radius: 12px;
     }
 
     .application-title {
@@ -153,10 +158,16 @@ html[dir="rtl"] .form-control {
     }
 
     .form-section {
-        padding: 20px 15px;
+        padding: 15px 10px;
+        margin-bottom: 20px;
     }
 
     .section-title {
         font-size: 1.2rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px 20px;
     }
 }

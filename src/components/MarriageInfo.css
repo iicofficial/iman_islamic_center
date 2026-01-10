@@ -104,19 +104,48 @@ html[dir="rtl"] .marriage-text-section p {
 }
 
 @media (max-width: 768px) {
+    .marriage-info-container {
+        padding-top: 100px;
+    }
+
     .marriage-content-wrapper {
-        padding: 25px;
+        padding: 20px;
+    }
+
+    .header-images {
+        gap: 15px;
+        justify-content: center !important;
+        flex-wrap: wrap;
     }
 
     .header-logo {
-        height: 105px;
+        height: 100px;
     }
 
     .header-right-icon {
-        height: 130px;
+        height: 120px;
     }
 
     .rose-decoration {
-        height: 120px;
+        height: 100px;
+        bottom: 90px;
+        right: 10px;
+    }
+
+    .marriage-page-title {
+        font-size: 1.8rem !important;
+    }
+
+    .marriage-text-section p {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    html[dir="rtl"] .marriage-text-section p {
+        text-align: right;
+    }
+
+    .apply-btn {
+        min-width: 100%;
     }
 }
