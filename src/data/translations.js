@@ -45,6 +45,8 @@ export const translations = {
         events: {
             heading: "Announcements & Events",
             learnMore: "Learn More",
+            grandOpeningTitle: "Iman Islamic Center Grand Opening",
+            grandOpeningDesc: "Join us in celebrating the grand opening of Iman Islamic Center, a milestone in serving our community.",
             taraweehTitle: "Taraweeh Prayers - Ramadan 2026",
             taraweehDesc: "Iman Islamic Center - IIC, happily announces the establish time of Taraweeh Prayers for Ramadan 2026",
             quranTitle: "Quran Memorization and Teaching Sessions",
@@ -310,6 +312,8 @@ export const translations = {
         events: {
             heading: "الإعلانات والفعاليات",
             learnMore: "اعرف المزيد",
+            grandOpeningTitle: "الافتتاح الكبير لمركز الإيمان الإسلامي",
+            grandOpeningDesc: "انضم إلينا في الاحتفال بالافتتاح الكبير لمركز الإيمان الإسلامي، معلم بارز في خدمة مجتمعنا.",
             taraweehTitle: "صلاة التراويح - رمضان 2026",
             taraweehDesc: "مركز الإيمان الإسلامي - IIC، يعلن بسعادة عن موعد إقامة صلاة التراويح لشهر رمضان 2026",
             quranTitle: "حلقات تحفيظ وتعليم القرآن",

@@ -1,0 +1,78 @@
+/* Event Cards Container */
+.event-cards-container {
+    margin-top: 40px;
+}
+
+/* Individual Event Card */
+.event-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(39, 86, 155, 0.2);
+}
+
+.event-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.event-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-card-image img {
+    transform: scale(1.1);
+}
+
+.event-card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card-body h4 {
+    color: #27569b;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    min-height: 50px;
+}
+
+.event-card-body p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.event-card-body .btn {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .event-card-body h4 {
+        font-size: 1rem;
+        min-height: auto;
+    }
+
+    .event-card-image {
+        height: 180px;
+    }
+}

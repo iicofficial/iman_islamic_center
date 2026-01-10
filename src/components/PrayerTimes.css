@@ -2,15 +2,48 @@
    Prayer Section
 ================================ */
 .prayer-section {
-  background-color: #f8f9fa;
-  padding: 20px 10px;
+  background: #ffffff;
+  padding: 20px 15px;
   text-align: center;
+  /* Modern Frame with Brand Color */
+  border: 3px solid #27569b;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(39, 86, 155, 0.15);
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Decorative corner accents */
+.prayer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #27569b 0%, transparent 100%);
+  border-radius: 0 0 20px 0;
+}
+
+.prayer-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(315deg, #27569b 0%, transparent 100%);
+  border-radius: 20px 0 0 0;
 }
 
 .prayer-heading {
   color: #27569b;
-  font-weight: 600;
-  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ===============================
