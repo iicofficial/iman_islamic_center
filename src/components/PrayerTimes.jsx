@@ -44,6 +44,14 @@ function PrayerTimes() {
         { prayer: t('prayer.jummah2'), khutba: "02:30 PM" },
     ];
 
+    const formatTime = (time) => {
+        if (!time) return "";
+        if (language === 'ar') {
+            return time.replace("AM", "ص").replace("PM", "م");
+        }
+        return time;
+    };
+
     return (
         <section className="prayer-section" id="prayer">
             <h2 className="prayer-heading">{t('prayer.heading')}</h2>
@@ -69,8 +77,8 @@ function PrayerTimes() {
                         {dailyPrayers.map((p, i) => (
                             <tr key={i}>
                                 <td>{p.prayer}</td>
-                                <td>{p.adhaan}</td>
-                                <td>{p.iqamah || "-"}</td>
+                                <td>{formatTime(p.adhaan)}</td>
+                                <td>{formatTime(p.iqamah) || "-"}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -90,7 +98,7 @@ function PrayerTimes() {
                         {jumuah.map((j, i) => (
                             <tr key={i}>
                                 <td>{j.prayer}</td>
-                                <td>{j.khutba}</td>
+                                <td>{formatTime(j.khutba)}</td>
                             </tr>
                         ))}
                     </tbody>
