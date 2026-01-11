@@ -36,10 +36,7 @@
 }
 
 .rose-decoration {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    height: 240px;
+    height: 160px;
     width: auto;
     opacity: 1;
     mix-blend-mode: multiply;
@@ -50,13 +47,10 @@
     box-shadow: none;
     border: none;
     border-radius: 0;
+    align-self: center;
 }
 
-/* Ensure Rose stays on the same side in Arabic */
-html[dir="rtl"] .rose-decoration {
-    right: auto;
-    left: 20px;
-}
+
 
 .marriage-page-title {
     color: #B8860B !important;
@@ -127,9 +121,7 @@ html[dir="rtl"] .marriage-text-section p {
     }
 
     .rose-decoration {
-        height: 100px;
-        bottom: 90px;
-        right: 10px;
+        height: 80px;
     }
 
     .marriage-page-title {

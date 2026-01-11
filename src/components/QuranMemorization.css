@@ -42,8 +42,8 @@
 }
 
 .quran-page-title {
-    color: #2e8b57 !important;
-    /* SeaGreen color */
+    color: #1a5d3b !important;
+    /* Dark Green */
     font-weight: 800 !important;
 }
 
@@ -52,26 +52,26 @@
 .program-list li {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #2e8b57;
-    /* Changed to green */
+    color: #1a5d3b;
+    /* Dark Green */
     margin-bottom: 20px;
 }
 
-.lead-text {
+.quran-lead-text {
     font-size: 1.25rem !important;
     font-weight: 500;
-    color: #2e8b57 !important;
-    /* Changed to green */
+    color: #1a5d3b !important;
+    /* Dark Green */
 }
 
 .section-subheading {
-    color: #2e8b57;
-    /* Changed to green */
+    color: #1a5d3b;
+    /* Dark Green */
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 20px;
-    border-left: 5px solid #2e8b57;
-    /* Changed to green */
+    border-left: 5px solid #1a5d3b;
+    /* Dark Green */
     /* English LTR border */
     padding-left: 15px;
     /* English LTR padding */
@@ -80,8 +80,8 @@
 /* RTL Support for subheading */
 html[dir="rtl"] .section-subheading {
     border-left: none;
-    border-right: 5px solid #2e8b57;
-    /* Changed to green */
+    border-right: 5px solid #1a5d3b;
+    /* Dark Green */
     padding-left: 0;
     padding-right: 15px;
 }
@@ -90,8 +90,8 @@ html[dir="rtl"] .section-subheading {
     font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #2e8b57;
-    background-color: rgba(46, 139, 87, 0.1);
+    color: #1a5d3b;
+    background-color: rgba(26, 93, 59, 0.1);
     /* Subtle green tint */
     padding: 10px 15px;
     border-radius: 8px;
@@ -117,18 +117,31 @@ html[dir="rtl"] .program-list li {
     padding-right: 10px;
 }
 
+.action-buttons-container h3 {
+    color: #1a5d3b;
+    /* Dark Green */
+    font-weight: 700;
+}
+
 .apply-btn {
     min-width: 250px;
     padding: 15px 30px;
     font-size: 1.1rem;
     font-weight: 600;
     border-radius: 50px;
+    background-color: #27569b !important;
+    /* Brand Blue */
+    border-color: #27569b !important;
+    color: #fff !important;
     box-shadow: 0 4px 15px rgba(39, 86, 155, 0.2);
     transition: all 0.3s ease;
 }
 
 .apply-btn:hover {
     transform: translateY(-3px);
+    background-color: #1e447b !important;
+    /* Darker Blue */
+    border-color: #1e447b !important;
     box-shadow: 0 8px 25px rgba(39, 86, 155, 0.3);
 }
 

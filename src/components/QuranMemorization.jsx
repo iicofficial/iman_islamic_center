@@ -28,7 +28,7 @@ function QuranMemorization() {
 
                     {/* Introduction Text */}
                     <div className="quran-text-section mb-5">
-                        <p className="lead-text">
+                        <p className="quran-lead-text">
                             {t('quranMemorization.introPara1')}
                         </p>
                         <p>

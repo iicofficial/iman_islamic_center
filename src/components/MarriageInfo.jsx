@@ -13,14 +13,12 @@ function MarriageInfo() {
         <div className="marriage-info-container">
             <div className="container my-5">
                 <div className="marriage-content-wrapper">
-                    {/* Header Images */}
+                    {/* Header Images with Rose in middle */}
                     <div className="d-flex justify-content-between align-items-start mb-4 header-images">
                         <img src={Logo} alt="Iman Islamic Center Logo" className="header-logo" />
+                        <img src={Rose} alt="Decoration" className="rose-decoration" />
                         <img src={MarriageContractIcon} alt="Marriage Contract Icon" className="header-right-icon" />
                     </div>
-
-                    {/* Rose Decoration */}
-                    <img src={Rose} alt="Decoration" className="rose-decoration" />
 
                     {/* Header Section */}
                     <div className="text-center mb-5">
@@ -46,7 +44,6 @@ function MarriageInfo() {
 
                     {/* Action Buttons */}
                     <div className="action-buttons-container text-center mt-5">
-                        <h3 className="mb-4">{t('navbar.applyOnlineForm')}</h3>
                         <div className="d-flex justify-content-center gap-3 flex-wrap">
                             <Link to="/marriage-certificate" className="btn btn-primary btn-lg apply-btn">
                                 {t('navbar.applyOnlineForm')}

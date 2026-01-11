@@ -77,13 +77,15 @@ section {
   color: #27569b;
   background-color: #fff;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .btn-light:hover {
-  background-color: #a1c0e8;
+  background-color: #27569b;
   color: #fff;
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(39, 86, 155, 0.15);
 }
 
 /* ------------------ Hero Section ------------------ */

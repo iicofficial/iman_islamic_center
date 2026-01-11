@@ -3,7 +3,8 @@
   background: rgba(248, 252, 255, 0.92) !important;
   backdrop-filter: blur(15px) saturate(160%) !important;
   -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
-  border-bottom: 1.5px solid rgba(39, 86, 155, 0.12);
+  border-bottom: 4px solid #27569b;
+  /* Thick, clean separation line */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
   z-index: 1000;
   width: 100%;
@@ -84,15 +85,24 @@ html[dir="rtl"] .navbar-logo:hover {
 }
 
 .navbar-nav .nav-link {
-  color: #1a1a1a !important;
-  font-weight: 600;
+  color: #0f172a !important;
+  /* Dark Slate - Crisper than pure black */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  /* Bolder */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Added spacing for clarity */
   margin-right: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  /* Adjusted for uppercase */
   text-shadow: none;
   position: relative;
-  transition: all 0.3s ease;
-  padding: 8px 15px !important;
-  border-radius: 8px;
+  transition: all 0.3s ease-out;
+  /* Smoother transition */
+  padding: 10px 18px !important;
+  /* More breathing room */
+  border-radius: 6px;
 }
 
 /* Maintain consistency for Arabic */
@@ -102,29 +112,42 @@ html[dir="rtl"] .navbar-nav .nav-link {
 }
 
 .navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-item:hover>.nav-link {
   color: #27569b !important;
-  background: rgba(39, 86, 155, 0.05);
+  transform: translateY(-2px);
+  background: rgba(39, 86, 155, 0.08);
+  /* Increased from 0.03 */
+}
+
+.navbar-nav .nav-link.active {
+  color: #1e467f !important;
+  /* Slightly deeper blue */
+  background: rgba(39, 86, 155, 0.12);
+  /* Increased from 0.06 */
+  box-shadow: inset 0 0 0 1px rgba(39, 86, 155, 0.1);
+  /* Subtle inner border */
 }
 
 /* Animated dot indicator for active/hover */
+/* Modern Underline Indicator */
 .navbar-nav .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
+  bottom: 5px;
+  left: 15%;
+  width: 0;
+  height: 3px;
+  /* Slightly thicker for clarity */
   background: #27569b;
-  border-radius: 50%;
-  transform: translateX(-50%) scale(0);
-  transition: transform 0.3s ease;
+  border-radius: 3px;
+  transition: width 0.3s cubic-bezier(0.65, 0, 0.35, 1);
   pointer-events: none;
 }
 
 .navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-item:hover>.nav-link::after,
 .navbar-nav .nav-link.active::after {
-  transform: translateX(-50%) scale(1);
+  width: 70%;
 }
 
 /* Remove dropdown arrows (carets) for a modern look */
@@ -140,73 +163,101 @@ html[dir="rtl"] .navbar-nav .nav-link {
   color: #fff;
   font-weight: 900 !important;
   font-size: 1.1rem !important;
-  /* Adjusted size */
   text-shadow: 0.5px 0px 0px #fff, -0.5px 0px 0px #fff;
-  /* Extra thickness shadow */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   padding: 8px 26px;
   border-radius: 999px;
   border: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(255, 159, 0, 0.3);
 }
 
-/* Removed redundant RTL override */
 .btn-donate:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(255, 159, 0, 0.5);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 159, 0, 0.5);
   color: #fff;
 }
 
 /* =========================
    Social + Phone icons
 ========================= */
-/* Language Toggle modern styling */
+/* Language Toggle modern pill styling */
 .language-toggle-top {
   position: absolute;
   top: 15px;
   left: 50%;
-  transform: translateX(-50%);
-  color: #1a1a1a !important;
-  font-size: 0.85rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  border-radius: 100px !important;
-  padding: 6px 20px !important;
-  min-width: 180px !important;
+  transform: translateX(-50%) !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
+  border: 2px solid #27569b;
+  border-radius: 50px;
+  padding: 4px;
   z-index: 1100;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  text-decoration: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  /* Fixed width for stability */
+  transition: all 0.3s ease;
 }
 
 .language-toggle-top:hover {
-  background: #ffffff !important;
-  border-color: #27569b !important;
-  color: #27569b !important;
   transform: translateX(-50%) translateY(-2px) !important;
-  box-shadow: 0 6px 15px rgba(39, 86, 155, 0.15);
+  box-shadow: 0 6px 20px rgba(39, 86, 155, 0.2);
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.lang-btn:hover {
+  color: #27569b;
+}
+
+.lang-btn.active {
+  background-color: #27569b !important;
+  color: #ffffff !important;
+}
+
+.lang-divider {
+  color: #e2e8f0;
+  font-weight: 300;
+  margin: 0 4px;
 }
 
 /* Mobile language toggle positioning */
 @media (max-width: 1199px) {
   .language-toggle-top {
     top: 10px;
-    font-size: 0.75rem !important;
-    padding: 4px 12px !important;
-    min-width: 140px !important;
+    min-width: 160px;
+    padding: 3px;
+  }
+
+  .lang-btn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
   }
 }
 
-html[dir="rtl"] .language-toggle {
-  margin-right: 15px !important;
+/* Ensure centering is solid regardless of direction */
+html[dir="rtl"] .language-toggle-top {
+  left: 50% !important;
+  right: auto !important;
+}
+
+html[dir="rtl"] .lang-btn {
+  font-family: 'Amiri', serif;
 }
 
 .social-icon {
@@ -218,12 +269,13 @@ html[dir="rtl"] .language-toggle {
   border-radius: 50%;
   font-size: 18px;
   color: #fff;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .social-icon:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) rotate(8deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
 }
 
 /* Social brand colors */
@@ -362,7 +414,9 @@ html[dir="rtl"] .social-icon.phone-icon svg {
   transition: all 0.2s ease !important;
 }
 
-.custom-navbar .dropdown-item:hover {
+.custom-navbar .dropdown-item:hover,
+.custom-navbar .dropdown-item.active-item,
+.dropdown-submenu:hover>.dropdown-item {
   background-color: #27569b !important;
   color: #ffffff !important;
   transform: translateX(5px);
@@ -566,8 +620,12 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
   }
 
   .nav-link {
-    padding: 12px 0 !important;
+    padding: 15px 10px !important;
     width: 100%;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px;
   }
 
   .middle-phone-modern {

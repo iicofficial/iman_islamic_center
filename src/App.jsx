@@ -15,10 +15,13 @@ import QuranBoysApplication from "./components/QuranBoysApplication";
 import QuranGirlsApplication from "./components/QuranGirlsApplication";
 import QuranMemorization from "./components/QuranMemorization";
 import MarriageInfo from "./components/MarriageInfo";
+import ScrollToTop from "./components/ScrollToTop";
+import ArabicHome from "./components/ArabicHome";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route
@@ -41,6 +44,17 @@ function App() {
             </>
           }
         />
+        <Route path="/ar" element={<ArabicHome />} />
+
+        {/* Arabic Routes to support getPath() */}
+        <Route path="/ar/contact" element={<ContactPage />} />
+        <Route path="/ar/marriage-certificate" element={<MarriageCertificate />} />
+        <Route path="/ar/quran-boys-application" element={<QuranBoysApplication />} />
+        <Route path="/ar/quran-girls-application" element={<QuranGirlsApplication />} />
+        <Route path="/ar/quran-memorization" element={<QuranMemorization />} />
+        <Route path="/ar/marriage-info" element={<MarriageInfo />} />
+        <Route path="/ar/event/:id" element={<Events />} />
+
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/marriage-certificate" element={<MarriageCertificate />} />
         <Route path="/quran-boys-application" element={<QuranBoysApplication />} />

@@ -4,7 +4,15 @@ import { useLanguage } from "../context/LanguageContext";
 import "./Footer.css";
 
 function Footer() {
-    const { t } = useLanguage();
+    const { language, t } = useLanguage();
+
+    // Helper to get language-prefixed paths
+    const getPath = (path) => {
+        if (language === 'ar') {
+            return path === '/' ? '/ar' : `/ar${path}`;
+        }
+        return path;
+    };
 
     return (
         <footer className="footer-section py-4" id="footer">
@@ -22,10 +30,10 @@ function Footer() {
                     <div className="col-md-4 mb-3">
                         <h5 className="text-white">{t('footer.quickLinks')}</h5>
                         <ul className="list-unstyled">
-                            <li><a href="/" className="footer-link">{t('navbar.home')}</a></li>
-                            <li><a href="#prayer" className="footer-link">{t('navbar.prayerTimes')}</a></li>
-                            <li><a href="#events" className="footer-link">{t('navbar.events')}</a></li>
-                            <li><Link to="/contact" className="footer-link">{t('navbar.contactUs')}</Link></li>
+                            <li><Link to={getPath("/")} className="footer-link">{t('navbar.home')}</Link></li>
+                            <li><Link to={getPath("/#prayer")} className="footer-link">{t('navbar.prayerTimes')}</Link></li>
+                            <li><Link to={getPath("/#events")} className="footer-link">{t('navbar.events')}</Link></li>
+                            <li><Link to={getPath("/contact")} className="footer-link">{t('navbar.contactUs')}</Link></li>
                             <li><a href="/forms/Constitution and bylaws.docx" className="footer-link" download>{t('navbar.constitution')}</a></li>
                         </ul>
                     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { useLanguage } from "../context/LanguageContext";
@@ -11,6 +11,37 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
     const { language, toggleLanguage, t } = useLanguage();
+    const location = useLocation();
+
+    // Helper to check if a regular link is active
+    const isActiveLink = (path) => {
+        // Handle generic root path matching
+        if (path === '/') {
+            return location.pathname === '/' || location.pathname === '/ar';
+        }
+        // Check if pathname ends with the path (to handle /ar prefix automatically)
+        // or exact match for non-prefixed
+        return location.pathname === path || location.pathname === `/ar${path}` || location.pathname.includes(path);
+    };
+
+    // Helper to check if a specific dropdown item is active (exact match preferred)
+    const isItemActive = (path) => {
+        const fullPath = language === 'ar' ? `/ar${path}` : path;
+        // For hash links, we might just ignore or check simple inclusion if generic
+        if (path.startsWith('/#')) return false;
+        return location.pathname === fullPath;
+    };
+
+    const getPath = (path) => {
+        // If Arabic is active, prefix with /ar to load the Arabic version of the page.
+        // Otherwise return the default (English) path.
+        if (language === 'ar') {
+            // For home page, return /ar instead of /ar/
+            return path === '/' ? '/ar' : `/ar${path}`;
+        }
+        return path;
+    };
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -32,7 +63,7 @@ function Navbar() {
             <div className="container-fluid px-4 position-relative">
 
                 {/* Brand Section */}
-                <Link className="navbar-brand d-flex align-items-center" to="/" onClick={closeMenu}>
+                <Link className="navbar-brand d-flex align-items-center" to={getPath("/")} onClick={closeMenu}>
                     <img
                         src={language === 'ar' ? arabicLogo : logo}
                         alt="Iman Islamic Center Logo"
@@ -41,14 +72,21 @@ function Navbar() {
                 </Link>
 
                 {/* Language Toggle - Positioned Top Center */}
-                <button
-                    className="btn btn-link text-decoration-none fw-bold language-toggle-top"
-                    onClick={toggleLanguage}
-                >
-                    <span>English</span>
-                    <span className="mx-2" style={{ opacity: 0.5 }}>|</span>
-                    <span>العربية</span>
-                </button>
+                <div className="language-toggle-container language-toggle-top">
+                    <button
+                        className={`lang-btn ${language === 'en' ? 'active' : ''}`}
+                        onClick={() => language !== 'en' && toggleLanguage()}
+                    >
+                        English
+                    </button>
+                    <span className="lang-divider">|</span>
+                    <button
+                        className={`lang-btn ${language === 'ar' ? 'active' : ''}`}
+                        onClick={() => language !== 'ar' && toggleLanguage()}
+                    >
+                        العربية
+                    </button>
+                </div>
 
                 {/* Hamburger Toggler */}
                 <button
@@ -70,13 +108,13 @@ function Navbar() {
                                 {t('navbar.home')}
                             </a>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/" onClick={closeMenu}>{t('navbar.mainPage')}</Link></li>
-                                <li><Link className="dropdown-item" to="/contact" onClick={closeMenu}>{t('navbar.contactUs')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/') ? 'active-item' : ''}`} to={getPath("/")} onClick={closeMenu}>{t('navbar.mainPage')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/contact') ? 'active-item' : ''}`} to={getPath("/contact")} onClick={closeMenu}>{t('navbar.contactUs')}</Link></li>
                             </ul>
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
+                            <a href="#" className={`nav-link dropdown-toggle ${location.pathname.includes('/event') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 {t('navbar.events')}
                             </a>
                             <ul className="dropdown-menu">
@@ -86,12 +124,12 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
+                            <a href="#" className={`nav-link dropdown-toggle ${isItemActive('/#fajr') || isItemActive('/#jummah') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 {t('navbar.prayerTimes')}
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#fajr" onClick={closeMenu}>{t('navbar.dailyPrayers')}</a></li>
-                                <li><a className="dropdown-item" href="#jummah" onClick={closeMenu}>{t('navbar.jummahPrayers')}</a></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/#fajr') ? 'active-item' : ''}`} to={getPath("/#fajr")} onClick={closeMenu}>{t('navbar.dailyPrayers')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/#jummah') ? 'active-item' : ''}`} to={getPath("/#jummah")} onClick={closeMenu}>{t('navbar.jummahPrayers')}</Link></li>
                             </ul>
                         </li>
 
@@ -102,40 +140,44 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
+                            <a href="#"
+                                className={`nav-link dropdown-toggle ${location.pathname.includes('/quran') ||
+                                    location.pathname.includes('/marriage')
+                                    ? 'active' : ''}`}
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 {t('navbar.services')}
                             </a>
                             <ul className="dropdown-menu">
                                 {/* Quran Memorization Submenu */}
                                 <li className="dropdown-submenu">
                                     <a
-                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'quran' ? 'show' : ''}`}
+                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'quran' || location.pathname.includes('/quran') ? 'show active-item' : ''}`}
                                         href="#"
                                         onClick={(e) => toggleSubmenu('quran', e)}
                                     >
                                         {t('navbar.quranSessions')}
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'quran' ? 'show' : ''}`}>
-                                        <li><Link className="dropdown-item" to="/quran-boys-application" onClick={closeMenu}>{t('navbar.quranBoys')}</Link></li>
-                                        <li><Link className="dropdown-item" to="/quran-girls-application" onClick={closeMenu}>{t('navbar.quranGirls')}</Link></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/quran-boys-application') ? 'active-item' : ''}`} to={getPath("/quran-boys-application")} onClick={closeMenu}>{t('navbar.quranBoys')}</Link></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/quran-girls-application') ? 'active-item' : ''}`} to={getPath("/quran-girls-application")} onClick={closeMenu}>{t('navbar.quranGirls')}</Link></li>
                                     </ul>
                                 </li>
 
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.daycareServices')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.eduPrograms')}</a></li>
 
-                                {/* Marriage Contracts Submenu */}
+                                {/* Marriage Services Submenu */}
                                 <li className="dropdown-submenu">
                                     <a
-                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'marriage' ? 'show' : ''}`}
+                                        className={`dropdown-item dropdown-toggle ${activeSubmenu === 'marriage' || location.pathname.includes('/marriage') ? 'show active-item' : ''}`}
                                         href="#"
                                         onClick={(e) => toggleSubmenu('marriage', e)}
                                     >
-                                        {t('navbar.marriageContracts')}
+                                        {t('navbar.marriageServices')}
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'marriage' ? 'show' : ''}`}>
-                                        <li><Link className="dropdown-item" to="/marriage-certificate" onClick={closeMenu}>{t('navbar.applyOnlineForm')}</Link></li>
-                                        <li><a className="dropdown-item" href="#" download onClick={closeMenu}>{t('navbar.downloadForm')}</a></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/marriage-certificate') ? 'active-item' : ''}`} to={getPath("/marriage-certificate")} onClick={closeMenu}>{t('navbar.applyOnlineForm')}</Link></li>
+                                        <li><a className="dropdown-item" href="/forms/Marriage Contract Form.pdf" download onClick={closeMenu}>{t('navbar.downloadForm')}</a></li>
                                     </ul>
                                 </li>
 
@@ -147,7 +189,7 @@ function Navbar() {
                         </li>
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
+                            <a href="#" className={`nav-link dropdown-toggle ${location.pathname.includes('/forms/') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
                                 {t('navbar.forms')}
                             </a>
                             <ul className="dropdown-menu">
