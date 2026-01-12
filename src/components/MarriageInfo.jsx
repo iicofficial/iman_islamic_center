@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './MarriageInfo.css';
-import Logo from '../assets/logo.png';
+import Logo from '../assets/riblogo_pink.png';
 import MarriageContractIcon from '../assets/marriage_contract.png';
-import Rose from '../assets/rose.jpeg';
 
 function MarriageInfo() {
     const { t } = useLanguage();
@@ -16,7 +15,6 @@ function MarriageInfo() {
                     {/* Header Images with Rose in middle */}
                     <div className="d-flex justify-content-between align-items-start mb-4 header-images">
                         <img src={Logo} alt="Iman Islamic Center Logo" className="header-logo" />
-                        <img src={Rose} alt="Decoration" className="rose-decoration" />
                         <img src={MarriageContractIcon} alt="Marriage Contract Icon" className="header-right-icon" />
                     </div>
 

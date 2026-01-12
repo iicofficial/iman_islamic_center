@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import './QuranMemorization.css';
-import Logo from '../assets/logo.png';
+import Logo from '../assets/riblogo_green.png';
 import QuranMemorizationIcon from '../assets/quran_memorization.png';
 import QuranLight from '../assets/quran_light.jpeg';
 
@@ -14,10 +14,12 @@ function QuranMemorization() {
             <div className="container my-5">
                 <div className="quran-content-wrapper">
                     {/* Header Images */}
-                    <div className="d-flex justify-content-between align-items-center mb-4 header-images">
+                    <div className="d-flex justify-content-between align-items-start mb-4 header-images">
                         <img src={Logo} alt="Iman Islamic Center Logo" className="header-logo" />
-                        <img src={QuranMemorizationIcon} alt="Quran Memorization" className="header-program-logo" />
-                        <img src={QuranLight} alt="Quran Light" className="header-middle-icon" />
+                        <div className="header-right-icons d-flex align-items-center gap-3">
+                            <img src={QuranMemorizationIcon} alt="Quran Memorization" className="header-program-logo" />
+                            <img src={QuranLight} alt="Quran Light" className="header-middle-icon" />
+                        </div>
                     </div>
 
                     {/* Header Section */}

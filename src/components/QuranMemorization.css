@@ -11,34 +11,91 @@
     padding: 50px;
     border-radius: 16px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Added for absolute positioning of logo */
 }
 
 .header-images {
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid #ced4da;
     padding-bottom: 20px;
     display: flex !important;
     flex-direction: row !important;
-    /* Keep same order in English and Arabic */
+    min-height: 270px;
+    /* Adjusted for 2x ribbon */
 }
 
-.header-logo {
-    height: 280px;
-    /* Doubled from 140px */
-    width: auto;
+/* Desktop Positioning (Min-Width 1025px) */
+@media (min-width: 1025px) {
+    .header-logo {
+        height: 360px;
+        /* 2x original size */
+        width: auto;
+        margin-top: -38px;
+        margin-left: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-program-logo {
+        height: 460px;
+        /* 2x original size */
+        width: auto;
+        margin-right: 280px;
+        margin-left: 0;
+        margin-top: -113px;
+    }
+
+    .header-middle-icon {
+        height: 210px;
+        width: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        margin-top: -190px;
+    }
 }
 
-.header-program-logo {
-    height: 360px;
-    /* Doubled from 180px */
-    width: auto;
-}
-
-
+/* Base styles for Middle Icon (Shared) */
 .header-middle-icon {
-    height: 210px;
-    width: auto;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile/Tablet Layout (Max-Width 1024px) */
+@media (max-width: 1024px) {
+    .header-logo {
+        display: none !important;
+        /* Hide ribbon */
+    }
+
+    .header-program-logo {
+        height: 150px;
+        width: auto;
+        margin: 0 0 20px 0;
+        /* Reset margins */
+    }
+
+    .header-middle-icon {
+        height: 100px;
+        width: auto;
+        margin: 0;
+        /* Reset margins */
+    }
+
+    .header-images {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-height: auto;
+        gap: 20px;
+    }
+
+    .header-right-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 }
 
 .quran-page-title {
@@ -153,24 +210,6 @@ html[dir="rtl"] .program-list li {
 
     .quran-content-wrapper {
         padding: 20px;
-    }
-
-    .header-images {
-        gap: 10px;
-        justify-content: center !important;
-        flex-wrap: wrap;
-    }
-
-    .header-logo {
-        height: 80px;
-    }
-
-    .header-program-logo {
-        height: 100px;
-    }
-
-    .header-middle-icon {
-        height: 60px;
     }
 
     .quran-page-title {
