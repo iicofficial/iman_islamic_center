@@ -6,11 +6,8 @@ import ribbonLogo from '../assets/riblogo_green.png';
 const ProgramPolicies = () => {
     const { t, language } = useLanguage();
 
-    // Using the quranBoys keys since the content is identical
-    const policies = [
-        'policy1', 'policy2', 'policy3', 'policy4', 'policy5',
-        'policy6', 'policy7', 'policy8', 'policy9'
-    ];
+    // Using quranMemorization.policies which has the combined gender policies
+    const policies = t('quranMemorization.policies');
 
     return (
         <div className="policies-page">
@@ -24,9 +21,9 @@ const ProgramPolicies = () => {
 
                     <div className="policies-card">
                         <ul className="policies-list-main">
-                            {policies.map((policyKey, index) => (
+                            {policies.map((policy, index) => (
                                 <li key={index} className="policy-item">
-                                    {t(`quranBoys.${policyKey}`)}
+                                    {policy}
                                 </li>
                             ))}
                         </ul>
