@@ -17,6 +17,7 @@ import QuranMemorization from "./components/QuranMemorization";
 import MarriageInfo from "./components/MarriageInfo";
 import ScrollToTop from "./components/ScrollToTop";
 import ArabicHome from "./components/ArabicHome";
+import ProgramPolicies from "./components/ProgramPolicies";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="/ar/quran-girls-application" element={<QuranGirlsApplication />} />
         <Route path="/ar/quran-memorization" element={<QuranMemorization />} />
         <Route path="/ar/marriage-info" element={<MarriageInfo />} />
+        <Route path="/ar/policies" element={<ProgramPolicies />} />
         <Route path="/ar/event/:id" element={<Events />} />
 
         <Route path="/contact" element={<ContactPage />} />
@@ -61,6 +63,7 @@ function App() {
         <Route path="/quran-girls-application" element={<QuranGirlsApplication />} />
         <Route path="/quran-memorization" element={<QuranMemorization />} />
         <Route path="/marriage-info" element={<MarriageInfo />} />
+        <Route path="/policies" element={<ProgramPolicies />} />
         <Route path="/event/:id" element={<Events />} />
       </Routes>
       <Footer />

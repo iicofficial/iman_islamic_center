@@ -139,6 +139,15 @@ function Navbar() {
                             </a>
                         </li>
 
+
+
+
+                        <li className="nav-item">
+                            <Link className={`nav-link ${isItemActive('/policies') ? 'active-item' : ''}`} to={getPath("/policies")} onClick={closeMenu}>
+                                {t('navbar.programPolicies')}
+                            </Link>
+                        </li>
+
                         <li className="nav-item dropdown">
                             <a href="#"
                                 className={`nav-link dropdown-toggle ${location.pathname.includes('/quran') ||

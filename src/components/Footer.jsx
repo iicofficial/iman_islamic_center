@@ -35,6 +35,7 @@ function Footer() {
                             <li><Link to={getPath("/#events")} className="footer-link">{t('navbar.events')}</Link></li>
                             <li><Link to={getPath("/contact")} className="footer-link">{t('navbar.contactUs')}</Link></li>
                             <li><a href="/forms/Constitution and bylaws.docx" className="footer-link" download>{t('navbar.constitution')}</a></li>
+                            <li><Link to={getPath("/policies")} className="footer-link">{t('navbar.programPolicies')}</Link></li>
                         </ul>
                     </div>
 
