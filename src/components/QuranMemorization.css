@@ -50,8 +50,39 @@
         width: auto;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        margin-top: -190px;
+        position: absolute;
+        /* Changed from relative to sit at edge */
+        right: 15px;
+        /* Far right edge */
+        top: 20px;
+        /* Keeping vertical position */
+        margin: 0;
+    }
+
+    /* Arabic (RTL) Swapping for Desktop */
+    html[dir="rtl"] .header-images {
+        justify-content: flex-start !important;
+        /* Forces both groups to the Right side in RTL */
+        gap: 20px;
+        /* Base gap between Ribbon and Icon group */
+    }
+
+    html[dir="rtl"] .header-logo {
+        margin-left: 0;
+        margin-right: 10px;
+        /* Ribbon on the far right */
+    }
+
+    html[dir="rtl"] .header-program-logo {
+        margin-right: 0;
+        margin-left: 30px;
+        /* Small distance to keep them together as requested */
+    }
+
+    html[dir="rtl"] .header-middle-icon {
+        right: auto;
+        left: 15px;
+        /* Quran Light sits on the far LEFT edge */
     }
 }
 

@@ -20,56 +20,75 @@
     display: flex !important;
     flex-direction: row !important;
     min-height: 270px;
-    /* Adjusted for 2x ribbon */
 }
 
-/* Desktop Positioning (Min-Width 1025px) */
-@media (min-width: 1025px) {
+/* Desktop Positioning (Min-Width 769px) */
+@media (min-width: 769px) {
     .header-logo {
-        height: 360px;
-        /* 2x original size */
+        height: 300px;
         width: auto;
-        margin-top: -38px;
-        /* Moved down 50px */
-        margin-left: 10px;
-        /* Moved left 50px */
-        position: relative;
-        z-index: 1;
-        /* Under navbar on scroll */
+        position: absolute;
+        top: 12px;
+        /* 50px down from original -38px */
+        left: 10px;
+        z-index: 10;
+        margin: 0;
+    }
+
+    .header-images {
+        justify-content: flex-end !important;
     }
 
     .header-right-icon {
         height: 234px;
-        /* 1.3x original (180px) */
         width: auto;
-        position: relative;
-        margin-top: -40px;
-        /* Moved 40px to the top */
+        position: absolute;
+        top: 10px;
+        /* Moved 50px down from -40px */
+        right: 10px;
+        z-index: 10;
+        margin: 0;
+    }
+
+    /* Arabic (RTL) Swapped Positions for Desktop */
+    html[dir="rtl"] .header-logo {
+        left: auto;
+        right: 10px;
+    }
+
+    html[dir="rtl"] .header-right-icon {
+        right: auto;
+        left: 10px;
     }
 }
 
-/* Mobile/Tablet Layout (Max-Width 1024px) */
-@media (max-width: 1024px) {
+/* Mobile/Tablet Layout (Max-Width 768px) */
+@media (max-width: 768px) {
     .header-logo {
-        display: none !important;
-        /* Hide ribbon on mobile/tablet */
+        display: block !important;
+        height: 100px;
+        /* Reduced height for mobile */
+        width: auto;
+        position: static;
+        margin: 0;
     }
 
     .header-right-icon {
-        height: 120px;
+        height: 100px;
+        /* Reduced height for mobile */
         width: auto;
-        margin-top: 0;
-        /* Reset margin */
-        margin-bottom: 20px;
+        margin: 0;
     }
 
     .header-images {
-        flex-direction: column !important;
+        flex-direction: row !important;
+        /* Stack side by side */
         align-items: center !important;
-        justify-content: center !important;
+        justify-content: space-between !important;
+        /* One left, one right */
         min-height: auto;
         padding-bottom: 20px;
-        gap: 20px;
+        gap: 10px;
     }
 }
 
@@ -80,7 +99,7 @@
     mix-blend-mode: multiply;
     /* Effectively removes white background */
     filter: brightness(1.1) saturate(1.2) contrast(1.1);
-    /* Makes it shiny and vibrant */
+
     pointer-events: none;
     box-shadow: none;
     border: none;
