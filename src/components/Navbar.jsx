@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import {
+    FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaPhoneAlt, FaEnvelope,
+    FaChevronDown, FaChevronRight, FaAngleRight, FaHome, FaCalendarAlt,
+    FaHistory, FaClock, FaMosque, FaBookOpen, FaChild, FaUserGraduate,
+    FaRing, FaHandsHelping, FaFileContract, FaLanguage, FaHandHoldingHeart,
+    FaMale, FaFemale, FaWpforms, FaFileDownload, FaUserPlus, FaHandHoldingUsd,
+    FaFileAlt
+} from "react-icons/fa";
 import { IoLanguage } from "react-icons/io5";
 import { useLanguage } from "../context/LanguageContext";
 import logo from "../assets/logo.png";
@@ -105,31 +112,31 @@ function Navbar() {
                     <ul className="navbar-nav mx-auto align-items-center">
                         <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
-                                {t('navbar.home')}
+                                {t('navbar.home')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
-                                <li><Link className={`dropdown-item ${isItemActive('/') ? 'active-item' : ''}`} to={getPath("/")} onClick={closeMenu}>{t('navbar.mainPage')}</Link></li>
-                                <li><Link className={`dropdown-item ${isItemActive('/contact') ? 'active-item' : ''}`} to={getPath("/contact")} onClick={closeMenu}>{t('navbar.contactUs')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/') ? 'active-item' : ''}`} to={getPath("/")} onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.mainPage')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/contact') ? 'active-item' : ''}`} to={getPath("/contact")} onClick={closeMenu}><FaEnvelope className="me-2 menu-icon" />{t('navbar.contactUs')}</Link></li>
                             </ul>
                         </li>
 
                         <li className="nav-item dropdown">
                             <a href="#" className={`nav-link dropdown-toggle ${location.pathname.includes('/event') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
-                                {t('navbar.events')}
+                                {t('navbar.events')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#upcoming" onClick={closeMenu}>{t('navbar.upcoming')}</a></li>
-                                <li><a className="dropdown-item" href="#past" onClick={closeMenu}>{t('navbar.past')}</a></li>
+                                <li><a className="dropdown-item" href="#upcoming" onClick={closeMenu}><FaCalendarAlt className="me-2 menu-icon" />{t('navbar.upcoming')}</a></li>
+                                <li><a className="dropdown-item" href="#past" onClick={closeMenu}><FaHistory className="me-2 menu-icon" />{t('navbar.past')}</a></li>
                             </ul>
                         </li>
 
                         <li className="nav-item dropdown">
                             <a href="#" className={`nav-link dropdown-toggle ${isItemActive('/#fajr') || isItemActive('/#jummah') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
-                                {t('navbar.prayerTimes')}
+                                {t('navbar.prayerTimes')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
-                                <li><Link className={`dropdown-item ${isItemActive('/#fajr') ? 'active-item' : ''}`} to={getPath("/#fajr")} onClick={closeMenu}>{t('navbar.dailyPrayers')}</Link></li>
-                                <li><Link className={`dropdown-item ${isItemActive('/#jummah') ? 'active-item' : ''}`} to={getPath("/#jummah")} onClick={closeMenu}>{t('navbar.jummahPrayers')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/#fajr') ? 'active-item' : ''}`} to={getPath("/#fajr")} onClick={closeMenu}><FaClock className="me-2 menu-icon" />{t('navbar.dailyPrayers')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/#jummah') ? 'active-item' : ''}`} to={getPath("/#jummah")} onClick={closeMenu}><FaMosque className="me-2 menu-icon" />{t('navbar.jummahPrayers')}</Link></li>
                             </ul>
                         </li>
 
@@ -154,7 +161,7 @@ function Navbar() {
                                     location.pathname.includes('/marriage')
                                     ? 'active' : ''}`}
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
-                                {t('navbar.services')}
+                                {t('navbar.services')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
                                 {/* Quran Memorization Submenu */}
@@ -164,16 +171,18 @@ function Navbar() {
                                         href="#"
                                         onClick={(e) => toggleSubmenu('quran', e)}
                                     >
+                                        <FaBookOpen className="me-2 menu-icon" />
                                         {t('navbar.quranSessions')}
+                                        <FaAngleRight className="submenu-arrow" />
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'quran' ? 'show' : ''}`}>
-                                        <li><Link className={`dropdown-item ${isItemActive('/quran-boys-application') ? 'active-item' : ''}`} to={getPath("/quran-boys-application")} onClick={closeMenu}>{t('navbar.quranBoys')}</Link></li>
-                                        <li><Link className={`dropdown-item ${isItemActive('/quran-girls-application') ? 'active-item' : ''}`} to={getPath("/quran-girls-application")} onClick={closeMenu}>{t('navbar.quranGirls')}</Link></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/quran-boys-application') ? 'active-item' : ''}`} to={getPath("/quran-boys-application")} onClick={closeMenu}><FaMale className="me-2 menu-icon" />{t('navbar.quranBoys')}</Link></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/quran-girls-application') ? 'active-item' : ''}`} to={getPath("/quran-girls-application")} onClick={closeMenu}><FaFemale className="me-2 menu-icon" />{t('navbar.quranGirls')}</Link></li>
                                     </ul>
                                 </li>
 
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.daycareServices')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.eduPrograms')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaChild className="me-2 menu-icon" />{t('navbar.daycareServices')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaUserGraduate className="me-2 menu-icon" />{t('navbar.eduPrograms')}</a></li>
 
                                 {/* Marriage Services Submenu */}
                                 <li className="dropdown-submenu">
@@ -182,24 +191,26 @@ function Navbar() {
                                         href="#"
                                         onClick={(e) => toggleSubmenu('marriage', e)}
                                     >
+                                        <FaRing className="me-2 menu-icon" />
                                         {t('navbar.marriageServices')}
+                                        <FaAngleRight className="submenu-arrow" />
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'marriage' ? 'show' : ''}`}>
-                                        <li><Link className={`dropdown-item ${isItemActive('/marriage-certificate') ? 'active-item' : ''}`} to={getPath("/marriage-certificate")} onClick={closeMenu}>{t('navbar.applyOnlineForm')}</Link></li>
-                                        <li><a className="dropdown-item" href="/forms/Marriage Contract Form.pdf" download onClick={closeMenu}>{t('navbar.downloadForm')}</a></li>
+                                        <li><Link className={`dropdown-item ${isItemActive('/marriage-certificate') ? 'active-item' : ''}`} to={getPath("/marriage-certificate")} onClick={closeMenu}><FaWpforms className="me-2 menu-icon" />{t('navbar.applyOnlineForm')}</Link></li>
+                                        <li><a className="dropdown-item" href="/forms/Marriage Contract Form.pdf" download onClick={closeMenu}><FaFileDownload className="me-2 menu-icon" />{t('navbar.downloadForm')}</a></li>
                                     </ul>
                                 </li>
 
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.coupleReconciliation')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.divorceFormalization')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.certifiedTranslation')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}>{t('navbar.funeralServices')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandsHelping className="me-2 menu-icon" />{t('navbar.coupleReconciliation')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaFileContract className="me-2 menu-icon" />{t('navbar.divorceFormalization')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaLanguage className="me-2 menu-icon" />{t('navbar.certifiedTranslation')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingHeart className="me-2 menu-icon" />{t('navbar.funeralServices')}</a></li>
                             </ul>
                         </li>
 
                         <li className="nav-item dropdown">
                             <a href="#" className={`nav-link dropdown-toggle ${location.pathname.includes('/forms/') ? 'active' : ''}`} role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
-                                {t('navbar.forms')}
+                                {t('navbar.forms')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
                                 {/* Quran Memorization Forms Submenu */}
@@ -209,11 +220,13 @@ function Navbar() {
                                         href="#"
                                         onClick={(e) => toggleSubmenu('quranForms', e)}
                                     >
+                                        <FaBookOpen className="me-2 menu-icon" />
                                         {t('navbar.quranMemorizationForms')}
+                                        <FaAngleRight className="submenu-arrow" />
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'quranForms' ? 'show' : ''}`}>
-                                        <li><a className="dropdown-item" href="/forms/boys quran applicaiton form.docx" download onClick={closeMenu}>{t('navbar.quranBoysForm')}</a></li>
-                                        <li><a className="dropdown-item" href="/forms/girls quran applicaiton form.docx" download onClick={closeMenu}>{t('navbar.quranGirlsForm')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/boys quran applicaiton form.docx" download onClick={closeMenu}><FaMale className="me-2 menu-icon" />{t('navbar.quranBoysForm')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/girls quran applicaiton form.docx" download onClick={closeMenu}><FaFemale className="me-2 menu-icon" />{t('navbar.quranGirlsForm')}</a></li>
                                     </ul>
                                 </li>
 
@@ -224,11 +237,13 @@ function Navbar() {
                                         href="#"
                                         onClick={(e) => toggleSubmenu('membership', e)}
                                     >
+                                        <FaUserPlus className="me-2 menu-icon" />
                                         {t('navbar.membershipForms')}
+                                        <FaAngleRight className="submenu-arrow" />
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'membership' ? 'show' : ''}`}>
-                                        <li><a className="dropdown-item" href="/forms/Islamic_Center_Monthly_Commitment_Form.docx" download onClick={closeMenu}>{t('downloadForms.commitmentTitle')}</a></li>
-                                        <li><a className="dropdown-item" href="/forms/ELC Member work form.docx" download onClick={closeMenu}>{t('downloadForms.elcTitle')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/Islamic_Center_Monthly_Commitment_Form.docx" download onClick={closeMenu}><FaFileAlt className="me-2 menu-icon" />{t('downloadForms.commitmentTitle')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/ELC Member work form.docx" download onClick={closeMenu}><FaWpforms className="me-2 menu-icon" />{t('downloadForms.elcTitle')}</a></li>
                                     </ul>
                                 </li>
 
@@ -239,11 +254,13 @@ function Navbar() {
                                         href="#"
                                         onClick={(e) => toggleSubmenu('donation', e)}
                                     >
+                                        <FaHandHoldingUsd className="me-2 menu-icon" />
                                         {t('navbar.donationForms')}
+                                        <FaAngleRight className="submenu-arrow" />
                                     </a>
                                     <ul className={`dropdown-menu ${activeSubmenu === 'donation' ? 'show' : ''}`}>
-                                        <li><a className="dropdown-item" href="/forms/board of directors member work form.docx" download onClick={closeMenu}>{t('downloadForms.boardTitle')}</a></li>
-                                        <li><a className="dropdown-item" href="/forms/Sponsor_Quran_Student.docx" download onClick={closeMenu}>{t('downloadForms.sponsorTitle')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/board of directors member work form.docx" download onClick={closeMenu}><FaFileAlt className="me-2 menu-icon" />{t('downloadForms.boardTitle')}</a></li>
+                                        <li><a className="dropdown-item" href="/forms/Sponsor_Quran_Student.docx" download onClick={closeMenu}><FaHandHoldingUsd className="me-2 menu-icon" />{t('downloadForms.sponsorTitle')}</a></li>
                                     </ul>
                                 </li>
                             </ul>
