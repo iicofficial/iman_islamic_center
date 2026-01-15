@@ -95,14 +95,24 @@ function QuranBoysApplication() {
             errors.address = 'Student must currently reside in Lincoln, NE';
         }
 
-        // Phone validations
-        if (formData.workPhone && !validatePhone(formData.workPhone)) {
+        // Phone validations - at least one phone number is required
+        const hasWorkPhone = formData.workPhone && formData.workPhone.trim() !== '';
+        const hasHomePhone = formData.homePhone && formData.homePhone.trim() !== '';
+        const hasMobile = formData.mobile && formData.mobile.trim() !== '';
+
+        // Check if at least one phone number is provided
+        if (!hasWorkPhone && !hasHomePhone && !hasMobile) {
+            errors.phone = 'Please provide at least one phone number (Work, Home, or Mobile)';
+        }
+
+        // Validate format of provided phone numbers
+        if (hasWorkPhone && !validatePhone(formData.workPhone)) {
             errors.workPhone = 'Please enter a valid US phone number: (123)456-7890';
         }
-        if (formData.homePhone && !validatePhone(formData.homePhone)) {
+        if (hasHomePhone && !validatePhone(formData.homePhone)) {
             errors.homePhone = 'Please enter a valid US phone number: (123)456-7890';
         }
-        if (!validatePhone(formData.mobile)) {
+        if (hasMobile && !validatePhone(formData.mobile)) {
             errors.mobile = 'Please enter a valid US phone number: (123)456-7890';
         }
 
@@ -414,6 +424,12 @@ function QuranBoysApplication() {
                         <div className="form-section">
                             <h3 className="section-title">{t('quranBoys.contactInfo')}</h3>
 
+                            {validationErrors.phone && (
+                                <div className="alert alert-warning mb-3" role="alert">
+                                    {validationErrors.phone}
+                                </div>
+                            )}
+
                             <div className="row">
                                 <div className="col-md-4 mb-3">
                                     <label className="form-label">{t('quranBoys.workPhone')}</label>
@@ -455,7 +471,6 @@ function QuranBoysApplication() {
                                         onChange={handleChange}
                                         placeholder="(402)123-4567"
                                         maxLength="13"
-                                        required
                                     />
                                     {validationErrors.mobile && (
                                         <small className="text-danger">{validationErrors.mobile}</small>
