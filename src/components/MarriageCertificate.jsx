@@ -5,6 +5,7 @@ import logo from "../assets/logo.png";
 import "./MarriageCertificate.css";
 import emailjs from '@emailjs/browser';
 import StatusModal from './StatusModal';
+import { DatePicker, TimePicker } from './DateTimePicker';
 
 function MarriageCertificate() {
     const { t } = useLanguage();
@@ -707,25 +708,22 @@ function MarriageCertificate() {
                                         <div className="appointment-section">
                                             <div className="row mb-4">
                                                 <div className="col-md-6 mb-3">
-                                                    <label className="form-label">{t('marriageCertificate.appointmentDate')}</label>
-                                                    <input
-                                                        type="date"
-                                                        name="appointmentDate"
-                                                        className="form-control form-control-lg"
-                                                        required
-                                                        onChange={handleChange}
+                                                    <DatePicker
+                                                        label={t('marriageCertificate.appointmentDate')}
                                                         value={formData.appointmentDate}
+                                                        onChange={handleChange}
+                                                        name="appointmentDate"
+                                                        required
+                                                        minDate={new Date().toISOString().split('T')[0]}
                                                     />
                                                 </div>
                                                 <div className="col-md-6 mb-3">
-                                                    <label className="form-label">{t('marriageCertificate.appointmentTime')}</label>
-                                                    <input
-                                                        type="time"
-                                                        name="appointmentTime"
-                                                        className="form-control form-control-lg"
-                                                        required
-                                                        onChange={handleChange}
+                                                    <TimePicker
+                                                        label={t('marriageCertificate.appointmentTime')}
                                                         value={formData.appointmentTime}
+                                                        onChange={handleChange}
+                                                        name="appointmentTime"
+                                                        required
                                                     />
                                                 </div>
                                             </div>

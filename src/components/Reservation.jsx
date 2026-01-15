@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./Reservation.css";
 import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
+import jsPDF from "jspdf";
+import logo from "../assets/logo.png";
+import StatusModal from './StatusModal';
+import { DatePicker, TimePicker } from './DateTimePicker';
 
 function Reservation() {
     const { t } = useLanguage();
@@ -13,11 +18,104 @@ function Reservation() {
         message: ""
     });
 
-    const handleSubmit = (e) => {
+    const [status, setStatus] = useState({ type: '', message: '' });
+
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.width;
+
+        // Header
+        doc.setFillColor(245, 245, 245);
+        doc.rect(0, 0, pageWidth, 40, 'F');
+        doc.addImage(logo, 'PNG', 15, 5, 30, 30);
+
+        doc.setTextColor(44, 62, 80);
+        doc.setFontSize(22);
+        doc.setFont("helvetica", "bold");
+        doc.text("IMAN ISLAMIC CENTER", 55, 18);
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "normal");
+        doc.text("Visit Reservation Confirmation", 55, 28);
+
+        let yPos = 60;
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(12);
+
+        const addRow = (label, value) => {
+            doc.setFont("helvetica", "bold");
+            doc.text(`${label}:`, 20, yPos);
+            doc.setFont("helvetica", "normal");
+            doc.text(String(value || "N/A"), 70, yPos);
+            yPos += 12;
+        };
+
+        addRow("Visitor Name", formData.name);
+        addRow("Email Address", formData.email);
+        addRow("Preferred Date", formData.date);
+        addRow("Preferred Time", formData.time);
+
+        if (formData.message) {
+            yPos += 5;
+            doc.setFont("helvetica", "bold");
+            doc.text("Reason for Visit:", 20, yPos);
+            yPos += 7;
+            doc.setFont("helvetica", "normal");
+            const splitMessage = doc.splitTextToSize(formData.message, pageWidth - 40);
+            doc.text(splitMessage, 20, yPos);
+        }
+
+        yPos = 250;
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "italic");
+        doc.text("Thank you for your interest in visiting Iman Islamic Center.", pageWidth / 2, yPos, { align: 'center' });
+        doc.text("We will contact you shortly to confirm your appointment.", pageWidth / 2, yPos + 5, { align: 'center' });
+
+        doc.save(`IIC_Visit_${formData.name.replace(/\s+/g, '_')}.pdf`);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Since there is no backend, we simulate the email sending
-        alert(`Request sent! Confirmation for ${formData.name} on ${formData.date} at ${formData.time} has been prepared.`);
-        // Note: To send actual emails, services like EmailJS or Formspree are recommended.
+        setStatus({ type: 'info', message: 'Scheduling your visit...' });
+
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        // Reusing the Quran template to stay within the free tier limit (2 templates)
+        const templateId = import.meta.env.VITE_EMAILJS_QURAN_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        if (!serviceId || !templateId || !publicKey) {
+            console.error('EmailJS configuration missing');
+            setStatus({ type: 'error', message: 'System Error: Email configuration is missing. Downloading PDF anyway...' });
+            generatePDF();
+            return;
+        }
+
+        emailjs.init(publicKey);
+
+        // We use the same field names as the Quran template so we don't need a new one
+        const templateParams = {
+            studentName: formData.name,      // Reusing 'studentName' for Visitor Name
+            parentName: `Visit on ${formData.date} at ${formData.time}`, // Reusing 'parentName' for Visit details
+            email: formData.email,            // Reusing 'email'
+            to_email: formData.email,
+            phone: "Visit Request",           // Label for the phone field
+            message: formData.message || "General Visit"
+        };
+
+        try {
+            await emailjs.send(serviceId, templateId, templateParams, publicKey);
+            setStatus({
+                type: 'success',
+                message: `Visit Scheduled! A confirmation email has been sent to ${formData.email}. Downloading PDF...`
+            });
+        } catch (err) {
+            console.error('Email send failure:', err);
+            setStatus({
+                type: 'warning',
+                message: 'Reservation submitted, but email failed. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
+            });
+        } finally {
+            generatePDF();
+        }
     };
 
     const handleChange = (e) => {
@@ -44,6 +142,7 @@ function Reservation() {
                                             <input
                                                 type="text"
                                                 name="name"
+                                                value={formData.name}
                                                 className="form-control-modern"
                                                 placeholder={t('reservation.enterName')}
                                                 required
@@ -59,6 +158,7 @@ function Reservation() {
                                             <input
                                                 type="email"
                                                 name="email"
+                                                value={formData.email}
                                                 className="form-control-modern"
                                                 placeholder={t('reservation.enterEmail')}
                                                 required
@@ -69,30 +169,25 @@ function Reservation() {
 
                                     {/* Date */}
                                     <div className="col-md-6">
-                                        <div className="input-group-modern">
-                                            <label><FaCalendarAlt className="me-2" /> {t('reservation.date')}</label>
-                                            <input
-                                                type="date"
-                                                name="date"
-                                                className="form-control-modern"
-                                                required
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                        <DatePicker
+                                            label={t('reservation.date')}
+                                            value={formData.date}
+                                            onChange={handleChange}
+                                            name="date"
+                                            required
+                                            minDate={new Date().toISOString().split('T')[0]}
+                                        />
                                     </div>
 
                                     {/* Time */}
                                     <div className="col-md-6">
-                                        <div className="input-group-modern">
-                                            <label><FaClock className="me-2" /> {t('reservation.time')}</label>
-                                            <input
-                                                type="time"
-                                                name="time"
-                                                className="form-control-modern"
-                                                required
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                        <TimePicker
+                                            label={t('reservation.time')}
+                                            value={formData.time}
+                                            onChange={handleChange}
+                                            name="time"
+                                            required
+                                        />
                                     </div>
 
                                     {/* Message */}
@@ -101,6 +196,7 @@ function Reservation() {
                                             <label>{t('reservation.reason')}</label>
                                             <textarea
                                                 name="message"
+                                                value={formData.message}
                                                 className="form-control-modern"
                                                 rows="3"
                                                 placeholder={t('reservation.reasonPlaceholder')}
@@ -124,8 +220,16 @@ function Reservation() {
                     </div>
                 </div>
             </div>
+
+            {/* Status Modal */}
+            <StatusModal
+                show={!!status.message}
+                status={status}
+                onClose={() => setStatus({ type: '', message: '' })}
+            />
         </section>
     );
 }
 
 export default Reservation;
+
