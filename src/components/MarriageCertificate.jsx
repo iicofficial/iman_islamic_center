@@ -39,6 +39,7 @@ function MarriageCertificate() {
         homeAddress: "",
         email: ""
     });
+    const [status, setStatus] = useState({ type: '', message: '' });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -249,14 +250,26 @@ function MarriageCertificate() {
             setStep(2);
             window.scrollTo(0, 0);
         } else {
+            setStatus({ type: 'info', message: 'Processing application...' });
+
             // 1. Send Confirmation Email via EmailJS FIRST
             const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
             const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
             const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+            console.log("EmailJS Config Check:", {
+                hasService: !!serviceId,
+                hasTemplate: !!templateId,
+                hasKey: !!publicKey
+            });
+
             if (!serviceId || !templateId || !publicKey) {
-                console.error('EmailJS Environment Variables Missing:', { serviceId, templateId, publicKey });
-                alert('System Error: Email configuration is missing. If you just added the .env file, please restart your development server (Ctrl+C then npm run dev).');
+                const errorMsg = 'System Error: Email configuration is missing. Keys loaded: ' +
+                    (serviceId ? 'Service✅ ' : 'Service❌ ') +
+                    (templateId ? 'Template✅ ' : 'Template❌ ') +
+                    (publicKey ? 'Key✅' : 'Key❌');
+                console.error(errorMsg);
+                setStatus({ type: 'error', message: errorMsg + '. Downloading PDF anyway...' });
                 // Download PDF anyway so user doesn't lose data
                 generatePDF();
                 return;
@@ -281,10 +294,16 @@ function MarriageCertificate() {
             try {
                 const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
                 console.log('Email sent successfully!', response.status, response.text);
-                alert(`Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`);
+                setStatus({
+                    type: 'success',
+                    message: `Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`
+                });
             } catch (err) {
                 console.error('Failed to send email:', err);
-                alert('Application Success! Failed to send confirmation email, but downloading PDF. Error: ' + JSON.stringify(err));
+                setStatus({
+                    type: 'warning',
+                    message: 'Application Success! Failed to send confirmation email, but downloading PDF. Error: ' + (err.text || JSON.stringify(err))
+                });
             } finally {
                 // 2. Generate and download PDF regardless of email success
                 generatePDF();
@@ -768,6 +787,16 @@ function MarriageCertificate() {
                                                         onChange={handleChange}
                                                         value={formData.homeAddress}
                                                     />
+                                                </div>
+                                            )}
+
+                                            {/* Status Message Display */}
+                                            {status.message && (
+                                                <div className={`alert mt-4 ${status.type === 'success' ? 'alert-success' :
+                                                        status.type === 'error' ? 'alert-danger' :
+                                                            'alert-warning'
+                                                    }`} role="alert">
+                                                    {status.message}
                                                 </div>
                                             )}
 

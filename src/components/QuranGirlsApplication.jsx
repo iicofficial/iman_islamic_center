@@ -26,6 +26,8 @@ function QuranGirlsApplication() {
         agreeToTerms: false
     });
 
+    const [status, setStatus] = useState({ type: '', message: '' });
+
     const generatePDF = () => {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.width;
@@ -130,15 +132,26 @@ function QuranGirlsApplication() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setStatus({ type: 'info', message: 'Processing application...' });
 
         // 1. EmailJS Configuration
         const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
         const templateId = import.meta.env.VITE_EMAILJS_QURAN_TEMPLATE_ID;
         const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+        console.log("EmailJS Config Check:", {
+            hasService: !!serviceId,
+            hasTemplate: !!templateId,
+            hasKey: !!publicKey
+        });
+
         if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS Environment Variables Missing:', { serviceId, templateId, publicKey });
-            alert('System Error: Email configuration is missing. If you just added the .env file, please restart your development server.');
+            const errorMsg = 'System Error: Email configuration is missing. Keys loaded: ' +
+                (serviceId ? 'Service✅ ' : 'Service❌ ') +
+                (templateId ? 'Template✅ ' : 'Template❌ ') +
+                (publicKey ? 'Key✅' : 'Key❌');
+            console.error(errorMsg);
+            setStatus({ type: 'error', message: errorMsg });
             generatePDF();
             return;
         }
@@ -156,10 +169,16 @@ function QuranGirlsApplication() {
         try {
             const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
             console.log('Email sent successfully!', response.status, response.text);
-            alert(`Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`);
+            setStatus({
+                type: 'success',
+                message: `Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`
+            });
         } catch (err) {
             console.error('Failed to send email:', err);
-            alert('Application submitted, but failed to send confirmation email. Downloading PDF... Error: ' + JSON.stringify(err));
+            setStatus({
+                type: 'warning',
+                message: 'Application submitted, but failed to send email. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
+            });
         } finally {
             // 2. Generate PDF regardless of email success
             try {
@@ -420,6 +439,16 @@ function QuranGirlsApplication() {
                                 </label>
                             </div>
                         </div>
+
+                        {/* Status Message Display */}
+                        {status.message && (
+                            <div className={`alert mt-4 ${status.type === 'success' ? 'alert-success' :
+                                    status.type === 'error' ? 'alert-danger' :
+                                        'alert-warning'
+                                }`} role="alert">
+                                {status.message}
+                            </div>
+                        )}
 
                         <div className="text-center mt-4">
                             <button type="submit" className="btn btn-primary btn-submit">
