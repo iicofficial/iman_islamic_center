@@ -3,6 +3,7 @@ import { useLanguage } from "../context/LanguageContext";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
 import "./MarriageCertificate.css";
+import emailjs from '@emailjs/browser';
 
 function MarriageCertificate() {
     const { t } = useLanguage();
@@ -35,7 +36,8 @@ function MarriageCertificate() {
         appointmentDate: "",
         appointmentTime: "",
         appointmentLocation: "masjid",
-        homeAddress: ""
+        homeAddress: "",
+        email: ""
     });
 
     const handleChange = (e) => {
@@ -247,9 +249,36 @@ function MarriageCertificate() {
             setStep(2);
             window.scrollTo(0, 0);
         } else {
-            // Generate and download PDF
+            // 1. Generate and download PDF
             generatePDF();
-            alert(`Application and Appointment Scheduled Successfully! Your PDF has been downloaded.`);
+
+            // 2. Send Confirmation Email via EmailJS
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+            // Prepare template parameters
+            const templateParams = {
+                to_email: formData.email,
+                groomName: formData.groomName,
+                brideName: formData.brideName,
+                appointmentDate: formData.appointmentDate,
+                appointmentTime: formData.appointmentTime,
+                appointmentLocation: formData.appointmentLocation === 'masjid' ? 'Masjid' : 'Home Visit',
+                homeAddress: formData.appointmentLocation === 'home' ? formData.homeAddress : 'N/A',
+                nikaahDate: formData.nikaahDate
+            };
+
+            emailjs.send(serviceId, templateId, templateParams, publicKey)
+                .then((response) => {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    alert(`Application Success! PDF downloaded and confirmation email sent to ${formData.email}`);
+                })
+                .catch((err) => {
+                    console.error('Failed to send email:', err);
+                    // DEBUG: Show the exact error on screen
+                    alert('Error Detail: ' + JSON.stringify(err));
+                });
         }
     };
 
@@ -629,7 +658,8 @@ function MarriageCertificate() {
                                                         type="text"
                                                         name="nikaahDate"
                                                         className="form-control"
-                                                        onChange={handleChange}
+                                                        style={{ backgroundColor: "#e9ecef" }}
+                                                        readOnly
                                                         value={formData.nikaahDate}
                                                     />
                                                 </div>
@@ -668,6 +698,19 @@ function MarriageCertificate() {
                                                         value={formData.appointmentTime}
                                                     />
                                                 </div>
+                                            </div>
+
+                                            <div className="mb-4">
+                                                <label className="form-label">Contact Email (for confirmation)</label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    className="form-control form-control-lg"
+                                                    required
+                                                    onChange={handleChange}
+                                                    value={formData.email}
+                                                    placeholder="example@email.com"
+                                                />
                                             </div>
 
                                             <div className="mb-4">
