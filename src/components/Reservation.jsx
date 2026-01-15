@@ -24,6 +24,16 @@ function Reservation() {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.width;
 
+        // Helper function to convert 24-hour time to 12-hour AM/PM format
+        const formatTime12Hour = (time24) => {
+            if (!time24) return "N/A";
+            const [h, m] = time24.split(':');
+            const hourNum = parseInt(h);
+            const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+            const ampm = hourNum >= 12 ? 'PM' : 'AM';
+            return `${hour12}:${m} ${ampm}`;
+        };
+
         // Header
         doc.setFillColor(245, 245, 245);
         doc.rect(0, 0, pageWidth, 40, 'F');
@@ -52,7 +62,7 @@ function Reservation() {
         addRow("Visitor Name", formData.name);
         addRow("Email Address", formData.email);
         addRow("Preferred Date", formData.date);
-        addRow("Preferred Time", formData.time);
+        addRow("Preferred Time", formatTime12Hour(formData.time));
 
         if (formData.message) {
             yPos += 5;

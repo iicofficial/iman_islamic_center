@@ -53,6 +53,16 @@ function MarriageCertificate() {
         const margin = 15;
         const contentWidth = pageWidth - (margin * 2);
 
+        // Helper function to convert 24-hour time to 12-hour AM/PM format
+        const formatTime12Hour = (time24) => {
+            if (!time24) return "_______________";
+            const [h, m] = time24.split(':');
+            const hourNum = parseInt(h);
+            const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+            const ampm = hourNum >= 12 ? 'PM' : 'AM';
+            return `${hour12}:${m} ${ampm}`;
+        };
+
         // Helper function to draw section box
         const drawSectionBox = (startY, height, title) => {
             // Draw shaded header
@@ -215,7 +225,7 @@ function MarriageCertificate() {
         yPos += 3;
 
         tempY = addField("Date", formData.appointmentDate, leftCol, yPos);
-        addField("Time", formData.appointmentTime, rightCol, yPos);
+        addField("Time", formatTime12Hour(formData.appointmentTime), rightCol, yPos);
         yPos = tempY + 1;
 
         const location = formData.appointmentLocation === 'masjid' ? 'At the Masjid' : 'Home Visit';

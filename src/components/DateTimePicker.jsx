@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './DateTimePicker.css';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 
-export const DatePicker = ({ value, onChange, label, required = false, minDate = null }) => {
+export const DatePicker = ({ value, onChange, label, required = false, minDate = null, name = 'date' }) => {
     const [showPicker, setShowPicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(value || '');
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -30,7 +30,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
         const dayStr = String(day).padStart(2, '0');
         const dateString = `${year}-${month}-${dayStr}`;
         setSelectedDate(dateString);
-        onChange({ target: { value: dateString } });
+        onChange({ target: { name: name, value: dateString } });
         setShowPicker(false);
     };
 
@@ -132,7 +132,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
     );
 };
 
-export const TimePicker = ({ value, onChange, label, required = false }) => {
+export const TimePicker = ({ value, onChange, label, required = false, name = 'time' }) => {
     const [showPicker, setShowPicker] = useState(false);
     const [selectedTime, setSelectedTime] = useState(value || '');
     const [hour, setHour] = useState('12');
@@ -158,7 +158,7 @@ export const TimePicker = ({ value, onChange, label, required = false }) => {
 
         const timeString = `${String(hour24).padStart(2, '0')}:${minute}`;
         setSelectedTime(timeString);
-        onChange({ target: { value: timeString } });
+        onChange({ target: { name: name, value: timeString } });
         setShowPicker(false);
     };
 
