@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./QuranGirlsApplication.css";
+import emailjs from '@emailjs/browser';
+import jsPDF from "jspdf";
+import logo from "../assets/logo.png";
 
 function QuranGirlsApplication() {
     const { t } = useLanguage();
@@ -23,6 +26,100 @@ function QuranGirlsApplication() {
         agreeToTerms: false
     });
 
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.width;
+        const margin = 20;
+
+        // Header
+        doc.setFillColor(245, 245, 245);
+        doc.rect(0, 0, pageWidth, 40, 'F');
+        doc.addImage(logo, 'PNG', 15, 5, 30, 30);
+
+        doc.setTextColor(44, 62, 80);
+        doc.setFontSize(22);
+        doc.setFont("helvetica", "bold");
+        doc.text("IMAN ISLAMIC CENTER", 55, 18);
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "normal");
+        doc.text("Quran Memorization Program (Girls)", 55, 28);
+        doc.setTextColor(0, 0, 0);
+
+        let yPos = 55;
+        const lineHeight = 8;
+        const leftCol = margin;
+        const rightCol = pageWidth / 2 + 10;
+
+        // Helper to add lines
+        const addLine = (label, value, x = leftCol) => {
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(10);
+            doc.text(`${label}:`, x, yPos);
+            doc.setFont("helvetica", "normal");
+            doc.text(String(value || ""), x + doc.getTextWidth(`${label}: `) + 2, yPos);
+        };
+
+        // Section Title
+        const addSection = (title) => {
+            yPos += 10;
+            doc.setFillColor(39, 86, 155);
+            doc.rect(margin, yPos - 6, pageWidth - (margin * 2), 8, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.text(title, margin + 5, yPos);
+            doc.setTextColor(0, 0, 0);
+            yPos += 10;
+        };
+
+        // Student Info
+        addSection("STUDENT INFORMATION");
+        addLine("Name", formData.studentName);
+        yPos += lineHeight;
+        addLine("Grade", formData.grade);
+        addLine("Age", formData.age, rightCol);
+        yPos += lineHeight;
+        addLine("School", formData.school);
+        yPos += lineHeight;
+        addLine("Address", formData.address);
+        yPos += 5;
+
+        // Guardian Info
+        addSection("GUARDIAN INFORMATION");
+        addLine("Name", formData.guardianName);
+        yPos += lineHeight;
+        addLine("Kinship", formData.kinship);
+        addLine("Job/Title", formData.guardianJob, rightCol);
+        yPos += 5;
+
+        // Contact Info
+        addSection("CONTACT INFORMATION");
+        addLine("Mobile", formData.mobile);
+        addLine("Home", formData.homePhone, rightCol);
+        yPos += lineHeight;
+        addLine("Email", formData.email);
+        addLine("Work", formData.workPhone, rightCol);
+        yPos += 15;
+
+        // Acknowledgement
+        doc.setLineWidth(0.5);
+        doc.line(margin, yPos, pageWidth - margin, yPos);
+        yPos += 10;
+        doc.setFont("helvetica", "italic");
+        doc.setFontSize(9);
+        doc.text("I acknowledge that I have read and agreed to the program policies.", margin, yPos);
+        yPos += 10;
+
+        // Signatures
+        doc.setFont("helvetica", "bold");
+        doc.text("Guardian Name: " + formData.guardianNameAck, margin, yPos);
+        yPos += 8;
+        doc.text("Signature: " + formData.signature, margin, yPos);
+        yPos += 8;
+        doc.text("Emergency Phone: " + formData.phoneAck, margin, yPos);
+
+        doc.save(`IIC_Quran_Girls_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -33,9 +130,36 @@ function QuranGirlsApplication() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        alert("Application submitted successfully!");
-        // Here you would typically send the data to your backend
+
+        // 1. Generate PDF
+        try {
+            generatePDF();
+        } catch (error) {
+            console.error("PDF Generation Error", error);
+        }
+
+        // 2. EmailJS Configuration
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_QURAN_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        const templateParams = {
+            studentName: formData.studentName,
+            parentName: formData.guardianName,
+            phone: formData.mobile,
+            email: formData.email,
+            to_email: formData.email
+        };
+
+        emailjs.send(serviceId, templateId, templateParams, publicKey)
+            .then((response) => {
+                console.log('Email sent successfully!', response.status, response.text);
+                alert(`Application Success! PDF downloaded and confirmation email sent to ${formData.email}`);
+            })
+            .catch((err) => {
+                console.error('Failed to send email:', err);
+                alert('Application submitted and PDF downloaded, but failed to send confirmation email. Error: ' + JSON.stringify(err));
+            });
     };
 
     return (

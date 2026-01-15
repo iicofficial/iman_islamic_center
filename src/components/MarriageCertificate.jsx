@@ -260,6 +260,7 @@ function MarriageCertificate() {
             // Prepare template parameters
             const templateParams = {
                 to_email: formData.email,
+                admin_email: 'akeelsalman888@gmail.com', // Explicitly pass admin email
                 groomName: formData.groomName,
                 brideName: formData.brideName,
                 appointmentDate: formData.appointmentDate,
@@ -276,8 +277,7 @@ function MarriageCertificate() {
                 })
                 .catch((err) => {
                     console.error('Failed to send email:', err);
-                    // DEBUG: Show the exact error on screen
-                    alert('Error Detail: ' + JSON.stringify(err));
+                    alert('Application Success! PDF downloaded, but failed to send confirmation email. Error: ' + JSON.stringify(err));
                 });
         }
     };
