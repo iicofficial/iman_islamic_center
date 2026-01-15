@@ -28,6 +28,83 @@ function QuranGirlsApplication() {
     });
 
     const [status, setStatus] = useState({ type: '', message: '' });
+    const [validationErrors, setValidationErrors] = useState({});
+
+    // Validation helper functions
+    const validateAge = (age) => {
+        const ageNum = parseInt(age);
+        return ageNum >= 5 && ageNum <= 15;
+    };
+
+    const validateAddress = (address) => {
+        const addressLower = address.toLowerCase();
+        return addressLower.includes('lincoln') && addressLower.includes('ne');
+    };
+
+    const validatePhone = (phone) => {
+        const phoneRegex = /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/;
+        return phoneRegex.test(phone);
+    };
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const formatPhoneNumber = (value) => {
+        const phoneNumber = value.replace(/\D/g, '');
+        if (phoneNumber.length <= 3) {
+            return phoneNumber;
+        } else if (phoneNumber.length <= 6) {
+            return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(3)}`;
+        } else {
+            return `(${phoneNumber.slice(0, 3)})${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        let newValue = type === 'checkbox' ? checked : value;
+
+        if (name === 'workPhone' || name === 'homePhone' || name === 'mobile' || name === 'phoneAck') {
+            newValue = formatPhoneNumber(value);
+        }
+
+        setFormData({ ...formData, [name]: newValue });
+
+        if (validationErrors[name]) {
+            setValidationErrors({ ...validationErrors, [name]: '' });
+        }
+    };
+
+    const validateForm = () => {
+        const errors = {};
+
+        if (!validateAge(formData.age)) {
+            errors.age = 'Student must be between 5-15 years of age';
+        }
+
+        if (!validateAddress(formData.address)) {
+            errors.address = 'Student must currently reside in Lincoln, NE';
+        }
+
+        if (formData.workPhone && !validatePhone(formData.workPhone)) {
+            errors.workPhone = 'Please enter a valid US phone number: (123)456-7890';
+        }
+        if (formData.homePhone && !validatePhone(formData.homePhone)) {
+            errors.homePhone = 'Please enter a valid US phone number: (123)456-7890';
+        }
+        if (!validatePhone(formData.mobile)) {
+            errors.mobile = 'Please enter a valid US phone number: (123)456-7890';
+        }
+
+        if (!validateEmail(formData.email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+
+        setValidationErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -123,16 +200,24 @@ function QuranGirlsApplication() {
         doc.save(`IIC_Quran_Girls_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validate form before submission
+        if (!validateForm()) {
+            setStatus({
+                type: 'error',
+                message: 'Please fix the validation errors before submitting.'
+            });
+            const firstError = document.querySelector('.error-message');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
         setStatus({ type: 'info', message: 'Processing application...' });
 
         // 1. EmailJS Configuration
@@ -202,19 +287,38 @@ function QuranGirlsApplication() {
                         <div className="form-section">
                             <h3 className="section-title">{t('quranGirls.studentInfo')}</h3>
 
+                            <div className="mb-3">
+                                <label className="form-label">{t('quranGirls.studentName')}</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="studentName"
+                                    value={formData.studentName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+
                             <div className="row">
-                                <div className="col-md-8 mb-3">
-                                    <label className="form-label">{t('quranGirls.studentName')}</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="studentName"
-                                        value={formData.studentName}
+                                <div className="col-md-4 mb-3">
+                                    <label className="form-label">{t('quranGirls.age')}</label>
+                                    <select
+                                        className={`form-control ${validationErrors.age ? 'is-invalid' : ''}`}
+                                        name="age"
+                                        value={formData.age}
                                         onChange={handleChange}
                                         required
-                                    />
+                                    >
+                                        <option value="">{t('common.select')}</option>
+                                        {[5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(num => (
+                                            <option key={num} value={num}>{num}</option>
+                                        ))}
+                                    </select>
+                                    {validationErrors.age && (
+                                        <small className="text-danger">{validationErrors.age}</small>
+                                    )}
                                 </div>
-                                <div className="col-md-4 mb-3">
+                                <div className="col-md-8 mb-3">
                                     <label className="form-label">{t('quranGirls.grade')}</label>
                                     <input
                                         type="text"
@@ -227,29 +331,20 @@ function QuranGirlsApplication() {
                                 </div>
                             </div>
 
-                            <div className="row">
-                                <div className="col-md-2 mb-3">
-                                    <label className="form-label">{t('quranGirls.age')}</label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        name="age"
-                                        value={formData.age}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="col-md-10 mb-3">
-                                    <label className="form-label">{t('quranGirls.address')}</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="address"
-                                        value={formData.address}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                </div>
+                            <div className="mb-3">
+                                <label className="form-label">{t('quranGirls.address')}</label>
+                                <input
+                                    type="text"
+                                    className={`form-control ${validationErrors.address ? 'is-invalid' : ''}`}
+                                    name="address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="Lincoln, NE"
+                                />
+                                {validationErrors.address && (
+                                    <small className="text-danger">{validationErrors.address}</small>
+                                )}
                             </div>
 
                             <div className="mb-3">
@@ -316,35 +411,47 @@ function QuranGirlsApplication() {
                                     <label className="form-label">{t('quranGirls.workPhone')}</label>
                                     <input
                                         type="tel"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.workPhone ? 'is-invalid' : ''}`}
                                         name="workPhone"
                                         value={formData.workPhone}
                                         onChange={handleChange}
-                                        placeholder="(402) 123-4567"
+                                        placeholder="(402)123-4567"
+                                        maxLength="13"
                                     />
+                                    {validationErrors.workPhone && (
+                                        <small className="text-danger">{validationErrors.workPhone}</small>
+                                    )}
                                 </div>
                                 <div className="col-md-4 mb-3">
                                     <label className="form-label">{t('quranGirls.homePhone')}</label>
                                     <input
                                         type="tel"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.homePhone ? 'is-invalid' : ''}`}
                                         name="homePhone"
                                         value={formData.homePhone}
                                         onChange={handleChange}
-                                        placeholder="(402) 123-4567"
+                                        placeholder="(402)123-4567"
+                                        maxLength="13"
                                     />
+                                    {validationErrors.homePhone && (
+                                        <small className="text-danger">{validationErrors.homePhone}</small>
+                                    )}
                                 </div>
                                 <div className="col-md-4 mb-3">
                                     <label className="form-label">{t('quranGirls.mobile')}</label>
                                     <input
                                         type="tel"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.mobile ? 'is-invalid' : ''}`}
                                         name="mobile"
                                         value={formData.mobile}
                                         onChange={handleChange}
-                                        placeholder="(402) 123-4567"
+                                        placeholder="(402)123-4567"
+                                        maxLength="13"
                                         required
                                     />
+                                    {validationErrors.mobile && (
+                                        <small className="text-danger">{validationErrors.mobile}</small>
+                                    )}
                                 </div>
                             </div>
 
@@ -352,13 +459,16 @@ function QuranGirlsApplication() {
                                 <label className="form-label">{t('quranGirls.email')}</label>
                                 <input
                                     type="email"
-                                    className="form-control"
+                                    className={`form-control ${validationErrors.email ? 'is-invalid' : ''}`}
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="example@email.com"
                                     required
                                 />
+                                {validationErrors.email && (
+                                    <small className="text-danger">{validationErrors.email}</small>
+                                )}
                             </div>
                         </div>
 

@@ -39,6 +39,9 @@ export const translations = {
             applyOnlineForm: "Apply online form",
             downloadForm: "Download form"
         },
+        common: {
+            select: "Select"
+        },
         hero: {
             welcome: "Welcome to Iman Islamic Center",
             subtext: "We are an Islamic center firmly grounded in the Quran and Sunnah, committed to upholding the understanding of the Prophet's companions and the virtuous generations.",
@@ -352,6 +355,9 @@ export const translations = {
             quranBoysForm: "نموذج طلب الأولاد",
             quranGirlsForm: "نموذج طلب البنات",
             programPolicies: "سياسات الحلقة",
+        },
+        common: {
+            select: "اختر"
         },
         hero: {
             welcome: "مرحبًا بكم في مركز الإيمان الإسلامي",
