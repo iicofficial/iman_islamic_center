@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import "./Footer.css";
 
 function Footer() {
@@ -46,9 +47,12 @@ function Footer() {
                         <p className="text-white mb-1">Phone: (402) 730-3883</p>
                         <p className="text-white">Address: 901 w dawes avenue, Lincoln, NE</p>
                         <div className="social-links mt-2">
-                            <a href="#" className="footer-link me-2">Facebook</a>
-                            <a href="#" className="footer-link me-2">Twitter</a>
-                            <a href="#" className="footer-link">Instagram</a>
+                            <a href="https://facebook.com/IICOfficial" target="_blank" rel="noopener noreferrer" className="footer-link me-3" aria-label="Facebook">
+                                <FaFacebookF />
+                            </a>
+                            <a href="https://instagram.com/iicofficial.lincoln" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="Instagram">
+                                <FaInstagram />
+                            </a>
                         </div>
                     </div>
                 </div>

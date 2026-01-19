@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iman Islamic Center - Website Walkthrough</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 8px;
+        }
+
+        .slide {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            page-break-inside: avoid;
+        }
+
+        .slide:last-child {
+            border-bottom: none;
+        }
+
+        h1 {
+            color: #27569b;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #444;
+            font-size: 22px;
+            margin-top: 0;
+        }
+
+        .slide-number {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            line-height: 1.6;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .notes {
+            background-color: #f9f9f9;
+            border-left: 4px solid #27569b;
+            padding: 15px;
+            margin-top: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27569b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .slide {
+                page-break-after: always;
+                border: none;
+                height: 90vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+
+    <div class="container">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <div class="slide-number">Slide 1: Introduction</div>
+            <h1>Iman Islamic Center Website Walkthrough</h1>
+            <p><strong>Bismillāh al‑Raḥmān al‑Raḥīm</strong></p>
+            <p>A comprehensive tour of the digital gateway for our community.</p>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Bismillāh al‑Raḥmān al‑Raḥīm. Welcome everyone. Today, I’m excited to take you on a detailed
+                walkthrough of the Iman Islamic Center website. This platform serves as a vital digital hub, connecting
+                our community to services, events, and essential resources. Over the next 10 minutes, we'll explore the
+                key features that make this site a powerful tool for all of us.”
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-number">Slide 2: Core Vision</div>
+            <h1>A Digital Hub for the Community</h1>
+            <ul>
+                <li><strong>Centralized Information</strong> – A single source of truth for all center activities.</li>
+                <li><strong>Accessibility</strong> – Designed for everyone, from elders to youth.</li>
+                <li><strong>Modern & Engaging</strong> – A premium interface that reflects the center's quality.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “The website isn't just a brochure; it's a functional hub. Our goal was to centralize information so you
+                never have to guess where to find prayer times, event details, or forms. It's built to be accessible to
+                everyone, ensuring that whether you're tech-savvy or not, you can navigate it with ease. The modern
+                aesthetics reflect the professionalism and warmth of our center.”
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-number">Slide 3: Navigation Experience</div>
+            <h1>Seamless Navigation</h1>
+            <ul>
+                <li><strong>Intuitive Navbar</strong> – 'Pill' design for clean separation of tools.</li>
+                <li><strong>Language Accessibility</strong> – Dedicated English/Arabic switcher.</li>
+                <li><strong>Quick Links</strong> – Social media and contact info always visible.</li>
+                <li><strong>Smart Dropdowns</strong> – Organized menus for Services, Forms, and About Us.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Let's start at the top. The navigation bar features a unique 'pill' design. This separates functional
+                tools—like the Language Switcher and Social Media icons—from the main menu, keeping things clutter-free.
+                The dropdown menus are categorized intelligently, so whether you're looking for 'Services' or 'Forms',
+                you find exactly what you need in seconds without deep searching.”
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-number">Slide 4: Online Applications</div>
+            <h1>Digital Services & Applications</h1>
+            <h2>Making Access Easier</h2>
+            <ul>
+                <li><strong>Quran Memorization</strong> – Full online application for Boys & Girls.</li>
+                <li><strong>Marriage Services</strong> – complete digital engagement.</li>
+                <li><strong>Reconciliation & Formalization</strong> – Sensitive services handled with digital care.</li>
+                <li><strong>Interactive Forms</strong> – Fill out essential details directly on the site.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “One of the most powerful features is our suite of Online Applications. Whether you are enrolling a
+                child in the Quran Memorization program or seeking Marriage Services, the process is digital. We have
+                comprehensive forms for Boys' and Girls' Quran programs, as well as distinct applications for Marriage
+                ceremonies, Couple Reconciliation, and Divorce Formalization. These interactive forms streamline the
+                process for everyone.”
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-number">Slide 5: Downloadable Resources</div>
+            <h1>Resource Center</h1>
+            <h2>Instant Access to Documents</h2>
+            <ul>
+                <li><strong>Membership Forms</strong> – Become a General or Board Member.</li>
+                <li><strong>Donation Commitments</strong> – Monthly pledges and Student Sponsorships.</li>
+                <li><strong>Standardized Format</strong> – All documents in universal, easy-to-print formats.</li>
+                <li><strong>One-Click Download</strong> – No barriers to accessing important paperwork.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Beyond interactive applications, we have a robust Resource Center. Under the 'Forms' menu, you can find
+                downloadable documents for Membership—whether you want to join the General Body or the Board. We also
+                have forms for Donation Commitments and Student Sponsorships. Everything is one click away, standardized
+                for easy printing and viewing on any device.”
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="slide-number">Slide 6: Visual Design & Aesthetics</div>
+            <h1>Premium Visual Experience</h1>
+            <ul>
+                <li><strong>Modern Color Palette</strong> – Deep blues and vibrant accents.</li>
+                <li><strong>Glassmorphism</strong> – Subtle, modern transparency effects.</li>
+                <li><strong>Micro-animations</strong> – Interactive hover states that feel responsive.</li>
+                <li><strong>Clean Typography</strong> – Highly readable fonts for all ages.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Visually, the site is designed to wow. We use a 'Deep Blue' color palette that feels professional and
+                calming. You'll notice 'Glassmorphism' effects—that frosted glass look—on the navigation bar. Small
+                details matter: hover over a button or a link, and you see smooth micro-animations. These aren't just
+                for show; they tell the user 'this is interactive', making the site feel alive and responsive.”
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="slide-number">Slide 7: Community Engagement</div>
+            <h1>Events & Prayer Times</h1>
+            <ul>
+                <li><strong>Dynamic Prayer Timetable</strong> – Accurate, easy-to-read daily times.</li>
+                <li><strong>Events Section</strong> – Highlight cards for upcoming programs.</li>
+                <li><strong>Visual Hierarchy</strong> – Important information stands out immediately.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Community life revolves around our schedule. The Prayer Times are prominent and easy to read. The
+                Events section uses beautiful cards to highlight almost every major activity—from weekend schools to
+                special lectures. The visual hierarchy ensures that the most critical information catches your eye
+                first, keeping the community informed and engaged.”
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-number">Slide 8: Donation & Support</div>
+            <h1>Supporting the Center</h1>
+            <ul>
+                <li><strong>Prominent Donate Button</strong> – Always accessible in the navbar.</li>
+                <li><strong>Multiple Channels</strong> – Options for different types of giving.</li>
+                <li><strong>Trust & Transparency</strong> – Professional layout inspires confidence.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Supporting the center should be effortless. That's why the 'Donate' button is a permanent fixture in
+                the navigation bar—it doesn't scroll away. We've made it simple to find different ways to contribute,
+                whether it's a one-time gift or a recurring sponsorship. The professional seamless design builds trust,
+                encouraging community support.”
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="slide-number">Slide 9: Mobile Responsiveness</div>
+            <h1>Accessible Anywhere</h1>
+            <ul>
+                <li><strong>Fully Responsive</strong> – Adapts to phones, tablets, and desktops.</li>
+                <li><strong>Mobile Menu</strong> – Hamburger navigation for smaller screens.</li>
+                <li><strong>Touch Optimization</strong> – Buttons and links sized for specialized ease of use.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Finally, we know most of you use phones. This website is fully responsive. On a desktop, you get the
+                full expansive view. On a phone, it transforms: the menu becomes a neat hamburger icon, buttons become
+                touch-friendly, and text resizes for readability. You get the full experience, no matter what device you
+                are holding.”
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="slide-number">Slide 10: Conclusion</div>
+            <h1>Moving Forward</h1>
+            <ul>
+                <li><strong>A Living Platform</strong> – The site will grow with the community.</li>
+                <li><strong>Feedback Loop</strong> – We invite usage and suggestions.</li>
+                <li><strong>Thank You</strong></li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “In conclusion, this website is a living digital home for the Iman Islamic Center. It combines modern
+                technology with our traditional values of connection and service. I invite you all to explore it, use
+                the forms, and check the events. Thank you for your time, and I'm happy to walk through any specific
+                feature you'd like to see in detail.”
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

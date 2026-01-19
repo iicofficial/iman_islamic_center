@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iman Islamic Center - Project Presentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 50px;
+            border-radius: 8px;
+        }
+        .slide {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            page-break-inside: avoid;
+        }
+        .slide:last-child {
+            border-bottom: none;
+        }
+        h1 {
+            color: #27569b;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .slide-number {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        ul {
+            line-height: 1.6;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .notes {
+            background-color: #f9f9f9;
+            border-left: 4px solid #27569b;
+            padding: 15px;
+            margin-top: 20px;
+            font-style: italic;
+            color: #555;
+        }
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27569b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        @media print {
+            body { 
+                background: white; 
+            }
+            .container { 
+                box-shadow: none; 
+                margin: 0; 
+                padding: 20px; 
+            }
+            .print-btn { 
+                display: none; 
+            }
+            .slide {
+                page-break-after: always;
+                border: none;
+                height: 90vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Save as PDF</button>
+
+    <div class="container">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <div class="slide-number">Slide 1: Title</div>
+            <h1>Iman Islamic Center – Modern Community Website</h1>
+            <p><strong>Bismillāh al‑Raḥmān al‑Raḥīm</strong><br>
+            (Excuse my English – I’m not a polished public speaker)</p>
+            
+            <div class="notes">
+                <strong>Speaker Note:</strong><br> 
+                “Bismillāh al‑Raḥmān al‑Raḥīm – With the help of God, I’ll present our project. Please excuse my English; I’m still learning how to speak publicly. I’m [Your Name] and I’ll show you the new website we built for the Iman Islamic Center, a community hub in Lincoln, Nebraska.”
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-number">Slide 2: Context</div>
+            <h1>Why a New Site?</h1>
+            <ul>
+                <li>Existing site was hard to read on phones.</li>
+                <li>Forms were only downloadable as <strong>DOCX</strong> – many users could not open them.</li>
+                <li>Navigation was cluttered; important links were hidden.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “People needed a clean, mobile‑friendly experience and easy access to all the community forms.”
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-number">Slide 3: Objectives</div>
+            <h1>Main Goals</h1>
+            <ul>
+                <li><strong>Responsive design</strong> – works on desktop, tablet, and phone.</li>
+                <li><strong>Clear navigation</strong> – intuitive dropdown menus for Services, Forms, etc.</li>
+                <li><strong>Universal form access</strong> – switch all downloadable forms to <strong>PDF</strong>.</li>
+                <li><strong>Premium look</strong> – modern colors, smooth animations, and consistent fonts.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Four simple goals guided every change we made.”
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="slide-number">Slide 4: Technology</div>
+            <h1>Tech Stack (at a glance)</h1>
+            <ul>
+                <li><strong>HTML</strong> – page structure.</li>
+                <li><strong>JavaScript (React)</strong> – interactive components (navbar, forms).</li>
+                <li><strong>CSS</strong> – custom styling, glass‑morphism, hover effects.</li>
+                <li><strong>Vite</strong> – fast development server.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “We kept the stack lightweight: pure React with Vite, no heavy frameworks, which makes the site fast and easy to maintain.”
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="slide-number">Slide 5: Design Highlight</div>
+            <h1>Navigation Redesign</h1>
+            <ul>
+                <li><strong>Centered top bar</strong> with two “pill” frames:
+                    <ul>
+                        <li>Language switcher.</li>
+                        <li>Social‑media icons (spaced 200 px apart).</li>
+                    </ul>
+                </li>
+                <li><strong>Dropdown menus</strong> for Services, Forms, About Us, etc.</li>
+                <li><strong>Phone/Contact pod</strong> moved closer to the “Donate” button.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “The new navbar looks like a premium app bar – the language selector and social icons are clearly separated, and the contact info is now right next to the Donate button.”
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="slide-number">Slide 6: Key Feature</div>
+            <h1>Forms – From DOCX to PDF</h1>
+            <ul>
+                <li>All files placed in <strong>public/forms</strong> folder.</li>
+                <li>Links updated to <strong>.pdf</strong> extensions.</li>
+                <li>Example: “Become Board Member” now downloads <strong>board‑of‑directors‑member‑work‑form.pdf</strong>.</li>
+                <li>PDFs open directly in browsers on any device.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “This change solves the biggest pain point – users can view or print a form instantly, even on a phone.”
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="slide-number">Slide 7: Usability</div>
+            <h1>Shortened Form Names</h1>
+            <ul>
+                <li>Long names trimmed for the dropdown menu:
+                    <ul>
+                        <li>“Membership Forms” → <strong>Membership</strong></li>
+                        <li>“Donation Forms” → <strong>Donations</strong></li>
+                        <li>“Become a Board Member” → <strong>Board Member</strong></li>
+                    </ul>
+                </li>
+                <li>Arabic titles also shortened.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Short names keep the menu tidy and prevent text from being cut off.”
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div class="slide-number">Slide 8: Aesthetics</div>
+            <h1>Visual Polish (Premium Feel)</h1>
+            <ul>
+                <li><strong>Color palette:</strong> deep blues with vibrant accents.</li>
+                <li><strong>Glass‑morphism</strong> on the top bar – subtle background blur.</li>
+                <li><strong>Micro‑animations:</strong> hover effects on links, smooth dropdown transitions.</li>
+                <li><strong>Responsive typography:</strong> larger headings, balanced body text.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “These visual tweaks give the site a modern, trustworthy look while staying accessible.”
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="slide-number">Slide 9: Demonstration</div>
+            <h1>Demo (Live Walk‑through)</h1>
+            <ul>
+                <li>Show the homepage on a desktop screen.</li>
+                <li>Resize to a mobile view – notice the hamburger menu and stacked layout.</li>
+                <li>Click <strong>Forms → Membership → Board Member</strong> – PDF opens instantly.</li>
+                <li>Switch language – layout stays consistent.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Let’s quickly walk through the site. (If you have a live demo, open it now.)”
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <div class="slide-number">Slide 10: Future Steps</div>
+            <h1>Future Enhancements</h1>
+            <ul>
+                <li><strong>Online form submission</strong> (no download needed).</li>
+                <li><strong>Multilingual content</strong> – full RTL support for Arabic.</li>
+                <li><strong>Accessibility audit</strong> – ARIA labels, keyboard navigation.</li>
+                <li><strong>Analytics</strong> – track which forms are most downloaded.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “We have a roadmap for more interactivity and deeper accessibility.”
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div class="slide-number">Slide 11: Conclusion</div>
+            <h1>Impact & Benefits</h1>
+            <ul>
+                <li><strong>Better user experience</strong> – faster access, clear navigation.</li>
+                <li><strong>Higher engagement</strong> – more people can fill out and submit forms.</li>
+                <li><strong>Reduced support calls</strong> – fewer questions about opening files.</li>
+                <li><strong>Modern brand image</strong> – aligns with the Center’s mission of community outreach.</li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “The site now truly serves the community’s needs and reflects the Center’s values.”
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <div class="slide-number">Slide 12: Closing</div>
+            <h1>Thank You & Q&A</h1>
+            <ul>
+                <li>Contact: <strong>info@imanislamic.org</strong></li>
+                <li>Phone: <strong>(402) 730‑3883</strong></li>
+                <li>Visit: <strong>901 W Dawes Ave, Lincoln, NE</strong></li>
+            </ul>
+
+            <div class="notes">
+                <strong>Speaker Note:</strong><br>
+                “Thank you for your time. I’m happy to answer any questions.”
+            </div>
+        </div>
+    </div>
+</body>
+</html>

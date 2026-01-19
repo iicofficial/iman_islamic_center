@@ -216,6 +216,85 @@ html[dir="rtl"] .nav-link:hover .nav-arrow-small {
    Social + Phone icons
 ========================= */
 /* Language Toggle modern pill styling */
+/* Centered Top Wrapper: Positions the two separate frames at the top center */
+.centered-top-wrapper {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+  /* Actual 200px space between the two different frames */
+  z-index: 1100;
+  width: max-content;
+  pointer-events: none;
+  /* Allows mouse interactions to fall through the giant gap */
+}
+
+.centered-top-wrapper>* {
+  pointer-events: auto;
+  /* Makes the pills themselves clickable */
+}
+
+/* Common Frame (Pill) Styling */
+/* Common Frame (Pill) Styling - Language Only */
+.language-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid #27569b;
+  border-radius: 50px;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.language-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 86, 155, 0.2);
+}
+
+/* Social Icons - Modern Minimalist (No Frame) */
+.social-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 15px;
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+/* Modern thin line at the bottom */
+.social-pill::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  /* Thin line */
+  background: linear-gradient(90deg, transparent, #27569b, transparent);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+/* Social icons inside their own frame */
+.social-pill .social-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  margin: 0 4px;
+  box-shadow: none;
+}
+
+/* Original Language Toggle for Mobile (remains as a single unit or legacy ref) */
 .language-toggle-top {
   position: absolute;
   top: 15px;
@@ -230,15 +309,9 @@ html[dir="rtl"] .nav-link:hover .nav-arrow-small {
   padding: 4px;
   z-index: 1100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 200px;
-  /* Fixed width for stability */
+  min-width: 160px;
   transition: all 0.3s ease;
   direction: ltr !important;
-}
-
-.language-toggle-top:hover {
-  transform: translateX(-50%) translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(39, 86, 155, 0.2);
 }
 
 .lang-btn {
@@ -326,8 +399,8 @@ html[dir="rtl"] .lang-btn {
   background-color: #e53935;
 }
 
-.social-icon.linkedin {
-  background-color: #0077b5;
+.social-icon.instagram {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
 }
 
 /* Phone icon */

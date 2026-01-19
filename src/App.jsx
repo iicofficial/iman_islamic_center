@@ -18,6 +18,8 @@ import MarriageInfo from "./components/MarriageInfo";
 import ScrollToTop from "./components/ScrollToTop";
 import ArabicHome from "./components/ArabicHome";
 import ProgramPolicies from "./components/ProgramPolicies";
+import CoupleReconciliation from "./components/CoupleReconciliation";
+import DivorceFormalization from "./components/DivorceFormalization";
 
 function App() {
   return (
@@ -55,7 +57,10 @@ function App() {
         <Route path="/ar/quran-memorization" element={<QuranMemorization />} />
         <Route path="/ar/marriage-info" element={<MarriageInfo />} />
         <Route path="/ar/policies" element={<ProgramPolicies />} />
+        <Route path="/ar/policies" element={<ProgramPolicies />} />
         <Route path="/ar/event/:id" element={<Events />} />
+        <Route path="/ar/couple-reconciliation" element={<CoupleReconciliation />} />
+        <Route path="/ar/divorce-formalization" element={<DivorceFormalization />} />
 
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/marriage-certificate" element={<MarriageCertificate />} />
@@ -65,6 +70,8 @@ function App() {
         <Route path="/marriage-info" element={<MarriageInfo />} />
         <Route path="/policies" element={<ProgramPolicies />} />
         <Route path="/event/:id" element={<Events />} />
+        <Route path="/couple-reconciliation" element={<CoupleReconciliation />} />
+        <Route path="/divorce-formalization" element={<DivorceFormalization />} />
       </Routes>
       <Footer />
     </Router>
