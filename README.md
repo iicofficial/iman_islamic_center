@@ -19,6 +19,8 @@ A premium, fully responsive website for Iman Islamic Center, built with React an
 ```text
 iman_islamic_center/
 │
+├─ docs/                       # Project guides & deployment instructions
+│
 ├─ src/
 │   ├─ assets/                     # High-resolution branding and assets
 │   ├─ context/                    # Language and Theme Context providers
@@ -39,6 +41,7 @@ iman_islamic_center/
 │   └─ main.jsx                    # Application Entry point
 │
 ├─ package.json                    # Configuration & Dependencies
+├─ PROJECT_HISTORY.md              # Master log of features & changes
 └─ README.md                       # Documentation
 ```
 
