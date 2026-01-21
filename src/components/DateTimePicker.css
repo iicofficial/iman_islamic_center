@@ -22,14 +22,20 @@
 .datetime-display {
     padding-left: 45px !important;
     cursor: pointer;
-    background-color: white !important;
+    background-color: #f8fafc !important;
+    /* Modern Light Background */
+    border: 2px solid #e2e8f0 !important;
+    /* Modern Soft Border */
     font-weight: 500;
-    color: #333;
+    color: #334155;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.datetime-display:focus {
-    box-shadow: 0 0 0 0.2rem rgba(57, 86, 155, 0.25);
-    border-color: #39569b;
+.datetime-display:focus,
+.datetime-input-group:hover .datetime-display {
+    background-color: #ffffff !important;
+    border-color: #27569b !important;
+    box-shadow: 0 0 0 4px rgba(39, 86, 155, 0.1) !important;
 }
 
 .datetime-overlay {

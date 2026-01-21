@@ -512,22 +512,27 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="groomBirthPlace"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.groomBirthPlace ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.groomBirthPlace}
                                                     />
+                                                    {validationErrors.groomBirthPlace && (
+                                                        <div className="invalid-feedback">{validationErrors.groomBirthPlace}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <label className="form-label">{t('marriageCertificate.dateOfBirth')}</label>
-                                                    <input
-                                                        type="date"
+                                                    <DatePicker
+                                                        label={t('marriageCertificate.dateOfBirth')}
                                                         name="groomBirthDate"
-                                                        className="form-control"
-                                                        required
-                                                        onChange={handleChange}
                                                         value={formData.groomBirthDate}
+                                                        onChange={handleChange}
+                                                        required
                                                     />
+                                                    {validationErrors.groomBirthDate && (
+                                                        <div className="invalid-feedback d-block">{validationErrors.groomBirthDate}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -595,22 +600,27 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="brideBirthPlace"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideBirthPlace ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideBirthPlace}
                                                     />
+                                                    {validationErrors.brideBirthPlace && (
+                                                        <div className="invalid-feedback">{validationErrors.brideBirthPlace}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <label className="form-label">{t('marriageCertificate.dateOfBirth')}</label>
-                                                    <input
-                                                        type="date"
+                                                    <DatePicker
+                                                        label={t('marriageCertificate.dateOfBirth')}
                                                         name="brideBirthDate"
-                                                        className="form-control"
-                                                        required
-                                                        onChange={handleChange}
                                                         value={formData.brideBirthDate}
+                                                        onChange={handleChange}
+                                                        required
                                                     />
+                                                    {validationErrors.brideBirthDate && (
+                                                        <div className="invalid-feedback d-block">{validationErrors.brideBirthDate}</div>
+                                                    )}
                                                 </div>
                                             </div>
 

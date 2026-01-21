@@ -82,7 +82,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
 
     return (
         <div className="datetime-picker-wrapper">
-            {label && <label className="form-label">{label} {required && <span className="text-danger">*</span>}</label>}
+            {label && <label className="form-label">{label}</label>}
             <div className="datetime-input-group" onClick={() => setShowPicker(!showPicker)}>
                 <FaCalendarAlt className="datetime-icon" />
                 <input
@@ -195,7 +195,7 @@ export const TimePicker = ({ value, onChange, label, required = false, name = 't
 
     return (
         <div className="datetime-picker-wrapper">
-            {label && <label className="form-label">{label} {required && <span className="text-danger">*</span>}</label>}
+            {label && <label className="form-label">{label}</label>}
             <div className="datetime-input-group" onClick={() => setShowPicker(!showPicker)}>
                 <FaClock className="datetime-icon" />
                 <input
