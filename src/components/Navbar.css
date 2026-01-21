@@ -231,6 +231,8 @@ html[dir="rtl"] .nav-link:hover .nav-arrow-small {
   width: max-content;
   pointer-events: none;
   /* Allows mouse interactions to fall through the giant gap */
+  direction: ltr !important;
+  /* Forces Left-to-Right layout always to prevent swapping */
 }
 
 .centered-top-wrapper>* {

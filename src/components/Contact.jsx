@@ -8,6 +8,7 @@ function Contact() {
     const { t } = useLanguage();
 
     return (
+        
         <section className="contact-section" id="contact">
             <div className="container">
                 <div className="contact-container">

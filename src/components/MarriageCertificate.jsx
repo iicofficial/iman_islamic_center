@@ -341,9 +341,9 @@ function MarriageCertificate() {
                                     <h2 className="marriage-title">
                                         {step === 1 ? t('marriageCertificate.title') : t('marriageCertificate.appointmentTitle')}
                                     </h2>
-                                    <p className="marriage-subtitle">
-                                        {step === 1 ? t('marriageCertificate.subtitle') : t('marriageCertificate.appointmentNote')}
-                                    </p>
+                                    <div className="required-note mb-4">
+                                        <span>{t('marriageCertificate.allFieldsRequired')}</span>
+                                    </div>
                                 </div>
 
                                 <form onSubmit={handleSubmit}>
@@ -706,8 +706,8 @@ function MarriageCertificate() {
                                                 </div>
                                             </div>
 
-                                            <div className="text-center mt-4">
-                                                <button type="submit" className="btn btn-primary btn-lg">
+                                            <div className="btn-container">
+                                                <button type="submit" className="apply-btn">
                                                     {t('marriageCertificate.nextButton')}
                                                 </button>
                                             </div>
@@ -806,15 +806,15 @@ function MarriageCertificate() {
                                                 onClose={() => setStatus({ type: '', message: '' })}
                                             />
 
-                                            <div className="d-flex justify-content-between mt-5">
+                                            <div className="btn-container">
                                                 <button
                                                     type="button"
-                                                    className="btn btn-outline-secondary btn-lg"
+                                                    className="back-btn"
                                                     onClick={handleBack}
                                                 >
                                                     {t('marriageCertificate.backButton')}
                                                 </button>
-                                                <button type="submit" className="btn btn-primary btn-lg">
+                                                <button type="submit" className="apply-btn">
                                                     {t('marriageCertificate.submitButton')}
                                                 </button>
                                             </div>
