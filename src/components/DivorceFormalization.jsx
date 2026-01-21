@@ -47,6 +47,20 @@ function DivorceFormalization() {
 
         try {
             await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+            // Google Sheets Submission
+            try {
+                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
+                await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...formData, formType: 'divorce' }),
+                });
+            } catch (sheetError) {
+                console.error("Google Sheets Error:", sheetError);
+            }
+
             setStatus({
                 type: 'success',
                 message: `Request Sent! A confirmation has been sent to ${formData.email}.`

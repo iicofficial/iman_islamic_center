@@ -82,6 +82,50 @@ function QuranBoysApplication() {
         }
     };
 
+    // Validate individual field on blur
+    // Validate individual field on blur
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        const errors = { ...validationErrors };
+
+        // Generic required check for most fields
+        const requiredFields = [
+            'studentName', 'grade', 'age', 'school', 'address',
+            'guardianName', 'kinship', 'guardianJob',
+            'email', 'guardianNameAck', 'signature'
+        ];
+
+        if (requiredFields.includes(name) && (!value || value.trim() === '')) {
+            errors[name] = 'This field is required';
+        } else {
+            // Remove "required" error if value exists, then check specific formats
+            delete errors[name];
+
+            if (name === 'age' && !validateAge(value)) {
+                errors.age = 'Student must be between 5-15 years of age';
+            }
+
+            if (name === 'address' && !validateAddress(value)) {
+                errors.address = 'Student must currently reside in Lincoln, NE';
+            }
+
+            if (name === 'email' && !validateEmail(value)) {
+                errors.email = 'Please enter a valid email address';
+            }
+        }
+
+        // Phone specific validation
+        if (['workPhone', 'homePhone', 'mobile'].includes(name)) {
+            if (value && value.trim() !== '' && !validatePhone(value)) {
+                errors[name] = 'Invalid phone format: (123)456-7890';
+            } else {
+                delete errors[name];
+            }
+        }
+
+        setValidationErrors(errors);
+    };
+
     const validateForm = () => {
         const errors = {};
 
@@ -273,6 +317,20 @@ function QuranBoysApplication() {
         try {
             const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
             console.log('Email sent successfully!', response.status, response.text);
+
+            // Google Sheets Submission
+            try {
+                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
+                await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...formData, formType: 'boys' }),
+                });
+            } catch (sheetError) {
+                console.error("Google Sheets Error:", sheetError);
+            }
+
             setStatus({
                 type: 'success',
                 message: `Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`
@@ -309,12 +367,16 @@ function QuranBoysApplication() {
                                 <label className="form-label">{t('quranBoys.studentName')}</label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${validationErrors.studentName ? 'is-invalid' : ''}`}
                                     name="studentName"
                                     value={formData.studentName}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {validationErrors.studentName && (
+                                    <div className="error-message"><small className="text-danger">{validationErrors.studentName}</small></div>
+                                )}
                             </div>
 
                             <div className="row">
@@ -325,6 +387,7 @@ function QuranBoysApplication() {
                                         name="age"
                                         value={formData.age}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         required
                                     >
                                         <option value="">{t('common.select')}</option>
@@ -333,19 +396,23 @@ function QuranBoysApplication() {
                                         ))}
                                     </select>
                                     {validationErrors.age && (
-                                        <small className="text-danger">{validationErrors.age}</small>
+                                        <div className="error-message"><small className="text-danger">{validationErrors.age}</small></div>
                                     )}
                                 </div>
                                 <div className="col-md-8 mb-3">
                                     <label className="form-label">{t('quranBoys.grade')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.grade ? 'is-invalid' : ''}`}
                                         name="grade"
                                         value={formData.grade}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         required
                                     />
+                                    {validationErrors.grade && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.grade}</small></div>
+                                    )}
                                 </div>
                             </div>
 
@@ -357,11 +424,12 @@ function QuranBoysApplication() {
                                     name="address"
                                     value={formData.address}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                     required
                                     placeholder="Lincoln, NE"
                                 />
                                 {validationErrors.address && (
-                                    <small className="text-danger">{validationErrors.address}</small>
+                                    <div className="error-message"><small className="text-danger">{validationErrors.address}</small></div>
                                 )}
                             </div>
 
@@ -369,12 +437,16 @@ function QuranBoysApplication() {
                                 <label className="form-label">{t('quranBoys.school')}</label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${validationErrors.school ? 'is-invalid' : ''}`}
                                     name="school"
                                     value={formData.school}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                     required
                                 />
+                                {validationErrors.school && (
+                                    <div className="error-message"><small className="text-danger">{validationErrors.school}</small></div>
+                                )}
                             </div>
                         </div>
 
@@ -387,35 +459,47 @@ function QuranBoysApplication() {
                                     <label className="form-label">{t('quranBoys.guardianName')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.guardianName ? 'is-invalid' : ''}`}
                                         name="guardianName"
                                         value={formData.guardianName}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         required
                                     />
+                                    {validationErrors.guardianName && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.guardianName}</small></div>
+                                    )}
                                 </div>
                                 <div className="col-md-3 mb-3">
                                     <label className="form-label">{t('quranBoys.kinship')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.kinship ? 'is-invalid' : ''}`}
                                         name="kinship"
                                         value={formData.kinship}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         placeholder={t('quranBoys.kinshipPlaceholder')}
                                         required
                                     />
+                                    {validationErrors.kinship && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.kinship}</small></div>
+                                    )}
                                 </div>
                                 <div className="col-md-4 mb-3">
                                     <label className="form-label">{t('quranBoys.guardianJob')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.guardianJob ? 'is-invalid' : ''}`}
                                         name="guardianJob"
                                         value={formData.guardianJob}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         required
                                     />
+                                    {validationErrors.guardianJob && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.guardianJob}</small></div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -439,11 +523,11 @@ function QuranBoysApplication() {
                                         name="workPhone"
                                         value={formData.workPhone}
                                         onChange={handleChange}
-                                        placeholder="(402)123-4567"
+                                        onBlur={handleBlur}
                                         maxLength="13"
                                     />
                                     {validationErrors.workPhone && (
-                                        <small className="text-danger">{validationErrors.workPhone}</small>
+                                        <div className="error-message"><small className="text-danger">{validationErrors.workPhone}</small></div>
                                     )}
                                 </div>
                                 <div className="col-md-4 mb-3">
@@ -454,11 +538,11 @@ function QuranBoysApplication() {
                                         name="homePhone"
                                         value={formData.homePhone}
                                         onChange={handleChange}
-                                        placeholder="(402)123-4567"
+                                        onBlur={handleBlur}
                                         maxLength="13"
                                     />
                                     {validationErrors.homePhone && (
-                                        <small className="text-danger">{validationErrors.homePhone}</small>
+                                        <div className="error-message"><small className="text-danger">{validationErrors.homePhone}</small></div>
                                     )}
                                 </div>
                                 <div className="col-md-4 mb-3">
@@ -469,11 +553,11 @@ function QuranBoysApplication() {
                                         name="mobile"
                                         value={formData.mobile}
                                         onChange={handleChange}
-                                        placeholder="(402)123-4567"
+                                        onBlur={handleBlur}
                                         maxLength="13"
                                     />
                                     {validationErrors.mobile && (
-                                        <small className="text-danger">{validationErrors.mobile}</small>
+                                        <div className="error-message"><small className="text-danger">{validationErrors.mobile}</small></div>
                                     )}
                                 </div>
                             </div>
@@ -486,11 +570,12 @@ function QuranBoysApplication() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                     placeholder="example@email.com"
                                     required
                                 />
                                 {validationErrors.email && (
-                                    <small className="text-danger">{validationErrors.email}</small>
+                                    <div className="error-message"><small className="text-danger">{validationErrors.email}</small></div>
                                 )}
                             </div>
                         </div>
@@ -527,24 +612,32 @@ function QuranBoysApplication() {
                                     <label className="form-label">{t('quranBoys.guardianNameAck')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.guardianNameAck ? 'is-invalid' : ''}`}
                                         name="guardianNameAck"
                                         value={formData.guardianNameAck}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         required
                                     />
+                                    {validationErrors.guardianNameAck && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.guardianNameAck}</small></div>
+                                    )}
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">{t('quranBoys.signature')}</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={`form-control ${validationErrors.signature ? 'is-invalid' : ''}`}
                                         name="signature"
                                         value={formData.signature}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         placeholder={t('quranBoys.signaturePlaceholder')}
                                         required
                                     />
+                                    {validationErrors.signature && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.signature}</small></div>
+                                    )}
                                 </div>
                             </div>
 

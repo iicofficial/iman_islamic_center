@@ -1,14 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./Contact.css";
-
+import StatusModal from "./StatusModal";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUser, FaPaperPlane } from "react-icons/fa";
 
 function Contact() {
     const { t } = useLanguage();
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    });
+    const [status, setStatus] = useState({ type: '', message: '' });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus({ type: 'info', message: 'Sending message...' });
+
+        try {
+            // Hardcoded URL for testing reliability
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
+
+            await fetch(SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors", // IMPORTANT: This bypasses CORS blocks
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ...formData, formType: 'contact' }),
+            });
+
+            // With no-cors, we can't check response.ok, so we assume success if no error thrown
+            setStatus({ type: 'success', message: 'Message sent successfully!' });
+            setFormData({ name: "", email: "", phone: "", message: "" });
+        } catch (error) {
+            console.error(error);
+            setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+        }
+    };
 
     return (
-        
         <section className="contact-section" id="contact">
             <div className="container">
                 <div className="contact-container">
@@ -56,18 +92,36 @@ function Contact() {
                         {/* Right Side: Form */}
                         <div className="col-lg-7">
                             <div className="contact-form-card">
-                                <form className="contact-form">
+                                <form className="contact-form" onSubmit={handleSubmit}>
                                     <h3 className="form-title">{t('contact.formTitle')}</h3>
                                     <div className="row">
                                         <div className="col-md-6 mb-4">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="name" placeholder={t('contact.nameLabel')} required />
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    id="name"
+                                                    name="name"
+                                                    value={formData.name}
+                                                    onChange={handleChange}
+                                                    placeholder={t('contact.nameLabel')}
+                                                    required
+                                                />
                                                 <label htmlFor="name">{t('contact.nameLabel')}</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6 mb-4">
                                             <div className="form-floating">
-                                                <input type="email" className="form-control" id="email" placeholder={t('contact.emailLabel')} required />
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    id="email"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
+                                                    placeholder={t('contact.emailLabel')}
+                                                    required
+                                                />
                                                 <label htmlFor="email">{t('contact.emailLabel')}</label>
                                             </div>
                                         </div>
@@ -75,14 +129,31 @@ function Contact() {
 
                                     <div className="mb-4">
                                         <div className="form-floating">
-                                            <input type="tel" className="form-control" id="phone" placeholder={t('contact.phoneLabel')} />
+                                            <input
+                                                type="tel"
+                                                className="form-control"
+                                                id="phone"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleChange}
+                                                placeholder={t('contact.phoneLabel')}
+                                            />
                                             <label htmlFor="phone">{t('contact.phoneLabel')}</label>
                                         </div>
                                     </div>
 
                                     <div className="mb-4">
                                         <div className="form-floating">
-                                            <textarea className="form-control" id="message" placeholder={t('contact.messageLabel')} style={{ height: "150px" }} required></textarea>
+                                            <textarea
+                                                className="form-control"
+                                                id="message"
+                                                name="message"
+                                                value={formData.message}
+                                                onChange={handleChange}
+                                                placeholder={t('contact.messageLabel')}
+                                                style={{ height: "150px" }}
+                                                required
+                                            ></textarea>
                                             <label htmlFor="message">{t('contact.messageLabel')}</label>
                                         </div>
                                     </div>
@@ -99,6 +170,12 @@ function Contact() {
                     </div>
                 </div>
             </div>
+
+            <StatusModal
+                show={!!status.message}
+                status={status}
+                onClose={() => setStatus({ type: '', message: '' })}
+            />
         </section>
     );
 }
