@@ -42,9 +42,108 @@ function MarriageCertificate() {
         email: ""
     });
     const [status, setStatus] = useState({ type: '', message: '' });
+    const [validationErrors, setValidationErrors] = useState({});
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+
+        // Clear error when user starts typing
+        if (validationErrors[name]) {
+            setValidationErrors({ ...validationErrors, [name]: '' });
+        }
+    };
+
+    const validateField = (name, value) => {
+        let error = '';
+
+        // Conditional validation for Home Address
+        if (name === 'homeAddress') {
+            if (formData.appointmentLocation === 'home' && (!value || value.trim() === '')) {
+                return 'Home address is required for home visits';
+            }
+            return '';
+        }
+
+        // Dowry is optional but must be numeric if provided
+        if (name === 'dowryAmount') {
+            if (value && value.trim() !== '') {
+                const numericRegex = /^\d+(\.\d{1,2})?$/; // Allows simple numbers or decimals
+                // Or looser check: /^[0-9$.,]+$/ to allow currency symbols
+                if (!/^[\d$.,]+$/.test(value)) {
+                    return 'Dowry amount should be a valid number';
+                }
+            }
+            return ''; // Optional
+        }
+
+        // Alphanumeric checks for IDs
+        if (name.toLowerCase().includes('licenseid') || name.toLowerCase().includes('id')) {
+            // Check if it's one of the ID fields
+            if (!value || value.trim() === '') {
+                return 'This field is required';
+            }
+            // Basic alphanumeric check (allowing hyphens/underscores if standard)
+            // User requested "alphanumeric (no spaces)" for groomLicenseId especially
+            if (!/^[a-zA-Z0-9-]+$/.test(value)) {
+                return 'ID must be alphanumeric (no spaces)';
+            }
+            return '';
+        }
+
+        // Required field validation (Default for others)
+        if (!value || (typeof value === 'string' && value.trim() === '')) {
+            error = 'This field is required';
+        }
+
+        // Email validation
+        if (name === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                error = 'Please enter a valid email address';
+            }
+        }
+
+        // Date validations
+        if (name.includes('BirthDate') && value) {
+            const birthDate = new Date(value);
+            const today = new Date();
+            // Clear time for fair comparison
+            today.setHours(0, 0, 0, 0);
+            if (birthDate >= today) {
+                error = 'Date of birth must be in the past';
+            }
+        }
+
+        if (name.includes('SignatureDate') && value) {
+            const sigDate = new Date(value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Compare dates only
+            // Signature date logic: typically today or past, definitely not future?
+            // User said: "past or today"
+            if (sigDate > today) {
+                error = 'Signature date cannot be in the future';
+            }
+        }
+
+        if (name === 'appointmentDate' && value) {
+            const appointmentDate = new Date(value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (appointmentDate < today) {
+                error = 'Appointment date cannot be in the past';
+            }
+        }
+
+        return error;
+    };
+
+
+
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        const error = validateField(name, value);
+        setValidationErrors({ ...validationErrors, [name]: error });
     };
 
     const generatePDF = () => {
@@ -121,7 +220,7 @@ function MarriageCertificate() {
 
         doc.setFontSize(8);
         doc.text("901 W Dawes Avenue, Lincoln, NE 68521", pageWidth / 2, 33, { align: "center" });
-        doc.text("Phone: (402) 730-3883 | Email: info@imanislamic.org", pageWidth / 2, 39, { align: "center" });
+        doc.text("Phone: (402) 730-3883 | Email: info@iman-islam.org", pageWidth / 2, 39, { align: "center" });
 
         doc.setTextColor(0, 0, 0);
         yPos = 53;
@@ -250,7 +349,7 @@ function MarriageCertificate() {
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(8);
-        doc.text("For questions, contact: (402) 730-3883 | info@imanislamic.org", pageWidth / 2, yPos + 15, { align: "center" });
+        doc.text("For questions, contact: (402) 730-3883 | info@iman-islam.org", pageWidth / 2, yPos + 15, { align: "center" });
 
         // Save the PDF
         doc.save("Marriage_Certificate_Application.pdf");
@@ -342,7 +441,7 @@ function MarriageCertificate() {
                                         {step === 1 ? t('marriageCertificate.title') : t('marriageCertificate.appointmentTitle')}
                                     </h2>
                                     <div className="required-note mb-4">
-                                        <span>{t('marriageCertificate.allFieldsRequired')}</span>
+                                        <span style={{ color: '#dc3545', fontWeight: 'bold' }}>All Fields Required</span>
                                     </div>
                                 </div>
 
@@ -358,11 +457,15 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="groomName"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.groomName ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.groomName}
                                                     />
+                                                    {validationErrors.groomName && (
+                                                        <div className="invalid-feedback">{validationErrors.groomName}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -372,19 +475,24 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="groomLicenseId"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.groomLicenseId ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.groomLicenseId}
                                                     />
+                                                    {validationErrors.groomLicenseId && (
+                                                        <div className="invalid-feedback">{validationErrors.groomLicenseId}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.state')}</label>
                                                     <select
                                                         name="groomLicenseState"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.groomLicenseState ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.groomLicenseState}
                                                     >
                                                         <option value="">{t('marriageCertificate.selectState')}</option>
@@ -392,6 +500,9 @@ function MarriageCertificate() {
                                                             <option key={state} value={state}>{state}</option>
                                                         ))}
                                                     </select>
+                                                    {validationErrors.groomLicenseState && (
+                                                        <div className="invalid-feedback">{validationErrors.groomLicenseState}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -429,11 +540,15 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="brideName"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideName ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideName}
                                                     />
+                                                    {validationErrors.brideName && (
+                                                        <div className="invalid-feedback">{validationErrors.brideName}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -443,19 +558,24 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="brideLicenseId"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideLicenseId ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideLicenseId}
                                                     />
+                                                    {validationErrors.brideLicenseId && (
+                                                        <div className="invalid-feedback">{validationErrors.brideLicenseId}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.state')}</label>
                                                     <select
                                                         name="brideLicenseState"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideLicenseState ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideLicenseState}
                                                     >
                                                         <option value="">{t('marriageCertificate.selectState')}</option>
@@ -463,6 +583,9 @@ function MarriageCertificate() {
                                                             <option key={state} value={state}>{state}</option>
                                                         ))}
                                                     </select>
+                                                    {validationErrors.brideLicenseState && (
+                                                        <div className="invalid-feedback">{validationErrors.brideLicenseState}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -500,66 +623,84 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="groomSignature"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.groomSignature ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.groomSignature}
                                                     />
+                                                    {validationErrors.groomSignature && (
+                                                        <div className="invalid-feedback">{validationErrors.groomSignature}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <label className="form-label">{t('marriageCertificate.date')}</label>
-                                                    <input
-                                                        type="date"
+                                                    <DatePicker
+                                                        label={t('marriageCertificate.date')}
                                                         name="groomSignatureDate"
-                                                        className="form-control"
-                                                        required
-                                                        onChange={handleChange}
                                                         value={formData.groomSignatureDate}
+                                                        onChange={handleChange}
+                                                        required
                                                     />
+                                                    {validationErrors.groomSignatureDate && (
+                                                        <div className="invalid-feedback d-block">{validationErrors.groomSignatureDate}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
                                             <div className="row mb-3">
-                                                <div className="col-md-4">
-                                                    <label className="form-label">{t('marriageCertificate.brideRepSignature')}</label>
+                                                <div className="col-md-8">
+                                                    <label className="form-label">Bride's Representative Signature-Wali (Print name)</label>
                                                     <input
                                                         type="text"
                                                         name="brideRepSignature"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideRepSignature ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideRepSignature}
                                                     />
+                                                    {validationErrors.brideRepSignature && (
+                                                        <div className="invalid-feedback">{validationErrors.brideRepSignature}</div>
+                                                    )}
                                                 </div>
-                                                <div className="col-md-2">
-                                                    <label className="form-label">{t('marriageCertificate.date')}</label>
-                                                    <input
-                                                        type="date"
+                                                <div className="col-md-4">
+                                                    <DatePicker
+                                                        label={t('marriageCertificate.date')}
                                                         name="brideRepSignatureDate"
-                                                        className="form-control"
-                                                        required
-                                                        onChange={handleChange}
                                                         value={formData.brideRepSignatureDate}
+                                                        onChange={handleChange}
+                                                        required
                                                     />
+                                                    {validationErrors.brideRepSignatureDate && (
+                                                        <div className="invalid-feedback d-block">{validationErrors.brideRepSignatureDate}</div>
+                                                    )}
                                                 </div>
-                                                <div className="col-md-3">
+                                            </div>
+
+                                            <div className="row mb-3">
+                                                <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                                     <input
                                                         type="text"
                                                         name="brideRepLicenseId"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideRepLicenseId ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideRepLicenseId}
                                                     />
+                                                    {validationErrors.brideRepLicenseId && (
+                                                        <div className="invalid-feedback">{validationErrors.brideRepLicenseId}</div>
+                                                    )}
                                                 </div>
-                                                <div className="col-md-3">
+                                                <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.state')}</label>
                                                     <select
                                                         name="brideRepLicenseState"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.brideRepLicenseState ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.brideRepLicenseState}
                                                     >
                                                         <option value="">{t('marriageCertificate.selectState')}</option>
@@ -567,6 +708,9 @@ function MarriageCertificate() {
                                                             <option key={state} value={state}>{state}</option>
                                                         ))}
                                                     </select>
+                                                    {validationErrors.brideRepLicenseState && (
+                                                        <div className="invalid-feedback">{validationErrors.brideRepLicenseState}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -579,22 +723,30 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="witness1Name"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.witness1Name ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.witness1Name}
                                                     />
+                                                    {validationErrors.witness1Name && (
+                                                        <div className="invalid-feedback">{validationErrors.witness1Name}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                                     <input
                                                         type="text"
                                                         name="witness1Id"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.witness1Id ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.witness1Id}
                                                     />
+                                                    {validationErrors.witness1Id && (
+                                                        <div className="invalid-feedback">{validationErrors.witness1Id}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -604,22 +756,30 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="witness2Name"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.witness2Name ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.witness2Name}
                                                     />
+                                                    {validationErrors.witness2Name && (
+                                                        <div className="invalid-feedback">{validationErrors.witness2Name}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">{t('marriageCertificate.licenseIdLabel')}</label>
                                                     <input
                                                         type="text"
                                                         name="witness2Id"
-                                                        className="form-control"
+                                                        className={`form-control ${validationErrors.witness2Id ? 'is-invalid' : ''}`}
                                                         required
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.witness2Id}
                                                     />
+                                                    {validationErrors.witness2Id && (
+                                                        <div className="invalid-feedback">{validationErrors.witness2Id}</div>
+                                                    )}
                                                 </div>
                                             </div>
 
@@ -687,11 +847,14 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="dowryAmount"
-                                                        className="form-control"
-                                                        required
+                                                        className={`form-control ${validationErrors.dowryAmount ? 'is-invalid' : ''}`}
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.dowryAmount}
                                                     />
+                                                    {validationErrors.dowryAmount && (
+                                                        <div className="invalid-feedback">{validationErrors.dowryAmount}</div>
+                                                    )}
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">Date of Marriage</label>
@@ -743,12 +906,16 @@ function MarriageCertificate() {
                                                 <input
                                                     type="email"
                                                     name="email"
-                                                    className="form-control form-control-lg"
+                                                    className={`form-control form-control-lg ${validationErrors.email ? 'is-invalid' : ''}`}
                                                     required
                                                     onChange={handleChange}
+                                                    onBlur={handleBlur}
                                                     value={formData.email}
                                                     placeholder="example@email.com"
                                                 />
+                                                {validationErrors.email && (
+                                                    <div className="invalid-feedback">{validationErrors.email}</div>
+                                                )}
                                             </div>
 
                                             <div className="mb-4">
@@ -791,11 +958,15 @@ function MarriageCertificate() {
                                                     <input
                                                         type="text"
                                                         name="homeAddress"
-                                                        className="form-control form-control-lg"
+                                                        className={`form-control form-control-lg ${validationErrors.homeAddress ? 'is-invalid' : ''}`}
                                                         required={formData.appointmentLocation === 'home'}
                                                         onChange={handleChange}
+                                                        onBlur={handleBlur}
                                                         value={formData.homeAddress}
                                                     />
+                                                    {validationErrors.homeAddress && (
+                                                        <div className="invalid-feedback">{validationErrors.homeAddress}</div>
+                                                    )}
                                                 </div>
                                             )}
 
@@ -823,10 +994,10 @@ function MarriageCertificate() {
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+                    </div >
+                </div >
+            </section >
+        </div >
     );
 }
 

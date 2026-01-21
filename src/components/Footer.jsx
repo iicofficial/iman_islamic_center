@@ -43,7 +43,7 @@ function Footer() {
                     {/* Contact Info */}
                     <div className="col-md-4 mb-3">
                         <h5 className="text-white">{t('footer.contactUs')}</h5>
-                        <p className="text-white mb-1">Email: info@imanislamic.org</p>
+                        <p className="text-white mb-1">Email: <a href="mailto:info@iman-islam.org" className="text-white text-decoration-none">info@iman-islam.org</a></p>
                         <p className="text-white mb-1">Phone: (402) 730-3883</p>
                         <p className="text-white">Address: 901 w dawes avenue, Lincoln, NE</p>
                         <div className="social-links mt-2">

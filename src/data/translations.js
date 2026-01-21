@@ -130,7 +130,7 @@ export const translations = {
             send: "Send Message",
             // Values (Always English)
             phoneValue: "(402) 730-3883",
-            emailValue: "info@imanislamic.org",
+            emailValue: "info@iman-islam.org",
             addressValue: "901 w dawes avenue, Lincoln, NE"
         },
         marriageCertificate: {
@@ -481,7 +481,7 @@ export const translations = {
             send: "إرسال الرسالة",
             // Values (Always English per request)
             phoneValue: "(402) 730-3883",
-            emailValue: "info@imanislamic.org",
+            emailValue: "info@iman-islam.org",
             addressValue: "901 w dawes avenue, Lincoln, NE"
         },
         marriageCertificate: {

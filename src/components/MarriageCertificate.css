@@ -173,3 +173,109 @@
     width: auto;
     font-size: 1.1rem;
 }
+
+
+/* Make Input Fields More Visible & Modern */
+.marriage-certificate-card .form-control,
+.marriage-certificate-card .form-select {
+    background-color: #f8fafc;
+    /* Very light slate/blue tint */
+    border: 2px solid #e2e8f0;
+    /* Softer, modern border */
+    color: #334155;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+}
+
+.marriage-certificate-card .form-control:focus,
+.marriage-certificate-card .form-select:focus {
+    background-color: #ffffff;
+    border-color: #27569b;
+    /* Primary Color Focus */
+    box-shadow: 0 0 0 4px rgba(39, 86, 155, 0.1);
+    /* Soft spread glow */
+}
+
+/* Validation Error Styling */
+.is-invalid {
+    border-color: #dc3545 !important;
+    border-width: 2px !important;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Button Container - Centered */
+/* Button Container - Centered with Gap */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* Separate buttons */
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Back Button Styling (Secondary Primary Color) */
+.back-btn {
+    background: transparent;
+    color: #27569b;
+    /* Primary Blue Text */
+    border: 2px solid #27569b;
+    /* Primary Blue Border */
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-btn:hover {
+    background-color: #e3f2fd;
+    /* Lightest blue tint on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(39, 86, 155, 0.15);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+}
+
+/* Apply Button Styling */
+.apply-btn {
+    background: linear-gradient(135deg, #27569b 0%, #1e467f 100%);
+    color: white;
+    border: none;
+    padding: 15px 60px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 86, 155, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(39, 86, 155, 0.4);
+    background: linear-gradient(135deg, #1e467f 0%, #27569b 100%);
+}
+
+.apply-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(39, 86, 155, 0.3);
+}

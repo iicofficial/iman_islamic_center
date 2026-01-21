@@ -106,9 +106,28 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
                             >
                                 ‹
                             </button>
-                            <span className="calendar-month-year">
-                                {months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
-                            </span>
+                            <div className="d-flex align-items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                                <select
+                                    className="form-select form-select-sm p-1"
+                                    style={{ width: 'auto', fontSize: '0.85rem' }}
+                                    value={currentMonth.getMonth()}
+                                    onChange={(e) => setCurrentMonth(new Date(currentMonth.getFullYear(), parseInt(e.target.value)))}
+                                >
+                                    {months.map((m, i) => (
+                                        <option key={m} value={i}>{m}</option>
+                                    ))}
+                                </select>
+                                <select
+                                    className="form-select form-select-sm p-1"
+                                    style={{ width: 'auto', fontSize: '0.85rem' }}
+                                    value={currentMonth.getFullYear()}
+                                    onChange={(e) => setCurrentMonth(new Date(parseInt(e.target.value), currentMonth.getMonth()))}
+                                >
+                                    {Array.from({ length: 120 }, (_, i) => new Date().getFullYear() - 90 + i).map(y => (
+                                        <option key={y} value={y}>{y}</option>
+                                    ))}
+                                </select>
+                            </div>
                             <button
                                 type="button"
                                 onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
