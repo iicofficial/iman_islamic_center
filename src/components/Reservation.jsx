@@ -87,10 +87,10 @@ function Reservation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Scheduling your visit...' });
 
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const serviceId = "service_rb2tnxl";
         // Reusing the Quran template to stay within the free tier limit (2 templates)
-        const templateId = import.meta.env.VITE_EMAILJS_QURAN_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const templateId = "template_eiyci1x";
+        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
 
         if (!serviceId || !templateId || !publicKey) {
             console.error('EmailJS configuration missing');

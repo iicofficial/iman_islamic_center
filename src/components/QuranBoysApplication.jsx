@@ -283,9 +283,10 @@ function QuranBoysApplication() {
         setStatus({ type: 'info', message: 'Processing application...' });
 
         // 1. EmailJS Configuration
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_QURAN_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        // 1. EmailJS Configuration (Hardcoded for stability)
+        const serviceId = "service_rb2tnxl";
+        const templateId = "template_eiyci1x";
+        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
 
         console.log("EmailJS Config Check:", {
             hasService: !!serviceId,

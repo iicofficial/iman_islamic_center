@@ -364,9 +364,9 @@ function MarriageCertificate() {
             setStatus({ type: 'info', message: 'Processing application...' });
 
             // 1. Send Confirmation Email via EmailJS FIRST
-            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+            const serviceId = "service_rb2tnxl";
+            const templateId = "template_clbz3te";
+            const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
 
             console.log("EmailJS Config Check:", {
                 hasService: !!serviceId,
