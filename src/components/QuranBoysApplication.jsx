@@ -299,10 +299,19 @@ function QuranBoysApplication() {
         const templateParams = {
             form_title: "Quran Memorization Program (Boys)",
             user_name: formData.studentName,
+            user_email: formData.email, // Added explicit user_email
+            to_email: formData.email,
+            reply_to: formData.email, // Added reply_to for easier organization response
             date: new Date().toLocaleDateString(),
             location: "Iman Islamic Center",
-            to_email: formData.email,
-            phone: formData.mobile
+            phone: formData.mobile,
+            message: `New application received for ${formData.studentName}.
+Grade: ${formData.grade}
+Age: ${formData.age}
+School: ${formData.school}
+Address: ${formData.address}
+Guardian: ${formData.guardianName} (${formData.kinship})
+Contact: ${formData.mobile} / ${formData.email}`
         };
 
         try {

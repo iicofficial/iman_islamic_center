@@ -102,10 +102,18 @@ function Reservation() {
         const templateParams = {
             form_title: "Visit Request / Reservation",
             user_name: formData.name,
+            user_email: formData.email,
+            to_email: formData.email,
+            reply_to: formData.email,
             date: `${formData.date} at ${formData.time}`,
             location: "Iman Islamic Center",
-            to_email: formData.email,
-            phone: "Not provided"
+            phone: "Not provided",
+            message: `New Visit Request:
+Name: ${formData.name}
+Date: ${formData.date}
+Time: ${formData.time}
+Email: ${formData.email}
+Reason: ${formData.reason || "General Visit"}`
         };
 
         try {

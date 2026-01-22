@@ -5,6 +5,8 @@ import "./Contact.css";
 import StatusModal from "./StatusModal";
 import emailjs from '@emailjs/browser';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUser, FaPaperPlane } from "react-icons/fa";
+import jsPDF from "jspdf";
+import logo from "../assets/logo.png";
 
 function Contact() {
     const { t, language } = useLanguage();
@@ -18,6 +20,69 @@ function Contact() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const generatePDF = () => {
+        try {
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.width;
+
+            // Header
+            doc.setFillColor(245, 245, 245);
+            doc.rect(0, 0, pageWidth, 40, 'F');
+            if (logo) {
+                doc.addImage(logo, 'PNG', 15, 5, 30, 30);
+            }
+
+            doc.setTextColor(39, 86, 155);
+            doc.setFontSize(22);
+            doc.setFont("helvetica", "bold");
+            doc.text("IMAN ISLAMIC CENTER", 55, 18);
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+            doc.text("General Inquiry Form", 55, 28);
+
+            let yPos = 55;
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+
+            // Details
+            doc.setFont("helvetica", "bold");
+            doc.text("Name:", 20, yPos);
+            doc.setFont("helvetica", "normal");
+            doc.text(formData.name, 50, yPos);
+            yPos += 10;
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Email:", 20, yPos);
+            doc.setFont("helvetica", "normal");
+            doc.text(formData.email, 50, yPos);
+            yPos += 10;
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Phone:", 20, yPos);
+            doc.setFont("helvetica", "normal");
+            doc.text(formData.phone || "Not provided", 50, yPos);
+            yPos += 15;
+
+            // Message
+            doc.setFont("helvetica", "bold");
+            doc.text("Message:", 20, yPos);
+            yPos += 7;
+            doc.setFont("helvetica", "normal");
+            const splitMessage = doc.splitTextToSize(formData.message, 170);
+            doc.text(splitMessage, 20, yPos);
+
+            // Footer
+            const dateStr = new Date().toLocaleString();
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text(`Submitted on: ${dateStr}`, 20, 280);
+
+            doc.save(`IIC_Contact_${formData.name.replace(/\s+/g, '_')}.pdf`);
+        } catch (error) {
+            console.error("PDF generation failed:", error);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -34,10 +99,13 @@ function Contact() {
                 const templateParams = {
                     form_title: "General Contact Inquiry",
                     user_name: formData.name,
+                    user_email: formData.email,
+                    to_email: formData.email,
+                    reply_to: formData.email,
                     date: new Date().toLocaleDateString(),
                     location: "Online Inquiry",
-                    to_email: formData.email,
-                    phone: formData.phone || "Not provided"
+                    phone: formData.phone || "Not provided",
+                    message: formData.message
                 };
                 await emailjs.send(serviceId, templateId, templateParams, publicKey);
             }
@@ -52,7 +120,8 @@ function Contact() {
                 body: JSON.stringify({ ...formData, formType: 'contact' }),
             });
 
-            setStatus({ type: 'success', message: 'Message sent successfully!' });
+            setStatus({ type: 'success', message: 'Message sent successfully! Downloading copy...' });
+            generatePDF();
             setFormData({ name: "", email: "", phone: "", message: "" });
         } catch (error) {
             console.error(error);

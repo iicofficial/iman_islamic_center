@@ -381,10 +381,18 @@ function MarriageCertificate() {
             const templateParams = {
                 form_title: "Marriage Certificate Application",
                 user_name: `${formData.groomName} & ${formData.brideName}`,
+                user_email: formData.email,
+                to_email: formData.email,
+                reply_to: formData.email,
                 date: formData.nikaahDate,
                 location: formData.appointmentLocation === 'home' ? 'Home Visit' : 'At Masjid',
-                to_email: formData.email,
-                phone: "Not provided"
+                phone: "Check PDF for details",
+                message: `New Marriage Certificate Application:
+Groom: ${formData.groomName}
+Bride: ${formData.brideName}
+Nikaah Date: ${formData.nikaahDate}
+Email: ${formData.email}
+Location: ${formData.appointmentLocation}`
             };
 
             try {

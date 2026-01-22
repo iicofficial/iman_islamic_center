@@ -5,6 +5,8 @@ import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaMale, FaFe
 import emailjs from '@emailjs/browser';
 import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
+import jsPDF from "jspdf";
+import logo from "../assets/logo.png";
 
 function CoupleReconciliation() {
     const { t } = useLanguage();
@@ -18,6 +20,65 @@ function CoupleReconciliation() {
     });
 
     const [status, setStatus] = useState({ type: '', message: '' });
+
+    const generatePDF = () => {
+        try {
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.width;
+
+            // Header
+            doc.setFillColor(245, 245, 245);
+            doc.rect(0, 0, pageWidth, 40, 'F');
+            if (logo) {
+                doc.addImage(logo, 'PNG', 15, 5, 30, 30);
+            }
+
+            doc.setTextColor(39, 86, 155);
+            doc.setFontSize(22);
+            doc.setFont("helvetica", "bold");
+            doc.text("IMAN ISLAMIC CENTER", 55, 18);
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+            doc.text("Couple Reconciliation Request", 55, 28);
+
+            let yPos = 55;
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+
+            // Details
+            const addField = (label, value) => {
+                doc.setFont("helvetica", "bold");
+                doc.text(`${label}:`, 20, yPos);
+                doc.setFont("helvetica", "normal");
+                doc.text(String(value || "N/A"), 60, yPos);
+                yPos += 10;
+            };
+
+            addField("Party 1", formData.name1);
+            addField("Party 2", formData.name2);
+            addField("Email", formData.email);
+            addField("Date", formData.date);
+            addField("Time", formData.time);
+
+            yPos += 5;
+            doc.setFont("helvetica", "bold");
+            doc.text("Notes:", 20, yPos);
+            yPos += 7;
+            doc.setFont("helvetica", "normal");
+            const splitNotes = doc.splitTextToSize(formData.notes || "No additional notes.", 170);
+            doc.text(splitNotes, 20, yPos);
+
+            // Footer
+            const dateStr = new Date().toLocaleString();
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text(`Generated on: ${dateStr}`, 20, 280);
+
+            doc.save(`IIC_Reconciliation_${formData.name1.replace(/\s+/g, '_')}.pdf`);
+        } catch (error) {
+            console.error("PDF generation failed:", error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,10 +99,18 @@ function CoupleReconciliation() {
         const templateParams = {
             form_title: "Couple Reconciliation Request",
             user_name: `${formData.name1} & ${formData.name2}`,
+            user_email: formData.email,
+            to_email: formData.email,
+            reply_to: formData.email,
             date: `${formData.date} at ${formData.time}`,
             location: "Conference Room",
-            to_email: formData.email,
-            phone: "Not provided"
+            phone: "Not provided",
+            message: `New Couple Reconciliation Request:
+Parties: ${formData.name1} & ${formData.name2}
+Preferred Date: ${formData.date}
+Preferred Time: ${formData.time}
+Email: ${formData.email}
+Notes: ${formData.notes}`
         };
 
         try {
@@ -62,8 +131,9 @@ function CoupleReconciliation() {
 
             setStatus({
                 type: 'success',
-                message: `Request Sent! A confirmation has been sent to ${formData.email}.`
+                message: `Request Sent! A confirmation has been sent to ${formData.email}. Downloading copy...`
             });
+            generatePDF();
             // Reset form on success
             setFormData({
                 name1: "",
