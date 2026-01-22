@@ -3,7 +3,7 @@ import { useLanguage } from "../context/LanguageContext";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
 import "./MarriageCertificate.css";
-import emailjs from '@emailjs/browser';
+import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 
@@ -39,7 +39,8 @@ function MarriageCertificate() {
         appointmentTime: "",
         appointmentLocation: "masjid",
         homeAddress: "",
-        email: ""
+        email: "",
+        phone: ""
     });
     const [status, setStatus] = useState({ type: '', message: '' });
     const [validationErrors, setValidationErrors] = useState({});
@@ -318,10 +319,21 @@ function MarriageCertificate() {
         yPos = tempY + 5;
 
         // ===== APPOINTMENT DETAILS =====
-        const appointmentHeight = formData.appointmentLocation === 'home' && formData.homeAddress ? 26 : 22;
+        const appointmentHeight = formData.appointmentLocation === 'home' && formData.homeAddress ? 30 : 26;
         sectionStart = yPos;
         yPos = drawSectionBox(sectionStart, appointmentHeight, "APPOINTMENT DETAILS");
         yPos += 3;
+
+        // Contact info
+        doc.setFont("helvetica", "bold");
+        doc.text("Contact Phone:", leftCol, yPos + 18); // Place near bottom of box
+        doc.setFont("helvetica", "normal");
+        doc.text(formData.phone || "Not provided", leftCol + 30, yPos + 18);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Contact Email:", rightCol, yPos + 18);
+        doc.setFont("helvetica", "normal");
+        doc.text(formData.email || "Not provided", rightCol + 25, yPos + 18);
 
         tempY = addField("Date", formData.appointmentDate, leftCol, yPos);
         addField("Time", formatTime12Hour(formData.appointmentTime), rightCol, yPos);
@@ -364,40 +376,50 @@ function MarriageCertificate() {
             setStatus({ type: 'info', message: 'Processing application...' });
 
             // 1. Send Confirmation Email via EmailJS FIRST
-            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+            const gasUrl = import.meta.env.VITE_GAS_URL;
 
-            if (!serviceId || !templateId || !publicKey) {
-                console.error('EmailJS configuration missing');
+            if (!gasUrl) {
+                console.error('GAS URL configuration missing');
                 generatePDF();
                 return;
             }
 
-            // Explicitly initialize with public key
-            emailjs.init(publicKey);
+            // Helper function for time formatting
+            const formatTime12Hour = (time24) => {
+                if (!time24) return "N/A";
+                const [h, m] = time24.split(':');
+                const hourNum = parseInt(h);
+                const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+                const ampm = hourNum >= 12 ? 'PM' : 'AM';
+                return `${hour12}:${m} ${ampm}`;
+            };
+
+            const formattedTime = formatTime12Hour(formData.appointmentTime);
 
             // Prepare template parameters
             const templateParams = {
                 form_title: "Marriage Certificate Application",
                 user_name: `${formData.groomName} & ${formData.brideName}`,
                 user_email: formData.email,
-                to_email: formData.email,
+                to_email: "dev@iman-islam.org", // Organization email
                 reply_to: formData.email,
                 date: formData.nikaahDate,
                 location: formData.appointmentLocation === 'home' ? 'Home Visit' : 'At Masjid',
-                phone: "Check PDF for details",
+                phone: formData.phone || "Not provided",
                 message: `New Marriage Certificate Application:
+Phone: ${formData.phone}
 Groom: ${formData.groomName}
 Bride: ${formData.brideName}
 Nikaah Date: ${formData.nikaahDate}
 Email: ${formData.email}
-Location: ${formData.appointmentLocation}`
+Location: ${formData.appointmentLocation}
+Appointment Date: ${formData.appointmentDate}
+Appointment Time: ${formattedTime}`
             };
 
             try {
-                const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
-                console.log('Email sent successfully!', response.status, response.text);
+                await sendEmail(templateParams);
+                console.log('Email sent successfully via GAS');
 
                 // Google Sheets Submission
                 try {
@@ -414,7 +436,7 @@ Location: ${formData.appointmentLocation}`
 
                 setStatus({
                     type: 'success',
-                    message: `Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`
+                    message: `Email sent to ${formData.email}. PDF Downloaded.`
                 });
             } catch (err) {
                 console.error('Failed to send email:', err);
@@ -932,6 +954,23 @@ Location: ${formData.appointmentLocation}`
                                                 />
                                                 {validationErrors.email && (
                                                     <div className="invalid-feedback">{validationErrors.email}</div>
+                                                )}
+                                            </div>
+
+                                            <div className="mb-4">
+                                                <label className="form-label">Contact Phone</label>
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    className={`form-control form-control-lg ${validationErrors.phone ? 'is-invalid' : ''}`}
+                                                    required
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={formData.phone}
+                                                    placeholder="(123) 456-7890"
+                                                />
+                                                {validationErrors.phone && (
+                                                    <div className="invalid-feedback">{validationErrors.phone}</div>
                                                 )}
                                             </div>
 

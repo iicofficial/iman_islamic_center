@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./Reservation.css";
-import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle } from "react-icons/fa";
-import emailjs from '@emailjs/browser';
+import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaPhoneAlt } from "react-icons/fa";
+import { sendEmail } from "../utils/emailService";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
 import StatusModal from './StatusModal';
@@ -13,6 +13,7 @@ function Reservation() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        phone: "",
         date: "",
         time: "",
         message: ""
@@ -20,19 +21,18 @@ function Reservation() {
 
     const [status, setStatus] = useState({ type: '', message: '' });
 
+    const formatTime12Hour = (time24) => {
+        if (!time24) return "N/A";
+        const [h, m] = time24.split(':');
+        const hourNum = parseInt(h);
+        const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+        const ampm = hourNum >= 12 ? 'PM' : 'AM';
+        return `${hour12}:${m} ${ampm}`;
+    };
+
     const generatePDF = () => {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.width;
-
-        // Helper function to convert 24-hour time to 12-hour AM/PM format
-        const formatTime12Hour = (time24) => {
-            if (!time24) return "N/A";
-            const [h, m] = time24.split(':');
-            const hourNum = parseInt(h);
-            const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
-            const ampm = hourNum >= 12 ? 'PM' : 'AM';
-            return `${hour12}:${m} ${ampm}`;
-        };
 
         // Header
         doc.setFillColor(245, 245, 245);
@@ -61,6 +61,7 @@ function Reservation() {
 
         addRow("Visitor Name", formData.name);
         addRow("Email Address", formData.email);
+        addRow("Phone Number", formData.phone);
         addRow("Preferred Date", formData.date);
         addRow("Preferred Time", formatTime12Hour(formData.time));
 
@@ -87,37 +88,36 @@ function Reservation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Scheduling your visit...' });
 
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const gasUrl = import.meta.env.VITE_GAS_URL;
 
-        if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS configuration missing');
+        if (!gasUrl) {
+            console.error('GAS URL configuration missing');
             generatePDF();
             return;
         }
 
-        emailjs.init(publicKey);
+        const formattedTime = formatTime12Hour(formData.time);
 
         const templateParams = {
-            form_title: "Visit Request / Reservation",
+            form_title: "Visit Request - Reservation",
             user_name: formData.name,
             user_email: formData.email,
-            to_email: formData.email,
+            to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,
-            date: `${formData.date} at ${formData.time}`,
+            date: `${formData.date} at ${formattedTime}`,
             location: "Iman Islamic Center",
-            phone: "Not provided",
+            phone: formData.phone || "Not provided",
             message: `New Visit Request:
+Phone: ${formData.phone}
 Name: ${formData.name}
 Date: ${formData.date}
-Time: ${formData.time}
+Time: ${formattedTime}
 Email: ${formData.email}
 Reason: ${formData.reason || "General Visit"}`
         };
 
         try {
-            await emailjs.send(serviceId, templateId, templateParams, publicKey);
+            await sendEmail(templateParams);
 
             // Google Sheets Submission
             try {
@@ -134,7 +134,7 @@ Reason: ${formData.reason || "General Visit"}`
 
             setStatus({
                 type: 'success',
-                message: `Visit Scheduled! A confirmation email has been sent to ${formData.email}. Downloading PDF...`
+                message: `Email sent to ${formData.email}. PDF Downloaded.`
             });
         } catch (err) {
             console.error('Email send failure:', err);
@@ -190,6 +190,22 @@ Reason: ${formData.reason || "General Visit"}`
                                                 value={formData.email}
                                                 className="form-control-modern"
                                                 placeholder={t('reservation.enterEmail')}
+                                                required
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Phone */}
+                                    <div className="col-md-6">
+                                        <div className="input-group-modern">
+                                            <label><FaPhoneAlt className="me-2" /> Phone Number</label>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                className="form-control-modern"
+                                                placeholder="(123) 456-7890"
                                                 required
                                                 onChange={handleChange}
                                             />

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./Reservation.css"; // Reuse existing styles
-import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaMale, FaFemale } from "react-icons/fa";
-import emailjs from '@emailjs/browser';
+import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaMale, FaFemale, FaPhoneAlt } from "react-icons/fa";
+import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 import jsPDF from "jspdf";
@@ -14,12 +14,23 @@ function DivorceFormalization() {
         name1: "",
         name2: "",
         email: "",
+        phone: "",
         date: "",
         time: "",
         notes: ""
     });
 
     const [status, setStatus] = useState({ type: '', message: '' });
+
+    // Helper function to convert 24-hour time to 12-hour AM/PM format
+    const formatTime12Hour = (time24) => {
+        if (!time24) return "N/A";
+        const [h, m] = time24.split(':');
+        const hourNum = parseInt(h);
+        const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+        const ampm = hourNum >= 12 ? 'PM' : 'AM';
+        return `${hour12}:${m} ${ampm}`;
+    };
 
     const generatePDF = () => {
         try {
@@ -56,9 +67,10 @@ function DivorceFormalization() {
 
             addField("Party 1", formData.name1);
             addField("Party 2", formData.name2);
+            addField("Phone", formData.phone);
             addField("Email", formData.email);
             addField("Preferred Date", formData.date);
-            addField("Preferred Time", formData.time);
+            addField("Preferred Time", formatTime12Hour(formData.time));
 
             yPos += 5;
             doc.setFont("helvetica", "bold");
@@ -84,37 +96,36 @@ function DivorceFormalization() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Sending request...' });
 
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const gasUrl = import.meta.env.VITE_GAS_URL;
 
-        if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS configuration missing');
+        if (!gasUrl) {
+            console.error('GAS URL configuration missing');
             setStatus({ type: 'error', message: 'System Error: Email configuration is missing.' });
             return;
         }
 
-        emailjs.init(publicKey);
+        const formattedTime = formatTime12Hour(formData.time);
 
         const templateParams = {
             form_title: "Divorce Formalization Request",
             user_name: `${formData.name1} & ${formData.name2}`,
             user_email: formData.email,
-            to_email: formData.email,
+            to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,
-            date: `${formData.date} at ${formData.time}`,
+            date: `${formData.date} at ${formattedTime}`,
             location: "Main Office",
-            phone: "Not provided",
+            phone: formData.phone,
             message: `New Divorce Formalization Request:
 Parties: ${formData.name1} & ${formData.name2}
+Phone: ${formData.phone}
 Preferred Date: ${formData.date}
-Preferred Time: ${formData.time}
+Preferred Time: ${formattedTime}
 Email: ${formData.email}
 Notes: ${formData.notes}`
         };
 
         try {
-            await emailjs.send(serviceId, templateId, templateParams, publicKey);
+            await sendEmail(templateParams);
 
             // Google Sheets Submission
             try {
@@ -131,7 +142,7 @@ Notes: ${formData.notes}`
 
             setStatus({
                 type: 'success',
-                message: `Request Sent! A confirmation has been sent to ${formData.email}. Downloading copy...`
+                message: `Email sent to ${formData.email}. PDF Downloaded.`
             });
             generatePDF();
             // Reset form on success
@@ -202,7 +213,7 @@ Notes: ${formData.notes}`
                                     </div>
 
                                     {/* Email */}
-                                    <div className="col-md-12">
+                                    <div className="col-md-6">
                                         <div className="input-group-modern">
                                             <label><FaEnvelope className="me-2" /> {t('divorceFormalization.email')}</label>
                                             <input
@@ -211,6 +222,22 @@ Notes: ${formData.notes}`
                                                 value={formData.email}
                                                 className="form-control-modern"
                                                 placeholder={t('divorceFormalization.enterEmail')}
+                                                required
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Phone */}
+                                    <div className="col-md-6">
+                                        <div className="input-group-modern">
+                                            <label><FaPhoneAlt className="me-2" /> {t('quranBoys.mobile')}</label>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                className="form-control-modern"
+                                                placeholder="(402) 000-0000"
                                                 required
                                                 onChange={handleChange}
                                             />

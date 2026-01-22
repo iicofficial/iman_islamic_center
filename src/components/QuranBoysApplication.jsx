@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./QuranBoysApplication.css";
-import emailjs from '@emailjs/browser';
+import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
@@ -282,26 +282,20 @@ function QuranBoysApplication() {
 
         setStatus({ type: 'info', message: 'Processing application...' });
 
-        // 1. EmailJS Configuration
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const gasUrl = import.meta.env.VITE_GAS_URL;
 
-        if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS configuration missing');
-            // If keys are missing, we still want to generate the PDF
+        if (!gasUrl) {
+            console.error('GAS URL configuration missing');
             generatePDF();
             return;
         }
 
-        emailjs.init(publicKey);
-
         const templateParams = {
             form_title: "Quran Memorization Program (Boys)",
             user_name: formData.studentName,
-            user_email: formData.email, // Added explicit user_email
-            to_email: formData.email,
-            reply_to: formData.email, // Added reply_to for easier organization response
+            user_email: formData.email,
+            to_email: "dev@iman-islam.org", // Organization email
+            reply_to: formData.email,
             date: new Date().toLocaleDateString(),
             location: "Iman Islamic Center",
             phone: formData.mobile,
@@ -315,8 +309,8 @@ Contact: ${formData.mobile} / ${formData.email}`
         };
 
         try {
-            const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
-            console.log('Email sent successfully!', response.status, response.text);
+            await sendEmail(templateParams);
+            console.log('Email sent successfully via GAS');
 
             // Google Sheets Submission
             try {
@@ -333,7 +327,7 @@ Contact: ${formData.mobile} / ${formData.email}`
 
             setStatus({
                 type: 'success',
-                message: `Application Success! Confirmation email sent to ${formData.email}. Downloading PDF...`
+                message: `Email sent to ${formData.email}. PDF Downloaded.`
             });
         } catch (err) {
             console.error('Failed to send email:', err);

@@ -69,15 +69,25 @@ Large `.docx` files (~8MB) cause deployment issues and slow user downloads.
 
 ## 3. Deployment Instructions (Vercel)
 
+### D. Email Service (Google Apps Script)
+To avoid the 200 requests/month limit of EmailJS, we transitioned to a custom **Google Apps Script** (GAS) web app.
+
+**How it works:**
+1.  **Script**: A tiny `doPost` function in GAS calls `GmailApp.sendEmail`.
+2.  **Utility**: `src/utils/emailService.js` handles the `fetch` request to the GAS URL.
+3.  **Security**: No secret keys are stored in the front-end; it communicates only with your secure Workspace account.
+
+---
+
+## 3. Deployment Instructions (Vercel)
+
 ### Environment Variables
-These **MUST** be set in the Vercel Dashboard for email functionality to work.
+These **MUST** be set in the Vercel Dashboard for functionality to work.
 
 | Key | Value |
 | :--- | :--- |
-| `VITE_EMAILJS_PUBLIC_KEY` | `BbOdJw90Znas1_-jM` |
-| `VITE_EMAILJS_SERVICE_ID` | `service_rb2tnxl` |
-| `VITE_EMAILJS_TEMPLATE_ID` | `template_eiyci1x` |
-| `VITE_EMAILJS_QURAN_TEMPLATE_ID` | `template_clbz3te` |
+| `VITE_GAS_URL` | *Your deployed Google Apps Script URL* |
+| `VITE_EMAILJS_PUBLIC_KEY` | *(Legacy - Keep for now if needed)* |
 
 ### Deployment Steps
 1.  **Push Code**: `git push origin main`

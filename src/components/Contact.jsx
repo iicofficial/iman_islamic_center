@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import "./Contact.css";
 import StatusModal from "./StatusModal";
-import emailjs from '@emailjs/browser';
+import { sendEmail } from "../utils/emailService";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUser, FaPaperPlane } from "react-icons/fa";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
@@ -90,24 +90,22 @@ function Contact() {
         setStatus({ type: 'info', message: 'Sending message...' });
 
         try {
-            // 1. Send Confirmation Email (Auto-reply)
-            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+            // 1. Send Confirmation Email via GAS
+            const gasUrl = import.meta.env.VITE_GAS_URL;
 
-            if (serviceId && templateId && publicKey) {
+            if (gasUrl) {
                 const templateParams = {
                     form_title: "General Contact Inquiry",
                     user_name: formData.name,
                     user_email: formData.email,
-                    to_email: formData.email,
+                    to_email: "dev@iman-islam.org", // Organization email
                     reply_to: formData.email,
                     date: new Date().toLocaleDateString(),
                     location: "Online Inquiry",
                     phone: formData.phone || "Not provided",
                     message: formData.message
                 };
-                await emailjs.send(serviceId, templateId, templateParams, publicKey);
+                await sendEmail(templateParams);
             }
 
             // 2. Google Sheets Submission
@@ -120,7 +118,7 @@ function Contact() {
                 body: JSON.stringify({ ...formData, formType: 'contact' }),
             });
 
-            setStatus({ type: 'success', message: 'Message sent successfully! Downloading copy...' });
+            setStatus({ type: 'success', message: `Email sent to ${formData.email}. PDF Downloaded.` });
             generatePDF();
             setFormData({ name: "", email: "", phone: "", message: "" });
         } catch (error) {
@@ -158,7 +156,7 @@ function Contact() {
                                         </div>
                                         <div>
                                             <label>{t('contact.emailUs')}</label>
-                                            <p>info@imanislamiccenter.org</p>
+                                            <p>dev@iman-islam.org</p>
                                         </div>
                                     </div>
                                     <div className="info-item">
