@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
     FaRing, FaHandsHelping, FaFileContract, FaLanguage, FaHandHoldingHeart,
@@ -16,9 +16,22 @@ import "./Navbar.css";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
     const { language, toggleLanguage, t } = useLanguage();
     const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     // Helper to check if a regular link is active
     const isActiveLink = (path) => {
@@ -66,7 +79,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="navbar navbar-expand-xl custom-navbar fixed-top">
+        <nav className={`navbar navbar-expand-xl custom-navbar fixed-top ${isScrolled ? "scrolled" : ""} `}>
             <div className="container-fluid px-4 position-relative">
 
                 {/* Brand Section */}

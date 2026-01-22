@@ -54,3 +54,4 @@ Desktop.ini
 # .gitignore
 .agent/*
 !.agent/workflows/
+.vercel

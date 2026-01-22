@@ -17,6 +17,31 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.custom-navbar.scrolled {
+  height: 100px;
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #27569b;
+}
+
+/* Shrink logo on scroll */
+.custom-navbar.scrolled .navbar-logo {
+  height: 80px;
+}
+
+/* Shrink/Hide top elements on scroll to focus on main links */
+.custom-navbar.scrolled .centered-top-wrapper {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .centered-top-wrapper {
+  transition: all 0.3s ease;
+}
+
+
 /* Subtle inner glow for extra premium feel */
 .custom-navbar::after {
   content: '';
@@ -32,10 +57,14 @@
 /* =========================
    Logo + Brand
 ========================= */
+/* Brand Section */
 .custom-navbar .container-fluid {
   padding-left: 0 !important;
   padding-right: 0 !important;
-  /* Remove padding so logo touches edge */
+  display: flex !important;
+  flex-direction: row !important;
+  direction: ltr !important;
+  /* Keep logo on left, menu on right always */
 }
 
 .navbar-brand {
@@ -235,6 +264,19 @@ html[dir="rtl"] .nav-link:hover .nav-arrow-small {
   /* Forces Left-to-Right layout always to prevent swapping */
 }
 
+/* Ensure centering is rock-solid even in RTL */
+html[dir="rtl"] .centered-top-wrapper {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  direction: ltr !important;
+}
+
+.centered-top-wrapper .language-pill,
+.centered-top-wrapper .social-pill {
+  direction: ltr !important;
+}
+
 .centered-top-wrapper>* {
   pointer-events: auto;
   /* Makes the pills themselves clickable */
@@ -345,6 +387,15 @@ html[dir="rtl"] .nav-link:hover .nav-arrow-small {
   font-weight: 300;
   margin: 0 4px;
 }
+
+/* Ensure order of buttons stays fixed regardless of direction */
+.language-pill,
+.language-toggle-top {
+  display: flex !important;
+  flex-direction: row !important;
+  direction: ltr !important;
+}
+
 
 /* Mobile language toggle positioning */
 @media (max-width: 1199px) {
