@@ -103,8 +103,8 @@ function Contact() {
                                     </div>
                                 </div>
                                 <div className="mt-4 pt-3 border-top border-white border-opacity-25">
-                                    <Link to={language === 'ar' ? '/ar/reservation' : '/reservation'} className="btn btn-light w-100 fw-bold">
-                                        {t('hero.bookVisit')}
+                                    <Link to={language === 'ar' ? '/ar' : '/'} className="btn btn-light w-100 fw-bold">
+                                        {t('navbar.home')}
                                     </Link>
                                 </div>
                             </div>
