@@ -23,9 +23,9 @@ function DivorceFormalization() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Sending request...' });
 
-        const serviceId = "service_rb2tnxl";
-        const templateId = "template_eiyci1x";
-        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         if (!serviceId || !templateId || !publicKey) {
             console.error('EmailJS configuration missing');
@@ -35,14 +35,13 @@ function DivorceFormalization() {
 
         emailjs.init(publicKey);
 
-        // Map to existing template fields
         const templateParams = {
-            studentName: "Divorce Formalization Request", // Title
-            parentName: `Husband: ${formData.name1}, Wife: ${formData.name2}`, // Names
-            email: formData.email,
+            form_title: "Divorce Formalization Request",
+            user_name: `${formData.name1} & ${formData.name2}`,
+            date: `${formData.date} at ${formData.time}`,
+            location: "Main Office",
             to_email: formData.email,
-            phone: `Date: ${formData.date}, Time: ${formData.time}`, // Date/Time mapping
-            message: formData.notes || "No additional information"
+            phone: "Not provided"
         };
 
         try {

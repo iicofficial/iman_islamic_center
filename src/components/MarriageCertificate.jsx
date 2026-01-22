@@ -364,24 +364,12 @@ function MarriageCertificate() {
             setStatus({ type: 'info', message: 'Processing application...' });
 
             // 1. Send Confirmation Email via EmailJS FIRST
-            const serviceId = "service_rb2tnxl";
-            const templateId = "template_clbz3te";
-            const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
-
-            console.log("EmailJS Config Check:", {
-                hasService: !!serviceId,
-                hasTemplate: !!templateId,
-                hasKey: !!publicKey
-            });
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
             if (!serviceId || !templateId || !publicKey) {
-                const errorMsg = 'System Error: Email configuration is missing. Keys loaded: ' +
-                    (serviceId ? 'Service✅ ' : 'Service❌ ') +
-                    (templateId ? 'Template✅ ' : 'Template❌ ') +
-                    (publicKey ? 'Key✅' : 'Key❌');
-                console.error(errorMsg);
-                setStatus({ type: 'error', message: errorMsg + '. Downloading PDF anyway...' });
-                // Download PDF anyway so user doesn't lose data
+                console.error('EmailJS configuration missing');
                 generatePDF();
                 return;
             }
@@ -391,15 +379,12 @@ function MarriageCertificate() {
 
             // Prepare template parameters
             const templateParams = {
+                form_title: "Marriage Certificate Application",
+                user_name: `${formData.groomName} & ${formData.brideName}`,
+                date: formData.nikaahDate,
+                location: formData.appointmentLocation === 'home' ? 'Home Visit' : 'At Masjid',
                 to_email: formData.email,
-                admin_email: 'akeelsalman888@gmail.com', // Explicitly pass admin email
-                groomName: formData.groomName,
-                brideName: formData.brideName,
-                appointmentDate: formData.appointmentDate,
-                appointmentTime: formData.appointmentTime,
-                appointmentLocation: formData.appointmentLocation === 'masjid' ? 'Masjid' : 'Home Visit',
-                homeAddress: formData.appointmentLocation === 'home' ? formData.homeAddress : 'N/A',
-                nikaahDate: formData.nikaahDate
+                phone: "Not provided"
             };
 
             try {

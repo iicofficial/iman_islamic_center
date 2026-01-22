@@ -283,24 +283,13 @@ function QuranBoysApplication() {
         setStatus({ type: 'info', message: 'Processing application...' });
 
         // 1. EmailJS Configuration
-        // 1. EmailJS Configuration (Hardcoded for stability)
-        const serviceId = "service_rb2tnxl";
-        const templateId = "template_eiyci1x";
-        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
-
-        console.log("EmailJS Config Check:", {
-            hasService: !!serviceId,
-            hasTemplate: !!templateId,
-            hasKey: !!publicKey
-        });
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         if (!serviceId || !templateId || !publicKey) {
-            const errorMsg = 'System Error: Email configuration is missing. Keys loaded: ' +
-                (serviceId ? 'Service✅ ' : 'Service❌ ') +
-                (templateId ? 'Template✅ ' : 'Template❌ ') +
-                (publicKey ? 'Key✅' : 'Key❌');
-            console.error(errorMsg);
-            setStatus({ type: 'error', message: errorMsg });
+            console.error('EmailJS configuration missing');
+            // If keys are missing, we still want to generate the PDF
             generatePDF();
             return;
         }
@@ -308,11 +297,12 @@ function QuranBoysApplication() {
         emailjs.init(publicKey);
 
         const templateParams = {
-            studentName: formData.studentName,
-            parentName: formData.guardianName,
-            phone: formData.mobile,
-            email: formData.email,
-            to_email: formData.email
+            form_title: "Quran Memorization Program (Boys)",
+            user_name: formData.studentName,
+            date: new Date().toLocaleDateString(),
+            location: "Iman Islamic Center",
+            to_email: formData.email,
+            phone: formData.mobile
         };
 
         try {
@@ -326,7 +316,7 @@ function QuranBoysApplication() {
                     method: "POST",
                     mode: "no-cors",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...formData, formType: 'boys' }),
+                    body: JSON.stringify({ ...formData, name: formData.studentName, formType: 'boys' }),
                 });
             } catch (sheetError) {
                 console.error("Google Sheets Error:", sheetError);

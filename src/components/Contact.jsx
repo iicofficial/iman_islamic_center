@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "./Contact.css";
 import StatusModal from "./StatusModal";
+import emailjs from '@emailjs/browser';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUser, FaPaperPlane } from "react-icons/fa";
 
 function Contact() {
@@ -23,19 +24,33 @@ function Contact() {
         setStatus({ type: 'info', message: 'Sending message...' });
 
         try {
-            // Hardcoded URL for testing reliability
+            // 1. Send Confirmation Email (Auto-reply)
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+            if (serviceId && templateId && publicKey) {
+                const templateParams = {
+                    form_title: "General Contact Inquiry",
+                    user_name: formData.name,
+                    date: new Date().toLocaleDateString(),
+                    location: "Online Inquiry",
+                    to_email: formData.email,
+                    phone: formData.phone || "Not provided"
+                };
+                await emailjs.send(serviceId, templateId, templateParams, publicKey);
+            }
+
+            // 2. Google Sheets Submission
             const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
 
             await fetch(SCRIPT_URL, {
                 method: "POST",
-                mode: "no-cors", // IMPORTANT: This bypasses CORS blocks
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ ...formData, formType: 'contact' }),
             });
 
-            // With no-cors, we can't check response.ok, so we assume success if no error thrown
             setStatus({ type: 'success', message: 'Message sent successfully!' });
             setFormData({ name: "", email: "", phone: "", message: "" });
         } catch (error) {

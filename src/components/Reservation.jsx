@@ -87,28 +87,25 @@ function Reservation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Scheduling your visit...' });
 
-        const serviceId = "service_rb2tnxl";
-        // Reusing the Quran template to stay within the free tier limit (2 templates)
-        const templateId = "template_eiyci1x";
-        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         if (!serviceId || !templateId || !publicKey) {
             console.error('EmailJS configuration missing');
-            setStatus({ type: 'error', message: 'System Error: Email configuration is missing. Downloading PDF anyway...' });
             generatePDF();
             return;
         }
 
         emailjs.init(publicKey);
 
-        // We use the same field names as the Quran template so we don't need a new one
         const templateParams = {
-            studentName: formData.name,      // Reusing 'studentName' for Visitor Name
-            parentName: `Visit on ${formData.date} at ${formData.time}`, // Reusing 'parentName' for Visit details
-            email: formData.email,            // Reusing 'email'
+            form_title: "Visit Request / Reservation",
+            user_name: formData.name,
+            date: `${formData.date} at ${formData.time}`,
+            location: "Iman Islamic Center",
             to_email: formData.email,
-            phone: "Visit Request",           // Label for the phone field
-            message: formData.message || "General Visit"
+            phone: "Not provided"
         };
 
         try {

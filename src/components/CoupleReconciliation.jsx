@@ -23,9 +23,9 @@ function CoupleReconciliation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Sending request...' });
 
-        const serviceId = "service_rb2tnxl";
-        const templateId = "template_eiyci1x";
-        const publicKey = "LNBiDjDQhBXvEOeIAseQ_";
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         if (!serviceId || !templateId || !publicKey) {
             console.error('EmailJS configuration missing');
@@ -35,14 +35,13 @@ function CoupleReconciliation() {
 
         emailjs.init(publicKey);
 
-        // Map to existing template fields
         const templateParams = {
-            studentName: "Couple Reconciliation Request", // Title/Subject
-            parentName: `Husband: ${formData.name1}, Wife: ${formData.name2}`, // Names
-            email: formData.email,
+            form_title: "Couple Reconciliation Request",
+            user_name: `${formData.name1} & ${formData.name2}`,
+            date: `${formData.date} at ${formData.time}`,
+            location: "Conference Room",
             to_email: formData.email,
-            phone: `Date: ${formData.date}, Time: ${formData.time}`, // Date/Time in phone field
-            message: formData.notes || "No additional notes"
+            phone: "Not provided"
         };
 
         try {
