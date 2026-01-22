@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import "./Contact.css";
 import StatusModal from "./StatusModal";
@@ -6,7 +7,7 @@ import emailjs from '@emailjs/browser';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaUser, FaPaperPlane } from "react-icons/fa";
 
 function Contact() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -100,6 +101,11 @@ function Contact() {
                                             <p>Lincoln, Nebraska, USA</p>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="mt-4 pt-3 border-top border-white border-opacity-25">
+                                    <Link to={language === 'ar' ? '/ar/reservation' : '/reservation'} className="btn btn-light w-100 fw-bold">
+                                        {t('hero.bookVisit')}
+                                    </Link>
                                 </div>
                             </div>
                         </div>
