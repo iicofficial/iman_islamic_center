@@ -29,24 +29,49 @@ const Staff = () => {
                             </h3>
 
                             <div className="staff-bio">
-                                <p>
-                                    Imam Abdulaziz Abdullah Al-Abbasi was born in Jeddah, Kingdom of Saudi Arabia, on August 16, 1984. He began his educational journey at Umar ibn Khattab High School, where he served as the leader of the Islamic Da‘wah Committee.
-                                </p>
-                                <p>
-                                    From 2006 to 2008, he served as a muezzin, deputy imam, and spare khateeb at Masjid al-Khalil in Jeddah. During this period, he organized and led several Qur’anic halaqas and summer memorization programs, including initiatives he helped establish at Masjid al-Khalil. Between 2008 and 2010, he worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen, teaching Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated educational team.
-                                </p>
-                                <p>
-                                    In 2016, Imam Abdulaziz graduated from King Abdulaziz University with a Doctor of Pharmacy (PharmD) degree. He then worked as a licensed pharmacist for nearly five years. Despite his professional career, his devotion to Islamic knowledge continued to grow. He memorized the entire Qur’an at the age of 17 and had the honor of reciting the Holy Qur’an before several distinguished scholars, among them Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the General Administration of Egyptian Quranic Recitations (GAEQR). This early commitment to Qur’anic mastery and tajwīd strengthened his spiritual foundation and inspired him to continue pursuing sacred knowledge.
-                                </p>
-                                <p>
-                                    Imam Abdulaziz studied under several eminent scholars, including Sheikh Mohammed Mokhtar al-Shanqiti, under whom he studied Sunan al-Tirmidhi from the Book of Prayer to the Book of Hajj for seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. He also attended lessons with Sheikh Ibn Jibreel (may Allah have mercy on him) and completed courses in Muhimmat al-‘Ilm and other foundational texts with Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. He received ijazah (authorization) in approximately nineteen classical Islamic works, further solidifying his scholarly background.
-                                </p>
-                                <p>
-                                    In 2022, Imam Abdulaziz traveled to the United States to further his studies and was appointed Imam at the Islamic Foundation of Lincoln, where he served until 2025. During his tenure, he delivered the Friday Jumu‘ah Khutbahs, led the Taraweeh prayers for three consecutive years, and oversaw various community programs. He also officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari‘ah. In addition, he founded the Qur’an Carriers Program, a structured Qur’an memorization initiative that ran for two semesters, and organized Qur’anic summer camps throughout 2023, 2024, and 2025.
-                                </p>
-                                <p>
-                                    Currently, Imam Abdulaziz serves as the Imam of Iman Islamic Center (IIC), where he continues his mission of spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah.
-                                </p>
+                                {language === 'ar' ? (
+                                    <>
+                                        <p>
+                                            ولد الإمام عبد العزيز عبد الله العباسي في جدة بالمملكة العربية السعودية في 16 أغسطس 1984. بدأ مسيرته التعليمية في ثانوية عمر بن الخطاب، حيث كان مسؤولاً عن جماعة التوعية الإسلامية.
+                                        </p>
+                                        <p>
+                                            من عام 2006 إلى 2008، عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. وخلال هذه الفترة، نظم وأدار العديد من حلقات تحفيظ القرآن الكريم والبرامج الصيفية، بما في ذلك مبادرات ساهم في تأسيسها في المسجد. وبين عامي 2008 و2010، عمل معلماً ومربياً في مسجد الخلفاء الراشدين، حيث قام بتدريس القرآن الكريم والدراسات الإسلامية لطلاب المرحلتين الابتدائية والمتوسطة ضمن فريق تعليمي متخصص.
+                                        </p>
+                                        <p>
+                                            في عام 2016، تخرج الإمام عبد العزيز من جامعة الملك عبد العزيز بدرجة دكتور صيدلي (PharmD). وعمل صيدلانياً مرخصاً لمدة خمس سنوات تقريباً. وعلى الرغم من مسيرته المهنية، استمر شغفه بالعلم الشرعي في النمو. أتم حفظ القرآن الكريم كاملاً في سن السابعة عشرة، وتشرّف بتلاوته على عدد من العلماء المتميزين، من بينهم الشيخ عبد الحليم عبد المنعم حسن، عضو بارز في الإدارة العامة للمقرئين المصريين. هذا الالتزام المبكر بإتقان القرآن والتجويد عزز أساسه الروحي وألهمه لمواصلة طلب العلم الشرعي.
+                                        </p>
+                                        <p>
+                                            تتلمذ الإمام عبد العزيز على يد عدد من العلماء البارزين، بمن فيهم الشيخ محمد مختار الشنقيطي، الذي درس عليه سنن الترمذي من كتاب الصلاة إلى كتاب الحج لمدة سبع سنوات في مسجد الإمام محمد بن سعود بجدة. كما حضر دروساً للشيخ ابن جبرين (رحمه الله) وأكمل دورات في "مهمات العلم" ومتون تأصيلية أخرى مع الشيخ صالح بن صالح العصيمي، عضو هيئة كبار العلماء في السعودية. وقد حصل على إجازات في حوالي تسعة عشر متناً من المتون الإسلامية الكلاسيكية، مما عزز خلفيته العلمية.
+                                        </p>
+                                        <p>
+                                            في عام 2022، سافر الإمام عبد العزيز إلى الولايات المتحدة لمواصلة دراسته وتم تعيينه إماماً للمؤسسة الإسلامية في لينكولن، حيث خدم حتى عام 2025. وخلال فترة ولايته، كان يلقي خطب الجمعة، ويؤم المصلين في صلاة التراويح لثلاث سنوات متتالية، ويشرف على برامج مجتمعية متنوعة. كما قام بإجراء عقود النكاح، والإصلاح بين الأزواج والأسر، والإشراف على إجراءات الطلاق وفقاً للشريعة الإسلامية. بالإضافة إلى ذلك، أسس برنامج "حملة القرآن"، وهي مبادرة منظمة لتحفيظ القرآن استمرت لفصلين دراسيين، ونظم مخيمات صيفية قرآنية خلال الأعوام 2023 و2024 و2025.
+                                        </p>
+                                        <p>
+                                            حالياً، يشغل الشيخ عبد العزيز منصب إمام مركز الإيمان الإسلامي (IIC)، حيث يواصل رسالته في نشر العلم الشرعي الصحيح، وتعزيز الإيمان في المجتمع، وتربية الأجيال القادمة على القرآن والسنة.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>
+                                            Imam Abdulaziz Abdullah Al-Abbasi was born in Jeddah, Kingdom of Saudi Arabia, on August 16, 1984. He began his educational journey at Umar ibn Khattab High School, where he served as the leader of the Islamic Da‘wah Committee.
+                                        </p>
+                                        <p>
+                                            From 2006 to 2008, he served as a muezzin, deputy imam, and spare khateeb at Masjid al-Khalil in Jeddah. During this period, he organized and led several Qur’anic halaqas and summer memorization programs, including initiatives he helped establish at Masjid al-Khalil. Between 2008 and 2010, he worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen, teaching Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated educational team.
+                                        </p>
+                                        <p>
+                                            In 2016, Imam Abdulaziz graduated from King Abdulaziz University with a Doctor of Pharmacy (PharmD) degree. He then worked as a licensed pharmacist for nearly five years. Despite his professional career, his devotion to Islamic knowledge continued to grow. He memorized the entire Qur’an at the age of 17 and had the honor of reciting the Holy Qur’an before several distinguished scholars, among them Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the General Administration of Egyptian Quranic Recitations (GAEQR). This early commitment to Qur’anic mastery and tajwīd strengthened his spiritual foundation and inspired him to continue pursuing sacred knowledge.
+                                        </p>
+                                        <p>
+                                            Imam Abdulaziz studied under several eminent scholars, including Sheikh Mohammed Mokhtar al-Shanqiti, under whom he studied Sunan al-Tirmidhi from the Book of Prayer to the Book of Hajj for seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. He also attended lessons with Sheikh Ibn Jibreel (may Allah have mercy on him) and completed courses in Muhimmat al-‘Ilm and other foundational texts with Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. He received ijazah (authorization) in approximately nineteen classical Islamic works, further solidifying his scholarly background.
+                                        </p>
+                                        <p>
+                                            In 2022, Imam Abdulaziz traveled to the United States to further his studies and was appointed Imam at the Islamic Foundation of Lincoln, where he served until 2025. During his tenure, he delivered the Friday Jumu‘ah Khutbahs, led the Taraweeh prayers for three consecutive years, and oversaw various community programs. He also officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari‘ah. In addition, he founded the Qur’an Carriers Program, a structured Qur’an memorization initiative that ran for two semesters, and organized Qur’anic summer camps throughout 2023, 2024, and 2025.
+                                        </p>
+                                        <p>
+                                            Currently, Imam Abdulaziz serves as the Imam of Iman Islamic Center (IIC), where he continues his mission of spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah.
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -114,34 +139,58 @@ const Staff = () => {
 
                 <div className="staff-divider my-5"></div>
 
-                {/* ELC Members Section */}
+                {/* Executive Leadership Committee Section */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
                         <h2 className="section-title">
-                            {language === 'ar' ? 'أعضاء اللجنة التعليمية' : 'ELC Members'}
+                            {language === 'ar' ? 'اللجنة القيادية التنفيذية' : 'Executive Leadership Committee'}
                         </h2>
                     </div>
-                    {/* Placeholder for ELC Members */}
                     {/* ELC Members List */}
                     <div className="col-12">
                         <div className="row justify-content-center">
                             {[
-                                "Idriss Abdelmadjid",
-                                "Mohammad Alshammari",
-                                "Ahmed",
-                                "Esam Mohamed",
-                                "Soleiman Espinoza",
-                                "Dhugomsa Mohammed",
-                                "Zaid Al Bayati"
-                            ].map((name, index) => (
+                                { en: "Idriss Abdelmadjid", ar: "إدريس عبد المجيد" },
+                                { en: "Mohammad Alshammari", ar: "محمد الشمري" },
+                                { en: "Ahmed", ar: "أحمد" },
+                                { en: "Esam Mohamed", ar: "عصام محمد" },
+                                { en: "Soleiman Espinoza", ar: "سليمان إسبينوزا" },
+                                { en: "Dhugomsa Mohammed", ar: "دقمسا محمد" },
+                                { en: "Zaid Al Bayati", ar: "زيد البياتي" }
+                            ].map((person, index) => (
                                 <div key={index} className="col-md-4 col-sm-6 mb-4">
                                     <div className="staff-card p-4 text-center h-100 d-flex align-items-center justify-content-center">
                                         <h3 className="staff-card-name m-0" style={{ fontSize: '1.2rem' }}>
-                                            {name}
+                                            {language === 'ar' ? person.ar : person.en}
                                         </h3>
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="staff-divider my-5"></div>
+
+                {/* IT & Development Section */}
+                <div className="row mb-5">
+                    <div className="col-12 text-center mb-5">
+                        <h2 className="section-title">
+                            {language === 'ar' ? 'تكنولوجيا المعلومات والتطوير' : 'IT & Development'}
+                        </h2>
+                    </div>
+                    <div className="col-12">
+                        <div className="row justify-content-center">
+                            <div className="col-md-4 col-sm-6 mb-4">
+                                <div className="staff-card p-4 text-center h-100">
+                                    <div className="staff-card-badge mb-3">
+                                        {language === 'ar' ? 'المطور' : 'Developer'}
+                                    </div>
+                                    <h3 className="staff-card-name">
+                                        {language === 'ar' ? 'عقيل خطاب' : 'Akeel Salman'}
+                                    </h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
