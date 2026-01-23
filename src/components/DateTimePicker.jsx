@@ -30,8 +30,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
         const dayStr = String(day).padStart(2, '0');
         const dateString = `${year}-${month}-${dayStr}`;
         setSelectedDate(dateString);
-        onChange({ target: { name: name, value: dateString } });
-        setShowPicker(false);
+        // Don't close immediately, wait for Confirm button
     };
 
     const formatDisplayDate = (dateStr) => {
@@ -80,6 +79,13 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
         );
     }
 
+    const handleConfirm = () => {
+        if (selectedDate) {
+            onChange({ target: { name: name, value: selectedDate } });
+            setShowPicker(false);
+        }
+    };
+
     return (
         <div className="datetime-picker-wrapper">
             {label && <label className="form-label">{label}</label>}
@@ -97,7 +103,8 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
             {showPicker && (
                 <>
                     <div className="datetime-overlay" onClick={() => setShowPicker(false)}></div>
-                    <div className="datetime-picker-dropdown">
+                    <div className="datetime-picker-dropdown date-picker">
+                        <div className="datetime-picker-header">Select Date</div>
                         <div className="calendar-header">
                             <button
                                 type="button"
@@ -106,26 +113,31 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
                             >
                                 ‹
                             </button>
-                            <div className="d-flex align-items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            <div className="calendar-month-year-select" onClick={(e) => e.stopPropagation()}>
                                 <select
-                                    className="form-select form-select-sm p-1"
-                                    style={{ width: 'auto', fontSize: '0.85rem' }}
-                                    value={currentMonth.getMonth()}
-                                    onChange={(e) => setCurrentMonth(new Date(currentMonth.getFullYear(), parseInt(e.target.value)))}
+                                    value={`${currentMonth.getMonth()}-${currentMonth.getFullYear()}`}
+                                    onChange={(e) => {
+                                        const [m, y] = e.target.value.split('-').map(Number);
+                                        setCurrentMonth(new Date(y, m));
+                                    }}
                                 >
-                                    {months.map((m, i) => (
-                                        <option key={m} value={i}>{m}</option>
-                                    ))}
-                                </select>
-                                <select
-                                    className="form-select form-select-sm p-1"
-                                    style={{ width: 'auto', fontSize: '0.85rem' }}
-                                    value={currentMonth.getFullYear()}
-                                    onChange={(e) => setCurrentMonth(new Date(parseInt(e.target.value), currentMonth.getMonth()))}
-                                >
-                                    {Array.from({ length: 120 }, (_, i) => new Date().getFullYear() - 90 + i).map(y => (
-                                        <option key={y} value={y}>{y}</option>
-                                    ))}
+                                    {Array.from({ length: 48 }, (_, i) => {
+                                        const d = new Date();
+                                        d.setMonth(d.getMonth() - 24 + i);
+                                        const m = d.getMonth();
+                                        const y = d.getFullYear();
+                                        return (
+                                            <option key={`${m}-${y}`} value={`${m}-${y}`}>
+                                                {months[m]} {y}
+                                            </option>
+                                        );
+                                    })}
+                                    {/* Add a few more years back for birth dates if needed */}
+                                    {currentMonth.getFullYear() < new Date().getFullYear() - 2 && (
+                                        <option value={`${currentMonth.getMonth()}-${currentMonth.getFullYear()}`}>
+                                            {months[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+                                        </option>
+                                    )}
                                 </select>
                             </div>
                             <button
@@ -143,6 +155,11 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
                         </div>
                         <div className="calendar-days">
                             {days}
+                        </div>
+                        <div className="datetime-picker-footer">
+                            <button type="button" className="btn btn-primary" onClick={handleConfirm} disabled={!selectedDate}>
+                                Confirm
+                            </button>
                         </div>
                     </div>
                 </>
@@ -191,7 +208,7 @@ export const TimePicker = ({ value, onChange, label, required = false, name = 't
     };
 
     const hours = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
-    const minutes = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, '0'));
+    const minutes = ['00', '30'];
 
     return (
         <div className="datetime-picker-wrapper">
@@ -211,7 +228,7 @@ export const TimePicker = ({ value, onChange, label, required = false, name = 't
                 <>
                     <div className="datetime-overlay" onClick={() => setShowPicker(false)}></div>
                     <div className="datetime-picker-dropdown time-picker">
-                        <div className="time-picker-header">Select Time</div>
+                        <div className="datetime-picker-header">Select Time</div>
                         <div className="time-picker-body">
                             <div className="time-column">
                                 <div className="time-column-label">Hour</div>
@@ -257,8 +274,8 @@ export const TimePicker = ({ value, onChange, label, required = false, name = 't
                                 </div>
                             </div>
                         </div>
-                        <div className="time-picker-footer">
-                            <button type="button" className="btn btn-primary btn-sm" onClick={handleTimeSelect}>
+                        <div className="datetime-picker-footer">
+                            <button type="button" className="btn btn-primary" onClick={handleTimeSelect}>
                                 Confirm
                             </button>
                         </div>

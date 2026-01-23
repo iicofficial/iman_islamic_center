@@ -52,11 +52,12 @@
     top: calc(100% + 5px);
     left: 0;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
     z-index: 1001;
-    padding: 1rem;
-    min-width: 320px;
+    padding: 1.25rem;
+    min-width: 300px;
+    /* Unified width */
     animation: slideDown 0.2s ease;
 }
 
@@ -78,14 +79,32 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+    padding: 0.25rem;
+    background: #f1f5f9;
+    /* Same color as time scrolls */
+    border-radius: 10px;
 }
 
-.calendar-month-year {
+.calendar-month-year-select {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.calendar-month-year-select select {
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
     font-weight: 700;
-    font-size: 1.1rem;
-    color: #333;
+    color: #1e293b;
+    cursor: pointer;
+    padding: 6px 12px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+    width: 100%;
 }
 
 .calendar-nav-btn {
@@ -142,8 +161,9 @@
 }
 
 .calendar-day:not(.empty):not(.disabled):hover {
-    background-color: #e8f0ff;
-    color: #39569b;
+    background-color: #e2e8f0;
+    /* Match time scroll hover */
+    color: #1e293b;
     transform: scale(1.05);
 }
 
@@ -151,6 +171,7 @@
     background-color: #39569b;
     color: white;
     font-weight: 700;
+    box-shadow: 0 4px 10px rgba(57, 86, 155, 0.3);
 }
 
 .calendar-day.disabled {
@@ -163,18 +184,56 @@
 }
 
 /* Time Picker Styles */
-.time-picker {
-    min-width: 280px;
-}
-
-.time-picker-header {
+/* Unified Header/Footer Styles */
+.datetime-picker-header {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #333;
+    color: #1e293b;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid #f1f5f9;
     text-align: center;
+}
+
+.datetime-picker-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 2px solid #f1f5f9;
+}
+
+.datetime-picker-footer .btn-primary {
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    background-color: #39569b;
+    border: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(57, 86, 155, 0.2);
+}
+
+.datetime-picker-footer .btn-primary:hover {
+    background-color: #2d4373;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(57, 86, 155, 0.3);
+}
+
+.datetime-picker-footer .btn-primary:active {
+    transform: translateY(0);
+}
+
+.datetime-picker-footer .btn-primary:disabled {
+    background-color: #e2e8f0;
+    color: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Time Picker Specifics */
+.time-picker {
+    min-width: 300px;
+    /* match unified width */
 }
 
 .time-picker-body {
@@ -253,16 +312,8 @@
 }
 
 .time-picker-footer {
-    display: flex;
-    justify-content: center;
-    padding-top: 0.75rem;
-    border-top: 2px solid #f0f0f0;
-}
-
-.time-picker-footer .btn {
-    padding: 0.5rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
+    display: none;
+    /* Replaced by unified .datetime-picker-footer */
 }
 
 /* RTL Support */
