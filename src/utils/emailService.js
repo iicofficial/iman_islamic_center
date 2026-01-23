@@ -4,11 +4,12 @@
  */
 
 export const sendEmail = async (templateParams) => {
-    const GAS_URL = import.meta.env.VITE_GAS_URL;
-    console.log("DEBUG - CURRENT GAS URL IS:", GAS_URL); // <-- Debugging line
+    // HARDCODING URL TO FIX DEPLOYMENT ISSUE IMMEDIATELY
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbw_aviFOyzao-O_ZCruSQq-EmxDDihKzdwXUOepjpZacq4a1_TiLLMJu1-Cdw2p1bhJcA/exec";
+    console.log("DEBUG - USING HARDCODED GAS URL:", GAS_URL);
 
     if (!GAS_URL) {
-        console.error("VITE_GAS_URL is not defined in environment variables.");
+        console.error("VITE_GAS_URL is not defined.");
         throw new Error("Email service configuration missing.");
     }
 
