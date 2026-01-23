@@ -101,8 +101,8 @@ function Reservation() {
         const templateParams = {
             form_title: "Visit Request - Reservation",
             user_name: formData.name,
-            sender_name: "Iman Islamic Center(IIC)",
-            from_name: "Iman Islamic Center(IIC)",
+            sender_name: "Iman Islamic Center (IIC)",
+            from_name: "Iman Islamic Center (IIC)",
             user_email: formData.email,
             to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,
@@ -115,24 +115,15 @@ Name: ${formData.name}
 Date: ${formData.date}
 Time: ${formattedTime}
 Email: ${formData.email}
-Reason: ${formData.reason || "General Visit"}`
+Reason: ${formData.reason || "General Visit"}`,
+            formType: 'visit',
+            name: formData.name,
+            date: formData.date,
+            time: formData.time
         };
 
         try {
             await sendEmail(templateParams);
-
-            // Google Sheets Submission
-            try {
-                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...formData, formType: 'visit' }),
-                });
-            } catch (sheetError) {
-                console.error("Google Sheets Error:", sheetError);
-            }
 
             setStatus({
                 type: 'success',

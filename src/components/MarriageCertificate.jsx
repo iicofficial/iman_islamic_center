@@ -400,8 +400,8 @@ function MarriageCertificate() {
             const templateParams = {
                 form_title: "Marriage Certificate Application",
                 user_name: `${formData.groomName} & ${formData.brideName}`,
-                sender_name: "Iman Islamic Center(IIC)",
-                from_name: "Iman Islamic Center(IIC)",
+                sender_name: "Iman Islamic Center (IIC)",
+                from_name: "Iman Islamic Center (IIC)",
                 user_email: formData.email,
                 to_email: "dev@iman-islam.org", // Organization email
                 reply_to: formData.email,
@@ -416,25 +416,19 @@ Nikaah Date: ${formData.nikaahDate}
 Email: ${formData.email}
 Location: ${formData.appointmentLocation}
 Appointment Date: ${formData.appointmentDate}
-Appointment Time: ${formattedTime}`
+Appointment Time: ${formattedTime}`,
+                formType: 'marriage',
+                groomName: formData.groomName,
+                brideName: formData.brideName,
+                appointmentDate: formData.appointmentDate,
+                appointmentTime: formData.appointmentTime,
+                appointmentLocation: formData.appointmentLocation,
+                nikaahDate: formData.nikaahDate
             };
 
             try {
                 await sendEmail(templateParams);
                 console.log('Email sent successfully via GAS');
-
-                // Google Sheets Submission
-                try {
-                    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
-                    await fetch(SCRIPT_URL, {
-                        method: "POST",
-                        mode: "no-cors",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ ...formData, formType: 'marriage' }),
-                    });
-                } catch (sheetError) {
-                    console.error("Google Sheets Error:", sheetError);
-                }
 
                 setStatus({
                     type: 'success',

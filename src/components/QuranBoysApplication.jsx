@@ -293,8 +293,8 @@ function QuranBoysApplication() {
         const templateParams = {
             form_title: "Quran Memorization Program (Boys)",
             user_name: formData.studentName,
-            sender_name: "Iman Islamic Center(IIC)",
-            from_name: "Iman Islamic Center(IIC)",
+            sender_name: "Iman Islamic Center (IIC)",
+            from_name: "Iman Islamic Center (IIC)",
             user_email: formData.email,
             to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,
@@ -307,25 +307,20 @@ Age: ${formData.age}
 School: ${formData.school}
 Address: ${formData.address}
 Guardian: ${formData.guardianName} (${formData.kinship})
-Contact: ${formData.mobile} / ${formData.email}`
+Contact: ${formData.mobile} / ${formData.email}`,
+            formType: 'boys',
+            studentName: formData.studentName,
+            age: formData.age,
+            grade: formData.grade,
+            school: formData.school,
+            guardianName: formData.guardianName,
+            mobile: formData.mobile,
+            address: formData.address
         };
 
         try {
             await sendEmail(templateParams);
             console.log('Email sent successfully via GAS');
-
-            // Google Sheets Submission
-            try {
-                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...formData, name: formData.studentName, formType: 'boys' }),
-                });
-            } catch (sheetError) {
-                console.error("Google Sheets Error:", sheetError);
-            }
 
             setStatus({
                 type: 'success',

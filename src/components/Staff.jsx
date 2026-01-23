@@ -187,7 +187,8 @@ const Staff = () => {
                                 { en: "Esam Mohamed", ar: "عصام محمد" },
                                 { en: "Soleiman Espinoza", ar: "سليمان إسبينوزا" },
                                 { en: "Dhugomsa Mohammed", ar: "دقمسا محمد" },
-                                { en: "Zaid Al Bayati", ar: "زيد البياتي" }
+                                { en: "Zaid Al Bayati", ar: "زيد البياتي" },
+                                { en: "Abdelmalik Al-Fendi", ar: "عبد الملك الفندي" }
                             ].map((person, index) => (
                                 <div key={index} className="col-md-4 col-sm-6 mb-4">
                                     <div className="staff-card p-4 text-center h-100 d-flex align-items-center justify-content-center">

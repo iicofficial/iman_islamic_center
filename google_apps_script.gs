@@ -45,13 +45,13 @@ function doPost(e) {
       subject: "[ORG COPY] " + subject + " - " + data.user_name,
       replyTo: data.user_email,
       body: body,
-      name: data.from_name || "Iman Islamic Center(IIC)"
+      name: data.from_name || "Iman Islamic Center (IIC)"
     });
 
     // 2. Send Confirmation to User
     if (userRecipient) {
       var userBody = "Dear " + (data.user_name || "Applicant") + ",\n\n" +
-                     "Thank you for contacting Iman Islamic Center. We have received your application for: " + subject + ".\n\n" +
+                     "Thank you for contacting Iman Islamic Center (IIC). We have received your application for: " + subject + ".\n\n" +
                      "Our team will review your request and get back to you shortly.\n\n" +
                      "A copy of your submitted details is included below for your records.\n\n" +
                      "---\n" + body;
@@ -60,7 +60,7 @@ function doPost(e) {
         to: userRecipient,
         subject: "Confirmation: " + subject + " Received",
         body: userBody,
-        name: data.from_name || "Iman Islamic Center(IIC)"
+        name: data.from_name || "Iman Islamic Center (IIC)"
       });
     }
 

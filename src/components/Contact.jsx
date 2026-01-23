@@ -97,28 +97,19 @@ function Contact() {
                 const templateParams = {
                     form_title: "General Contact Inquiry",
                     user_name: formData.name,
-                    sender_name: "Iman Islamic Center(IIC)",
-                    from_name: "Iman Islamic Center(IIC)",
+                    sender_name: "Iman Islamic Center (IIC)",
+                    from_name: "Iman Islamic Center (IIC)",
                     user_email: formData.email,
                     to_email: "dev@iman-islam.org", // Organization email
                     reply_to: formData.email,
                     date: new Date().toLocaleDateString(),
                     location: "Online Inquiry",
                     phone: formData.phone || "Not provided",
-                    message: formData.message
+                    message: formData.message,
+                    formType: 'contact'
                 };
                 await sendEmail(templateParams);
             }
-
-            // 2. Google Sheets Submission
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
-
-            await fetch(SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, formType: 'contact' }),
-            });
 
             setStatus({ type: 'success', message: `Email sent to ${formData.email}. PDF Downloaded.` });
             generatePDF();

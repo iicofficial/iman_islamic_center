@@ -109,8 +109,8 @@ function CoupleReconciliation() {
         const templateParams = {
             form_title: "Couple Reconciliation Request",
             user_name: `${formData.name1} & ${formData.name2}`,
-            sender_name: "Iman Islamic Center(IIC)",
-            from_name: "Iman Islamic Center(IIC)",
+            sender_name: "Iman Islamic Center (IIC)",
+            from_name: "Iman Islamic Center (IIC)",
             user_email: formData.email,
             to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,
@@ -123,24 +123,17 @@ Phone: ${formData.phone}
 Preferred Date: ${formData.date}
 Preferred Time: ${formattedTime}
 Email: ${formData.email}
-Notes: ${formData.notes}`
+Notes: ${formData.notes}`,
+            formType: 'reconciliation',
+            name1: formData.name1,
+            name2: formData.name2,
+            date: formData.date,
+            time: formData.time,
+            notes: formData.notes
         };
 
         try {
             await sendEmail(templateParams);
-
-            // Google Sheets Submission
-            try {
-                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBbx7DHeVbKQqNBZPMDUQm6i0b57x67--mTpgBFsNEyQ_do3Q2m0-GAnm3tIlZYKdI4w/exec";
-                await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...formData, formType: 'reconciliation' }),
-                });
-            } catch (sheetError) {
-                console.error("Google Sheets Error:", sheetError);
-            }
 
             setStatus({
                 type: 'success',
