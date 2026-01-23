@@ -44,7 +44,8 @@ function doPost(e) {
       to: orgRecipient,
       subject: "[ORG COPY] " + subject + " - " + data.user_name,
       replyTo: data.user_email,
-      body: body
+      body: body,
+      name: data.from_name || "Iman Islamic Center(IIC)"
     });
 
     // 2. Send Confirmation to User
@@ -58,7 +59,8 @@ function doPost(e) {
       MailApp.sendEmail({
         to: userRecipient,
         subject: "Confirmation: " + subject + " Received",
-        body: userBody
+        body: userBody,
+        name: data.from_name || "Iman Islamic Center(IIC)"
       });
     }
 

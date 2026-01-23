@@ -101,6 +101,8 @@ function Reservation() {
         const templateParams = {
             form_title: "Visit Request - Reservation",
             user_name: formData.name,
+            sender_name: "Iman Islamic Center(IIC)",
+            from_name: "Iman Islamic Center(IIC)",
             user_email: formData.email,
             to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,

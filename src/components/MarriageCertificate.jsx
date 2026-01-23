@@ -400,6 +400,8 @@ function MarriageCertificate() {
             const templateParams = {
                 form_title: "Marriage Certificate Application",
                 user_name: `${formData.groomName} & ${formData.brideName}`,
+                sender_name: "Iman Islamic Center(IIC)",
+                from_name: "Iman Islamic Center(IIC)",
                 user_email: formData.email,
                 to_email: "dev@iman-islam.org", // Organization email
                 reply_to: formData.email,

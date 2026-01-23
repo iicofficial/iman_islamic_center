@@ -109,6 +109,8 @@ function DivorceFormalization() {
         const templateParams = {
             form_title: "Divorce Formalization Request",
             user_name: `${formData.name1} & ${formData.name2}`,
+            sender_name: "Iman Islamic Center(IIC)",
+            from_name: "Iman Islamic Center(IIC)",
             user_email: formData.email,
             to_email: "dev@iman-islam.org", // Organization email
             reply_to: formData.email,

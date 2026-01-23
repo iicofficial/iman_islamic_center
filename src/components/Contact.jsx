@@ -97,6 +97,8 @@ function Contact() {
                 const templateParams = {
                     form_title: "General Contact Inquiry",
                     user_name: formData.name,
+                    sender_name: "Iman Islamic Center(IIC)",
+                    from_name: "Iman Islamic Center(IIC)",
                     user_email: formData.email,
                     to_email: "dev@iman-islam.org", // Organization email
                     reply_to: formData.email,
