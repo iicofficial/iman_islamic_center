@@ -1,9 +1,9 @@
+/* Staff Page Base */
 .staff-page {
-    background-color: #f8f9fa;
-    min-height: 100vh;
+    background-color: #ffffff;
     min-height: 100vh;
     padding-bottom: 5rem;
-    padding-top: 180px;
+    padding-top: 230px;
 }
 
 .staff-page.rtl {
@@ -11,94 +11,159 @@
     text-align: right;
 }
 
-.imam-image-wrapper {
-    position: relative;
-    display: inline-block;
-    padding: 15px;
+/* -------------------------------------------
+   IMAM SECTION DESIGN
+------------------------------------------- */
+.imam-section-container {
+    background-color: transparent;
+    /* Seamless background */
+    padding: 0;
+    margin-bottom: 4rem;
 }
 
-.imam-image {
-    position: relative;
-    z-index: 2;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(39, 86, 155, 0.2);
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.imam-image:hover {
-    transform: translateY(-5px);
-}
-
-.image-border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 3px solid #a1c0e8;
-    border-radius: 20px;
-    transform: translate(15px, 15px);
-    z-index: 1;
-    transition: transform 0.5s ease;
-}
-
-.imam-image-wrapper:hover .image-border {
-    transform: translate(10px, 10px);
-}
-
+/* Restored Badge Style */
 .section-badge {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 10px 30px;
     background-color: rgba(39, 86, 155, 0.1);
     color: #27569b;
     border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+    background: #f8f9fa;
+    /* Decorative frame */
+    border: 3px solid #27569b;
+    box-shadow: 0 8px 20px rgba(39, 86, 155, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
 }
 
+.section-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(39, 86, 155, 0.35),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Restored Name Style */
 .staff-name {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #27569b;
-    margin-top: 1rem;
+    /* Primary Blue */
+    margin-top: 1.2rem;
     line-height: 1.2;
 }
 
-.staff-title {
-    font-size: 1.25rem;
-    color: #6c757d;
-    font-weight: 500;
-    border-bottom: 3px solid #a1c0e8;
+.imam-header-subtitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
     display: inline-block;
-    padding-bottom: 10px;
+    width: 100%;
 }
 
-.staff-bio {
-    margin-top: 2rem;
+/* Layout Grid */
+.imam-profile-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    /* NO GAP */
+    padding-bottom: 0;
+    /* NO GAP */
 }
 
-.staff-bio p {
+/* Bio Content Side */
+.bio-content-column {
+    padding-right: 2rem;
+}
+
+.staff-page.rtl .bio-content-column {
+    padding-right: 0;
+    padding-left: 2rem;
+}
+
+/* STRUCTURED BIO TEXT */
+.bio-item {
+    margin-bottom: 1rem;
     font-size: 1.05rem;
-    line-height: 1.8;
-    color: #4a4a4a;
-    margin-bottom: 1.5rem;
-    text-align: justify;
+    line-height: 1.6;
+    color: #444;
 }
 
-.staff-page.rtl .staff-bio p {
-    text-align: justify;
+.bio-label {
+    font-weight: 800;
+    color: #000;
+    margin-right: 5px;
 }
 
-/* New Styles for Additional Sections */
+.staff-page.rtl .bio-label {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.bio-value {
+    color: #555;
+}
+
+/* STICKY IMAGE SIDE - Seamless/No Frame */
+.sticky-image-wrapper {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+    margin-bottom: 0;
+    /* NO GAP */
+    padding-bottom: 0;
+}
+
+.imam-sticky-photo {
+    width: 100%;
+    border-radius: 4px;
+    /* Slight radius ok, but frame removed */
+    box-shadow: none;
+    /* Removed shadow */
+    border: none;
+    /* Removed border */
+    background-color: transparent;
+}
+
+/* BANNER IMAGE (Imam 2) - Seamless Static */
+.imam-banner-section {
+    margin-top: 0;
+    /* NO GAP */
+    width: 100%;
+    position: relative;
+    padding-top: 0;
+    line-height: 0;
+    /* Prevents inline block gap */
+}
+
+.imam-banner-img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    display: block;
+}
+
+
+/* -------------------------------------------
+   OTHER SECTIONS (Board, ELC, IT, etc.)
+------------------------------------------- */
 .staff-divider {
     height: 2px;
     background: linear-gradient(to right, transparent, #a1c0e8, transparent);
+    margin: 2rem auto;
+    width: 100%;
     opacity: 0.5;
 }
 
@@ -108,6 +173,7 @@
     position: relative;
     display: inline-block;
     padding-bottom: 10px;
+    font-weight: 700;
 }
 
 .section-title::after {
@@ -128,6 +194,11 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .staff-card:hover {
@@ -139,26 +210,47 @@
     display: inline-block;
     padding: 6px 12px;
     background-color: rgba(39, 86, 155, 0.08);
-    /* Lighter version of primary */
     color: #27569b;
     border-radius: 4px;
     font-size: 0.85rem;
     font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .staff-card-name {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #333;
     margin: 0;
 }
 
+
+/* Mobile Responsive */
 @media (max-width: 991.98px) {
     .staff-name {
         font-size: 2rem;
     }
 
-    .image-border {
-        transform: translate(10px, 10px);
+    .bio-content-column {
+        padding-right: 0;
+        padding-left: 0 !important;
+        margin-top: 2rem;
+    }
+
+    .sticky-image-wrapper {
+        position: relative;
+        top: 0;
+        margin-bottom: 1rem;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .imam-profile-row {
+        flex-direction: column;
+    }
+
+    .staff-page {
+        padding-top: 100px;
     }
 }

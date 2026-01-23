@@ -1,103 +1,150 @@
 import React, { useEffect } from 'react';
 import { useLanguage } from "../context/LanguageContext";
-import imamImage from '../assets/imam.jpeg';
+import imamImage from '../assets/imam.JPG';
+import imamBanner from '../assets/imam2.JPG';
 import './Staff.css';
 
 const Staff = () => {
     const { language } = useLanguage();
+    const isRtl = language === 'ar';
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const isRtl = language === 'ar';
+    // Bio Data Structure
+    const bioData = [
+        {
+            label: isRtl ? "ولد في:" : "Born:",
+            value: isRtl
+                ? "16 أغسطس 1984 - جدة، المملكة العربية السعودية"
+                : "August 16, 1984 – Jeddah, Kingdom of Saudi Arabia"
+        },
+        {
+            label: isRtl ? "التعليم:" : "Education:",
+            value: isRtl
+                ? "تخرج من ثانوية عمر بن الخطاب، حيث كان مسؤولاً عن جماعة التوعية الإسلامية."
+                : "Graduated from Umar ibn Khattab High School, where he served as leader of the Islamic Da‘wah Committee."
+        },
+        {
+            label: isRtl ? "الخدمة الدينية المبكرة (2006-2008):" : "Early Religious Service (2006–2008):",
+            value: isRtl
+                ? "عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. نظم وأدار العديد من حلقات تحفيظ القرآن والبرامج الصيفية."
+                : "Served as muezzin, deputy imam (Taraweeh leader), and spare Khateeb at Masjid al-Khalil in Jeddah. Organized and led several Qur’anic halaqas and summer memorization programs."
+        },
+        {
+            label: isRtl ? "التدريس والإرشاد (2008-2010):" : "Teaching and Mentorship (2008–2010):",
+            value: isRtl
+                ? "عمل معلماً ومربياً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب الابتدائي والمتوسط."
+                : "Worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen. Taught Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated teaching team."
+        },
+        {
+            label: isRtl ? "المسيرة الأكاديمية (2010-2016):" : "Academic Career (2010–2016):",
+            value: isRtl
+                ? "حصل على دكتور صيدلي (PharmD) من جامعة الملك عبد العزيز عام 2016. عمل كصيدلي مرخص لمدة خمس سنوات."
+                : "Pursued higher education at King Abdulaziz University, earning a Doctor of Pharmacy (PharmD) degree in 2016. Worked as a licensed pharmacist for nearly five years following graduation."
+        },
+        {
+            label: isRtl ? "التدريب القرآني والعلمي:" : "Qur’anic and Scholarly Training:",
+            value: isRtl
+                ? "حفظ القرآن كاملاً في سن 17. قرأ على علماء متميزين منهم الشيخ عبد الحليم عبد المنعم حسن."
+                : "Memorized the entire Qur’an at the age of 17. Recited the Holy Qur’an before several distinguished scholars, including Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the GAEQR."
+        },
+        {
+            label: isRtl ? "الدراسة على يد العلماء:" : "Studies with Scholars:",
+            value: isRtl
+                ? "درس سنن الترمذي على الشيخ محمد مختار الشنقيطي لمدة 7 سنوات. حضر دروس الشيخ ابن جبرين ودورات الشيخ صالح العصيمي. حصل على إجازات في 19 متناً."
+                : "Studied under Sheikh Mohammed Mokhtar al-Shanqiti (Sunan al-Tirmidhi for 7 years). Attended lessons with Sheikh Ibn Jibreel and courses with Sheikh Saleh ibn Saleh al-Usaymi. Received ijazah in approximately nineteen classical Islamic works."
+        },
+        {
+            label: isRtl ? "الإمامة في الولايات المتحدة (2022-2025):" : "Imamship in the United States (2022–2025):",
+            value: isRtl
+                ? "إمام المؤسسة الإيمان الإسلامية في لينكولن. ألقى خطب الجمعة وقاد التراويح. أجرى عقود الزواج وأصلح بين الأسر. أسس برنامج حملة القرآن."
+                : "Appointed Imam at the Islamic Foundation of Lincoln. Delivered Friday Khutbahs, led Taraweeh, and oversaw community programs. Officiated marriages and conducted counseling. Founded the Qur’an Carriers Program."
+        },
+        {
+            label: isRtl ? "الدور الحالي:" : "Current Role:",
+            value: isRtl
+                ? "يعمل كإمام لمركز الإيمان الإسلامي (IIC). يقود الصلوات والخطب وبرامج التعليم القرآني."
+                : "Serves as Imam of Iman Islamic Center (IIC). Leads daily prayers, Friday sermons, and Qur’anic education programs for youth and adults. Dedicated to spreading authentic Islamic knowledge."
+        }
+    ];
 
     return (
         <div className={`staff-page ${isRtl ? 'rtl' : ''}`}>
-            <div className="container my-5 pt-5">
-                <div className="row align-items-center">
-                    <div className={`col-lg-7 ${isRtl ? 'order-lg-2 text-end' : ''}`}>
-                        <div className="staff-content p-4">
-                            <div className="section-badge mb-3">
-                                {language === 'ar' ? 'الإمام' : 'Imam'}
-                            </div>
-                            <h1 className="staff-name mb-2">
-                                {language === 'ar' ? 'عبد العزيز العباسي' : 'Abdulaziz Al-Abbasi'}
-                            </h1>
-                            <h3 className="staff-title mb-4">
-                                {language === 'ar' ? 'إمام مركز الإيمان الإسلامي' : 'Imam, Iman Islamic Center (IIC)'}
-                            </h3>
+            <div className="container">
 
-                            <div className="staff-bio">
-                                {language === 'ar' ? (
-                                    <>
-                                        <p>
-                                            ولد الإمام عبد العزيز عبد الله العباسي في جدة بالمملكة العربية السعودية في 16 أغسطس 1984. بدأ مسيرته التعليمية في ثانوية عمر بن الخطاب، حيث كان مسؤولاً عن جماعة التوعية الإسلامية.
-                                        </p>
-                                        <p>
-                                            من عام 2006 إلى 2008، عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. وخلال هذه الفترة، نظم وأدار العديد من حلقات تحفيظ القرآن الكريم والبرامج الصيفية، بما في ذلك مبادرات ساهم في تأسيسها في المسجد. وبين عامي 2008 و2010، عمل معلماً ومربياً في مسجد الخلفاء الراشدين، حيث قام بتدريس القرآن الكريم والدراسات الإسلامية لطلاب المرحلتين الابتدائية والمتوسطة ضمن فريق تعليمي متخصص.
-                                        </p>
-                                        <p>
-                                            في عام 2016، تخرج الإمام عبد العزيز من جامعة الملك عبد العزيز بدرجة دكتور صيدلي (PharmD). وعمل صيدلانياً مرخصاً لمدة خمس سنوات تقريباً. وعلى الرغم من مسيرته المهنية، استمر شغفه بالعلم الشرعي في النمو. أتم حفظ القرآن الكريم كاملاً في سن السابعة عشرة، وتشرّف بتلاوته على عدد من العلماء المتميزين، من بينهم الشيخ عبد الحليم عبد المنعم حسن، عضو بارز في الإدارة العامة للمقرئين المصريين. هذا الالتزام المبكر بإتقان القرآن والتجويد عزز أساسه الروحي وألهمه لمواصلة طلب العلم الشرعي.
-                                        </p>
-                                        <p>
-                                            تتلمذ الإمام عبد العزيز على يد عدد من العلماء البارزين، بمن فيهم الشيخ محمد مختار الشنقيطي، الذي درس عليه سنن الترمذي من كتاب الصلاة إلى كتاب الحج لمدة سبع سنوات في مسجد الإمام محمد بن سعود بجدة. كما حضر دروساً للشيخ ابن جبرين (رحمه الله) وأكمل دورات في "مهمات العلم" ومتون تأصيلية أخرى مع الشيخ صالح بن صالح العصيمي، عضو هيئة كبار العلماء في السعودية. وقد حصل على إجازات في حوالي تسعة عشر متناً من المتون الإسلامية الكلاسيكية، مما عزز خلفيته العلمية.
-                                        </p>
-                                        <p>
-                                            في عام 2022، سافر الإمام عبد العزيز إلى الولايات المتحدة لمواصلة دراسته وتم تعيينه إماماً للمؤسسة الإسلامية في لينكولن، حيث خدم حتى عام 2025. وخلال فترة ولايته، كان يلقي خطب الجمعة، ويؤم المصلين في صلاة التراويح لثلاث سنوات متتالية، ويشرف على برامج مجتمعية متنوعة. كما قام بإجراء عقود النكاح، والإصلاح بين الأزواج والأسر، والإشراف على إجراءات الطلاق وفقاً للشريعة الإسلامية. بالإضافة إلى ذلك، أسس برنامج "حملة القرآن"، وهي مبادرة منظمة لتحفيظ القرآن استمرت لفصلين دراسيين، ونظم مخيمات صيفية قرآنية خلال الأعوام 2023 و2024 و2025.
-                                        </p>
-                                        <p>
-                                            حالياً، يشغل الشيخ عبد العزيز منصب إمام مركز الإيمان الإسلامي (IIC)، حيث يواصل رسالته في نشر العلم الشرعي الصحيح، وتعزيز الإيمان في المجتمع، وتربية الأجيال القادمة على القرآن والسنة.
-                                        </p>
-                                    </>
-                                ) : (
-                                    <>
-                                        <p>
-                                            Imam Abdulaziz Abdullah Al-Abbasi was born in Jeddah, Kingdom of Saudi Arabia, on August 16, 1984. He began his educational journey at Umar ibn Khattab High School, where he served as the leader of the Islamic Da‘wah Committee.
-                                        </p>
-                                        <p>
-                                            From 2006 to 2008, he served as a muezzin, deputy imam, and spare khateeb at Masjid al-Khalil in Jeddah. During this period, he organized and led several Qur’anic halaqas and summer memorization programs, including initiatives he helped establish at Masjid al-Khalil. Between 2008 and 2010, he worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen, teaching Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated educational team.
-                                        </p>
-                                        <p>
-                                            In 2016, Imam Abdulaziz graduated from King Abdulaziz University with a Doctor of Pharmacy (PharmD) degree. He then worked as a licensed pharmacist for nearly five years. Despite his professional career, his devotion to Islamic knowledge continued to grow. He memorized the entire Qur’an at the age of 17 and had the honor of reciting the Holy Qur’an before several distinguished scholars, among them Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the General Administration of Egyptian Quranic Recitations (GAEQR). This early commitment to Qur’anic mastery and tajwīd strengthened his spiritual foundation and inspired him to continue pursuing sacred knowledge.
-                                        </p>
-                                        <p>
-                                            Imam Abdulaziz studied under several eminent scholars, including Sheikh Mohammed Mokhtar al-Shanqiti, under whom he studied Sunan al-Tirmidhi from the Book of Prayer to the Book of Hajj for seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. He also attended lessons with Sheikh Ibn Jibreel (may Allah have mercy on him) and completed courses in Muhimmat al-‘Ilm and other foundational texts with Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. He received ijazah (authorization) in approximately nineteen classical Islamic works, further solidifying his scholarly background.
-                                        </p>
-                                        <p>
-                                            In 2022, Imam Abdulaziz traveled to the United States to further his studies and was appointed Imam at the Islamic Foundation of Lincoln, where he served until 2025. During his tenure, he delivered the Friday Jumu‘ah Khutbahs, led the Taraweeh prayers for three consecutive years, and oversaw various community programs. He also officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari‘ah. In addition, he founded the Qur’an Carriers Program, a structured Qur’an memorization initiative that ran for two semesters, and organized Qur’anic summer camps throughout 2023, 2024, and 2025.
-                                        </p>
-                                        <p>
-                                            Currently, Imam Abdulaziz serves as the Imam of Iman Islamic Center (IIC), where he continues his mission of spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah.
-                                        </p>
-                                    </>
-                                )}
+                {/* ---------------- IMAM SECTION ---------------- */}
+                <div className="imam-section-container">
+
+                    {/* Header */}
+                    <div className="row mb-4">
+                        <div className="col-12">
+                            <div className="section-badge mb-3">
+                                {isRtl ? 'الإمام' : 'IMAM'}
+                            </div>
+                            <div className="staff-divider my-4"></div>
+                            <h1 className="staff-name mb-2">
+                                {isRtl ? 'عبد العزيز عبد الله العباسي' : 'Abdulaziz Abdullah Al-Abbasi'}
+                            </h1>
+                            <div className="imam-header-subtitle">
+                                {isRtl ? 'إمام مركز الإيمان الإسلامي' : 'Imam, Iman Islamic Center (IIC)'}
                             </div>
                         </div>
                     </div>
-                    <div className={`col-lg-5 mb-5 mb-lg-0 text-center ${isRtl ? 'order-lg-1' : ''}`}>
-                        <div className="imam-image-wrapper">
-                            <img
-                                src={imamImage}
-                                alt="Imam Abdulaziz Abdullah Al-Abbasi"
-                                className="img-fluid imam-image"
-                            />
-                            <div className="image-border"></div>
+
+                    <div className="row imam-profile-row">
+
+                        {/* Bio Content (Left on LTR, Right on RTL) */}
+                        <div className={`col-lg-7 bio-content-column ${isRtl ? 'order-lg-1' : ''}`}>
+                            {bioData.map((item, index) => (
+                                <div className="bio-item" key={index}>
+                                    <span className="bio-label">{item.label}</span>
+                                    <span className="bio-value">{item.value}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Sticky Image (Right on LTR, Left on RTL) */}
+                        <div className={`col-lg-5 ${isRtl ? 'order-lg-2' : ''}`}>
+                            <div className="sticky-image-wrapper">
+                                <img
+                                    src={imamImage}
+                                    alt="Imam Abdulaziz"
+                                    className="img-fluid imam-sticky-photo"
+                                />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Banner Image Below */}
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="imam-banner-section">
+                                <img
+                                    src={imamBanner}
+                                    alt="Imam Leading Prayer"
+                                    className="imam-banner-img"
+                                />
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
-                <div className="staff-divider my-5"></div>
+                <div className="staff-divider"></div>
 
-                {/* Executive Committee Section */}
+
+                {/* ---------------- BOARD OF DIRECTORS ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
                         <h2 className="section-title">
-                            {language === 'ar' ? 'اللجنة التنفيذية' : 'Executive Committee'}
+                            {language === 'ar' ? 'مجلس الإدارة' : 'Board of Directors'}
                         </h2>
                     </div>
 
-                    {/* Secretary Placeholder */}
+                    {/* Secretary */}
                     <div className="col-md-6 mb-4">
                         <div className="staff-card p-4 text-center h-100">
                             <div className="staff-card-badge mb-3">
@@ -109,7 +156,7 @@ const Staff = () => {
                         </div>
                     </div>
 
-                    {/* Treasurer Placeholder */}
+                    {/* Treasurer */}
                     <div className="col-md-6 mb-4">
                         <div className="staff-card p-4 text-center h-100">
                             <div className="staff-card-badge mb-3">
@@ -122,31 +169,15 @@ const Staff = () => {
                     </div>
                 </div>
 
-                <div className="staff-divider my-5"></div>
+                <div className="staff-divider"></div>
 
-                {/* Board of Directors Section */}
-                <div className="row mb-5">
-                    <div className="col-12 text-center mb-5">
-                        <h2 className="section-title">
-                            {language === 'ar' ? 'مجلس الإدارة' : 'Board of Directors'}
-                        </h2>
-                    </div>
-                    {/* Placeholder for Board Members - can be a list or grid */}
-                    <div className="col-12 text-center text-muted">
-                        <p>{language === 'ar' ? 'قريباً...' : 'Coming Soon...'}</p>
-                    </div>
-                </div>
-
-                <div className="staff-divider my-5"></div>
-
-                {/* Executive Leadership Committee Section */}
+                {/* ---------------- ELC ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
                         <h2 className="section-title">
                             {language === 'ar' ? 'اللجنة القيادية التنفيذية' : 'Executive Leadership Committee'}
                         </h2>
                     </div>
-                    {/* ELC Members List */}
                     <div className="col-12">
                         <div className="row justify-content-center">
                             {[
@@ -170,22 +201,20 @@ const Staff = () => {
                     </div>
                 </div>
 
-                <div className="staff-divider my-5"></div>
+                <div className="staff-divider"></div>
 
-                {/* IT & Development Section */}
+                {/* ---------------- IT ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
                         <h2 className="section-title">
-                            {language === 'ar' ? 'تكنولوجيا المعلومات والتطوير' : 'IT & Development'}
+                            {language === 'ar' ? 'التطوير' : 'Development'}
                         </h2>
                     </div>
                     <div className="col-12">
                         <div className="row justify-content-center">
                             <div className="col-md-4 col-sm-6 mb-4">
                                 <div className="staff-card p-4 text-center h-100">
-                                    <div className="staff-card-badge mb-3">
-                                        {language === 'ar' ? 'المطور' : 'Developer'}
-                                    </div>
+                                    {/* Developer badge removed by user request */}
                                     <h3 className="staff-card-name">
                                         {language === 'ar' ? 'عقيل خطاب' : 'Akeel Salman'}
                                     </h3>
@@ -194,6 +223,7 @@ const Staff = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );
