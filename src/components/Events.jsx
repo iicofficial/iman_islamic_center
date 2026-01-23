@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import "./Events.css";
 import "./EventsModal.css";
@@ -64,6 +64,7 @@ const cardEvents = [
 
 function Events() {
     const { t } = useLanguage();
+    const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState({ image: null, links: null });
@@ -101,6 +102,14 @@ function Events() {
         setModalData({ image: null, links: null });
     };
 
+    const handleCardClick = (event) => {
+        if (event.route) {
+            navigate(event.route);
+        } else {
+            openModal(event);
+        }
+    };
+
     return (
         <section id="events" className="events-section">
             <div className="w-100 px-3">
@@ -113,6 +122,8 @@ function Events() {
                             <div
                                 key={index}
                                 className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
+                                onClick={() => openModal(event)}
+                                style={{ cursor: 'pointer' }}
                             >
                                 <img
                                     src={event.image}
@@ -124,7 +135,10 @@ function Events() {
                                     <p>{t(event.descKey)}</p>
                                     <button
                                         className="btn btn-primary"
-                                        onClick={() => openModal(event)}
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // Prevent double trigger
+                                            openModal(event);
+                                        }}
                                     >
                                         {t('events.learnMore')}
                                     </button>
@@ -158,7 +172,11 @@ function Events() {
                     <div className="row g-4 mt-4">
                         {cardEvents.map((event, index) => (
                             <div key={index} className="col-md-6 col-lg-3">
-                                <div className="event-card">
+                                <div
+                                    className="event-card h-100"
+                                    onClick={() => handleCardClick(event)}
+                                    style={{ cursor: 'pointer' }}
+                                >
                                     <div className="event-card-image">
                                         <img
                                             src={event.image}
@@ -166,21 +184,14 @@ function Events() {
                                             className={event.imageClassName || ""}
                                         />
                                     </div>
-                                    <div className="event-card-body">
+                                    <div className="event-card-body d-flex flex-column h-100">
                                         <h4>{t(event.titleKey)}</h4>
-                                        <p>{t(event.descKey)}</p>
-                                        {event.route ? (
-                                            <Link to={event.route} className="btn btn-outline-primary btn-sm">
+                                        <p className="flex-grow-1">{t(event.descKey)}</p>
+                                        <div className="mt-auto">
+                                            <span className="btn btn-outline-primary btn-sm">
                                                 {t('events.learnMore')}
-                                            </Link>
-                                        ) : (
-                                            <button
-                                                className="btn btn-outline-primary btn-sm"
-                                                onClick={() => openModal(event)}
-                                            >
-                                                {t('events.learnMore')}
-                                            </button>
-                                        )}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
