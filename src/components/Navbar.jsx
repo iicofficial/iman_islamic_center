@@ -296,7 +296,7 @@ function Navbar() {
                                 {t('navbar.aboutUs')} <FaChevronDown className="ms-1 nav-arrow" />
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#" onClick={closeMenu}><FaUsers className="me-2 menu-icon" />{t('navbar.staff')}</a></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/staff') ? 'active-item' : ''} `} to={getPath("/staff")} onClick={closeMenu}><FaUsers className="me-2 menu-icon" />{t('navbar.staff')}</Link></li>
                                 <li><Link className={`dropdown-item ${isItemActive('/policies') ? 'active-item' : ''} `} to={getPath("/policies")} onClick={closeMenu}><FaFileContract className="me-2 menu-icon" />{t('navbar.programPolicies')}</Link></li>
                             </ul>
                         </li>

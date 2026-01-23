@@ -20,6 +20,7 @@ import ArabicHome from "./components/ArabicHome";
 import ProgramPolicies from "./components/ProgramPolicies";
 import CoupleReconciliation from "./components/CoupleReconciliation";
 import DivorceFormalization from "./components/DivorceFormalization";
+import Staff from "./components/Staff";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
         <Route path="/ar/event/:id" element={<Events />} />
         <Route path="/ar/couple-reconciliation" element={<CoupleReconciliation />} />
         <Route path="/ar/divorce-formalization" element={<DivorceFormalization />} />
+        <Route path="/ar/staff" element={<Staff />} />
 
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/marriage-certificate" element={<MarriageCertificate />} />
@@ -72,6 +74,7 @@ function App() {
         <Route path="/event/:id" element={<Events />} />
         <Route path="/couple-reconciliation" element={<CoupleReconciliation />} />
         <Route path="/divorce-formalization" element={<DivorceFormalization />} />
+        <Route path="/staff" element={<Staff />} />
       </Routes>
       <Footer />
     </Router>
