@@ -261,6 +261,9 @@
         padding-right: 0;
         padding-left: 0 !important;
         margin-top: 2rem;
+        max-height: none;
+        /* Disable scroll box on mobile */
+        overflow-y: visible;
     }
 
     .sticky-image-wrapper {
