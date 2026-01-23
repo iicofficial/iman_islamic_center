@@ -5,6 +5,7 @@
 
 export const sendEmail = async (templateParams) => {
     const GAS_URL = import.meta.env.VITE_GAS_URL;
+    console.log("DEBUG - CURRENT GAS URL IS:", GAS_URL); // <-- Debugging line
 
     if (!GAS_URL) {
         console.error("VITE_GAS_URL is not defined in environment variables.");
