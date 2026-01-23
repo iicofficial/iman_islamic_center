@@ -29,13 +29,13 @@ const Staff = () => {
         {
             label: isRtl ? "الخدمة الدينية المبكرة (2006-2008):" : "Early Religious Service (2006–2008):",
             value: isRtl
-                ? "عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. نظم وأدار العديد من حلقات تحفيظ القرآن والبرامج الصيفية."
-                : "Served as muezzin, deputy imam (Taraweeh leader), and spare Khateeb at Masjid al-Khalil in Jeddah. Organized and led several Qur’anic halaqas and summer memorization programs."
+                ? "عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. نظم وأدار العديد من حلقات تحفيظ القرآن والبرامج الصيفية، بما في ذلك مبادرات ساهم في تأسيسها في المسجد."
+                : "Served as muezzin, deputy imam (Taraweeh leader), and spare Khateeb at Masjid al-Khalil in Jeddah. Organized and led several Qur’anic halaqas and summer memorization programs, including initiatives he helped establish at Masjid al-Khalil."
         },
         {
             label: isRtl ? "التدريس والإرشاد (2008-2010):" : "Teaching and Mentorship (2008–2010):",
             value: isRtl
-                ? "عمل معلماً ومربياً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب الابتدائي والمتوسط."
+                ? "عمل معلماً ومربياً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب الابتدائي والمتوسط ضمن فريق تعليمي متخصص."
                 : "Worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen. Taught Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated teaching team."
         },
         {
@@ -47,26 +47,26 @@ const Staff = () => {
         {
             label: isRtl ? "التدريب القرآني والعلمي:" : "Qur’anic and Scholarly Training:",
             value: isRtl
-                ? "حفظ القرآن كاملاً في سن 17. قرأ على علماء متميزين منهم الشيخ عبد الحليم عبد المنعم حسن."
-                : "Memorized the entire Qur’an at the age of 17. Recited the Holy Qur’an before several distinguished scholars, including Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the GAEQR."
+                ? "حفظ القرآن كاملاً في سن 17. قرأ على علماء متميزين منهم الشيخ عبد الحليم عبد المنعم حسن، عضو الإدارة العامة للمقرئين المصريين."
+                : "Memorized the entire Qur’an at the age of 17. Recited the Holy Qur’an before several distinguished scholars, including Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the General Administration of Egyptian Quranic Recitations (GAEQR). This early dedication to the Qur’an and tajwid inspired his lifelong pursuit of Islamic knowledge."
         },
         {
             label: isRtl ? "الدراسة على يد العلماء:" : "Studies with Scholars:",
             value: isRtl
-                ? "درس سنن الترمذي على الشيخ محمد مختار الشنقيطي لمدة 7 سنوات. حضر دروس الشيخ ابن جبرين ودورات الشيخ صالح العصيمي. حصل على إجازات في 19 متناً."
-                : "Studied under Sheikh Mohammed Mokhtar al-Shanqiti (Sunan al-Tirmidhi for 7 years). Attended lessons with Sheikh Ibn Jibreel and courses with Sheikh Saleh ibn Saleh al-Usaymi. Received ijazah in approximately nineteen classical Islamic works."
+                ? "درس سنن الترمذي على الشيخ محمد مختار الشنقيطي لمدة 7 سنوات في مسجد الإمام محمد بن سعود. حضر دروس الشيخ ابن جبرين (رحمه الله) ودورات الشيخ صالح العصيمي. حصل على إجازات في 19 متناً."
+                : "Studied under Sheikh Mohammed Mokhtar al-Shanqiti, completing Sunan al-Tirmidhi (Book of Prayer to Book of Hajj) over seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. Attended lessons with Sheikh Ibn Jibreen (may Allah have mercy on him). Completed courses in Muhimmat al-‘Ilm and other foundational texts under Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. Received ijazah (authorization) in approximately nineteen classical Islamic works."
         },
         {
             label: isRtl ? "الإمامة في الولايات المتحدة (2022-2025):" : "Imamship in the United States (2022–2025):",
             value: isRtl
-                ? "إمام المؤسسة الإيمان الإسلامية في لينكولن. ألقى خطب الجمعة وقاد التراويح. أجرى عقود الزواج وأصلح بين الأسر. أسس برنامج حملة القرآن."
-                : "Appointed Imam at the Islamic Foundation of Lincoln. Delivered Friday Khutbahs, led Taraweeh, and oversaw community programs. Officiated marriages and conducted counseling. Founded the Qur’an Carriers Program."
+                ? "إمام المؤسسة الإسلامية في لينكولن من 2022 إلى 2025. ألقى خطب الجمعة وقاد التراويح لثلاث سنوات. أجرى عقود الزواج وأصلح بين الأسر وأشرف على الطلاق. أسس برنامج حملة القرآن."
+                : "Appointed Imam at the Islamic Foundation of Lincoln from 2022 to 2025. Delivered Friday Jumu'ah Khutbahs and led Taraweeh prayers for three consecutive years. Oversaw numerous community programs and provided spiritual counseling. Officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari'ah. Founded the Qur’an Carriers Program, a structured Qur’an memorization course that ran for two semesters alongside organizing Qur’anic summer camps in 2023, 2024, and 2025."
         },
         {
             label: isRtl ? "الدور الحالي:" : "Current Role:",
             value: isRtl
-                ? "يعمل كإمام لمركز الإيمان الإسلامي (IIC). يقود الصلوات والخطب وبرامج التعليم القرآني."
-                : "Serves as Imam of Iman Islamic Center (IIC). Leads daily prayers, Friday sermons, and Qur’anic education programs for youth and adults. Dedicated to spreading authentic Islamic knowledge."
+                ? "يعمل كإمام لمركز الإيمان الإسلامي (IIC). يقود الصلوات والخطب وبرامج التعليم القرآني. مكرس لنشر العلم الصحيح وتعزيز الإيمان."
+                : "Serves as Imam of Iman Islamic Center (IIC). Leads daily prayers, Friday sermons, and Qur’anic education programs for youth and adults. Dedicated to spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah."
         }
     ];
 
@@ -93,7 +93,7 @@ const Staff = () => {
                         </div>
                     </div>
 
-                    <div className="row imam-profile-row">
+                    <div className="row imam-profile-row mb-0">
 
                         {/* Bio Content (Left on LTR, Right on RTL) */}
                         <div className={`col-lg-7 bio-content-column ${isRtl ? 'order-lg-1' : ''}`}>
@@ -106,7 +106,7 @@ const Staff = () => {
                         </div>
 
                         {/* Sticky Image (Right on LTR, Left on RTL) */}
-                        <div className={`col-lg-5 ${isRtl ? 'order-lg-2' : ''}`}>
+                        <div className="col-lg-5 ps-lg-0 pe-lg-0">
                             <div className="sticky-image-wrapper">
                                 <img
                                     src={imamImage}
@@ -119,8 +119,8 @@ const Staff = () => {
                     </div>
 
                     {/* Banner Image Below */}
-                    <div className="row">
-                        <div className="col-12">
+                    <div className="row mt-0">
+                        <div className="col-12 p-0">
                             <div className="imam-banner-section">
                                 <img
                                     src={imamBanner}
