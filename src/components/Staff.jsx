@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLanguage } from "../context/LanguageContext";
-import imamImage from '../assets/imam.JPG';
-import imamBanner from '../assets/imam2.JPG';
+import imamImage from '../assets/imam.png';
+import imamBanner from '../assets/imam2.png';
 import './Staff.css';
 
 const Staff = () => {
@@ -94,19 +94,8 @@ const Staff = () => {
                     </div>
 
                     <div className="row imam-profile-row mb-0">
-
-                        {/* Bio Content (Left on LTR, Right on RTL) */}
-                        <div className={`col-lg-7 bio-content-column ${isRtl ? 'order-lg-1' : ''}`}>
-                            {bioData.map((item, index) => (
-                                <div className="bio-item" key={index}>
-                                    <span className="bio-label">{item.label}</span>
-                                    <span className="bio-value">{item.value}</span>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Sticky Image (Right on LTR, Left on RTL) */}
-                        <div className="col-lg-5 ps-lg-0 pe-lg-0">
+                        <div className="col-12 bio-content-column">
+                            {/* Floated Image (Right on LTR, Left on RTL) */}
                             <div className="sticky-image-wrapper">
                                 <img
                                     src={imamImage}
@@ -114,22 +103,37 @@ const Staff = () => {
                                     className="img-fluid imam-sticky-photo"
                                 />
                             </div>
-                        </div>
 
-                    </div>
+                            {/* Bio Content - Part 1 (Everything except Current Role) */}
+                            {bioData.slice(0, -1).map((item, index) => (
+                                <div className="bio-item" key={index}>
+                                    <span className="bio-label">{item.label}</span>
+                                    <span className="bio-value">{item.value}</span>
+                                </div>
+                            ))}
 
-                    {/* Banner Image Below */}
-                    <div className="row mt-0">
-                        <div className="col-12 p-0">
-                            <div className="imam-banner-section">
+                            {/* Banner Image in middle of text flow (technically after text above) */}
+                            <div className="imam-banner-section my-4">
                                 <img
                                     src={imamBanner}
                                     alt="Imam Leading Prayer"
                                     className="imam-banner-img"
+                                    style={{ width: '100%', borderRadius: '8px' }}
                                 />
                             </div>
+
+                            {/* Bio Content - Part 2 (Current Role - Last Item) */}
+                            {bioData.slice(-1).map((item, index) => (
+                                <div className="bio-item" key={index + 100}>
+                                    <span className="bio-label">{item.label}</span>
+                                    <span className="bio-value">{item.value}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
+
+                    {/* Banner Image Below */}
+
 
                 </div>
 
@@ -143,6 +147,8 @@ const Staff = () => {
                             {language === 'ar' ? 'مجلس الإدارة' : 'Board of Directors'}
                         </h2>
                     </div>
+
+
 
                     {/* Secretary */}
                     <div className="col-md-6 mb-4">
@@ -188,7 +194,8 @@ const Staff = () => {
                                 { en: "Soleiman Espinoza", ar: "سليمان إسبينوزا" },
                                 { en: "Dhugomsa Mohammed", ar: "دقمسا محمد" },
                                 { en: "Zaid Al Bayati", ar: "زيد البياتي" },
-                                { en: "Abdelmalik Al-Fendi", ar: "عبد الملك الفندي" }
+                                { en: "Abdulmalek Al Rashid", ar: "عبد الملك الراشد" },
+                                { en: "Akeel Salman", ar: "عقيل سلمان" }
                             ].map((person, index) => (
                                 <div key={index} className="col-md-4 col-sm-6 mb-4">
                                     <div className="staff-card p-4 text-center h-100 d-flex align-items-center justify-content-center">
@@ -198,29 +205,6 @@ const Staff = () => {
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="staff-divider"></div>
-
-                {/* ---------------- IT ---------------- */}
-                <div className="row mb-5">
-                    <div className="col-12 text-center mb-5">
-                        <h2 className="section-title">
-                            {language === 'ar' ? 'التطوير' : 'Development'}
-                        </h2>
-                    </div>
-                    <div className="col-12">
-                        <div className="row justify-content-center">
-                            <div className="col-md-4 col-sm-6 mb-4">
-                                <div className="staff-card p-4 text-center h-100">
-                                    {/* Developer badge removed by user request */}
-                                    <h3 className="staff-card-name">
-                                        {language === 'ar' ? 'عقيل خطاب' : 'Akeel Salman'}
-                                    </h3>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

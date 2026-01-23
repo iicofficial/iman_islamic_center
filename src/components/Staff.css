@@ -15,9 +15,13 @@
    IMAM SECTION DESIGN
 ------------------------------------------- */
 .imam-section-container {
-    background-color: transparent;
+    background-color: #f9fafb;
+    /* Light gray background */
     /* Seamless background */
-    padding: 0;
+    padding: 3rem;
+    /* Add padding inside the gray box */
+    border-radius: 12px;
+    /* Smooth corners */
     margin-bottom: 4rem;
 }
 
@@ -81,34 +85,15 @@
     /* NO GAP */
 }
 
-/* Bio Content Side - Scrollable */
+/* Bio Content Side - Full Height (No Scroll) */
 .bio-content-column {
-    padding-right: 2rem;
-    max-height: 800px;
-    overflow-y: auto;
-    /* Custom Scrollbar for Webkit */
-    scrollbar-width: thin;
-    scrollbar-color: #27569b #f0f0f0;
-}
-
-.bio-content-column::-webkit-scrollbar {
-    width: 8px;
-}
-
-.bio-content-column::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 4px;
-}
-
-.bio-content-column::-webkit-scrollbar-thumb {
-    background-color: #27569b;
-    border-radius: 4px;
-    border: 2px solid #f0f0f0;
-}
-
-.staff-page.rtl .bio-content-column {
     padding-right: 0;
-    padding-left: 2rem;
+    /* Removed fixed height/scroll to allow natural wrapping */
+}
+
+/* RTL Adjustments */
+.staff-page.rtl .bio-content-column {
+    padding-left: 0;
 }
 
 /* STRUCTURED BIO TEXT */
@@ -136,18 +121,48 @@
 
 /* IMAGE SIDE - Stacked Photos */
 .sticky-image-wrapper {
-    /* Sticky to keep photos in view while page scrolls, if text is short */
-    position: sticky;
-    top: 100px;
-    align-self: flex-start;
-    margin-bottom: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    /* Space between photos */
-    /* NO GAP */
+    float: right;
+    width: 40%;
+    max-width: 400px;
+    margin-left: 0;
+    /* Very tight wrap */
+    /* Increased buffer */
+    margin-bottom: 0.5rem;
+    margin-top: -3rem;
+    /* Moved image up */
+    /* Increased buffer */
     padding-bottom: 0;
+    padding-left: 5px;
+}
+
+.staff-page.rtl .sticky-image-wrapper {
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
+    /* Very tight wrap for RTL */
+    padding-right: 5px;
+    padding-left: 0;
+    /* Increased buffer for RTL */
+}
+
+/* Updated Bio Item for cleaner wrapping */
+.bio-item {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    /* Increased line height for readability */
+    color: #444;
+    text-align: justify;
+    /* Clean edges */
+}
+
+@media (max-width: 991.98px) {
+    .sticky-image-wrapper {
+        float: none;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 2rem auto;
+    }
 }
 
 .imam-sticky-photo {
@@ -198,28 +213,34 @@
     color: #27569b;
     position: relative;
     display: inline-block;
-    padding-bottom: 10px;
+    padding: 15px 40px;
+    /* Added padding */
     font-weight: 700;
+    background-color: #f9fafb;
+    /* Light Gray Background */
+    border-radius: 50px;
+    /* Rounded pill shape */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* Subtle lift */
+    border: 1px solid #e1e8f0;
+    /* Subtle border */
+    margin-bottom: 2rem;
 }
 
 .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: #a1c0e8;
-    border-radius: 3px;
+    display: none;
+    /* Remove the old underline */
 }
 
 .staff-card {
-    background: #fff;
+    background: #f9fafb;
+    /* Light Gray Background */
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    /* Softer shadow */
     transition: transform 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid #e1e8f0;
+    /* Matches title border */
     height: 100%;
     display: flex;
     flex-direction: column;
