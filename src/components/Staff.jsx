@@ -17,55 +17,55 @@ const Staff = () => {
         {
             label: isRtl ? "ولد في:" : "Born:",
             value: isRtl
-                ? "16 أغسطس 1984 - جدة، المملكة العربية السعودية"
+                ? "16 أغسطس 1984 – جدة، المملكة العربية السعودية"
                 : "August 16, 1984 – Jeddah, Kingdom of Saudi Arabia"
         },
         {
             label: isRtl ? "التعليم:" : "Education:",
             value: isRtl
-                ? "تخرج من ثانوية عمر بن الخطاب، حيث كان مسؤولاً عن جماعة التوعية الإسلامية."
+                ? "تخرج من ثانوية عمر بن الخطاب، حيث كان مسؤولاً عن لجنة التوعية الإسلامية."
                 : "Graduated from Umar ibn Khattab High School, where he served as leader of the Islamic Da‘wah Committee."
         },
         {
             label: isRtl ? "الخدمة الدينية المبكرة (2006-2008):" : "Early Religious Service (2006–2008):",
             value: isRtl
-                ? "عمل مؤذناً ونائباً للإمام وخطيباً احتياطياً في مسجد الخليل بجدة. نظم وأدار العديد من حلقات تحفيظ القرآن والبرامج الصيفية، بما في ذلك مبادرات ساهم في تأسيسها في المسجد."
+                ? "عمل مؤذناً ونائباً للإمام (إمام التراويح)، وخطيباً احتياطياً في مسجد الخليل بجدة. نظم وأدار العديد من حلقات تحفيظ القرآن والبرامج الصيفية، بما في ذلك مبادرات ساهم في تأسيسها في مسجد الخليل."
                 : "Served as muezzin, deputy imam (Taraweeh leader), and spare Khateeb at Masjid al-Khalil in Jeddah. Organized and led several Qur’anic halaqas and summer memorization programs, including initiatives he helped establish at Masjid al-Khalil."
         },
         {
             label: isRtl ? "التدريس والإرشاد (2008-2010):" : "Teaching and Mentorship (2008–2010):",
             value: isRtl
-                ? "عمل معلماً ومربياً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب الابتدائي والمتوسط ضمن فريق تعليمي متخصص."
+                ? "عمل معلماً وموجهاً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب المراحل الابتدائية والمتوسطة كجزء من فريق تعليمي متخصص."
                 : "Worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen. Taught Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated teaching team."
         },
         {
             label: isRtl ? "المسيرة الأكاديمية (2010-2016):" : "Academic Career (2010–2016):",
             value: isRtl
-                ? "حصل على دكتور صيدلي (PharmD) من جامعة الملك عبد العزيز عام 2016. عمل كصيدلي مرخص لمدة خمس سنوات."
+                ? "أكمل تعليمه العالي في جامعة الملك عبد العزيز، وحصل على درجة دكتور صيدلي (PharmD) في عام 2016. عمل كصيدلي مرخص لمدة خمس سنوات تقريباً بعد التخرج."
                 : "Pursued higher education at King Abdulaziz University, earning a Doctor of Pharmacy (PharmD) degree in 2016. Worked as a licensed pharmacist for nearly five years following graduation."
         },
         {
             label: isRtl ? "التدريب القرآني والعلمي:" : "Qur’anic and Scholarly Training:",
             value: isRtl
-                ? "حفظ القرآن كاملاً في سن 17. قرأ على علماء متميزين منهم الشيخ عبد الحليم عبد المنعم حسن، عضو الإدارة العامة للمقرئين المصريين."
+                ? "أتم حفظ القرآن الكريم كاملاً في سن السابعة عشرة. قرأ القرآن الكريم على عدد من العلماء المتميزين، ومنهم الشيخ عبد الحليم عبد المنعم حسن، العضو البارز في الإدارة العامة للمقاريء المصرية. هذا التفاني المبكر للقرآن والتجويد ألهمه لمواصلة طلب العلم الشرعي طوال حياته."
                 : "Memorized the entire Qur’an at the age of 17. Recited the Holy Qur’an before several distinguished scholars, including Sheikh Abdel-Halim Abdel-Moneim Hassan, a prominent member of the General Administration of Egyptian Quranic Recitations (GAEQR). This early dedication to the Qur’an and tajwid inspired his lifelong pursuit of Islamic knowledge."
         },
         {
             label: isRtl ? "الدراسة على يد العلماء:" : "Studies with Scholars:",
             value: isRtl
-                ? "درس سنن الترمذي على الشيخ محمد مختار الشنقيطي لمدة 7 سنوات في مسجد الإمام محمد بن سعود. حضر دروس الشيخ ابن جبرين (رحمه الله) ودورات الشيخ صالح العصيمي. حصل على إجازات في 19 متناً."
+                ? "درس على يد الشيخ محمد مختار الشنقيطي، وأكمل دراسة سنن الترمذي (من كتاب الصلاة إلى كتاب الحج) على مدار سبع سنوات في مسجد الإمام محمد بن سعود بجدة. حضر دروساً للشيخ ابن جبرين (رحمه الله). أكمل دورات في 'مهمات العلم' ومتون تأسيسية أخرى تحت إشراف الشيخ صالح بن عبد الله العصيمي، عضو هيئة كبار العلماء في المملكة العربية السعودية. حصل على إجازات في حوالي تسعة عشر متناً من المتون الإسلامية الكلاسيكية."
                 : "Studied under Sheikh Mohammed Mokhtar al-Shanqiti, completing Sunan al-Tirmidhi (Book of Prayer to Book of Hajj) over seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. Attended lessons with Sheikh Ibn Jibreen (may Allah have mercy on him). Completed courses in Muhimmat al-‘Ilm and other foundational texts under Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. Received ijazah (authorization) in approximately nineteen classical Islamic works."
         },
         {
             label: isRtl ? "الإمامة في الولايات المتحدة (2022-2025):" : "Imamship in the United States (2022–2025):",
             value: isRtl
-                ? "إمام المؤسسة الإسلامية في لينكولن من 2022 إلى 2025. ألقى خطب الجمعة وقاد التراويح لثلاث سنوات. أجرى عقود الزواج وأصلح بين الأسر وأشرف على الطلاق. أسس برنامج حملة القرآن."
+                ? "عُين إماماً للمؤسسة الإسلامية في لينكولن من 2022 إلى 2025. ألقى خطب الجمعة وأمّ المصلين في صلاة التراويح لثلاث سنوات متتالية. أشرف على العديد من البرامج المجتمعية وقدم الاستشارات الروحية. قام بعقد أنكحة الزواج، وإجراء الصلح العائلي والزوجي، والإشراف على إجراءات الطلاق وفقاً للشريعة الإسلامية. أسس برنامج 'حملة القرآن'، وهو دورة منهجية لحفظ القرآن استمرت لفصلين دراسيين، إلى جانب تنظيم مخيمات صيفية قرآنية في أعوام 2023 و2024 و2025."
                 : "Appointed Imam at the Islamic Foundation of Lincoln from 2022 to 2025. Delivered Friday Jumu'ah Khutbahs and led Taraweeh prayers for three consecutive years. Oversaw numerous community programs and provided spiritual counseling. Officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari'ah. Founded the Qur’an Carriers Program, a structured Qur’an memorization course that ran for two semesters alongside organizing Qur’anic summer camps in 2023, 2024, and 2025."
         },
         {
             label: isRtl ? "الدور الحالي:" : "Current Role:",
             value: isRtl
-                ? "يعمل كإمام لمركز الإيمان الإسلامي (IIC). يقود الصلوات والخطب وبرامج التعليم القرآني. مكرس لنشر العلم الصحيح وتعزيز الإيمان."
+                ? "يعمل حالياً إماماً لمركز الإيمان الإسلامي (IIC). يؤم الصلوات اليومية، ويلقي خطب الجمعة، ويدير برامج التعليم القرآني للشباب والكبار. يكرس جهوده لنشر العلم الشرعي الصحيح، وتعزيز إيمان المجتمع، وتربية الأجيال القادمة على القرآن والسنة."
                 : "Serves as Imam of Iman Islamic Center (IIC). Leads daily prayers, Friday sermons, and Qur’anic education programs for youth and adults. Dedicated to spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah."
         }
     ];
