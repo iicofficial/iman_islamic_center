@@ -53,19 +53,19 @@ const Staff = () => {
         {
             label: isRtl ? "الدراسة على يد العلماء:" : "Studies with Scholars:",
             value: isRtl
-                ? "درس على يد الشيخ محمد مختار الشنقيطي، وأكمل دراسة سنن الترمذي (من كتاب الصلاة إلى كتاب الحج) على مدار سبع سنوات في مسجد الإمام محمد بن سعود بجدة. حضر دروساً للشيخ ابن جبرين (رحمه الله). أكمل دورات في 'مهمات العلم' ومتون تأسيسية أخرى تحت إشراف الشيخ صالح بن عبد الله العصيمي، عضو هيئة كبار العلماء في المملكة العربية السعودية. حصل على إجازات في حوالي تسعة عشر متناً من المتون الإسلامية الكلاسيكية."
+                ? "تشرف بالدراسة على يد نخبة من كبار العلماء والفقهاء، حيث تعلم على يد الشيخ محمد مختار الشنقيطي، وأتم دراسة شرح سنن الترمذي كاملاً (من كتاب الصلاة إلى كتاب الحج) على مدار سبع سنوات من التفاني في مسجد الإمام محمد بن سعود بجدة. كما حرص على حضور دروس ومحاضرات الشيخ ابن جبرين (رحمه الله) والنهل من علمه. وأكمل دورات مكثفة في 'مهمات العلم' والمتون الشرعية التأسيسية تحت إشراف الشيخ صالح بن عبد الله العصيمي، عضو هيئة كبار العلماء بالمملكة العربية السعودية. وقد حصل على إجازات علمية معتبرة في حوالي تسعة عشر متناً من أمهات المتون الإسلامية الكلاسيكية في مختلف العلوم الشرعية."
                 : "Studied under Sheikh Mohammed Mokhtar al-Shanqiti, completing Sunan al-Tirmidhi (Book of Prayer to Book of Hajj) over seven years at Masjid al-Imam Mohammed bin Saud in Jeddah. Attended lessons with Sheikh Ibn Jibreen (may Allah have mercy on him). Completed courses in Muhimmat al-‘Ilm and other foundational texts under Sheikh Saleh ibn Saleh al-Usaymi, a member of the Council of Senior Scholars in Saudi Arabia. Received ijazah (authorization) in approximately nineteen classical Islamic works."
         },
         {
             label: isRtl ? "الإمامة في الولايات المتحدة (2022-2025):" : "Imamship in the United States (2022–2025):",
             value: isRtl
-                ? "عُين إماماً للمؤسسة الإسلامية في لينكولن من 2022 إلى 2025. ألقى خطب الجمعة وأمّ المصلين في صلاة التراويح لثلاث سنوات متتالية. أشرف على العديد من البرامج المجتمعية وقدم الاستشارات الروحية. قام بعقد أنكحة الزواج، وإجراء الصلح العائلي والزوجي، والإشراف على إجراءات الطلاق وفقاً للشريعة الإسلامية. أسس برنامج 'حملة القرآن'، وهو دورة منهجية لحفظ القرآن استمرت لفصلين دراسيين، إلى جانب تنظيم مخيمات صيفية قرآنية في أعوام 2023 و2024 و2025."
+                ? "بدأت مسيرته في الولايات المتحدة بتعيينه إماماً للمؤسسة الإسلامية في لينكولن للفترة من 2022 إلى 2025، حيث ألقى خطب الجمعة بأسلوب مؤثر وأمّ المصلين في صلاة التراويح لثلاث سنوات متتالية. أشرف على تطوير برامج مجتمعية شاملة وقدم الاستشارات الروحية والنفسية لأبناء المجتمع. كما عمل على تمتين الروابط الأسرية من خلال عقد أنكحة الزواج، وإجراء الصلح بين الزوجين، والإشراف على معاملات الطلاق وفق الشريعة الإسلامية. ومن أبرز إنجازاته تأسيس برنامج 'حملة القرآن'، وهو مسار تعليمي مبتكر ومنهجي لحفظ القرآن الكريم استمر لفصلين دراسيين، بالإضافة إلى تنظيم مخيمات قرآنية صيفية ناجحة في أعوام 2023 و2024 و2025."
                 : "Appointed Imam at the Islamic Foundation of Lincoln from 2022 to 2025. Delivered Friday Jumu'ah Khutbahs and led Taraweeh prayers for three consecutive years. Oversaw numerous community programs and provided spiritual counseling. Officiated marriage contracts, conducted family and marital reconciliations, and supervised Islamic divorce procedures in accordance with Shari'ah. Founded the Qur’an Carriers Program, a structured Qur’an memorization course that ran for two semesters alongside organizing Qur’anic summer camps in 2023, 2024, and 2025."
         },
         {
             label: isRtl ? "الدور الحالي:" : "Current Role:",
             value: isRtl
-                ? "يعمل حالياً إماماً لمركز الإيمان الإسلامي (IIC). يؤم الصلوات اليومية، ويلقي خطب الجمعة، ويدير برامج التعليم القرآني للشباب والكبار. يكرس جهوده لنشر العلم الشرعي الصحيح، وتعزيز إيمان المجتمع، وتربية الأجيال القادمة على القرآن والسنة."
+                ? "يشغل حالياً منصب إمام مركز الإيمان الإسلامي (IIC)، حيث يتولى إمامة الصلوات الخمس اليومية وخطابة الجمعة. يقود بكل تفانٍ برامج التعليم القرآني المكثفة الموجهة للشباب والكبار على حد سواء. يكرس معظم وقته لنشر العلم الشرعي الصحيح المبني على الدليل، وتعزيز الوازع الديني في نفوس المجتمع، والعمل الدؤوب على تربية الأجيال القادمة وتنشئتها على مائدة القرآن السنة النبوية المطهرة، ساعياً ليكون المركز منارة للعلم والتقوى."
                 : "Serves as Imam of Iman Islamic Center (IIC). Leads daily prayers, Friday sermons, and Qur’anic education programs for youth and adults. Dedicated to spreading authentic Islamic knowledge, strengthening community faith, and nurturing future generations upon the Qur’an and Sunnah."
         }
     ];
@@ -95,6 +95,14 @@ const Staff = () => {
 
                     <div className="row imam-profile-row mb-0">
                         <div className="col-12 bio-content-column">
+                            {/* Bio Content - Part 1 (Born & Education - Full Width Above Image) */}
+                            {bioData.slice(0, 2).map((item, index) => (
+                                <div className="bio-item" key={index}>
+                                    <span className="bio-label">{item.label}</span>
+                                    <span className="bio-value">{item.value}</span>
+                                </div>
+                            ))}
+
                             {/* Floated Image (Right on LTR, Left on RTL) */}
                             <div className="sticky-image-wrapper">
                                 <img
@@ -104,27 +112,29 @@ const Staff = () => {
                                 />
                             </div>
 
-                            {/* Bio Content - Part 1 (Everything except Current Role) */}
-                            {bioData.slice(0, -1).map((item, index) => (
-                                <div className="bio-item" key={index}>
+                            {/* Bio Content - Part 2 (Remaining bio items wrapping around Image) */}
+                            {bioData.slice(2, -1).map((item, index) => (
+                                <div className="bio-item" key={index + 2}>
                                     <span className="bio-label">{item.label}</span>
                                     <span className="bio-value">{item.value}</span>
                                 </div>
                             ))}
 
-                            {/* Banner Image in middle of text flow (technically after text above) */}
-                            <div className="imam-banner-section my-4">
+                            {/* Clear float for the banner below */}
+                            <div style={{ clear: 'both', paddingTop: '40px' }}></div>
+
+                            {/* Banner Image (imam2.png) */}
+                            <div className="imam-banner-section">
                                 <img
                                     src={imamBanner}
-                                    alt="Imam Leading Prayer"
+                                    alt="Imam Banner"
                                     className="imam-banner-img"
-                                    style={{ width: '100%', borderRadius: '8px' }}
                                 />
                             </div>
 
-                            {/* Bio Content - Part 2 (Current Role - Last Item) */}
+                            {/* Bio Content - Current Role (Full width under banner) */}
                             {bioData.slice(-1).map((item, index) => (
-                                <div className="bio-item" key={index + 100}>
+                                <div className="bio-item" key={index + 100} style={{ marginTop: '30px' }}>
                                     <span className="bio-label">{item.label}</span>
                                     <span className="bio-value">{item.value}</span>
                                 </div>
@@ -194,7 +204,32 @@ const Staff = () => {
                                 { en: "Soleiman Espinoza", ar: "سليمان إسبينوزا" },
                                 { en: "Dhugomsa Mohammed", ar: "دقمسا محمد" },
                                 { en: "Zaid Al Bayati", ar: "زيد البياتي" },
-                                { en: "Abdulmalek Al Rashid", ar: "عبد الملك الراشد" },
+                                { en: "Abdulmalek Al Rashid", ar: "عبد الملك الراشد" }
+                            ].map((person, index) => (
+                                <div key={index} className="col-md-4 col-sm-6 mb-4">
+                                    <div className="staff-card p-4 text-center h-100 d-flex align-items-center justify-content-center">
+                                        <h3 className="staff-card-name m-0" style={{ fontSize: '1.2rem' }}>
+                                            {language === 'ar' ? person.ar : person.en}
+                                        </h3>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="staff-divider"></div>
+
+                {/* ---------------- DEVELOPMENT ---------------- */}
+                <div className="row mb-5">
+                    <div className="col-12 text-center mb-5">
+                        <h2 className="section-title">
+                            {language === 'ar' ? 'التطوير' : 'Development'}
+                        </h2>
+                    </div>
+                    <div className="col-12">
+                        <div className="row justify-content-center">
+                            {[
                                 { en: "Akeel Salman", ar: "عقيل سلمان" }
                             ].map((person, index) => (
                                 <div key={index} className="col-md-4 col-sm-6 mb-4">

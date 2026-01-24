@@ -74,21 +74,19 @@
     width: 100%;
 }
 
-/* Layout Grid */
+/* Layout Grid - REMOVED FLEX TO ALLOW FLOATS */
 .imam-profile-row {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     margin-bottom: 0;
-    /* NO GAP */
     padding-bottom: 0;
-    /* NO GAP */
 }
 
 /* Bio Content Side - Full Height (No Scroll) */
 .bio-content-column {
+    display: block;
     padding-right: 0;
-    /* Removed fixed height/scroll to allow natural wrapping */
+    width: 100%;
 }
 
 /* RTL Adjustments */
@@ -99,8 +97,8 @@
 /* STRUCTURED BIO TEXT */
 .bio-item {
     margin-bottom: 1rem;
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.7;
     color: #444;
 }
 
@@ -122,38 +120,37 @@
 /* IMAGE SIDE - Stacked Photos */
 .sticky-image-wrapper {
     float: right;
-    width: 40%;
-    max-width: 400px;
-    margin-left: 0;
-    /* Very tight wrap */
-    /* Increased buffer */
-    margin-bottom: 0.5rem;
-    margin-top: -3rem;
-    /* Moved image up */
-    /* Increased buffer */
+    width: 32%;
+    max-width: 320px;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
     padding-bottom: 0;
-    padding-left: 5px;
+    padding-left: 0;
 }
 
 .staff-page.rtl .sticky-image-wrapper {
     float: left;
+    margin-right: 1.5rem;
     margin-left: 0;
-    margin-right: 0;
-    /* Very tight wrap for RTL */
-    padding-right: 5px;
-    padding-left: 0;
-    /* Increased buffer for RTL */
+    width: 32%;
+    max-width: 320px;
 }
 
-/* Updated Bio Item for cleaner wrapping */
+/* Base Bio Item - massive size for both LTR and RTL */
 .bio-item {
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    /* Increased line height for readability */
+    margin-bottom: 1.2rem;
+    font-size: 1.75rem;
+    line-height: 1.7;
     color: #444;
     text-align: justify;
-    /* Clean edges */
+    clear: none;
+}
+
+.staff-page.rtl .bio-item {
+    font-size: 1.75rem;
+    line-height: 2.2;
+    letter-spacing: 0;
 }
 
 @media (max-width: 991.98px) {
@@ -168,12 +165,15 @@
 .imam-sticky-photo {
     width: 100%;
     border-radius: 4px;
-    /* Slight radius ok, but frame removed */
     box-shadow: none;
-    /* Removed shadow */
     border: none;
-    /* Removed border */
     background-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.staff-page.rtl .imam-sticky-photo {
+    transform: scaleX(-1);
+    /* Horizontally flip for Arabic mode */
 }
 
 /* BANNER IMAGE (Imam 2) - Seamless Static */
