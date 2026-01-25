@@ -30,7 +30,10 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
         const dayStr = String(day).padStart(2, '0');
         const dateString = `${year}-${month}-${dayStr}`;
         setSelectedDate(dateString);
-        // Don't close immediately, wait for Confirm button
+
+        // Instant selection - No confirm button needed
+        onChange({ target: { name: name, value: dateString } });
+        setShowPicker(false);
     };
 
     const formatDisplayDate = (dateStr) => {
@@ -79,12 +82,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
         );
     }
 
-    const handleConfirm = () => {
-        if (selectedDate) {
-            onChange({ target: { name: name, value: selectedDate } });
-            setShowPicker(false);
-        }
-    };
+    // handleConfirm removed
 
     return (
         <div className="datetime-picker-wrapper">
@@ -156,11 +154,7 @@ export const DatePicker = ({ value, onChange, label, required = false, minDate =
                         <div className="calendar-days">
                             {days}
                         </div>
-                        <div className="datetime-picker-footer">
-                            <button type="button" className="btn btn-primary" onClick={handleConfirm} disabled={!selectedDate}>
-                                Confirm
-                            </button>
-                        </div>
+                        {/* Footer removed for DatePicker */}
                     </div>
                 </>
             )}

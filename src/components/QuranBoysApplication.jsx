@@ -140,24 +140,24 @@ function QuranBoysApplication() {
             errors.address = 'Student must currently reside in Lincoln, NE';
         }
 
-        // Phone validations - at least one phone number is required
-        const hasWorkPhone = formData.workPhone && formData.workPhone.trim() !== '';
-        const hasHomePhone = formData.homePhone && formData.homePhone.trim() !== '';
-        const hasMobile = formData.mobile && formData.mobile.trim() !== '';
-
-        // Check if at least one phone number is provided
-        if (!hasWorkPhone && !hasHomePhone && !hasMobile) {
-            errors.phone = 'Please provide at least one phone number (Work, Home, or Mobile)';
-        }
+        if (!formData.studentName || formData.studentName.trim() === '') errors.studentName = 'Student name is required';
+        if (!formData.grade || formData.grade.trim() === '') errors.grade = 'Grade is required';
+        if (!formData.school || formData.school.trim() === '') errors.school = 'School is required';
+        if (!formData.guardianName || formData.guardianName.trim() === '') errors.guardianName = 'Guardian name is required';
+        if (!formData.kinship || formData.kinship.trim() === '') errors.kinship = 'Kinship is required';
+        if (!formData.guardianJob || formData.guardianJob.trim() === '') errors.guardianJob = 'Guardian job is required';
+        if (!formData.workPhone || formData.workPhone.trim() === '') errors.workPhone = 'Work phone is required';
+        if (!formData.homePhone || formData.homePhone.trim() === '') errors.homePhone = 'Home phone is required';
+        if (!formData.mobile || formData.mobile.trim() === '') errors.mobile = 'Mobile number is required';
 
         // Validate format of provided phone numbers
-        if (hasWorkPhone && !validatePhone(formData.workPhone)) {
+        if (formData.workPhone && !validatePhone(formData.workPhone)) {
             errors.workPhone = 'Please enter a valid US phone number: (123)456-7890';
         }
-        if (hasHomePhone && !validatePhone(formData.homePhone)) {
+        if (formData.homePhone && !validatePhone(formData.homePhone)) {
             errors.homePhone = 'Please enter a valid US phone number: (123)456-7890';
         }
-        if (hasMobile && !validatePhone(formData.mobile)) {
+        if (formData.mobile && !validatePhone(formData.mobile)) {
             errors.mobile = 'Please enter a valid US phone number: (123)456-7890';
         }
 
@@ -189,14 +189,7 @@ function QuranBoysApplication() {
                     { label: t('quranBoys.guardianName'), value: formData.guardianName },
                     { label: t('quranBoys.kinship'), value: formData.kinship },
                     { label: t('quranBoys.guardianJob'), value: formData.guardianJob },
-                ]
-            },
-            {
-                title: t('quranBoys.contactInfo'),
-                fields: [
                     { label: t('quranBoys.mobile'), value: formData.mobile },
-                    { label: t('quranBoys.homePhone'), value: formData.homePhone },
-                    { label: t('quranBoys.workPhone'), value: formData.workPhone },
                     { label: t('quranBoys.email'), value: formData.email },
                 ]
             },
@@ -300,6 +293,7 @@ Contact: ${formData.mobile} / ${formData.email}`,
             <div className="container py-5">
                 <div className="quran-application-card">
                     <h1 className="application-title">{t('quranBoys.title')}</h1>
+                    <p className="application-subtitle" style={{ color: 'red', fontWeight: 'bold' }}>* All Fields Required</p>
                     <p className="application-subtitle">{t('quranBoys.subtitle')}</p>
 
                     <form onSubmit={handleSubmit}>
@@ -446,50 +440,8 @@ Contact: ${formData.mobile} / ${formData.email}`,
                                     )}
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Contact Information */}
-                        <div className="form-section">
-                            <h3 className="section-title">{t('quranBoys.contactInfo')}</h3>
-
-                            {validationErrors.phone && (
-                                <div className="alert alert-warning mb-3" role="alert">
-                                    {validationErrors.phone}
-                                </div>
-                            )}
-
                             <div className="row">
-                                <div className="col-md-4 mb-3">
-                                    <label className="form-label">{t('quranBoys.workPhone')}</label>
-                                    <input
-                                        type="tel"
-                                        className={`form-control ${validationErrors.workPhone ? 'is-invalid' : ''}`}
-                                        name="workPhone"
-                                        value={formData.workPhone}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        maxLength="13"
-                                    />
-                                    {validationErrors.workPhone && (
-                                        <div className="error-message"><small className="text-danger">{validationErrors.workPhone}</small></div>
-                                    )}
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <label className="form-label">{t('quranBoys.homePhone')}</label>
-                                    <input
-                                        type="tel"
-                                        className={`form-control ${validationErrors.homePhone ? 'is-invalid' : ''}`}
-                                        name="homePhone"
-                                        value={formData.homePhone}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        maxLength="13"
-                                    />
-                                    {validationErrors.homePhone && (
-                                        <div className="error-message"><small className="text-danger">{validationErrors.homePhone}</small></div>
-                                    )}
-                                </div>
-                                <div className="col-md-4 mb-3">
+                                <div className="col-md-6 mb-3">
                                     <label className="form-label">{t('quranBoys.mobile')}</label>
                                     <input
                                         type="tel"
@@ -499,28 +451,28 @@ Contact: ${formData.mobile} / ${formData.email}`,
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         maxLength="13"
+                                        required
                                     />
                                     {validationErrors.mobile && (
                                         <div className="error-message"><small className="text-danger">{validationErrors.mobile}</small></div>
                                     )}
                                 </div>
-                            </div>
-
-                            <div className="mb-3">
-                                <label className="form-label">{t('quranBoys.email')}</label>
-                                <input
-                                    type="email"
-                                    className={`form-control ${validationErrors.email ? 'is-invalid' : ''}`}
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="example@email.com"
-                                    required
-                                />
-                                {validationErrors.email && (
-                                    <div className="error-message"><small className="text-danger">{validationErrors.email}</small></div>
-                                )}
+                                <div className="col-md-6 mb-3">
+                                    <label className="form-label">{t('quranBoys.email')}</label>
+                                    <input
+                                        type="email"
+                                        className={`form-control ${validationErrors.email ? 'is-invalid' : ''}`}
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder="example@email.com"
+                                        required
+                                    />
+                                    {validationErrors.email && (
+                                        <div className="error-message"><small className="text-danger">{validationErrors.email}</small></div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
