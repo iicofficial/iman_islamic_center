@@ -3,10 +3,10 @@ import { useLanguage } from "../context/LanguageContext";
 import "./Reservation.css"; // Reuse existing styles
 import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaMale, FaFemale, FaPhoneAlt } from "react-icons/fa";
 import { sendEmail } from "../utils/emailService";
-import StatusModal from './StatusModal';
-import { DatePicker, TimePicker } from './DateTimePicker';
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
+import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
+import StatusModal from './StatusModal';
 
 function DivorceFormalization() {
     const { t } = useLanguage();
@@ -32,64 +32,26 @@ function DivorceFormalization() {
         return `${hour12}:${m} ${ampm}`;
     };
 
-    const generatePDF = () => {
-        try {
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.width;
-
-            // Header
-            doc.setFillColor(245, 245, 245);
-            doc.rect(0, 0, pageWidth, 40, 'F');
-            if (logo) {
-                doc.addImage(logo, 'PNG', 15, 5, 30, 30);
+    const generatePDF = async () => {
+        const title = t('divorceFormalization.title');
+        const sections = [
+            {
+                title: t('divorceFormalization.subtitle'),
+                fields: [
+                    { label: t('divorceFormalization.party1'), value: formData.name1 },
+                    { label: t('divorceFormalization.party2'), value: formData.name2 },
+                    { label: "Phone", value: formData.phone },
+                    { label: t('divorceFormalization.email'), value: formData.email },
+                    { label: t('divorceFormalization.date'), value: formData.date },
+                    { label: t('divorceFormalization.time'), value: formatTime12Hour(formData.time) },
+                    { label: t('divorceFormalization.notes'), value: formData.notes },
+                ]
             }
+        ];
 
-            doc.setTextColor(39, 86, 155);
-            doc.setFontSize(22);
-            doc.setFont("helvetica", "bold");
-            doc.text("IMAN ISLAMIC CENTER", 55, 18);
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "normal");
-            doc.text("Divorce Formalization Request", 55, 28);
-
-            let yPos = 55;
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(12);
-
-            // Details
-            const addField = (label, value) => {
-                doc.setFont("helvetica", "bold");
-                doc.text(`${label}:`, 20, yPos);
-                doc.setFont("helvetica", "normal");
-                doc.text(String(value || "N/A"), 60, yPos);
-                yPos += 10;
-            };
-
-            addField("Party 1", formData.name1);
-            addField("Party 2", formData.name2);
-            addField("Phone", formData.phone);
-            addField("Email", formData.email);
-            addField("Preferred Date", formData.date);
-            addField("Preferred Time", formatTime12Hour(formData.time));
-
-            yPos += 5;
-            doc.setFont("helvetica", "bold");
-            doc.text("Notes:", 20, yPos);
-            yPos += 7;
-            doc.setFont("helvetica", "normal");
-            const splitNotes = doc.splitTextToSize(formData.notes || "No additional notes.", 170);
-            doc.text(splitNotes, 20, yPos);
-
-            // Footer
-            const dateStr = new Date().toLocaleString();
-            doc.setFontSize(10);
-            doc.setTextColor(150);
-            doc.text(`Generated on: ${dateStr}`, 20, 280);
-
-            doc.save(`IIC_Divorce_${formData.name1.replace(/\s+/g, '_')}.pdf`);
-        } catch (error) {
-            console.error("PDF generation failed:", error);
-        }
+        const { language } = useLanguage();
+        const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
+        await generateArabicPdf(template, `IIC_Divorce_${formData.name1.replace(/\s+/g, '_')}.pdf`);
     };
 
     const handleSubmit = async (e) => {
@@ -139,7 +101,7 @@ Notes: ${formData.notes}`,
                 type: 'success',
                 message: `Email sent to ${formData.email}. PDF Downloaded.`
             });
-            generatePDF();
+            await generatePDF();
             // Reset form on success
             setFormData({
                 name1: "",

@@ -5,6 +5,7 @@ import { FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaCheckCircle, FaPhoneAlt }
 import { sendEmail } from "../utils/emailService";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
+import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 
@@ -30,58 +31,25 @@ function Reservation() {
         return `${hour12}:${m} ${ampm}`;
     };
 
-    const generatePDF = () => {
-        const doc = new jsPDF();
-        const pageWidth = doc.internal.pageSize.width;
+    const generatePDF = async () => {
+        const title = t('reservation.title');
+        const sections = [
+            {
+                title: t('reservation.subtitle'),
+                fields: [
+                    { label: t('reservation.fullName'), value: formData.name },
+                    { label: t('reservation.email'), value: formData.email },
+                    { label: "Phone", value: formData.phone },
+                    { label: t('reservation.date'), value: formData.date },
+                    { label: t('reservation.time'), value: formatTime12Hour(formData.time) },
+                    { label: t('reservation.reason'), value: formData.message },
+                ]
+            }
+        ];
 
-        // Header
-        doc.setFillColor(245, 245, 245);
-        doc.rect(0, 0, pageWidth, 40, 'F');
-        doc.addImage(logo, 'PNG', 15, 5, 30, 30);
-
-        doc.setTextColor(44, 62, 80);
-        doc.setFontSize(22);
-        doc.setFont("helvetica", "bold");
-        doc.text("IMAN ISLAMIC CENTER", 55, 18);
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "normal");
-        doc.text("Visit Reservation Confirmation", 55, 28);
-
-        let yPos = 60;
-        doc.setTextColor(0, 0, 0);
-        doc.setFontSize(12);
-
-        const addRow = (label, value) => {
-            doc.setFont("helvetica", "bold");
-            doc.text(`${label}:`, 20, yPos);
-            doc.setFont("helvetica", "normal");
-            doc.text(String(value || "N/A"), 70, yPos);
-            yPos += 12;
-        };
-
-        addRow("Visitor Name", formData.name);
-        addRow("Email Address", formData.email);
-        addRow("Phone Number", formData.phone);
-        addRow("Preferred Date", formData.date);
-        addRow("Preferred Time", formatTime12Hour(formData.time));
-
-        if (formData.message) {
-            yPos += 5;
-            doc.setFont("helvetica", "bold");
-            doc.text("Reason for Visit:", 20, yPos);
-            yPos += 7;
-            doc.setFont("helvetica", "normal");
-            const splitMessage = doc.splitTextToSize(formData.message, pageWidth - 40);
-            doc.text(splitMessage, 20, yPos);
-        }
-
-        yPos = 250;
-        doc.setFontSize(10);
-        doc.setFont("helvetica", "italic");
-        doc.text("Thank you for your interest in visiting Iman Islamic Center.", pageWidth / 2, yPos, { align: 'center' });
-        doc.text("We will contact you shortly to confirm your appointment.", pageWidth / 2, yPos + 5, { align: 'center' });
-
-        doc.save(`IIC_Visit_${formData.name.replace(/\s+/g, '_')}.pdf`);
+        const { language } = useLanguage();
+        const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
+        await generateArabicPdf(template, `IIC_Visit_${formData.name.replace(/\s+/g, '_')}.pdf`);
     };
 
     const handleSubmit = async (e) => {
@@ -136,7 +104,7 @@ Reason: ${formData.reason || "General Visit"}`,
                 message: 'Reservation submitted, but email failed. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
             });
         } finally {
-            generatePDF();
+            await generatePDF();
         }
     };
 

@@ -63,8 +63,22 @@
   padding-right: 0 !important;
   display: flex !important;
   flex-direction: row !important;
-  direction: ltr !important;
-  /* Keep logo on left, menu on right always */
+}
+
+/* Switches the logo and contact info position in RTL (Arabic) mode */
+html[dir="rtl"] .custom-navbar .container-fluid {
+  flex-direction: row !important;
+  /* Row in RTL naturally puts first item (logo) on the right */
+}
+
+html[dir="rtl"] .navbar-logo {
+  margin-right: 15px !important;
+  margin-left: 25px !important;
+}
+
+html[dir="rtl"] .middle-phone-modern {
+  margin-right: 0 !important;
+  margin-left: 8px !important;
 }
 
 .navbar-brand {
@@ -698,6 +712,17 @@ html[dir="rtl"] .dropdown-submenu>.dropdown-menu {
     align-items: center;
     justify-content: space-between;
     position: relative;
+  }
+
+  /* Force RTL Layout on Mobile for Arabic */
+  html[dir="rtl"] .custom-navbar .container-fluid {
+    direction: rtl !important;
+  }
+
+  /* Flip Toggler Margins in RTL */
+  html[dir="rtl"] .navbar-toggler {
+    margin-right: 0 !important;
+    margin-left: 10px !important;
   }
 
   .custom-navbar {

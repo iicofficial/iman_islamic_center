@@ -5,6 +5,7 @@ import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
+import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 
 function QuranBoysApplication() {
     const { t } = useLanguage();
@@ -169,96 +170,48 @@ function QuranBoysApplication() {
         return Object.keys(errors).length === 0;
     };
 
-    const generatePDF = () => {
-        const doc = new jsPDF();
-        const pageWidth = doc.internal.pageSize.width;
-        const margin = 20;
+    const generatePDF = async () => {
+        const title = t('quranBoys.title');
+        const sections = [
+            {
+                title: t('quranBoys.studentInfo'),
+                fields: [
+                    { label: t('quranBoys.studentName'), value: formData.studentName },
+                    { label: t('quranBoys.age'), value: formData.age },
+                    { label: t('quranBoys.grade'), value: formData.grade },
+                    { label: t('quranBoys.school'), value: formData.school },
+                    { label: t('quranBoys.address'), value: formData.address },
+                ]
+            },
+            {
+                title: t('quranBoys.guardianInfo'),
+                fields: [
+                    { label: t('quranBoys.guardianName'), value: formData.guardianName },
+                    { label: t('quranBoys.kinship'), value: formData.kinship },
+                    { label: t('quranBoys.guardianJob'), value: formData.guardianJob },
+                ]
+            },
+            {
+                title: t('quranBoys.contactInfo'),
+                fields: [
+                    { label: t('quranBoys.mobile'), value: formData.mobile },
+                    { label: t('quranBoys.homePhone'), value: formData.homePhone },
+                    { label: t('quranBoys.workPhone'), value: formData.workPhone },
+                    { label: t('quranBoys.email'), value: formData.email },
+                ]
+            },
+            {
+                title: t('quranBoys.acknowledgement'),
+                fields: [
+                    { label: t('quranBoys.guardianNameAck'), value: formData.guardianNameAck },
+                    { label: t('quranBoys.signature'), value: formData.signature },
+                ]
+            }
+        ];
 
-        // Header
-        doc.setFillColor(245, 245, 245);
-        doc.rect(0, 0, pageWidth, 40, 'F');
-        doc.addImage(logo, 'PNG', 15, 5, 30, 30);
-
-        doc.setTextColor(44, 62, 80);
-        doc.setFontSize(22);
-        doc.setFont("helvetica", "bold");
-        doc.text("IMAN ISLAMIC CENTER", 55, 18);
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "normal");
-        doc.text("Quran Memorization Program (Boys)", 55, 28);
-        doc.setTextColor(0, 0, 0);
-
-        let yPos = 55;
-        const lineHeight = 8;
-        const leftCol = margin;
-        const rightCol = pageWidth / 2 + 10;
-
-        // Helper to add lines
-        const addLine = (label, value, x = leftCol) => {
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(10);
-            doc.text(`${label}: `, x, yPos);
-            doc.setFont("helvetica", "normal");
-            doc.text(String(value || ""), x + doc.getTextWidth(`${label}: `) + 2, yPos);
-        };
-
-        // Section Title
-        const addSection = (title) => {
-            yPos += 10;
-            doc.setFillColor(39, 86, 155);
-            doc.rect(margin, yPos - 6, pageWidth - (margin * 2), 8, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFont("helvetica", "bold");
-            doc.text(title, margin + 5, yPos);
-            doc.setTextColor(0, 0, 0);
-            yPos += 10;
-        };
-
-        // Student Info
-        addSection("STUDENT INFORMATION");
-        addLine("Name", formData.studentName);
-        yPos += lineHeight;
-        addLine("Grade", formData.grade);
-        addLine("Age", formData.age, rightCol);
-        yPos += lineHeight;
-        addLine("School", formData.school);
-        yPos += lineHeight;
-        addLine("Address", formData.address);
-        yPos += 5;
-
-        // Guardian Info
-        addSection("GUARDIAN INFORMATION");
-        addLine("Name", formData.guardianName);
-        yPos += lineHeight;
-        addLine("Kinship", formData.kinship);
-        addLine("Job/Title", formData.guardianJob, rightCol);
-        yPos += 5;
-
-        // Contact Info
-        addSection("CONTACT INFORMATION");
-        addLine("Mobile", formData.mobile);
-        addLine("Home", formData.homePhone, rightCol);
-        yPos += lineHeight;
-        addLine("Email", formData.email);
-        addLine("Work", formData.workPhone, rightCol);
-        yPos += 15;
-
-        // Acknowledgement
-        doc.setLineWidth(0.5);
-        doc.line(margin, yPos, pageWidth - margin, yPos);
-        yPos += 10;
-        doc.setFont("helvetica", "italic");
-        doc.setFontSize(9);
-        doc.text("I acknowledge that I have read and agreed to the program policies.", margin, yPos);
-        yPos += 10;
-
-        // Signatures
-        doc.setFont("helvetica", "bold");
-        doc.text("Guardian Name: " + formData.guardianNameAck, margin, yPos);
-        yPos += 8;
-        doc.text("Signature: " + formData.signature, margin, yPos);
-
-        doc.save(`IIC_Quran_Boys_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
+        const { language } = useLanguage();
+        const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
+        await generateArabicPdf(template, `IIC_Quran_Boys_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
     };
 
 
@@ -335,7 +288,7 @@ Contact: ${formData.mobile} / ${formData.email}`,
         } finally {
             // 2. Generate PDF regardless of email success
             try {
-                generatePDF();
+                await generatePDF();
             } catch (error) {
                 console.error("PDF Generation Error", error);
             }

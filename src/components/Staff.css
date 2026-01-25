@@ -119,10 +119,11 @@
 
 /* IMAGE SIDE - Stacked Photos */
 .sticky-image-wrapper {
-    float: right;
+    float: left;
     width: 32%;
     max-width: 320px;
-    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-left: 0;
     margin-bottom: 1rem;
     margin-top: 0;
     padding-bottom: 0;
@@ -141,7 +142,7 @@
 .bio-item {
     margin-bottom: 1.2rem;
     font-size: 1.75rem;
-    line-height: 1.7;
+    line-height: 2.2;
     color: #444;
     text-align: justify;
     clear: none;
@@ -169,6 +170,7 @@
     border: none;
     background-color: transparent;
     transition: transform 0.3s ease;
+    transform: scaleX(-1);
 }
 
 .staff-page.rtl .imam-sticky-photo {

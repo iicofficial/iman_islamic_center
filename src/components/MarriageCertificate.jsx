@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
+import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 import "./MarriageCertificate.css";
 import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
@@ -147,224 +148,67 @@ function MarriageCertificate() {
         setValidationErrors({ ...validationErrors, [name]: error });
     };
 
-    const generatePDF = () => {
-        const doc = new jsPDF();
-        const pageWidth = doc.internal.pageSize.width;
-        const margin = 15;
-        const contentWidth = pageWidth - (margin * 2);
+    // Helper function to convert 24-hour time to 12-hour AM/PM format
+    const formatTime12Hour = (time24) => {
+        if (!time24) return "_______________";
+        const [h, m] = time24.split(':');
+        const hourNum = parseInt(h);
+        const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
+        const ampm = hourNum >= 12 ? 'PM' : 'AM';
+        return `${hour12}:${m} ${ampm}`;
+    };
 
-        // Helper function to convert 24-hour time to 12-hour AM/PM format
-        const formatTime12Hour = (time24) => {
-            if (!time24) return "_______________";
-            const [h, m] = time24.split(':');
-            const hourNum = parseInt(h);
-            const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
-            const ampm = hourNum >= 12 ? 'PM' : 'AM';
-            return `${hour12}:${m} ${ampm}`;
-        };
+    const generatePDF = async () => {
+        const title = t('marriageCertificate.title');
+        const sections = [
+            {
+                title: t('marriageCertificate.groomInfo'),
+                fields: [
+                    { label: t('marriageCertificate.groomName'), value: formData.groomName },
+                    { label: t('marriageCertificate.licenseId'), value: formData.groomLicenseId },
+                    { label: t('marriageCertificate.state'), value: formData.groomLicenseState },
+                    { label: t('marriageCertificate.placeOfBirth'), value: formData.groomBirthPlace },
+                    { label: t('marriageCertificate.dateOfBirth'), value: formData.groomBirthDate },
+                ]
+            },
+            {
+                title: t('marriageCertificate.brideInfo'),
+                fields: [
+                    { label: t('marriageCertificate.brideName'), value: formData.brideName },
+                    { label: t('marriageCertificate.licenseId'), value: formData.brideLicenseId },
+                    { label: t('marriageCertificate.state'), value: formData.brideLicenseState },
+                    { label: t('marriageCertificate.placeOfBirth'), value: formData.brideBirthPlace },
+                    { label: t('marriageCertificate.dateOfBirth'), value: formData.brideBirthDate },
+                ]
+            },
+            {
+                title: t('marriageCertificate.signatures'),
+                fields: [
+                    { label: t('marriageCertificate.groomSignature'), value: formData.groomSignature },
+                    { label: "Bride's Representative (Wali)", value: formData.brideRepSignature },
+                ]
+            },
+            {
+                title: t('marriageCertificate.witnesses'),
+                fields: [
+                    { label: t('marriageCertificate.witness1Name'), value: formData.witness1Name },
+                    { label: t('marriageCertificate.witness2Name'), value: formData.witness2Name },
+                ]
+            },
+            {
+                title: t('marriageCertificate.appointmentTitle'),
+                fields: [
+                    { label: t('marriageCertificate.appointmentDate'), value: formData.appointmentDate },
+                    { label: t('marriageCertificate.appointmentTime'), value: formatTime12Hour(formData.appointmentTime) },
+                    { label: t('marriageCertificate.appointmentLocation'), value: formData.appointmentLocation === 'home' ? t('marriageCertificate.homeOption') : t('marriageCertificate.masjidOption') },
+                    { label: "Address", value: formData.homeAddress || 'N/A' },
+                ]
+            }
+        ];
 
-        // Helper function to draw section box
-        const drawSectionBox = (startY, height, title) => {
-            // Draw shaded header
-            doc.setFillColor(39, 86, 155); // Blue color matching your theme
-            doc.rect(margin, startY, contentWidth, 8, 'F');
-
-            // Title in white
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(11);
-            doc.setFont("helvetica", "bold");
-            doc.text(title, margin + 3, startY + 5.5);
-
-            // Reset text color
-            doc.setTextColor(0, 0, 0);
-
-            // Draw border around section
-            doc.setDrawColor(39, 86, 155);
-            doc.setLineWidth(0.3);
-            doc.rect(margin, startY, contentWidth, height);
-
-            return startY + 8; // Return position after header
-        };
-
-        // Helper function to add field in two-column layout
-        const addField = (label, value, xPos, yPos, isFullWidth = false) => {
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(9);
-            doc.text(label + ":", xPos, yPos);
-
-            doc.setFont("helvetica", "normal");
-            const labelWidth = doc.getTextWidth(label + ": ");
-            const maxWidth = isFullWidth ? contentWidth - 6 : (contentWidth / 2) - 8;
-            const lines = doc.splitTextToSize(value || "_______________", maxWidth - labelWidth);
-            doc.text(lines, xPos + labelWidth, yPos);
-
-            return yPos + (lines.length * 4);
-        };
-
-        let yPos = 15;
-
-        // ===== HEADER =====
-        doc.setFillColor(181, 216, 255); // Lighter blue color
-        doc.rect(0, 0, pageWidth, 45, 'F');
-
-        // Add stretched logo on the left
-        doc.addImage(logo, 'PNG', 12, 8, 40, 30);
-
-        doc.setTextColor(0, 0, 0); // Black text for better contrast on light blue
-        doc.setFontSize(18); // Smaller heading
-        doc.setFont("helvetica", "bold");
-        doc.text("IMAN ISLAMIC CENTER", pageWidth / 2, 16, { align: "center" });
-
-        doc.setFontSize(12); // Smaller subtitle
-        doc.setFont("helvetica", "normal");
-        doc.text("Marriage Certificate Application", pageWidth / 2, 25, { align: "center" });
-
-        doc.setFontSize(8);
-        doc.text("901 W Dawes Avenue, Lincoln, NE 68521", pageWidth / 2, 33, { align: "center" });
-        doc.text("Phone: (402) 730-3883 | Email: info@iman-islam.org", pageWidth / 2, 39, { align: "center" });
-
-        doc.setTextColor(0, 0, 0);
-        yPos = 53;
-
-        // ===== GROOM'S INFORMATION =====
-        let sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 38, "GROOM'S INFORMATION");
-        yPos += 3;
-
-        const leftCol = margin + 3;
-        const rightCol = margin + (contentWidth / 2) + 3;
-
-        yPos = addField("Full Name", formData.groomName, leftCol, yPos, true);
-        yPos += 1;
-
-        let tempY = addField("License ID", formData.groomLicenseId, leftCol, yPos);
-        addField("State", formData.groomLicenseState, rightCol, yPos);
-        yPos = tempY + 1;
-
-        tempY = addField("Place of Birth", formData.groomBirthPlace, leftCol, yPos);
-        addField("Date of Birth", formData.groomBirthDate, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== BRIDE'S INFORMATION =====
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 38, "BRIDE'S INFORMATION");
-        yPos += 3;
-
-        yPos = addField("Full Name", formData.brideName, leftCol, yPos, true);
-        yPos += 1;
-
-        tempY = addField("License ID", formData.brideLicenseId, leftCol, yPos);
-        addField("State", formData.brideLicenseState, rightCol, yPos);
-        yPos = tempY + 1;
-
-        tempY = addField("Place of Birth", formData.brideBirthPlace, leftCol, yPos);
-        addField("Date of Birth", formData.brideBirthDate, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== SIGNATURES =====
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 42, "SIGNATURES");
-        yPos += 3;
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(9);
-        doc.text("Groom's Signature:", leftCol, yPos);
-        yPos += 4;
-
-        tempY = addField("Name", formData.groomSignature, leftCol, yPos);
-        addField("Date", formData.groomSignatureDate, rightCol, yPos);
-        yPos = tempY + 2;
-
-        doc.setFont("helvetica", "bold");
-        doc.text("Bride's Representative:", leftCol, yPos);
-        yPos += 4;
-
-        tempY = addField("Name", formData.brideRepSignature, leftCol, yPos);
-        addField("Date", formData.brideRepSignatureDate, rightCol, yPos);
-        yPos = tempY + 1;
-
-        tempY = addField("License ID", formData.brideRepLicenseId, leftCol, yPos);
-        addField("State", formData.brideRepLicenseState, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== WITNESSES =====
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 22, "WITNESSES");
-        yPos += 3;
-
-        tempY = addField("Witness 1", formData.witness1Name, leftCol, yPos);
-        addField("ID Number", formData.witness1Id, rightCol, yPos);
-        yPos = tempY + 1;
-
-        tempY = addField("Witness 2", formData.witness2Name, leftCol, yPos);
-        addField("ID Number", formData.witness2Id, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== IIC OFFICIALS =====
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 18, "IIC OFFICIALS");
-        yPos += 3;
-
-        tempY = addField("Authorized Person", formData.authorizedPersonName, leftCol, yPos);
-        addField("License ID", formData.authorizedPersonId, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== ADDITIONAL INFORMATION =====
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, 18, "ADDITIONAL INFORMATION");
-        yPos += 3;
-
-        tempY = addField("Dowry Amount", formData.dowryAmount, leftCol, yPos);
-        addField("Date of Marriage", formData.nikaahDate, rightCol, yPos);
-        yPos = tempY + 5;
-
-        // ===== APPOINTMENT DETAILS =====
-        const appointmentHeight = formData.appointmentLocation === 'home' && formData.homeAddress ? 30 : 26;
-        sectionStart = yPos;
-        yPos = drawSectionBox(sectionStart, appointmentHeight, "APPOINTMENT DETAILS");
-        yPos += 3;
-
-        // Contact info
-        doc.setFont("helvetica", "bold");
-        doc.text("Contact Phone:", leftCol, yPos + 18); // Place near bottom of box
-        doc.setFont("helvetica", "normal");
-        doc.text(formData.phone || "Not provided", leftCol + 30, yPos + 18);
-
-        doc.setFont("helvetica", "bold");
-        doc.text("Contact Email:", rightCol, yPos + 18);
-        doc.setFont("helvetica", "normal");
-        doc.text(formData.email || "Not provided", rightCol + 25, yPos + 18);
-
-        tempY = addField("Date", formData.appointmentDate, leftCol, yPos);
-        addField("Time", formatTime12Hour(formData.appointmentTime), rightCol, yPos);
-        yPos = tempY + 1;
-
-        const location = formData.appointmentLocation === 'masjid' ? 'At the Masjid' : 'Home Visit';
-        yPos = addField("Location", location, leftCol, yPos, true);
-
-        if (formData.appointmentLocation === 'home' && formData.homeAddress) {
-            yPos += 1;
-            yPos = addField("Address", formData.homeAddress, leftCol, yPos, true);
-        }
-        yPos += 5;
-
-        // ===== FOOTER =====
-        yPos += 5;
-        doc.setFillColor(240, 240, 240);
-        doc.rect(margin, yPos, contentWidth, 18, 'F');
-
-        doc.setFontSize(9);
-        doc.setFont("helvetica", "italic");
-        doc.setTextColor(60, 60, 60);
-        doc.text("This is a copy of your marriage certificate application.", pageWidth / 2, yPos + 6, { align: "center" });
-        doc.text("Please bring this document to your appointment at the Islamic Center.", pageWidth / 2, yPos + 11, { align: "center" });
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(8);
-        doc.text("For questions, contact: (402) 730-3883 | info@iman-islam.org", pageWidth / 2, yPos + 15, { align: "center" });
-
-        // Save the PDF
-        doc.save("Marriage_Certificate_Application.pdf");
+        const { language } = useLanguage();
+        const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
+        await generateArabicPdf(template, "Marriage_Certificate_Application.pdf");
     };
 
     const handleSubmit = async (e) => {
@@ -442,7 +286,7 @@ Appointment Time: ${formattedTime}`,
                 });
             } finally {
                 // 2. Generate and download PDF regardless of email success
-                generatePDF();
+                await generatePDF();
             }
         }
     };

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useLanguage } from "../context/LanguageContext";
-import imamImage from '../assets/imam.png';
+import imamImageEn from '../assets/imame.png';
+import imamImageAr from '../assets/imam.png';
 import imamBanner from '../assets/imam2.png';
 import './Staff.css';
 
 const Staff = () => {
     const { language } = useLanguage();
     const isRtl = language === 'ar';
+    const imamImage = isRtl ? imamImageAr : imamImageEn;
 
     useEffect(() => {
         window.scrollTo(0, 0);
