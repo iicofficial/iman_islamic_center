@@ -6,6 +6,8 @@ import jsPDF from "jspdf";
 import logo from "../assets/logo.png";
 import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 import StatusModal from "./StatusModal";
+import { sendEmail } from "../utils/emailService";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
 
 function Contact() {
     const { t, language } = useLanguage();
