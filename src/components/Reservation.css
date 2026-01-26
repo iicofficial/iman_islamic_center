@@ -13,11 +13,25 @@
     border: 2px solid #27569b;
     /* Solid blue border all around */
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; Removed to allow dropdowns to overflow */
 }
 
-/* Background Decoration */
-.reservation-card::before {
+/* New container for background decoration that keeps overflow hidden */
+.card-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    /* Matches card */
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Background Decoration moved to .card-decoration::before */
+.card-decoration::before {
     content: '';
     position: absolute;
     top: -100px;
@@ -40,6 +54,13 @@
     font-size: 1.1rem;
     margin-bottom: 50px;
     font-weight: 500;
+}
+
+/* Ensure content sits above the decoration */
+.reservation-header,
+.reservation-form {
+    position: relative;
+    z-index: 1;
 }
 
 .input-group-modern {

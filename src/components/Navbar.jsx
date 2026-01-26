@@ -128,7 +128,7 @@ function Navbar() {
 
                     {/* Member Login Button */}
                     <Link
-                        to="/announcements"
+                        to="/member-login"
                         className="member-login-btn me-2"
                         title={t('navbar.memberLogin')}
                         target="_blank"
@@ -331,7 +331,7 @@ function Navbar() {
 
                         <li className="nav-item d-xl-none">
                             <Link
-                                to="/announcements"
+                                to="/member-login"
                                 className="member-login-btn my-2"
                                 onClick={closeMenu}
                                 target="_blank"

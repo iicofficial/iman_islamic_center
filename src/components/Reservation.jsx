@@ -112,6 +112,7 @@ Reason: ${formData.message || "General Visit"}`,
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="reservation-card">
+                            <div className="card-decoration"></div>
                             <div className="reservation-header text-center">
                                 <h2 className="section-title">{t('reservation.title')}</h2>
                                 <p className="section-subtitle">{t('reservation.subtitle')}</p>

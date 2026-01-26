@@ -58,7 +58,7 @@ function App() {
           <Route path="/ar" element={<><Navbar /><ArabicHome /><Footer /></>} />
 
           {/* Standalone Pages without default Navbar/Footer (handled inside component or custom) */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/member-login" element={<Login />} />
           <Route
             path="/announcements"
             element={
