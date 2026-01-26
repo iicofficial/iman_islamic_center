@@ -22,12 +22,12 @@ const ProtectedRoute = ({ children }) => {
     }
 
     if (!currentUser) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/member-login" />;
     }
 
     // Double security check for domain (Frontend only, backend rules should also exist in Firestore)
     if (!currentUser.email.endsWith('@iman-islam.org')) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/member-login" />;
     }
 
     return children;

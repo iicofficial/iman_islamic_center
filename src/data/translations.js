@@ -356,21 +356,27 @@ export const translations = {
             priorityTitle: "Priority Announcements",
             urgentBadge: "URGENT",
             updateBadge: "UPDATE",
-            resourcesTitle: "Resources",
+            resourcesTitle: "Quick Resources",
             dutiesTitle: "Upcoming Duties",
             dutiesWeekend: "Weekend Supervision",
             dutiesCleaning: "Cleaning Roster",
             handbook: "Staff Handbook 2026",
-            leaveRequest: "Leave Request Form",
-            incidentReport: "Incident Report Template",
+            leaveRequest: "Expense Reimbursement Form",
+            booking: "Event Room Booking",
+            incidentReport: "Incident Report Portal",
             verifying: "Verifying Credentials...",
-            // Sample content keys (usually dynamic, but hardcoded for now)
-            announcement1Title: "Quarterly Curriculum Review Meeting",
-            announcement1Text: "Mandatory attendance required for all teaching staff this Friday post-Jummah. Please review the attached PDF before arriving.",
-            announcement2Title: "New Gate Security Protocols",
-            announcement2Text: "Effective immediately, all staff badges must be visible at entry points. See the security office if you need a replacement.",
-            duty1Person: "Brother Ahmed & Sister Fatima",
-            duty2Person: "Group B (Feb 1 - Feb 7)"
+            // New Dashboard Content
+            ramadanTitle: "Ramadan 2026 Preparation Committee",
+            ramadanText: "All staff members are requested to submit their department budget proposals for Ramadan by this Friday. We are finalizing the Tarawih schedule and guest speaker list.",
+            constructionTitle: "New Education Wing Construction",
+            constructionText: "Phase 2 of the construction has been approved. Contractors will be on-site starting next Monday to begin foundation work for the new classrooms. Please ensure all students use the North Entrance only.",
+            meetingTitle: "Teacher's Meeting - Curriculum Review",
+            meetingText: "A mandatory meeting for all Weekend School teachers is scheduled for Sunday at 2:00 PM in the Conference Room. We will be reviewing the new Islamic Studies curriculum.",
+            jummahDuty: "Jummah Khutbah (Next Week)",
+            securityDuty: "Weekend Security",
+            cleaningDuty: "Cleaning Rotation",
+            testMode: "SYSTEM TEST MODE",
+            testModeDesc: "This portal is currently in Beta Testing. The announcements and duties listed below are for demonstration purposes only."
         }
     },
     ar: {
@@ -732,21 +738,27 @@ export const translations = {
             priorityTitle: "إعلانات هامة",
             urgentBadge: "عاجل",
             updateBadge: "تحديث",
-            resourcesTitle: "الموارد",
+            resourcesTitle: "الموارد السريعة",
             dutiesTitle: "المهام القادمة",
             dutiesWeekend: "الإشراف في عطلة نهاية الأسبوع",
             dutiesCleaning: "جدول التنظيف",
             handbook: "دليل الموظفين 2026",
-            leaveRequest: "نموذج طلب إجازة",
-            incidentReport: "نموذج تقرير الحوادث",
+            leaveRequest: "نموذج تعويض المصروفات",
+            incidentReport: "بوابة تقرير الحوادث",
+            booking: "حجز قاعة الفعاليات",
             verifying: "جاري التحقق من بيانات الاعتماد...",
-            // Sample content keys
-            announcement1Title: "اجتماع مراجعة المناهج الفصلية",
-            announcement1Text: "الحضور إلزامي لجميع أعضاء هيئة التدريس هذا الجمعة بعد صلاة الجمعة. يرجى مراجعة ملف PDF المرفق قبل الحضور.",
-            announcement2Title: "بروتوكولات أمن البوابة الجديدة",
-            announcement2Text: "اعتبارًا من الآن، يجب أن تكون جميع شارات الموظفين مرئية عند نقاط الدخول. راجع مكتب الأمن إذا كنت بحاجة إلى استبدال.",
-            duty1Person: "الأخ أحمد والأخت فاطمة",
-            duty2Person: "المجموعة ب (1 فبراير - 7 فبراير)"
+            // New Dashboard Content
+            ramadanTitle: "لجنة التحضير لرمضان 2026",
+            ramadanText: "يُطلب من جميع الموظفين تقديم مقترحات ميزانية أقسامهم لرمضان بحلول يوم الجمعة. نحن بصدد الانتهاء من جدول التراويح وقائمة المتحدثين الضيوف.",
+            constructionTitle: "بناء الجناح التعليمي الجديد",
+            constructionText: "تمت الموافقة على المرحلة الثانية من البناء. سيبدأ المقاولون العمل في الموقع يوم الاثنين المقبل لبدء أعمال الأساس للفصول الدراسية الجديدة.",
+            meetingTitle: "اجتماع المعلمين - مراجعة المناهج",
+            meetingText: "اجتماع إلزامي لجميع معلمي مدرسة نهاية الأسبوع يوم الأحد الساعة 2:00 م في قاعة المؤتمرات لمراجعة مناهج الدراسات الإسلامية الجديدة.",
+            jummahDuty: "خطبة الجمعة (الأسبوع القادم)",
+            securityDuty: "أمن عطلة نهاية الأسبوع",
+            cleaningDuty: "نوبة التنظيف",
+            testMode: "وضع اختبار النظام",
+            testModeDesc: "هذه البوابة حاليًا في مرحلة الاختبار التجريبي. الإعلانات والمهام المدرجة أدناه هي لأغراض العرض التوضيحي فقط."
         }
     }
 };

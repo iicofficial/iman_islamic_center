@@ -21,7 +21,7 @@ const Announcements = () => {
 
     const handleLogout = async () => {
         await logout();
-        navigate('/login');
+        navigate('/member-login');
     };
 
     if (loading) {
@@ -40,17 +40,25 @@ const Announcements = () => {
             <Navbar /> {/* Optional: Keep main navbar or make a custom one */}
 
             <div className="portal-container container pb-5">
-                <div className="portal-header d-flex justify-content-between align-items-end mb-5">
+                <div className="portal-header d-flex justify-content-between align-items-start mb-5">
                     <div>
                         <img src={logo} alt="IIC Logo" style={{ height: '70px', marginBottom: '15px' }} />
                         <div className="d-block"></div>
                         <span className="badge bg-gold mb-2"><FaLock className="me-1" /> {t('announcements.secureBadge')}</span>
                         <h1 className="portal-title">{t('announcements.portalTitle')}</h1>
-                        <p className="portal-subtitle">{t('announcements.welcome')} <span className="admin-name">{currentUser?.displayName}</span></p>
+                        <div className="d-flex align-items-center flex-wrap gap-3">
+                            <p className="portal-subtitle mb-0">{t('announcements.welcome')} <span className="admin-name">{currentUser?.displayName}</span></p>
+                            <button onClick={handleLogout} className="btn btn-outline-danger btn-sm rounded-pill px-3 py-1" style={{ fontSize: '0.8rem' }}>
+                                <FaSignOutAlt className="me-2" /> {t('announcements.signOut')}
+                            </button>
+                        </div>
                     </div>
-                    <button onClick={handleLogout} className="btn btn-outline-danger btn-sm">
-                        <FaSignOutAlt className="me-2" /> {t('announcements.signOut')}
-                    </button>
+                    <div className="d-flex flex-column align-items-end" style={{ marginTop: '10px' }}>
+                        <div className="alert alert-warning py-2 px-3 mb-3 border-warning shadow-sm text-start" style={{ maxWidth: '450px', fontSize: '0.85rem' }}>
+                            <strong className="d-block mb-1"><i className="bi bi-exclamation-triangle-fill me-2"></i>{t('announcements.testMode')}</strong>
+                            <span className="d-block text-muted small" style={{ lineHeight: '1.4' }}>{t('announcements.testModeDesc')}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="row g-4">
@@ -61,26 +69,34 @@ const Announcements = () => {
                                 <h3 className="portal-section-title"><FaBullhorn className="me-2 text-primary" /> {t('announcements.priorityTitle')}</h3>
                             </div>
 
+                            {/* Urgent Update */}
                             <div className="announcement-item p-3 mb-3">
                                 <div className="d-flex justify-content-between align-items-start mb-2">
                                     <span className="badge bg-danger">{t('announcements.urgentBadge')}</span>
-                                    <small className="text-muted">Jan 24, 2026</small>
+                                    <small className="text-muted">Jan 26, 2026</small>
                                 </div>
-                                <h5 className="announcement-title">{t('announcements.announcement1Title')}</h5>
-                                <p className="announcement-text">
-                                    {t('announcements.announcement1Text')}
-                                </p>
+                                <h5 className="announcement-title">{t('announcements.ramadanTitle')}</h5>
+                                <p className="announcement-text">{t('announcements.ramadanText')}</p>
                             </div>
 
+                            {/* General Update */}
                             <div className="announcement-item p-3 mb-3">
                                 <div className="d-flex justify-content-between align-items-start mb-2">
-                                    <span className="badge bg-info text-dark">{t('announcements.updateBadge')}</span>
+                                    <span className="badge bg-primary">{t('announcements.updateBadge')}</span>
+                                    <small className="text-muted">Jan 24, 2026</small>
+                                </div>
+                                <h5 className="announcement-title">{t('announcements.constructionTitle')}</h5>
+                                <p className="announcement-text">{t('announcements.constructionText')}</p>
+                            </div>
+
+                            {/* Event Update */}
+                            <div className="announcement-item p-3 mb-3">
+                                <div className="d-flex justify-content-between align-items-start mb-2">
+                                    <span className="badge bg-success">{t('navbar.events')}</span>
                                     <small className="text-muted">Jan 20, 2026</small>
                                 </div>
-                                <h5 className="announcement-title">{t('announcements.announcement2Title')}</h5>
-                                <p className="announcement-text">
-                                    {t('announcements.announcement2Text')}
-                                </p>
+                                <h5 className="announcement-title">{t('announcements.meetingTitle')}</h5>
+                                <p className="announcement-text">{t('announcements.meetingText')}</p>
                             </div>
                         </div>
                     </div>
@@ -92,19 +108,30 @@ const Announcements = () => {
                             <ul className="portal-links">
                                 <li><a href="#">{t('announcements.handbook')}</a></li>
                                 <li><a href="#">{t('announcements.leaveRequest')}</a></li>
+                                <li><a href="#">{t('announcements.booking')}</a></li>
                                 <li><a href="#">{t('announcements.incidentReport')}</a></li>
                             </ul>
                         </div>
 
                         <div className="portal-panel sidebar-panel p-4">
                             <h4 className="portal-section-title mb-3"><FaCalendarCheck className="me-2 text-success" /> {t('announcements.dutiesTitle')}</h4>
-                            <div className="duty-item mb-2">
-                                <strong className="d-block duty-title">{t('announcements.dutiesWeekend')}</strong>
-                                <span className="duty-person">{t('announcements.duty1Person')}</span>
+
+                            <div className="duty-card mb-3 p-2 border-start border-4 border-warning bg-light">
+                                <strong className="d-block text-dark">{t('announcements.jummahDuty')}</strong>
+                                <span className="text-muted small">Friday, Jan 30</span>
+                                <div className="mt-1 fw-bold text-primary">Abdulaziz Abdullah Al-Abbasi</div>
                             </div>
-                            <div className="duty-item">
-                                <strong className="d-block duty-title">{t('announcements.dutiesCleaning')}</strong>
-                                <span className="duty-person">{t('announcements.duty2Person')}</span>
+
+                            <div className="duty-card mb-3 p-2 border-start border-4 border-info bg-light">
+                                <strong className="d-block text-dark">{t('announcements.securityDuty')}</strong>
+                                <span className="text-muted small">Sat-Sun, Jan 31-Feb 1</span>
+                                <div className="mt-1 fw-bold text-primary">Br. Omar & Team</div>
+                            </div>
+
+                            <div className="duty-card p-2 border-start border-4 border-success bg-light">
+                                <strong className="d-block text-dark">{t('announcements.cleaningDuty')}</strong>
+                                <span className="text-muted small">{t('common.select') || 'Checklist'}</span>
+                                <div className="mt-1 fw-bold text-primary">Group B (Sisters)</div>
                             </div>
                         </div>
                     </div>

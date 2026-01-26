@@ -27,8 +27,14 @@ export const AuthProvider = ({ children }) => {
             }
             return true;
         } catch (err) {
-            console.error("Login Failed", err);
-            setError('Login failed. Please try again.');
+            console.error("Login Failed:", err.code, err.message);
+            if (err.code === 'auth/unauthorized-domain') {
+                setError('Domain not authorized. Add to Firebase Console.');
+            } else if (err.code === 'auth/api-key-not-valid') {
+                setError('Invalid API Key. Check .env file.');
+            } else {
+                setError(`Login failed: ${err.message}`);
+            }
             return false;
         }
     };

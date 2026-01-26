@@ -12,6 +12,10 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+// Debug: Check if config is loaded
+console.log("Firebase Init - Project:", firebaseConfig.projectId);
+console.log("Firebase Init - API Key Present:", !!firebaseConfig.apiKey);
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
