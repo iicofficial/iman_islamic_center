@@ -3,7 +3,8 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    // Hardcoding key temporarily to fix Vercel sync issue
+    apiKey: "AIzaSyCKSMMRnCsvVwDzt1DiVtr9zXVau9VMf5M",
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
@@ -32,9 +33,6 @@ requiredKeys.forEach(key => {
     }
 });
 console.log("Full Auth Domain:", firebaseConfig.authDomain);
-if (firebaseConfig.apiKey && firebaseConfig.apiKey.includes('Z4cA')) {
-    console.error("ALERT: You are still using the OLD WRONG API KEY (ending in Z4cA). You must REDEPLOY on Vercel.");
-}
 console.groupEnd();
 
 // Initialize Firebase
