@@ -53,12 +53,7 @@ const Announcements = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="d-flex flex-column align-items-end" style={{ marginTop: '10px' }}>
-                        <div className="alert alert-warning py-2 px-3 mb-3 border-warning shadow-sm text-start" style={{ maxWidth: '450px', fontSize: '0.85rem' }}>
-                            <strong className="d-block mb-1"><i className="bi bi-exclamation-triangle-fill me-2"></i>{t('announcements.testMode')}</strong>
-                            <span className="d-block text-muted small" style={{ lineHeight: '1.4' }}>{t('announcements.testModeDesc')}</span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div className="row g-4">
