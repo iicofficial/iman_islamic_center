@@ -24,9 +24,17 @@ console.group("Firebase Configuration Check");
 console.log("Project ID:", firebaseConfig.projectId);
 requiredKeys.forEach(key => {
     const value = import.meta.env[key];
-    console.log(`${key}: ${value ? '✅ Found' : '❌ MISSING'}`);
+    if (value) {
+        // Show first 4 characters to confirm it's a real key (e.g. AIza...)
+        console.log(`${key}: ✅ [${value.substring(0, 4)}...${value.substring(value.length - 4)}]`);
+    } else {
+        console.log(`${key}: ❌ MISSING`);
+    }
 });
-if (!firebaseConfig.apiKey) console.error("CRITICAL: Firebase API Key is missing! Check Vercel Env Vars.");
+console.log("Auth Domain:", firebaseConfig.authDomain);
+if (!firebaseConfig.apiKey || firebaseConfig.apiKey === "undefined") {
+    console.error("CRITICAL: Firebase API Key is missing or string 'undefined'!");
+}
 console.groupEnd();
 
 // Initialize Firebase
