@@ -3,33 +3,22 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    // Hardcoding key temporarily to fix Vercel sync issue
     apiKey: "AIzaSyCKSMMRnCsvVwDzt1DiVtr9zXVau9VMf5M",
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+    authDomain: "iman-islamic-center.firebaseapp.com",
+    projectId: "iman-islamic-center",
+    storageBucket: "iman-islamic-center.firebasestorage.app",
+    messagingSenderId: "313930017571",
+    appId: "1:313930017571:web:e397ea6674c6636ba8fa96",
+    measurementId: "G-WJYWELMKHS"
 };
 
 // Debug: Detailed Config Check
-const requiredKeys = [
-    'VITE_FIREBASE_API_KEY',
-    'VITE_FIREBASE_AUTH_DOMAIN',
-    'VITE_FIREBASE_PROJECT_ID',
-    'VITE_FIREBASE_APP_ID'
-];
-
-console.group("Firebase Configuration Check - v1.0.3");
+console.group("Firebase Configuration Check - v1.0.4");
 console.log("Project ID:", firebaseConfig.projectId);
-requiredKeys.forEach(key => {
-    const value = import.meta.env[key];
-    if (value) {
-        // Show enough of the key to distinguish it
+Object.keys(firebaseConfig).forEach(key => {
+    const value = firebaseConfig[key];
+    if (value && typeof value === 'string') {
         console.log(`${key}: ✅ [${value.substring(0, 6)}...${value.slice(-6)}]`);
-    } else {
-        console.log(`${key}: ❌ MISSING`);
     }
 });
 console.log("Full Auth Domain:", firebaseConfig.authDomain);
