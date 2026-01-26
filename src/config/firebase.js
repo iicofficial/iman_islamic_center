@@ -20,20 +20,20 @@ const requiredKeys = [
     'VITE_FIREBASE_APP_ID'
 ];
 
-console.group("Firebase Configuration Check");
+console.group("Firebase Configuration Check - v1.0.2");
 console.log("Project ID:", firebaseConfig.projectId);
 requiredKeys.forEach(key => {
     const value = import.meta.env[key];
     if (value) {
-        // Show first 4 characters to confirm it's a real key (e.g. AIza...)
-        console.log(`${key}: ✅ [${value.substring(0, 4)}...${value.substring(value.length - 4)}]`);
+        // Show enough of the key to distinguish it
+        console.log(`${key}: ✅ [${value.substring(0, 6)}...${value.slice(-6)}]`);
     } else {
         console.log(`${key}: ❌ MISSING`);
     }
 });
-console.log("Auth Domain:", firebaseConfig.authDomain);
-if (!firebaseConfig.apiKey || firebaseConfig.apiKey === "undefined") {
-    console.error("CRITICAL: Firebase API Key is missing or string 'undefined'!");
+console.log("Full Auth Domain:", firebaseConfig.authDomain);
+if (firebaseConfig.apiKey && firebaseConfig.apiKey.includes('Z4cA')) {
+    console.error("ALERT: You are still using the OLD WRONG API KEY (ending in Z4cA). You must REDEPLOY on Vercel.");
 }
 console.groupEnd();
 
