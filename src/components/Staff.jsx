@@ -37,8 +37,8 @@ const Staff = () => {
         {
             label: isRtl ? "التدريس والإرشاد (2008-2010):" : "Teaching and Mentorship (2008–2010):",
             value: isRtl
-                ? "عمل معلماً وموجهاً في مسجد الخلفاء الراشدين. قام بتدريس القرآن والدراسات الإسلامية لطلاب المراحل الابتدائية والمتوسطة كجزء من فريق تعليمي متخصص."
-                : "Worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen. Taught Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated teaching team."
+                ? "عمل معلماً وموجهاً في مسجد الخلفاء الراشدين، ومسجد الإبياري، وجامع أم الخير. قام بتدريس القرآن والدراسات الإسلامية لطلاب المراحل الابتدائية والمتوسطة كجزء من فريق تعليمي متخصص."
+                : "Worked as a teacher and mentor at Masjid al-Khulafa’ al-Rashideen, Masjid Al-Ibairi and Jami- Um Al-Khair. Taught Qur’an and Islamic studies to elementary and intermediate students as part of a dedicated teaching team."
         },
         {
             label: isRtl ? "المسيرة الأكاديمية (2010-2016):" : "Academic Career (2010–2016):",

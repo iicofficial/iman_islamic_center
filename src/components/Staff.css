@@ -119,20 +119,20 @@
 
 /* IMAGE SIDE - Stacked Photos */
 .sticky-image-wrapper {
-    float: left;
+    float: right;
     width: 32%;
     max-width: 320px;
-    margin-right: 1.5rem;
-    margin-left: 0;
+    margin-left: 2rem;
+    margin-right: 0;
     margin-bottom: 1rem;
-    margin-top: 0;
+    margin-top: -60px;
     padding-bottom: 0;
     padding-left: 0;
 }
 
 .staff-page.rtl .sticky-image-wrapper {
     float: left;
-    margin-right: 1.5rem;
+    margin-right: 2rem;
     margin-left: 0;
     width: 32%;
     max-width: 320px;
@@ -170,7 +170,6 @@
     border: none;
     background-color: transparent;
     transition: transform 0.3s ease;
-    transform: scaleX(-1);
 }
 
 .staff-page.rtl .imam-sticky-photo {
