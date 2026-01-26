@@ -20,7 +20,7 @@ const requiredKeys = [
     'VITE_FIREBASE_APP_ID'
 ];
 
-console.group("Firebase Configuration Check - v1.0.2");
+console.group("Firebase Configuration Check - v1.0.3");
 console.log("Project ID:", firebaseConfig.projectId);
 requiredKeys.forEach(key => {
     const value = import.meta.env[key];
