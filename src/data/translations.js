@@ -375,7 +375,7 @@ export const translations = {
             jummahDuty: "Jummah Khutbah (Next Week)",
             securityDuty: "Weekend Security",
             cleaningDuty: "Cleaning Rotation",
-            testMode: "SYSTEM TEST MODE",
+            testMode: "TEST MODE - DEMO CONTENT",
             testModeDesc: "This portal is currently in Beta Testing. The announcements and duties listed below are for demonstration purposes only."
         }
     },
@@ -757,7 +757,8 @@ export const translations = {
             jummahDuty: "خطبة الجمعة (الأسبوع القادم)",
             securityDuty: "أمن عطلة نهاية الأسبوع",
             cleaningDuty: "نوبة التنظيف",
-            testMode: "وضع اختبار النظام",
+
+            testMode: "وضع الاختبار - محتوى تجريبي",
             testModeDesc: "هذه البوابة حاليًا في مرحلة الاختبار التجريبي. الإعلانات والمهام المدرجة أدناه هي لأغراض العرض التوضيحي فقط."
         }
     }
