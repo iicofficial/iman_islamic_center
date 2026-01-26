@@ -1,0 +1,137 @@
+/* Light Theme Login */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Soft light blue gradient based on primary color */
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%);
+    padding: 20px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.glass-card {
+    background: #ffffff;
+    /* Clean white card */
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 48px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 20px 40px -10px rgba(39, 86, 155, 0.15);
+    /* Soft blue shadow */
+    transition: transform 0.3s ease;
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-logo {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 24px;
+    border-radius: 50%;
+    /* Subtle shadow for logo */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 0;
+}
+
+.login-header h2 {
+    color: #1e293b;
+    /* Dark Slate */
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+}
+
+.login-header p {
+    color: #64748b;
+    /* Secondary text */
+    margin: 8px 0 0;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.login-body {
+    margin-bottom: 30px;
+}
+
+.login-instruction {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.domain-badge {
+    display: inline-block;
+    background: #eff6ff;
+    /* Light blue bg */
+    color: #2563eb;
+    /* Primary blue text */
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #dbeafe;
+    margin-bottom: 30px;
+}
+
+.login-error {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #fee2e2;
+}
+
+.btn-google-login {
+    background: #27569b;
+    /* Primary Brand Color */
+    color: #ffffff;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(39, 86, 155, 0.3);
+}
+
+.btn-google-login:hover {
+    background: #1e467f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(39, 86, 155, 0.4);
+}
+
+.btn-google-login:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.login-footer {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 24px;
+}
+
+.login-footer small {
+    color: #94a3b8;
+    font-weight: 500;
+    font-size: 0.8rem;
+}

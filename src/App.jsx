@@ -22,62 +22,81 @@ import CoupleReconciliation from "./components/CoupleReconciliation";
 import DivorceFormalization from "./components/DivorceFormalization";
 import Staff from "./components/Staff";
 
+import { AuthProvider } from "./context/AuthContext";
+import Login from "./components/Login";
+import Announcements from "./components/Announcements";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <div className="container-fluid my-5">
-                <div className="row">
-                  <div className="col-lg-8">
-                    <Events />
-                  </div>
-                  <div className="col-lg-4">
-                    <PrayerTimes />
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Hero />
+                <div className="container-fluid my-5">
+                  <div className="row">
+                    <div className="col-lg-8">
+                      <Events />
+                    </div>
+                    <div className="col-lg-4">
+                      <PrayerTimes />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <Donate />
-              <Reservation />
-            </>
-          }
-        />
-        <Route path="/ar" element={<ArabicHome />} />
+                <Donate />
+                <Reservation />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/ar" element={<><Navbar /><ArabicHome /><Footer /></>} />
 
-        {/* Arabic Routes to support getPath() */}
-        <Route path="/ar/contact" element={<ContactPage />} />
-        <Route path="/ar/marriage-certificate" element={<MarriageCertificate />} />
-        <Route path="/ar/quran-boys-application" element={<QuranBoysApplication />} />
-        <Route path="/ar/quran-girls-application" element={<QuranGirlsApplication />} />
-        <Route path="/ar/quran-memorization" element={<QuranMemorization />} />
-        <Route path="/ar/marriage-info" element={<MarriageInfo />} />
-        <Route path="/ar/policies" element={<ProgramPolicies />} />
-        <Route path="/ar/policies" element={<ProgramPolicies />} />
-        <Route path="/ar/event/:id" element={<Events />} />
-        <Route path="/ar/couple-reconciliation" element={<CoupleReconciliation />} />
-        <Route path="/ar/divorce-formalization" element={<DivorceFormalization />} />
-        <Route path="/ar/staff" element={<Staff />} />
+          {/* Standalone Pages without default Navbar/Footer (handled inside component or custom) */}
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/announcements"
+            element={
+              <ProtectedRoute>
+                <Announcements />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/marriage-certificate" element={<MarriageCertificate />} />
-        <Route path="/quran-boys-application" element={<QuranBoysApplication />} />
-        <Route path="/quran-girls-application" element={<QuranGirlsApplication />} />
-        <Route path="/quran-memorization" element={<QuranMemorization />} />
-        <Route path="/marriage-info" element={<MarriageInfo />} />
-        <Route path="/policies" element={<ProgramPolicies />} />
-        <Route path="/event/:id" element={<Events />} />
-        <Route path="/couple-reconciliation" element={<CoupleReconciliation />} />
-        <Route path="/divorce-formalization" element={<DivorceFormalization />} />
-        <Route path="/staff" element={<Staff />} />
-      </Routes>
-      <Footer />
-    </Router>
+          {/* Re-wrap other routes with Layout if needed, for now manually adding Navbar/Footer to keep existing structure working */}
+          {/* Note: In a larger refactor, Layout component would be better */}
+
+          <Route path="/ar/contact" element={<><Navbar /><ContactPage /><Footer /></>} />
+          <Route path="/ar/marriage-certificate" element={<><Navbar /><MarriageCertificate /><Footer /></>} />
+          <Route path="/ar/quran-boys-application" element={<><Navbar /><QuranBoysApplication /><Footer /></>} />
+          <Route path="/ar/quran-girls-application" element={<><Navbar /><QuranGirlsApplication /><Footer /></>} />
+          <Route path="/ar/quran-memorization" element={<><Navbar /><QuranMemorization /><Footer /></>} />
+          <Route path="/ar/marriage-info" element={<><Navbar /><MarriageInfo /><Footer /></>} />
+          <Route path="/ar/policies" element={<><Navbar /><ProgramPolicies /><Footer /></>} />
+          <Route path="/ar/event/:id" element={<><Navbar /><Events /><Footer /></>} />
+          <Route path="/ar/couple-reconciliation" element={<><Navbar /><CoupleReconciliation /><Footer /></>} />
+          <Route path="/ar/divorce-formalization" element={<><Navbar /><DivorceFormalization /><Footer /></>} />
+          <Route path="/ar/staff" element={<><Navbar /><Staff /><Footer /></>} />
+
+          <Route path="/contact" element={<><Navbar /><ContactPage /><Footer /></>} />
+          <Route path="/marriage-certificate" element={<><Navbar /><MarriageCertificate /><Footer /></>} />
+          <Route path="/quran-boys-application" element={<><Navbar /><QuranBoysApplication /><Footer /></>} />
+          <Route path="/quran-girls-application" element={<><Navbar /><QuranGirlsApplication /><Footer /></>} />
+          <Route path="/quran-memorization" element={<><Navbar /><QuranMemorization /><Footer /></>} />
+          <Route path="/marriage-info" element={<><Navbar /><MarriageInfo /><Footer /></>} />
+          <Route path="/policies" element={<><Navbar /><ProgramPolicies /><Footer /></>} />
+          <Route path="/event/:id" element={<><Navbar /><Events /><Footer /></>} />
+          <Route path="/couple-reconciliation" element={<><Navbar /><CoupleReconciliation /><Footer /></>} />
+          <Route path="/divorce-formalization" element={<><Navbar /><DivorceFormalization /><Footer /></>} />
+          <Route path="/staff" element={<><Navbar /><Staff /><Footer /></>} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

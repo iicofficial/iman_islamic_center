@@ -16,8 +16,8 @@ export const generateArabicPdf = async (templateHtml, fileName = "document.pdf")
     container.style.width = '800px';
     container.style.padding = '40px';
     container.style.backgroundColor = 'white';
-    // Use Poppins for English and Amiri for Arabic
-    container.style.fontFamily = "'Amiri', 'Poppins', serif";
+    // Use Poppins for English and Cairo for Arabic
+    container.style.fontFamily = "'Cairo', 'Poppins', sans-serif";
     container.innerHTML = templateHtml;
 
     document.body.appendChild(container);
@@ -27,7 +27,9 @@ export const generateArabicPdf = async (templateHtml, fileName = "document.pdf")
             scale: 2,
             useCORS: true,
             logging: false,
-            allowTaint: true
+            allowTaint: false, // Changed to false for better security/reliability with CORS images
+            backgroundColor: "#ffffff",
+            windowWidth: 800
         });
 
         const imgData = canvas.toDataURL('image/png');
@@ -39,6 +41,7 @@ export const generateArabicPdf = async (templateHtml, fileName = "document.pdf")
         pdf.save(fileName);
     } catch (error) {
         console.error("PDF Generation failed", error);
+        throw error; // Re-throw so the caller knows it failed if they care
     } finally {
         document.body.removeChild(container);
     }
@@ -53,7 +56,7 @@ export const buildPdfTemplate = (title, sections, lang = 'en', centerName = "Ima
     const textAlign = isRtl ? 'right' : 'left';
 
     return `
-        <div style="direction: ${direction}; text-align: ${textAlign}; color: #333; font-family: ${isRtl ? "'Amiri', serif" : "'Poppins', sans-serif"};">
+        <div style="direction: ${direction}; text-align: ${textAlign}; color: #333; font-family: ${isRtl ? "'Cairo', sans-serif" : "'Poppins', sans-serif"}; padding: 20px;">
             <div style="display: flex; align-items: center; border-bottom: 2px solid #27569b; padding-bottom: 20px; margin-bottom: 30px; flex-direction: ${isRtl ? 'row-reverse' : 'row'};">
                 <img src="${logo}" style="width: 80px; height: 80px; margin-${isRtl ? 'left' : 'right'}: 20px;" />
                 <div style="flex: 1; text-align: center;">

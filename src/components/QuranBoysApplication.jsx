@@ -8,7 +8,7 @@ import logo from "../assets/logo.png";
 import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 
 function QuranBoysApplication() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         studentName: "",
         grade: "",
@@ -146,8 +146,7 @@ function QuranBoysApplication() {
         if (!formData.guardianName || formData.guardianName.trim() === '') errors.guardianName = 'Guardian name is required';
         if (!formData.kinship || formData.kinship.trim() === '') errors.kinship = 'Kinship is required';
         if (!formData.guardianJob || formData.guardianJob.trim() === '') errors.guardianJob = 'Guardian job is required';
-        if (!formData.workPhone || formData.workPhone.trim() === '') errors.workPhone = 'Work phone is required';
-        if (!formData.homePhone || formData.homePhone.trim() === '') errors.homePhone = 'Home phone is required';
+        // Note: Mobile is required, others are optional
         if (!formData.mobile || formData.mobile.trim() === '') errors.mobile = 'Mobile number is required';
 
         // Validate format of provided phone numbers
@@ -202,7 +201,6 @@ function QuranBoysApplication() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, `IIC_Quran_Boys_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
     };
@@ -227,14 +225,6 @@ function QuranBoysApplication() {
         }
 
         setStatus({ type: 'info', message: 'Processing application...' });
-
-        const gasUrl = import.meta.env.VITE_GAS_URL;
-
-        if (!gasUrl) {
-            console.error('GAS URL configuration missing');
-            generatePDF();
-            return;
-        }
 
         const templateParams = {
             form_title: "Quran Memorization Program (Boys)",
@@ -270,13 +260,13 @@ Contact: ${formData.mobile} / ${formData.email}`,
 
             setStatus({
                 type: 'success',
-                message: `Email sent to ${formData.email}. PDF Downloaded.`
+                message: `Application Submitted! Confirmation emails have been sent to you and IIC. PDF is downloading.`
             });
         } catch (err) {
             console.error('Failed to send email:', err);
             setStatus({
                 type: 'warning',
-                message: 'Application submitted, but failed to send email. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
+                message: 'Application Submitted, but we had trouble sending the email. Your PDF is downloading below.'
             });
         } finally {
             // 2. Generate PDF regardless of email success
@@ -561,8 +551,12 @@ Contact: ${formData.mobile} / ${formData.email}`,
                         />
 
                         <div className="text-center mt-4">
-                            <button type="submit" className="btn btn-primary btn-submit">
-                                {t('quranBoys.submitButton')}
+                            <button
+                                type="submit"
+                                className="btn btn-primary btn-submit"
+                                disabled={status.type === 'info'}
+                            >
+                                {status.type === 'info' ? t('common.processing') || 'Processing...' : t('quranBoys.submitButton')}
                             </button>
                         </div>
                     </form>

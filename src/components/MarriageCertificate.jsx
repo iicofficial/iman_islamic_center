@@ -9,7 +9,7 @@ import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 
 function MarriageCertificate() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         groomName: "",
@@ -206,7 +206,6 @@ function MarriageCertificate() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, "Marriage_Certificate_Application.pdf");
     };
@@ -220,24 +219,6 @@ function MarriageCertificate() {
             setStatus({ type: 'info', message: 'Processing application...' });
 
             // 1. Send Confirmation Email via EmailJS FIRST
-            const gasUrl = import.meta.env.VITE_GAS_URL;
-
-            if (!gasUrl) {
-                console.error('GAS URL configuration missing');
-                generatePDF();
-                return;
-            }
-
-            // Helper function for time formatting
-            const formatTime12Hour = (time24) => {
-                if (!time24) return "N/A";
-                const [h, m] = time24.split(':');
-                const hourNum = parseInt(h);
-                const hour12 = hourNum > 12 ? hourNum - 12 : hourNum === 0 ? 12 : hourNum;
-                const ampm = hourNum >= 12 ? 'PM' : 'AM';
-                return `${hour12}:${m} ${ampm}`;
-            };
-
             const formattedTime = formatTime12Hour(formData.appointmentTime);
 
             // Prepare template parameters
@@ -276,17 +257,21 @@ Appointment Time: ${formattedTime}`,
 
                 setStatus({
                     type: 'success',
-                    message: `Email sent to ${formData.email}. PDF Downloaded.`
+                    message: `Application Submitted! Confirmation emails have been sent to you and IIC. Your PDF is being generated.`
                 });
             } catch (err) {
                 console.error('Failed to send email:', err);
                 setStatus({
                     type: 'warning',
-                    message: 'Application Success! Failed to send confirmation email, but downloading PDF. Error: ' + (err.text || JSON.stringify(err))
+                    message: 'Application Submitted, but we had trouble sending the confirmation email. Your PDF is downloading below.'
                 });
             } finally {
                 // 2. Generate and download PDF regardless of email success
-                await generatePDF();
+                try {
+                    await generatePDF();
+                } catch (pdfError) {
+                    console.error("PDF generation failed:", pdfError);
+                }
             }
         }
     };
@@ -749,8 +734,12 @@ Appointment Time: ${formattedTime}`,
                                             </div>
 
                                             <div className="btn-container">
-                                                <button type="submit" className="apply-btn">
-                                                    {t('marriageCertificate.nextButton')}
+                                                <button
+                                                    type="submit"
+                                                    className="apply-btn"
+                                                    disabled={status.type === 'info'}
+                                                >
+                                                    {status.type === 'info' ? t('common.processing') || 'Processing...' : t('marriageCertificate.nextButton')}
                                                 </button>
                                             </div>
                                         </>
@@ -881,8 +870,12 @@ Appointment Time: ${formattedTime}`,
                                                 >
                                                     {t('marriageCertificate.backButton')}
                                                 </button>
-                                                <button type="submit" className="apply-btn">
-                                                    {t('marriageCertificate.submitButton')}
+                                                <button
+                                                    type="submit"
+                                                    className="apply-btn"
+                                                    disabled={status.type === 'info'}
+                                                >
+                                                    {status.type === 'info' ? t('common.processing') || 'Processing...' : t('marriageCertificate.submitButton')}
                                                 </button>
                                             </div>
                                         </div>

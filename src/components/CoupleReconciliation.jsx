@@ -10,7 +10,7 @@ import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 
 function CoupleReconciliation() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         name1: "",
         name2: "",
@@ -50,7 +50,6 @@ function CoupleReconciliation() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, `IIC_Reconciliation_${formData.name1.replace(/\s+/g, '_')}.pdf`);
     };
@@ -59,16 +58,7 @@ function CoupleReconciliation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Sending request...' });
 
-        const gasUrl = import.meta.env.VITE_GAS_URL;
-
-        if (!gasUrl) {
-            console.error('GAS URL configuration missing');
-            setStatus({ type: 'error', message: 'System Error: Email configuration is missing.' });
-            return;
-        }
-
         const formattedTime = formatTime12Hour(formData.time);
-
         const templateParams = {
             form_title: "Couple Reconciliation Request",
             user_name: `${formData.name1} & ${formData.name2}`,
@@ -100,9 +90,20 @@ Notes: ${formData.notes}`,
 
             setStatus({
                 type: 'success',
-                message: `Email sent to ${formData.email}. PDF Downloaded.`
+                message: `Request Submitted! Confirmation emails have been sent to you and IIC. PDF is downloading.`
             });
-            await generatePDF();
+        } catch (err) {
+            console.error('Email send failure:', err);
+            setStatus({
+                type: 'warning',
+                message: 'Request Submitted, but we had trouble sending the email. Your PDF is downloading below.'
+            });
+        } finally {
+            try {
+                await generatePDF();
+            } catch (pdfError) {
+                console.error("PDF generation failure", pdfError);
+            }
             // Reset form on success
             setFormData({
                 name1: "",
@@ -112,12 +113,6 @@ Notes: ${formData.notes}`,
                 date: "",
                 time: "",
                 notes: ""
-            });
-        } catch (err) {
-            console.error('Email send failure:', err);
-            setStatus({
-                type: 'error',
-                message: 'Failed to send request. Please try again later.'
             });
         }
     };
@@ -242,8 +237,12 @@ Notes: ${formData.notes}`,
                                     </div>
 
                                     <div className="col-12 text-center mt-4">
-                                        <button type="submit" className="btn-modern-reservation">
-                                            <span>{t('coupleReconciliation.submit')}</span>
+                                        <button
+                                            type="submit"
+                                            className="btn-modern-reservation"
+                                            disabled={status.type === 'info'}
+                                        >
+                                            <span>{status.type === 'info' ? t('common.processing') || 'Processing...' : t('coupleReconciliation.submit')}</span>
                                             <FaCheckCircle className="ms-2" />
                                         </button>
                                         <p className="form-hint mt-3">

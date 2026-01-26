@@ -37,7 +37,6 @@ function Contact() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, `IIC_Contact_${formData.name.replace(/\s+/g, '_')}.pdf`);
     };
@@ -47,33 +46,39 @@ function Contact() {
         setStatus({ type: 'info', message: 'Sending message...' });
 
         try {
-            // 1. Send Confirmation Email via GAS
-            const gasUrl = import.meta.env.VITE_GAS_URL;
+            const templateParams = {
+                form_title: "General Contact Inquiry",
+                user_name: formData.name,
+                sender_name: "Iman Islamic Center (IIC)",
+                from_name: "Iman Islamic Center (IIC)",
+                user_email: formData.email,
+                to_email: "dev@iman-islam.org", // Organization email
+                reply_to: formData.email,
+                date: new Date().toLocaleDateString(),
+                location: "Online Inquiry",
+                phone: formData.phone || "Not provided",
+                message: formData.message,
+                formType: 'contact'
+            };
 
-            if (gasUrl) {
-                const templateParams = {
-                    form_title: "General Contact Inquiry",
-                    user_name: formData.name,
-                    sender_name: "Iman Islamic Center (IIC)",
-                    from_name: "Iman Islamic Center (IIC)",
-                    user_email: formData.email,
-                    to_email: "dev@iman-islam.org", // Organization email
-                    reply_to: formData.email,
-                    date: new Date().toLocaleDateString(),
-                    location: "Online Inquiry",
-                    phone: formData.phone || "Not provided",
-                    message: formData.message,
-                    formType: 'contact'
-                };
-                await sendEmail(templateParams);
+            await sendEmail(templateParams);
+
+            setStatus({
+                type: 'success',
+                message: `Thank you, ${formData.name}. Your message has been sent to IIC and a confirmation was sent to ${formData.email}.`
+            });
+
+            // Handle PDF separately to prevent it from crashing the success state
+            try {
+                await generatePDF();
+            } catch (pdfError) {
+                console.error("PDF generation failed:", pdfError);
             }
 
-            setStatus({ type: 'success', message: `Email sent to ${formData.email}. PDF Downloaded.` });
-            await generatePDF();
             setFormData({ name: "", email: "", phone: "", message: "" });
         } catch (error) {
             console.error(error);
-            setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+            setStatus({ type: 'error', message: 'Failed to send message. Please check your internet connection and try again.' });
         }
     };
 
@@ -197,8 +202,12 @@ function Contact() {
                                     </div>
 
                                     <div className="mt-4">
-                                        <button type="submit" className="btn btn-modern-submit">
-                                            <span>{t('contact.send')}</span>
+                                        <button
+                                            type="submit"
+                                            className="btn btn-modern-submit"
+                                            disabled={status.type === 'info'}
+                                        >
+                                            <span>{status.type === 'info' ? t('contact.sending') || 'Sending...' : t('contact.send')}</span>
                                             <FaPaperPlane className="ms-2" />
                                         </button>
                                     </div>

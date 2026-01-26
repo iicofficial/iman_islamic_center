@@ -1,6 +1,7 @@
 import React from "react";
-import { FaFileDownload, FaFilePdf, FaFileWord } from "react-icons/fa";
+import { FaFileDownload, FaFilePdf, FaFileWord, FaSignInAlt } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
+import { Link } from "react-router-dom";
 import "./DownloadForms.css";
 
 function DownloadForms() {
@@ -26,7 +27,8 @@ function DownloadForms() {
             descKey: "downloadForms.elcDesc",
             fileName: "ELC Member work form.docx",
             icon: <FaFileWord className="word-icon" />,
-            format: "DOCX"
+            format: "DOCX",
+            isElc: true // Marker for ELC card
         },
         {
             titleKey: "downloadForms.boardTitle",
@@ -58,13 +60,26 @@ function DownloadForms() {
                                     <h3 className="form-name">{t(form.titleKey)}</h3>
                                     <p className="form-desc">{t(form.descKey)}</p>
                                     <span className="file-badge">{form.format}</span>
-                                    <a
-                                        href={`/forms/${form.fileName}`}
-                                        download
-                                        className="btn btn-download-form"
-                                    >
-                                        <FaFileDownload /> {t('downloadForms.download')}
-                                    </a>
+
+                                    <div className="d-flex gap-2 flex-wrap">
+                                        <a
+                                            href={`/forms/${form.fileName}`}
+                                            download
+                                            className="btn btn-download-form flex-grow-1"
+                                        >
+                                            <FaFileDownload /> {t('downloadForms.download')}
+                                        </a>
+
+                                        {form.isElc && (
+                                            <Link
+                                                to="/announcements"
+                                                className="btn btn-primary flex-grow-1 d-flex align-items-center justify-content-center gap-2"
+                                                style={{ borderRadius: '8px', padding: '0.6rem 1rem' }}
+                                            >
+                                                <FaSignInAlt /> Member Login
+                                            </Link>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

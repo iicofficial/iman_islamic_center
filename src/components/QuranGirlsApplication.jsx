@@ -8,7 +8,7 @@ import logo from "../assets/logo.png";
 import { generateArabicPdf, buildPdfTemplate } from "../utils/pdfGenerator";
 
 function QuranGirlsApplication() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         studentName: "",
         grade: "",
@@ -139,8 +139,7 @@ function QuranGirlsApplication() {
         if (!formData.guardianName || formData.guardianName.trim() === '') errors.guardianName = 'Guardian name is required';
         if (!formData.kinship || formData.kinship.trim() === '') errors.kinship = 'Kinship is required';
         if (!formData.guardianJob || formData.guardianJob.trim() === '') errors.guardianJob = 'Guardian job is required';
-        if (!formData.workPhone || formData.workPhone.trim() === '') errors.workPhone = 'Work phone is required';
-        if (!formData.homePhone || formData.homePhone.trim() === '') errors.homePhone = 'Home phone is required';
+        // Note: Mobile/phoneAck is required, others are optional
         if (!formData.mobile || formData.mobile.trim() === '') errors.mobile = 'Mobile number is required';
         if (!formData.phoneAck || formData.phoneAck.trim() === '') errors.phoneAck = 'Phone number is required';
 
@@ -199,7 +198,6 @@ function QuranGirlsApplication() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, `IIC_Quran_Girls_${formData.studentName.replace(/\s+/g, '_')}.pdf`);
     };
@@ -225,14 +223,6 @@ function QuranGirlsApplication() {
         setStatus({ type: 'info', message: 'Processing application...' });
 
         // 1. EmailJS Configuration
-        const gasUrl = import.meta.env.VITE_GAS_URL;
-
-        if (!gasUrl) {
-            console.error('GAS URL configuration missing');
-            generatePDF();
-            return;
-        }
-
         const templateParams = {
             form_title: "Quran Memorization Program (Girls)",
             user_name: formData.studentName,
@@ -267,13 +257,13 @@ Contact: ${formData.mobile} / ${formData.email}`,
 
             setStatus({
                 type: 'success',
-                message: `Email sent to ${formData.email}. PDF Downloaded.`
+                message: `Application Submitted! Confirmation emails have been sent to you and IIC. PDF is downloading.`
             });
         } catch (err) {
             console.error('Failed to send email:', err);
             setStatus({
                 type: 'warning',
-                message: 'Application submitted, but failed to send email. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
+                message: 'Application Submitted, but we had trouble sending the email. Your PDF is downloading below.'
             });
         } finally {
             // 2. Generate PDF regardless of email success
@@ -571,8 +561,12 @@ Contact: ${formData.mobile} / ${formData.email}`,
                         />
 
                         <div className="text-center mt-4">
-                            <button type="submit" className="btn btn-primary btn-submit">
-                                {t('quranGirls.submitButton')}
+                            <button
+                                type="submit"
+                                className="btn btn-primary btn-submit"
+                                disabled={status.type === 'info'}
+                            >
+                                {status.type === 'info' ? t('common.processing') || 'Processing...' : t('quranGirls.submitButton')}
                             </button>
                         </div>
                     </form>

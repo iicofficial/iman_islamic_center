@@ -39,7 +39,8 @@ export const translations = {
             applyOnlineForm: "Apply online form",
             downloadForm: "Download form",
             aboutUs: "About Us",
-            staff: "Our Staff"
+            staff: "Our Staff",
+            memberLogin: "IIC Login"
         },
         common: {
             select: "Select"
@@ -346,6 +347,30 @@ export const translations = {
                 "The targeted age range is from 7 years old (or 5 if the child is mature) up to 15 years for both genders, boys and girls.",
                 "There will be weekly programs focused on doctrine, jurisprudence, manners, behavior, etiquette, spirituality, and more."
             ]
+        },
+        announcements: {
+            secureBadge: "Secure Environment",
+            portalTitle: "ELC Member Directives",
+            welcome: "Welcome,",
+            signOut: "Sign Out",
+            priorityTitle: "Priority Announcements",
+            urgentBadge: "URGENT",
+            updateBadge: "UPDATE",
+            resourcesTitle: "Resources",
+            dutiesTitle: "Upcoming Duties",
+            dutiesWeekend: "Weekend Supervision",
+            dutiesCleaning: "Cleaning Roster",
+            handbook: "Staff Handbook 2026",
+            leaveRequest: "Leave Request Form",
+            incidentReport: "Incident Report Template",
+            verifying: "Verifying Credentials...",
+            // Sample content keys (usually dynamic, but hardcoded for now)
+            announcement1Title: "Quarterly Curriculum Review Meeting",
+            announcement1Text: "Mandatory attendance required for all teaching staff this Friday post-Jummah. Please review the attached PDF before arriving.",
+            announcement2Title: "New Gate Security Protocols",
+            announcement2Text: "Effective immediately, all staff badges must be visible at entry points. See the security office if you need a replacement.",
+            duty1Person: "Brother Ahmed & Sister Fatima",
+            duty2Person: "Group B (Feb 1 - Feb 7)"
         }
     },
     ar: {
@@ -390,7 +415,8 @@ export const translations = {
             quranGirlsForm: "نموذج طلب البنات",
             programPolicies: "سياسات الحلقة",
             aboutUs: "من نحن",
-            staff: "طاقم العمل"
+            staff: "طاقم العمل",
+            memberLogin: "دخول الأعضاء"
         },
         common: {
             select: "اختر"
@@ -697,6 +723,30 @@ export const translations = {
                 "الفئة العمرية المستهدفة من سن 7 سنوات (أو 5 سنوات إذا كان الطفل ناضجاً) حتى 15 سنة لكلا الجنسين من بنين وبنات.",
                 "ستكون هناك برامج أسبوعية تركز على العقيدة والفقه والأخلاق والسلوك والآداب والروحانيات وغيرها."
             ]
+        },
+        announcements: {
+            secureBadge: "بيئة آمنة",
+            portalTitle: "توجيهات أعضاء ELC",
+            welcome: "أهلاً بك،",
+            signOut: "تسجيل الخروج",
+            priorityTitle: "إعلانات هامة",
+            urgentBadge: "عاجل",
+            updateBadge: "تحديث",
+            resourcesTitle: "الموارد",
+            dutiesTitle: "المهام القادمة",
+            dutiesWeekend: "الإشراف في عطلة نهاية الأسبوع",
+            dutiesCleaning: "جدول التنظيف",
+            handbook: "دليل الموظفين 2026",
+            leaveRequest: "نموذج طلب إجازة",
+            incidentReport: "نموذج تقرير الحوادث",
+            verifying: "جاري التحقق من بيانات الاعتماد...",
+            // Sample content keys
+            announcement1Title: "اجتماع مراجعة المناهج الفصلية",
+            announcement1Text: "الحضور إلزامي لجميع أعضاء هيئة التدريس هذا الجمعة بعد صلاة الجمعة. يرجى مراجعة ملف PDF المرفق قبل الحضور.",
+            announcement2Title: "بروتوكولات أمن البوابة الجديدة",
+            announcement2Text: "اعتبارًا من الآن، يجب أن تكون جميع شارات الموظفين مرئية عند نقاط الدخول. راجع مكتب الأمن إذا كنت بحاجة إلى استبدال.",
+            duty1Person: "الأخ أحمد والأخت فاطمة",
+            duty2Person: "المجموعة ب (1 فبراير - 7 فبراير)"
         }
     }
 };

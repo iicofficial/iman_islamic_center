@@ -1,0 +1,163 @@
+/* Light Portal Admin Theme */
+.portal-wrapper {
+    background-color: #f3f4f6;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+    padding-top: 225px;
+    /* Tighter Navbar Clearance */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.portal-loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #1e293b;
+    padding-top: 225px;
+    /* Navbar Clearance */
+}
+
+/* Badge Tweaks */
+.bg-gold {
+    background-color: #f59e0b;
+    color: #fff;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+}
+
+/* Panel Design */
+.portal-panel {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.portal-panel:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Titles */
+.portal-title {
+    color: #111827;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.5px;
+}
+
+.portal-subtitle {
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+.admin-name {
+    color: #27569b;
+    font-weight: 600;
+}
+
+/* Section Headings */
+.portal-section-title {
+    color: #374151;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 15px;
+    margin-top: 0;
+}
+
+/* Announcement Items */
+.announcement-item {
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.announcement-item:hover {
+    transform: translateY(-2px);
+    border-color: #d1d5db;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.announcement-title {
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.announcement-text {
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Sidebar Links */
+.portal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.portal-links li {
+    margin-bottom: 8px;
+}
+
+.portal-links a {
+    color: #4b5563;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    background: #f3f4f6;
+}
+
+.portal-links a:hover {
+    color: #27569b;
+    background: #eef2ff;
+    transform: translateX(4px);
+}
+
+.portal-links a::before {
+    content: "•";
+    margin-right: 10px;
+    color: #9ca3af;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.portal-links a:hover::before {
+    color: #27569b;
+}
+
+/* Duty Items */
+.duty-item {
+    padding: 12px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    border: 1px solid #dcfce7;
+    margin-bottom: 10px;
+}
+
+.duty-title {
+    color: #166534;
+    font-weight: 600;
+}
+
+.duty-person {
+    color: #15803d;
+    font-size: 0.9rem;
+}

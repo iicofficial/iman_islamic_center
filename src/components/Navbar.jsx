@@ -5,7 +5,7 @@ import {
     FaMale, FaFemale, FaWpforms, FaFileDownload, FaUserPlus, FaHandHoldingUsd,
     FaFileAlt, FaInstagram, FaFacebookF, FaYoutube, FaPhoneAlt, FaEnvelope,
     FaChevronDown, FaHome, FaCalendarAlt, FaHistory, FaClock, FaMosque,
-    FaBookOpen, FaAngleRight, FaChild, FaUserGraduate, FaUsers
+    FaBookOpen, FaAngleRight, FaChild, FaUserGraduate, FaUsers, FaSignInAlt, FaLock
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoLanguage } from "react-icons/io5";
@@ -32,6 +32,22 @@ function Navbar() {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Prevent background scrolling when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        };
+    }, [isOpen]);
 
     // Helper to check if a regular link is active
     const isActiveLink = (path) => {
@@ -92,9 +108,9 @@ function Navbar() {
                 </Link>
 
                 {/* Centered Top Wrapper: Holds Language and Socials separately */}
-                <div className="centered-top-wrapper d-none d-xl-flex">
+                <div className="centered-top-wrapper d-none d-xl-flex align-items-center">
                     {/* Language Frame */}
-                    <div className="language-pill">
+                    <div className="language-pill me-2">
                         <button
                             className={`lang-btn ${language === 'en' ? 'active' : ''} `}
                             onClick={() => language !== 'en' && toggleLanguage()}
@@ -109,6 +125,18 @@ function Navbar() {
                             العربية
                         </button>
                     </div>
+
+                    {/* Member Login Button */}
+                    <Link
+                        to="/announcements"
+                        className="member-login-btn me-2"
+                        title={t('navbar.memberLogin')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <FaLock className="me-2" />
+                        <span>{t('navbar.memberLogin')}</span>
+                    </Link>
 
                     {/* Social Frame */}
                     <div className="social-pill">
@@ -299,6 +327,20 @@ function Navbar() {
                                 <li><Link className={`dropdown-item ${isItemActive('/staff') ? 'active-item' : ''} `} to={getPath("/staff")} onClick={closeMenu}><FaUsers className="me-2 menu-icon" />{t('navbar.staff')}</Link></li>
                                 <li><Link className={`dropdown-item ${isItemActive('/policies') ? 'active-item' : ''} `} to={getPath("/policies")} onClick={closeMenu}><FaFileContract className="me-2 menu-icon" />{t('navbar.programPolicies')}</Link></li>
                             </ul>
+                        </li>
+
+                        <li className="nav-item d-xl-none">
+                            <Link
+                                to="/announcements"
+                                className="member-login-btn my-2"
+                                onClick={closeMenu}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ width: 'fit-content' }}
+                            >
+                                <FaLock className="me-2" />
+                                <span>{t('navbar.memberLogin')}</span>
+                            </Link>
                         </li>
 
                         <li className="nav-item">

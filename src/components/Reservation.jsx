@@ -10,7 +10,7 @@ import StatusModal from './StatusModal';
 import { DatePicker, TimePicker } from './DateTimePicker';
 
 function Reservation() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -47,7 +47,6 @@ function Reservation() {
             }
         ];
 
-        const { language } = useLanguage();
         const template = buildPdfTemplate(title, sections, language, t('navbar.brandName'));
         await generateArabicPdf(template, `IIC_Visit_${formData.name.replace(/\s+/g, '_')}.pdf`);
     };
@@ -56,16 +55,7 @@ function Reservation() {
         e.preventDefault();
         setStatus({ type: 'info', message: 'Scheduling your visit...' });
 
-        const gasUrl = import.meta.env.VITE_GAS_URL;
-
-        if (!gasUrl) {
-            console.error('GAS URL configuration missing');
-            generatePDF();
-            return;
-        }
-
         const formattedTime = formatTime12Hour(formData.time);
-
         const templateParams = {
             form_title: "Visit Request - Reservation",
             user_name: formData.name,
@@ -83,7 +73,7 @@ Name: ${formData.name}
 Date: ${formData.date}
 Time: ${formattedTime}
 Email: ${formData.email}
-Reason: ${formData.reason || "General Visit"}`,
+Reason: ${formData.message || "General Visit"}`,
             formType: 'visit',
             name: formData.name,
             date: formData.date,
@@ -95,16 +85,20 @@ Reason: ${formData.reason || "General Visit"}`,
 
             setStatus({
                 type: 'success',
-                message: `Email sent to ${formData.email}. PDF Downloaded.`
+                message: `Request Submitted! Confirmation emails have been sent to you and IIC. PDF is downloading.`
             });
         } catch (err) {
             console.error('Email send failure:', err);
             setStatus({
                 type: 'warning',
-                message: 'Reservation submitted, but email failed. Error: ' + (err.text || JSON.stringify(err)) + '. Downloading PDF...'
+                message: 'Request Submitted, but we had trouble sending the email. Your PDF is downloading below.'
             });
         } finally {
-            await generatePDF();
+            try {
+                await generatePDF();
+            } catch (pdfError) {
+                console.error("PDF Generation failed:", pdfError);
+            }
         }
     };
 
@@ -212,8 +206,12 @@ Reason: ${formData.reason || "General Visit"}`,
                                     </div>
 
                                     <div className="col-12 text-center mt-4">
-                                        <button type="submit" className="btn-modern-reservation">
-                                            <span>{t('reservation.submit')}</span>
+                                        <button
+                                            type="submit"
+                                            className="btn-modern-reservation"
+                                            disabled={status.type === 'info'}
+                                        >
+                                            <span>{status.type === 'info' ? t('common.processing') || 'Processing...' : t('reservation.submit')}</span>
                                             <FaCheckCircle className="ms-2" />
                                         </button>
                                         <p className="form-hint mt-3">

@@ -155,7 +155,7 @@ const Staff = () => {
                 {/* ---------------- BOARD OF DIRECTORS ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
-                        <h2 className="section-title">
+                        <h2 className="staff-section-title">
                             {language === 'ar' ? 'مجلس الإدارة' : 'Board of Directors'}
                         </h2>
                     </div>
@@ -192,7 +192,7 @@ const Staff = () => {
                 {/* ---------------- ELC ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
-                        <h2 className="section-title">
+                        <h2 className="staff-section-title">
                             {language === 'ar' ? 'اللجنة القيادية التنفيذية' : 'Executive Leadership Committee'}
                         </h2>
                     </div>
@@ -225,7 +225,7 @@ const Staff = () => {
                 {/* ---------------- DEVELOPMENT ---------------- */}
                 <div className="row mb-5">
                     <div className="col-12 text-center mb-5">
-                        <h2 className="section-title">
+                        <h2 className="staff-section-title">
                             {language === 'ar' ? 'التطوير' : 'Development'}
                         </h2>
                     </div>

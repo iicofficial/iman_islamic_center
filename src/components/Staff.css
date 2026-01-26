@@ -210,7 +210,7 @@
     opacity: 0.5;
 }
 
-.section-title {
+.staff-section-title {
     font-size: 2rem;
     color: #27569b;
     position: relative;
@@ -229,7 +229,7 @@
     margin-bottom: 2rem;
 }
 
-.section-title::after {
+.staff-section-title::after {
     display: none;
     /* Remove the old underline */
 }
