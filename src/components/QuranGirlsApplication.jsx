@@ -24,7 +24,6 @@ function QuranGirlsApplication() {
         email: "",
         guardianNameAck: "",
         signature: "",
-        phoneAck: "",
         agreeToTerms: false
     });
 
@@ -67,7 +66,7 @@ function QuranGirlsApplication() {
         const { name, value, type, checked } = e.target;
         let newValue = type === 'checkbox' ? checked : value;
 
-        if (name === 'workPhone' || name === 'homePhone' || name === 'mobile' || name === 'phoneAck') {
+        if (name === 'workPhone' || name === 'homePhone' || name === 'mobile') {
             newValue = formatPhoneNumber(value);
         }
 
@@ -88,7 +87,7 @@ function QuranGirlsApplication() {
         const requiredFields = [
             'studentName', 'grade', 'age', 'school', 'address',
             'guardianName', 'kinship', 'guardianJob',
-            'email', 'guardianNameAck', 'signature', 'phoneAck'
+            'email', 'guardianNameAck', 'signature'
         ];
 
         if (requiredFields.includes(name) && (!value || value.trim() === '')) {
@@ -111,7 +110,7 @@ function QuranGirlsApplication() {
         }
 
         // Phone specific validation
-        if (['workPhone', 'homePhone', 'mobile', 'phoneAck'].includes(name)) {
+        if (['workPhone', 'homePhone', 'mobile'].includes(name)) {
             if (value && value.trim() !== '' && !validatePhone(value)) {
                 errors[name] = 'Invalid phone format: (123)456-7890';
             } else {
@@ -141,7 +140,6 @@ function QuranGirlsApplication() {
         if (!formData.guardianJob || formData.guardianJob.trim() === '') errors.guardianJob = 'Guardian job is required';
         // Note: Mobile/phoneAck is required, others are optional
         if (!formData.mobile || formData.mobile.trim() === '') errors.mobile = 'Mobile number is required';
-        if (!formData.phoneAck || formData.phoneAck.trim() === '') errors.phoneAck = 'Phone number is required';
 
         // Validate format of provided phone numbers
         if (formData.workPhone && !validatePhone(formData.workPhone)) {
@@ -152,9 +150,6 @@ function QuranGirlsApplication() {
         }
         if (formData.mobile && !validatePhone(formData.mobile)) {
             errors.mobile = 'Please enter a valid US phone number: (123)456-7890';
-        }
-        if (formData.phoneAck && !validatePhone(formData.phoneAck)) {
-            errors.phoneAck = 'Please enter a valid US phone number: (123)456-7890';
         }
 
         if (!validateEmail(formData.email)) {
@@ -193,7 +188,6 @@ function QuranGirlsApplication() {
                 fields: [
                     { label: t('quranGirls.guardianNameAck'), value: formData.guardianNameAck },
                     { label: t('quranGirls.signature'), value: formData.signature },
-                    { label: t('quranGirls.phoneAck'), value: formData.phoneAck },
                 ]
             }
         ];
@@ -489,7 +483,7 @@ Contact: ${formData.mobile} / ${formData.email}`,
                             </div>
 
                             <div className="row mt-4">
-                                <div className="col-md-4 mb-3">
+                                <div className="col-md-6 mb-3">
                                     <label className="form-label">{t('quranGirls.guardianNameAck')}</label>
                                     <input
                                         type="text"
@@ -504,7 +498,7 @@ Contact: ${formData.mobile} / ${formData.email}`,
                                         <div className="error-message"><small className="text-danger">{validationErrors.guardianNameAck}</small></div>
                                     )}
                                 </div>
-                                <div className="col-md-4 mb-3">
+                                <div className="col-md-6 mb-3">
                                     <label className="form-label">{t('quranGirls.signature')}</label>
                                     <input
                                         type="text"
@@ -520,21 +514,7 @@ Contact: ${formData.mobile} / ${formData.email}`,
                                         <div className="error-message"><small className="text-danger">{validationErrors.signature}</small></div>
                                     )}
                                 </div>
-                                <div className="col-md-4 mb-3">
-                                    <label className="form-label">{t('quranGirls.phoneAck')}</label>
-                                    <input
-                                        type="tel"
-                                        className={`form-control ${validationErrors.phoneAck ? 'is-invalid' : ''}`}
-                                        name="phoneAck"
-                                        value={formData.phoneAck}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        required
-                                    />
-                                    {validationErrors.phoneAck && (
-                                        <div className="error-message"><small className="text-danger">{validationErrors.phoneAck}</small></div>
-                                    )}
-                                </div>
+
                             </div>
 
                             <div className="form-check mt-3">
