@@ -158,8 +158,10 @@
     .sticky-image-wrapper {
         float: none;
         width: 100%;
-        max-width: 400px;
+        max-width: 280px;
         margin: 0 auto 2rem auto;
+        margin-top: 0 !important;
+        /* Force reset of desktop negative margin */
     }
 }
 
@@ -293,8 +295,17 @@
         top: 0;
         margin-bottom: 1rem;
         max-width: 400px;
+        /* Default/Arabic stays large */
         margin-left: auto;
         margin-right: auto;
+    }
+
+    /* Fix for English Image (imame.png) on Mobile */
+    .staff-page:not(.rtl) .sticky-image-wrapper {
+        max-width: 280px;
+        margin-top: 0 !important;
+        /* Reset desktop negative margin */
+        float: none !important;
     }
 
     .imam-profile-row {

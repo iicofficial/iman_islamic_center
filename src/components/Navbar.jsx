@@ -126,17 +126,7 @@ function Navbar() {
                         </button>
                     </div>
 
-                    {/* Member Login Button */}
-                    <Link
-                        to="/member-login"
-                        className="member-login-btn me-2"
-                        title={t('navbar.memberLogin')}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <FaLock className="me-2" />
-                        <span>{t('navbar.memberLogin')}</span>
-                    </Link>
+
 
                     {/* Social Frame */}
                     <div className="social-pill">
@@ -329,19 +319,7 @@ function Navbar() {
                             </ul>
                         </li>
 
-                        <li className="nav-item d-xl-none">
-                            <Link
-                                to="/member-login"
-                                className="member-login-btn my-2"
-                                onClick={closeMenu}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ width: 'fit-content' }}
-                            >
-                                <FaLock className="me-2" />
-                                <span>{t('navbar.memberLogin')}</span>
-                            </Link>
-                        </li>
+
 
                         <li className="nav-item">
                             <a href="#donate" className="btn btn-donate ms-lg-2 my-2 my-lg-0" onClick={closeMenu}>{t('navbar.donate')}</a>
@@ -349,19 +327,35 @@ function Navbar() {
                     </ul>
 
                     {/* Actions Pod */}
-                    <div className="phone-wrapper middle-phone-modern mt-3 mt-lg-0 ms-lg-2">
-                        <div className="pod-item me-3">
-                            <a href="tel:4027303883" className="social-icon phone-icon">
-                                <FaPhoneAlt />
-                            </a>
-                            <span className="phone-number">402-730-3883</span>
-                        </div>
-                        <div className="pod-divider d-none d-lg-block"></div>
-                        <div className="pod-item ms-lg-3 mt-2 mt-lg-0">
-                            <Link to="/contact" className="contact-link-modern" onClick={closeMenu}>
-                                <FaEnvelope className="me-2" />
-                                <span>{t('navbar.contactUs')}</span>
-                            </Link>
+                    <div className="d-flex flex-column align-items-center ms-xl-auto mt-3 mt-xl-0">
+                        {/* Member Login Button - Moved here */}
+                        <Link
+                            to="/member-login"
+                            className="member-login-btn"
+                            style={{ marginBottom: '20px' }}
+                            onClick={closeMenu}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={t('navbar.memberLogin')}
+                        >
+                            <FaLock className="me-2" />
+                            <span>{t('navbar.memberLogin')}</span>
+                        </Link>
+
+                        <div className="phone-wrapper middle-phone-modern">
+                            <div className="pod-item me-3">
+                                <a href="tel:4027303883" className="social-icon phone-icon">
+                                    <FaPhoneAlt />
+                                </a>
+                                <span className="phone-number">402-730-3883</span>
+                            </div>
+                            <div className="pod-divider d-none d-lg-block"></div>
+                            <div className="pod-item ms-lg-3 mt-2 mt-lg-0">
+                                <Link to="/contact" className="contact-link-modern" onClick={closeMenu}>
+                                    <FaEnvelope className="me-2" />
+                                    <span>{t('navbar.contactUs')}</span>
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
