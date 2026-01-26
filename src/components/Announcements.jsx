@@ -54,6 +54,26 @@ const Announcements = () => {
                         </div>
                     </div>
 
+                    {/* Clean Test Mode Badge */}
+                    <div className="d-flex align-items-center">
+                        <div style={{
+                            background: '#fff3cd',
+                            color: '#856404',
+                            border: '1px solid #ffeeba',
+                            padding: '10px 20px',
+                            borderRadius: '50px',
+                            fontSize: '0.85rem',
+                            fontWeight: '700',
+                            letterSpacing: '0.5px',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.02)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px'
+                        }}>
+                            <i className="bi bi-exclamation-circle-fill"></i>
+                            TEST MODE - DEMO CONTENT
+                        </div>
+                    </div>
                 </div>
 
                 <div className="row g-4">
