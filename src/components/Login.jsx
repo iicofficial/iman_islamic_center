@@ -19,7 +19,7 @@ const Login = () => {
         instruction: language === 'ar' ? "يرجى تسجيل الدخول باستخدام حساب Google Workspace الرسمي الخاص بك." : "Please sign in with your official google workspace account.",
         signIn: language === 'ar' ? "تسجيل الدخول عبر Google" : "Sign in with Google",
         verifying: language === 'ar' ? "جارٍ التحقق..." : "Verifying...",
-        backHome: language === 'ar' ? "العودة للرئيسية" : "Back to Home",
+        backHome: language === 'ar' ? "العودة للرئيسية" : "Back to homepage",
         footer: language === 'ar' ? "دخول مقيد - للمصرح لهم فقط" : "Restricted Access - Authorized Personnel Only"
     };
 
