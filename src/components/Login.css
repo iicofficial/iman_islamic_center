@@ -3,25 +3,54 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Align card to the left */
+    padding-left: 6%;
+    /* Spacing from left edge - moved further left */
     /* Soft light blue gradient based on primary color */
     background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%);
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* RTL Support for Arabic: text direction is right-to-left, but we want the card 
+   VISUALLY on the Left to uncover the mosque sign on the Right. 
+   In RTL, 'flex-end' is the Left side. */
+.login-container.rtl {
+    justify-content: flex-end;
+    padding-left: 6%;
+    /* Keep visually consistent with English */
+    padding-right: 20px;
+}
+
 .glass-card {
-    background: #ffffff;
-    /* Clean white card */
-    border: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.85);
+    /* Semi-transparent */
+    backdrop-filter: blur(12px);
+    /* Glass blur effect */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 24px;
     padding: 48px;
     width: 100%;
     max-width: 440px;
     text-align: center;
-    box-shadow: 0 20px 40px -10px rgba(39, 86, 155, 0.15);
-    /* Soft blue shadow */
+    box-shadow: 0 20px 40px -10px rgba(39, 86, 155, 0.2);
     transition: transform 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .login-container {
+        justify-content: center;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .login-container.rtl {
+        padding-right: 20px;
+    }
 }
 
 .login-header {

@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "../assets/hero.png";
+import heroImage from "../assets/newhero.png";
 import { useLanguage } from "../context/LanguageContext";
 import "./Hero.css";
 

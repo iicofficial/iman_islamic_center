@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import logo from '../assets/logo.png';
+import bgImage from '../assets/iicmasjed.png';
 import { FaGoogle, FaHome } from 'react-icons/fa';
 import './Login.css';
 
@@ -36,7 +37,16 @@ const Login = () => {
     };
 
     return (
-        <div className={`login-container ${language === 'ar' ? 'rtl' : ''}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+        <div
+            className={`login-container ${language === 'ar' ? 'rtl' : ''}`}
+            dir={language === 'ar' ? 'rtl' : 'ltr'}
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+            }}
+        >
             <div className="glass-card">
                 <div className="login-header">
                     <img src={logo} alt="IIC Logo" className="login-logo" />
