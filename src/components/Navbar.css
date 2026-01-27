@@ -1015,3 +1015,42 @@ body {
     /* Adjust for mobile navbar height */
   }
 }
+
+/* =========================
+   Actions Pod (Login + Phone) Tweaks
+   ========================= */
+
+/* Default state: add the margin back that was removed from inline styles */
+.actions-pod .member-login-btn {
+  margin-bottom: 20px;
+}
+
+/* 
+     Scrolled Navbar State (Desktop XL+) 
+     - Switches from Column to Row to fit height 
+     - Removes vertical margins
+  */
+@media (min-width: 1200px) {
+
+  /* When scrolled, make the pod a row */
+  .custom-navbar.scrolled .actions-pod {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 15px;
+    margin-top: 0 !important;
+  }
+
+  /* Remove bottom margin from button in scrolled row mode */
+  .custom-navbar.scrolled .actions-pod .member-login-btn {
+    margin-bottom: 0;
+    padding: 6px 20px;
+    /* Slightly more compact */
+    font-size: 0.95rem;
+  }
+
+  /* Ensure phone wrapper fits nicely */
+  .custom-navbar.scrolled .middle-phone-modern {
+    margin-right: 0;
+    /* Reset margins if needed */
+  }
+}

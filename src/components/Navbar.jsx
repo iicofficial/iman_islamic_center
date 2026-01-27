@@ -327,12 +327,11 @@ function Navbar() {
                     </ul>
 
                     {/* Actions Pod */}
-                    <div className="d-flex flex-column align-items-center ms-xl-auto mt-3 mt-xl-0">
+                    <div className="actions-pod d-flex flex-column align-items-center ms-xl-auto mt-3 mt-xl-0">
                         {/* Member Login Button - Moved here */}
                         <Link
                             to="/member-login"
                             className="member-login-btn"
-                            style={{ marginBottom: '20px' }}
                             onClick={closeMenu}
                             title={t('navbar.memberLogin')}
                         >
