@@ -29,13 +29,11 @@
 }
 
 .login-logo {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 24px;
-    border-radius: 50%;
-    /* Subtle shadow for logo */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 0;
+    width: 180px;
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .login-header h2 {

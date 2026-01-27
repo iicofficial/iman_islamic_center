@@ -334,8 +334,6 @@ function Navbar() {
                             className="member-login-btn"
                             style={{ marginBottom: '20px' }}
                             onClick={closeMenu}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             title={t('navbar.memberLogin')}
                         >
                             <FaLock className="me-2" />

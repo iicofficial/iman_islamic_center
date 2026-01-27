@@ -26,7 +26,7 @@ const Login = () => {
             <div className="glass-card">
                 <div className="login-header">
                     <img src={logo} alt="IIC Logo" className="login-logo" />
-                    <h2>ELC Staff Portal</h2>
+                    <h2>Directors & ELC staff Portal</h2>
                     <p>Iman Islamic Center</p>
                 </div>
 
@@ -44,6 +44,14 @@ const Login = () => {
                         disabled={isLoggingIn}
                     >
                         {isLoggingIn ? 'Verifying...' : 'Sign in with Google'}
+                    </button>
+
+                    <button
+                        className="btn-back-home"
+                        onClick={() => navigate('/')}
+                        style={{ marginTop: '1rem', backgroundColor: '#27569b', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer', width: '100%' }}
+                    >
+                        Back to Home
                     </button>
                 </div>
 
