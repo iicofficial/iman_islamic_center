@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import logo from '../assets/logo.png';
-import bgImage from '../assets/iicmasjed.png';
+import bgImage from '../assets/iicmasjed1.png';
 import { FaGoogle, FaHome } from 'react-icons/fa';
 import './Login.css';
 

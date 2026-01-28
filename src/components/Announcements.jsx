@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import logo from '../assets/hero.png';
-import bgImage from '../assets/iicmasjed.png';
+import bgImage from '../assets/iicmasjed1.png';
 import './Announcements.css';
 import { FaBullhorn, FaFileAlt, FaCalendarCheck, FaSignOutAlt, FaLock } from 'react-icons/fa';
 

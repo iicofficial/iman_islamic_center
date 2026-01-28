@@ -26,8 +26,10 @@ function Navbar() {
         const handleScroll = () => {
             if (window.scrollY > 50) {
                 setIsScrolled(true);
+                document.documentElement.classList.add('has-scrolled-nav');
             } else {
                 setIsScrolled(false);
+                document.documentElement.classList.remove('has-scrolled-nav');
             }
         };
         window.addEventListener("scroll", handleScroll);
