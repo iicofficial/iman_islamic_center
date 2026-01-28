@@ -10,7 +10,7 @@ import "./Hero.css";
 function Hero() {
     const { t } = useLanguage();
 
-    const images = [img2, img1, img3, img4, img2];
+    const images = [img2, img1, img3, img4];
 
     return (
         <section className="hero-section">
@@ -18,7 +18,7 @@ function Hero() {
                 fade
                 indicators={false}
                 controls={false}
-                interval={3000}
+                interval={2000}
                 className="hero-carousel"
             >
                 {images.map((img, index) => (
