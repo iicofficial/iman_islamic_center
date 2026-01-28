@@ -5,7 +5,8 @@ import {
     FaMale, FaFemale, FaWpforms, FaFileDownload, FaUserPlus, FaHandHoldingUsd,
     FaFileAlt, FaInstagram, FaFacebookF, FaYoutube, FaPhoneAlt, FaEnvelope,
     FaChevronDown, FaHome, FaCalendarAlt, FaHistory, FaClock, FaMosque,
-    FaBookOpen, FaAngleRight, FaChild, FaUserGraduate, FaUsers, FaSignInAlt, FaLock
+    FaBookOpen, FaAngleRight, FaChild, FaUserGraduate, FaUsers, FaSignInAlt, FaLock,
+    FaShoppingBasket
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoLanguage } from "react-icons/io5";
@@ -306,6 +307,9 @@ function Navbar() {
                                 <li><Link className={`dropdown-item ${isItemActive('/divorce-formalization') ? 'active-item' : ''} `} to={getPath("/divorce-formalization")} onClick={closeMenu}><FaFileContract className="me-2 menu-icon" />{t('navbar.divorceFormalization')}</Link></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaLanguage className="me-2 menu-icon" />{t('navbar.certifiedTranslation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingHeart className="me-2 menu-icon" />{t('navbar.funeralServices')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingUsd className="me-2 menu-icon" />{t('navbar.utilityAssistance')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.rentalAssistance')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaShoppingBasket className="me-2 menu-icon" />{t('navbar.neighborhoodPantry')}</a></li>
                             </ul>
                         </li>
 

@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import logo from '../assets/hero.png';
+import bgImage from '../assets/iicmasjed.png';
 import './Announcements.css';
 import { FaBullhorn, FaFileAlt, FaCalendarCheck, FaSignOutAlt, FaLock } from 'react-icons/fa';
 
@@ -36,12 +37,21 @@ const Announcements = () => {
     }
 
     return (
-        <div className="portal-wrapper">
+        <div
+            className="portal-wrapper"
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed' // Optional: parallax effect for portal
+            }}
+        >
             <Navbar /> {/* Optional: Keep main navbar or make a custom one */}
 
-            <div className="portal-container container pb-5">
+            <div className="portal-container container-fluid pb-5">
                 <div className="portal-header d-flex justify-content-between align-items-start mb-5">
-                    <div>
+                    <div style={{ maxWidth: '45%' }}>
                         <img src={logo} alt="IIC Logo" style={{ height: '70px', marginBottom: '15px' }} />
                         <div className="d-block"></div>
                         <span className="badge bg-gold mb-2"><FaLock className="me-1" /> {t('announcements.secureBadge')}</span>
@@ -78,7 +88,7 @@ const Announcements = () => {
 
                 <div className="row g-4">
                     {/* Announcement 1 - Urgent */}
-                    <div className="col-md-8">
+                    <div className="col-md-4">
                         <div className="portal-panel main-panel p-4 h-100">
                             <div className="panel-header mb-4">
                                 <h3 className="portal-section-title"><FaBullhorn className="me-2 text-primary" /> {t('announcements.priorityTitle')}</h3>
@@ -112,41 +122,6 @@ const Announcements = () => {
                                 </div>
                                 <h5 className="announcement-title">{t('announcements.meetingTitle')}</h5>
                                 <p className="announcement-text">{t('announcements.meetingText')}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Sidebar / Quick Links */}
-                    <div className="col-md-4">
-                        <div className="portal-panel sidebar-panel p-4 mb-4">
-                            <h4 className="portal-section-title mb-3"><FaFileAlt className="me-2 text-primary" /> {t('announcements.resourcesTitle')}</h4>
-                            <ul className="portal-links">
-                                <li><a href="#">{t('announcements.handbook')}</a></li>
-                                <li><a href="#">{t('announcements.leaveRequest')}</a></li>
-                                <li><a href="#">{t('announcements.booking')}</a></li>
-                                <li><a href="#">{t('announcements.incidentReport')}</a></li>
-                            </ul>
-                        </div>
-
-                        <div className="portal-panel sidebar-panel p-4">
-                            <h4 className="portal-section-title mb-3"><FaCalendarCheck className="me-2 text-success" /> {t('announcements.dutiesTitle')}</h4>
-
-                            <div className="duty-card mb-3 p-2 border-start border-4 border-warning bg-light">
-                                <strong className="d-block text-dark">{t('announcements.jummahDuty')}</strong>
-                                <span className="text-muted small">Friday, Jan 30</span>
-                                <div className="mt-1 fw-bold text-primary">Abdulaziz Abdullah Al-Abbasi</div>
-                            </div>
-
-                            <div className="duty-card mb-3 p-2 border-start border-4 border-info bg-light">
-                                <strong className="d-block text-dark">{t('announcements.securityDuty')}</strong>
-                                <span className="text-muted small">Sat-Sun, Jan 31-Feb 1</span>
-                                <div className="mt-1 fw-bold text-primary">Br. Omar & Team</div>
-                            </div>
-
-                            <div className="duty-card p-2 border-start border-4 border-success bg-light">
-                                <strong className="d-block text-dark">{t('announcements.cleaningDuty')}</strong>
-                                <span className="text-muted small">{t('common.select') || 'Checklist'}</span>
-                                <div className="mt-1 fw-bold text-primary">Group B (Sisters)</div>
                             </div>
                         </div>
                     </div>

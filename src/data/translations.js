@@ -40,7 +40,10 @@ export const translations = {
             downloadForm: "Download form",
             aboutUs: "About Us",
             staff: "Our Staff",
-            memberLogin: "IIC Login"
+            memberLogin: "IIC Login",
+            utilityAssistance: "Utility Financial Assistance (UFAP)",
+            rentalAssistance: "Urgent Rental Assistance (URAP)",
+            neighborhoodPantry: "Neighborhood Pantry"
         },
         common: {
             select: "Select"
@@ -422,7 +425,10 @@ export const translations = {
             programPolicies: "سياسات الحلقة",
             aboutUs: "من نحن",
             staff: "طاقم العمل",
-            memberLogin: "دخول الأعضاء"
+            memberLogin: "دخول الأعضاء",
+            utilityAssistance: "برنامج المساعدة المالية للمرافق (UFAP)",
+            rentalAssistance: "برنامج المساعدة العاجلة للإيجار (URAP)",
+            neighborhoodPantry: "مخزن الطعام للحي"
         },
         common: {
             select: "اختر"

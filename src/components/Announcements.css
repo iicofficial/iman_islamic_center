@@ -11,6 +11,8 @@
 
 .portal-container {
     flex: 1;
+    padding-left: 5%;
+    /* Position near the far left edge */
 }
 
 .portal-loading {
@@ -39,11 +41,15 @@
 
 /* Panel Design */
 .portal-panel {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.94);
+    /* Slight transparency */
+    backdrop-filter: blur(10px);
+    /* Glass effect */
     border-radius: 12px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     border: 1px solid #e5e7eb;
     transition: all 0.2s ease;
+    margin-top: 20px;
 }
 
 .portal-panel:hover {
@@ -52,7 +58,10 @@
 
 /* Titles */
 .portal-title {
-    color: #111827;
+    color: #ffffff;
+    /* White text looks better on the photo background */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    /* Strong shadow for contrast */
     font-weight: 800;
     font-size: 2rem;
     margin-bottom: 0.25rem;
@@ -60,13 +69,16 @@
 }
 
 .portal-subtitle {
-    color: #6b7280;
+    color: #e5e7eb;
+    /* Light gray */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     font-size: 1.1rem;
 }
 
 .admin-name {
-    color: #27569b;
-    font-weight: 600;
+    color: #fbbf24;
+    /* Amber-400 */
+    font-weight: 700;
 }
 
 /* Section Headings */
