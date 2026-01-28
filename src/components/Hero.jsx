@@ -3,13 +3,14 @@ import { Carousel } from "react-bootstrap";
 import img1 from "../assets/iicmasjed1.png";
 import img2 from "../assets/iicmasjed2.jpeg";
 import img3 from "../assets/iicmasjed3.jpeg";
+import img4 from "../assets/iicmasjed4.jpeg";
 import { useLanguage } from "../context/LanguageContext";
 import "./Hero.css";
 
 function Hero() {
     const { t } = useLanguage();
 
-    const images = [img2, img1, img3, img2];
+    const images = [img2, img1, img3, img4, img2];
 
     return (
         <section className="hero-section">
@@ -17,7 +18,7 @@ function Hero() {
                 fade
                 indicators={false}
                 controls={false}
-                interval={5000}
+                interval={3000}
                 className="hero-carousel"
             >
                 {images.map((img, index) => (

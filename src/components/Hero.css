@@ -29,18 +29,38 @@
   margin: 0;
   padding: 0;
   border: none;
-  /* Custom Ease-In-Out transition for the fade effect */
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out !important;
+  /* Snappier Ease-In-Out transition */
+  transition: opacity 1s ease-in-out !important;
 }
 
+/* Professional Cross-Fade Animation */
 .hero-carousel.carousel-fade .carousel-item {
   opacity: 0;
-  transition-duration: 1.5s;
-  transition-property: opacity;
+  transition: opacity 1s ease-in-out;
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: block !important;
+  width: 100%;
 }
 
 .hero-carousel.carousel-fade .carousel-item.active {
   opacity: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-carousel.carousel-fade .carousel-item-next.carousel-item-start,
+.hero-carousel.carousel-fade .carousel-item-prev.carousel-item-end {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-carousel.carousel-fade .active.carousel-item-start,
+.hero-carousel.carousel-fade .active.carousel-item-end {
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 1s ease-in-out;
 }
 
 .hero-slide {
