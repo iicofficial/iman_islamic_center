@@ -85,7 +85,9 @@ export const translations = {
             jummah1: "1st Jumu'ah",
             jummah2: "2nd Jumu'ah",
             khutba: "Khutba",
-            jummahPrayers: "Jumu'ah Prayers"
+            jummahPrayers: "Jumu'ah Prayers",
+            nextPrayer: "Next Prayer",
+            timeLeft: "Time Left"
         },
         donate: {
             heading: "Support Iman Islamic Center",
@@ -471,7 +473,9 @@ export const translations = {
             jummah1: "الجمعة الأولى",
             jummah2: "الجمعة الثانية",
             khutba: "الخطبة",
-            jummahPrayers: "صلاة الجمعة"
+            jummahPrayers: "صلاة الجمعة",
+            nextPrayer: "الصلاة القادمة",
+            timeLeft: "الوقت المتبقي"
         },
         donate: {
             heading: "ادعم مركز الإيمان الإسلامي",

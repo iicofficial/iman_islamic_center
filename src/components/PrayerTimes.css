@@ -1,20 +1,17 @@
 /* ===============================
    Prayer Section
-================================ */
+ ================================ */
 .prayer-section {
   background: #ffffff;
-  padding: 20px 15px;
-  text-align: center;
-  /* Modern Frame with Brand Color */
-  border: 3px solid #27569b;
+  padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(39, 86, 155, 0.15);
+  box-shadow: 0 10px 40px rgba(39, 86, 155, 0.15);
+  border: 3px solid #39569b;
   position: relative;
   overflow: hidden;
-  margin: 0;
 }
 
-/* Decorative corner accents */
+/* Decorative corner accents - Restored from old frame */
 .prayer-section::before {
   content: '';
   position: absolute;
@@ -22,8 +19,10 @@
   left: 0;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #27569b 0%, transparent 100%);
+  background: linear-gradient(135deg, #39569b 0%, transparent 100%);
   border-radius: 0 0 20px 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .prayer-section::after {
@@ -33,100 +32,343 @@
   right: 0;
   width: 60px;
   height: 60px;
-  background: linear-gradient(315deg, #27569b 0%, transparent 100%);
+  background: linear-gradient(315deg, #39569b 0%, transparent 100%);
   border-radius: 20px 0 0 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.prayer-header-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .prayer-heading {
-  color: #27569b;
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  color: #1a202c;
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0 0 2rem 0;
+  position: relative;
+  padding-bottom: 15px;
+  z-index: 1;
+}
+
+.prayer-heading.centered {
+  text-align: center;
+}
+
+.prayer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #39569b;
+  border-radius: 2px;
+}
+
+/* Next Prayer Layout */
+.next-prayer-container {
+  margin-bottom: 2rem;
   position: relative;
   z-index: 1;
 }
 
-/* ===============================
-   Dates
-================================ */
+.next-prayer-card {
+  background: linear-gradient(135deg, #39569b 0%, #2d4373 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(57, 86, 155, 0.25);
+  animation: fadeInScale 0.5s ease-out;
+}
+
+.next-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.next-info-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.next-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.next-time-main {
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.next-iqamah-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2px 12px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.next-iqamah-badge small {
+  opacity: 0.7;
+  margin-right: 4px;
+  font-weight: 400;
+}
+
+.next-countdown-row {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.countdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.countdown-item small {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-item span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffd700;
+  /* Gold for emphasis */
+}
+
+/* Date Container */
 .prayer-date-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-
-.prayer-date-hijri {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #27569b;
-}
-
-.prayer-date-greg {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #000;
-}
-
-/* ===============================
-   Tables (Bootstrap-safe)
-================================ */
-.table {
-  width: 100%;
-  margin-bottom: 40px;
-  border-collapse: collapse;
-}
-
-/* Table Header */
-.table thead th {
-  background-color: #27569b;
-  color: #ffffff;
+  justify-content: center;
+  gap: 1.5rem;
+  background: #f8fafc;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  color: #4a5568;
   font-weight: 600;
-  text-align: center;
-  padding: 14px 10px;
-  border: 1px solid #dee2e6;
 }
 
-/* Table Cells */
-.table tbody td {
+.date-divider {
+  width: 2px;
+  height: 20px;
+  background: #e2e8f0;
+}
+
+.date-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Table Styles */
+.daily-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-bottom: 1.5rem;
+}
+
+.daily-table th {
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  padding: 1rem;
+  border: none;
   text-align: center;
-  padding: 12px 8px;
+}
+
+.daily-table td {
+  padding: 1.25rem 1rem;
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: center;
   font-size: 1rem;
-  font-weight: 500;
-  color: #000;
-  border: 1px solid #dee2e6;
 }
 
-/* ===============================
-   Darker Zebra Theme
-================================ */
-.table tbody tr:nth-child(even)>td {
-  background-color: #d6e6f7 !important;
+.daily-table td:first-child {
+  border-left: 1px solid #f1f5f9;
+  border-radius: 12px 0 0 12px;
+  color: #1e293b;
+  font-weight: 700;
+  text-align: left;
 }
 
-/* Hover Effect */
-.table tbody tr:hover>td {
-  background-color: #c2daf3 !important;
-  transition: background-color 0.2s ease;
+.daily-table td:last-child {
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0 12px 12px 0;
 }
 
-/* ===============================
-   Jumu'ah Table
-================================ */
-.jumuah-table thead th {
-  background-color: #27569b;
+.daily-table tr.next-row td {
+  background: #f0f7ff;
+  border-color: #39569b;
 }
 
-/* ===============================
-   Responsive
-================================ */
-.table-responsive {
-  overflow-x: auto;
+.daily-table tr.next-row td:first-child {
+  color: #39569b;
 }
 
-/* Remove any unwanted pseudo elements */
-.prayer-date-hijri::before,
-.prayer-date-greg::before {
-  content: none !important;
+.p-time,
+.p-iqamah {
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* Jumuah Styles */
+.jumuah-container {
+  background: #fffaf0;
+  border: 1px dashed #ed8936;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.jumuah-title {
+  color: #c05621;
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.jumuah-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.jumuah-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.jumuah-item span {
+  font-size: 0.85rem;
+  color: #9c4221;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.jumuah-item strong {
+  font-size: 1.5rem;
+  color: #2d3748;
+  font-weight: 800;
+}
+
+.prayer-loading {
+  padding: 5rem 3rem;
+  text-align: center;
+  color: #39569b;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Arabic RTL Support */
+[dir="rtl"] .p-name {
+  text-align: right !important;
+}
+
+[dir="rtl"] .prayer-heading::after {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .next-label .me-2 {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .daily-table td:first-child {
+  border-left: none;
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0 12px 12px 0;
+  text-align: right;
+}
+
+[dir="rtl"] .daily-table td:last-child {
+  border-right: none;
+  border-left: 1px solid #f1f5f9;
+  border-radius: 12px 0 0 12px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .prayer-header-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .prayer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .next-prayer-card {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .prayer-date-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .date-divider {
+    display: none;
+  }
+
+  .daily-table {
+    font-size: 0.9rem;
+  }
+
+  .daily-table td {
+    padding: 1rem 0.5rem;
+  }
 }
