@@ -110,8 +110,11 @@ Income: $${formData.monthlyIncome}
 Household: ${formData.householdSize}
 Reason: ${formData.reason} `,
                 // Additional fields for sheet
-                formType: 'UFAP',
+                formType: 'Utility Assistance',
                 sheetName: 'Utility Assistance',
+                sheet_name: 'Utility Assistance',
+                tabName: 'Utility Assistance',
+                table_name: 'Utility Assistance',
                 address: formData.address,
                 utilityType: formData.utilityType,
                 accountNumber: formData.accountNumber,

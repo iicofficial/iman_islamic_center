@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { FaHome, FaUser, FaEnvelope, FaPhone, FaFileInvoiceDollar, FaCalendar } from 'react-icons/fa';
 import { sendEmail } from "../utils/emailService";
 import StatusModal from './StatusModal';
+import { DatePicker } from './DateTimePicker';
 import jsPDF from 'jspdf';
 import './URAPApplication.css';
 
@@ -118,8 +119,11 @@ Owed: $${formData.amountOwed} (${formData.monthsBehind} months)
 Eviction Notice: ${formData.evictionNotice === 'yes' ? 'YES - Date: ' + formData.evictionDate : 'No'}
 Reason: ${formData.reason}`,
                 // Additional fields for sheet
-                formType: 'URAP',
+                formType: 'Rental Assistance',
                 sheetName: 'Rental Assistance',
+                sheet_name: 'Rental Assistance',
+                tabName: 'Rental Assistance',
+                table_name: 'Rental Assistance',
                 currentAddress: formData.currentAddress,
                 landlordName: formData.landlordName,
                 landlordPhone: formData.landlordPhone,
@@ -364,12 +368,11 @@ Reason: ${formData.reason}`,
 
                     {formData.evictionNotice === 'yes' && (
                         <div className="form-group">
-                            <label><FaCalendar className="input-icon" /> {language === 'ar' ? 'تاريخ الإخلاء المتوقع *' : 'Expected Eviction Date *'}</label>
-                            <input
-                                type="date"
-                                name="evictionDate"
+                            <DatePicker
+                                label={language === 'ar' ? 'تاريخ الإخلاء المتوقع *' : 'Expected Eviction Date *'}
                                 value={formData.evictionDate}
                                 onChange={handleChange}
+                                name="evictionDate"
                                 required={formData.evictionNotice === 'yes'}
                             />
                         </div>
