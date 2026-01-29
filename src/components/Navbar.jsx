@@ -311,6 +311,7 @@ function Navbar() {
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingHeart className="me-2 menu-icon" />{t('navbar.funeralServices')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingUsd className="me-2 menu-icon" />{t('navbar.utilityAssistance')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.rentalAssistance')}</a></li>
+                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.evectionAssistance')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaShoppingBasket className="me-2 menu-icon" />{t('navbar.neighborhoodPantry')}</a></li>
                             </ul>
                         </li>

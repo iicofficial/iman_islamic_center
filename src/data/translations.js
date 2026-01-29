@@ -43,6 +43,7 @@ export const translations = {
             memberLogin: "IIC Login",
             utilityAssistance: "Utility Financial Assistance (UFAP)",
             rentalAssistance: "Urgent Rental Assistance (URAP)",
+            evectionAssistance: "Eviction Notice Resolution Program",
             neighborhoodPantry: "Neighborhood Pantry"
         },
         common: {
@@ -428,6 +429,7 @@ export const translations = {
             memberLogin: "دخول الأعضاء",
             utilityAssistance: "برنامج المساعدة المالية للمرافق (UFAP)",
             rentalAssistance: "برنامج المساعدة العاجلة للإيجار (URAP)",
+            evectionAssistance: "برنامج حل إشعارات الإخلاء",
             neighborhoodPantry: "مخزن الطعام للحي"
         },
         common: {
