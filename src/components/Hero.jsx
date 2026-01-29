@@ -1,6 +1,5 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import img1 from "../assets/iicmasjed1.png";
 import img2 from "../assets/iicmasjed2.jpeg";
 import img3 from "../assets/iicmasjed3.jpeg";
 import img4 from "../assets/iicmasjed4.jpeg";
@@ -10,7 +9,7 @@ import "./Hero.css";
 function Hero() {
     const { t } = useLanguage();
 
-    const images = [img2, img1, img3, img4];
+    const images = [img2, img3, img4];
 
     return (
         <section className="hero-section">

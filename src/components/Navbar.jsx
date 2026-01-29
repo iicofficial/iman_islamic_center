@@ -14,6 +14,7 @@ import { useLanguage } from "../context/LanguageContext";
 import logo from "../assets/logo.png";
 import arabicLogo from "../assets/arabic_logo.png";
 import "./Navbar.css";
+import "./NavbarAnnouncements.css";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -97,8 +98,10 @@ function Navbar() {
         setActiveSubmenu(prev => prev === menuName ? null : menuName);
     };
 
+    const isAnnouncementsPage = location.pathname.includes('/announcements');
+
     return (
-        <nav className={`navbar navbar-expand-xl custom-navbar fixed-top ${isScrolled ? "scrolled" : ""} `}>
+        <nav className={`navbar navbar-expand-xl custom-navbar fixed-top ${isScrolled ? "scrolled" : ""} ${isAnnouncementsPage ? "announcements-nav" : ""} `}>
             <div className="container-fluid px-4 position-relative">
 
                 {/* Brand Section */}
@@ -309,8 +312,8 @@ function Navbar() {
                                 <li><Link className={`dropdown-item ${isItemActive('/divorce-formalization') ? 'active-item' : ''} `} to={getPath("/divorce-formalization")} onClick={closeMenu}><FaFileContract className="me-2 menu-icon" />{t('navbar.divorceFormalization')}</Link></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaLanguage className="me-2 menu-icon" />{t('navbar.certifiedTranslation')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingHeart className="me-2 menu-icon" />{t('navbar.funeralServices')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHandHoldingUsd className="me-2 menu-icon" />{t('navbar.utilityAssistance')}</a></li>
-                                <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.rentalAssistance')}</a></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/ufap-application') ? 'active-item' : ''}`} to={getPath("/ufap-application")} onClick={closeMenu}><FaHandHoldingUsd className="me-2 menu-icon" />{t('navbar.utilityAssistance')}</Link></li>
+                                <li><Link className={`dropdown-item ${isItemActive('/urap-application') ? 'active-item' : ''}`} to={getPath("/urap-application")} onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.rentalAssistance')}</Link></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaHome className="me-2 menu-icon" />{t('navbar.evectionAssistance')}</a></li>
                                 <li><a className="dropdown-item" href="#services" onClick={closeMenu}><FaShoppingBasket className="me-2 menu-icon" />{t('navbar.neighborhoodPantry')}</a></li>
                             </ul>
@@ -335,16 +338,18 @@ function Navbar() {
 
                     {/* Actions Pod */}
                     <div className="actions-pod d-flex flex-column align-items-center ms-xl-auto mt-3 mt-xl-0">
-                        {/* Member Login Button - Moved here */}
-                        <Link
-                            to="/member-login"
-                            className="member-login-btn"
-                            onClick={closeMenu}
-                            title={t('navbar.memberLogin')}
-                        >
-                            <FaLock className="me-2" />
-                            <span>{t('navbar.memberLogin')}</span>
-                        </Link>
+                        {/* Member Login Button - Hidden on Announcements page */}
+                        {!isAnnouncementsPage && (
+                            <Link
+                                to="/member-login"
+                                className="member-login-btn"
+                                onClick={closeMenu}
+                                title={t('navbar.memberLogin')}
+                            >
+                                <FaLock className="me-2" />
+                                <span>{t('navbar.memberLogin')}</span>
+                            </Link>
+                        )}
 
                         <div className="phone-wrapper middle-phone-modern">
                             <div className="pod-item me-3">

@@ -21,6 +21,8 @@ import ProgramPolicies from "./components/ProgramPolicies";
 import CoupleReconciliation from "./components/CoupleReconciliation";
 import DivorceFormalization from "./components/DivorceFormalization";
 import Staff from "./components/Staff";
+import UFAPApplication from "./components/UFAPApplication";
+import URAPApplication from "./components/URAPApplication";
 
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./components/Login";
@@ -82,6 +84,8 @@ function App() {
           <Route path="/ar/couple-reconciliation" element={<><Navbar /><CoupleReconciliation /><Footer /></>} />
           <Route path="/ar/divorce-formalization" element={<><Navbar /><DivorceFormalization /><Footer /></>} />
           <Route path="/ar/staff" element={<><Navbar /><Staff /><Footer /></>} />
+          <Route path="/ar/ufap-application" element={<><Navbar /><UFAPApplication /><Footer /></>} />
+          <Route path="/ar/urap-application" element={<><Navbar /><URAPApplication /><Footer /></>} />
 
           <Route path="/contact" element={<><Navbar /><ContactPage /><Footer /></>} />
           <Route path="/marriage-certificate" element={<><Navbar /><MarriageCertificate /><Footer /></>} />
@@ -94,6 +98,8 @@ function App() {
           <Route path="/couple-reconciliation" element={<><Navbar /><CoupleReconciliation /><Footer /></>} />
           <Route path="/divorce-formalization" element={<><Navbar /><DivorceFormalization /><Footer /></>} />
           <Route path="/staff" element={<><Navbar /><Staff /><Footer /></>} />
+          <Route path="/ufap-application" element={<><Navbar /><UFAPApplication /><Footer /></>} />
+          <Route path="/urap-application" element={<><Navbar /><URAPApplication /><Footer /></>} />
         </Routes>
       </Router>
     </AuthProvider>

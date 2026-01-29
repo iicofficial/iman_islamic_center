@@ -1,0 +1,192 @@
+.ufap-container {
+    max-width: 900px;
+    margin: 240px auto 50px;
+    /* Aligned with navbar height */
+    padding: 40px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.ufap-container.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Adjust margin when navbar shrinks on scroll */
+.has-scrolled-nav .ufap-container {
+    margin-top: 100px;
+}
+
+.ufap-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #27569b;
+}
+
+.ufap-icon {
+    font-size: 3.5rem;
+    color: #27569b;
+    margin-bottom: 15px;
+}
+
+.ufap-header h1 {
+    color: #27569b;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.ufap-header p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.ufap-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+    margin-bottom: 35px;
+}
+
+.form-section h3 {
+    color: #27569b;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.section-icon {
+    font-size: 1.3rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-icon {
+    color: #27569b;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #27569b;
+    box-shadow: 0 0 0 3px rgba(39, 86, 155, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #27569b 0%, #1e4278 100%);
+    color: white;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(39, 86, 155, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(39, 86, 155, 0.4);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-note {
+    margin-top: 25px;
+    padding: 15px;
+    background: #e7f3ff;
+    border-left: 4px solid #27569b;
+    border-radius: 8px;
+    color: #495057;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.ufap-container.rtl .form-note {
+    border-left: none;
+    border-right: 4px solid #27569b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ufap-container {
+        margin: 240px 20px 30px;
+        padding: 25px;
+    }
+
+    .ufap-form {
+        padding: 25px;
+    }
+
+    .ufap-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px 30px;
+    }
+}

@@ -1,0 +1,90 @@
+/* Announcements Page Navbar - Blue Solid */
+.announcements-nav,
+.announcements-nav.scrolled {
+    background: #27569b !important;
+    /* Matches Footer Color Exact */
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Force white text for links on this blue background */
+.announcements-nav .navbar-nav .nav-link {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.announcements-nav .navbar-nav .nav-link:hover,
+.announcements-nav .navbar-nav .nav-item:hover>.nav-link {
+    color: #e0e0e0 !important;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.announcements-nav .navbar-nav .nav-link.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Adjust active underline to be white */
+.announcements-nav .navbar-nav .nav-link::after {
+    background: #ffffff;
+}
+
+/* Adjust arrows */
+.announcements-nav .nav-arrow,
+.announcements-nav .menu-icon {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile Toggler - make it white */
+.announcements-nav .navbar-toggler-icon {
+    filter: invert(1) brightness(2);
+}
+
+/* Adjust contact/phone info if visible */
+.announcements-nav .middle-phone-modern {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.announcements-nav .phone-number {
+    color: #fff;
+}
+
+.announcements-nav .contact-link-modern {
+    color: #fff !important;
+}
+
+.announcements-nav .pod-divider {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Member login btn on blue background */
+.announcements-nav .member-login-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.announcements-nav .member-login-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Keep dropdowns white with dark text */
+.announcements-nav .dropdown-menu {
+    background: #ffffff !important;
+}
+
+.announcements-nav .dropdown-item {
+    color: #1a1a1a !important;
+}
+
+.announcements-nav .dropdown-item:hover {
+    color: #ffffff !important;
+}
+
+/* Force Logo to White on Announcements Page */
+.announcements-nav .navbar-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
