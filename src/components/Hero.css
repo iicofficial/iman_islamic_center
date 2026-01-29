@@ -15,59 +15,7 @@
   margin-top: 100px;
 }
 
-/* Force Carousel root to fill the 60vh container */
-.hero-carousel {
-  width: 100%;
-  height: 100%;
-}
-
-/* Force all carousel layers to be exactly the same size as the section */
-.hero-carousel .carousel-inner,
-.hero-carousel .carousel-item {
-  height: 100% !important;
-  width: 100% !important;
-  margin: 0;
-  padding: 0;
-  border: none;
-  /* Snappier Ease-In-Out transition */
-  transition: opacity 1s ease-in-out !important;
-}
-
-/* Strict Opacity-Only Cross-Fade (No Sliding) */
-.hero-carousel.carousel-fade .carousel-item {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out !important;
-  left: 0 !important;
-  top: 0 !important;
-  position: absolute !important;
-  display: block !important;
-  width: 100% !important;
-  transform: none !important;
-  /* Block all bootstrap sliding */
-}
-
-.hero-carousel.carousel-fade .carousel-item.active {
-  opacity: 1;
-  position: relative !important;
-  z-index: 1;
-  transform: none !important;
-}
-
-.hero-carousel.carousel-fade .carousel-item-next.carousel-item-start,
-.hero-carousel.carousel-fade .carousel-item-prev.carousel-item-end {
-  opacity: 1;
-  z-index: 1;
-  transform: none !important;
-}
-
-.hero-carousel.carousel-fade .active.carousel-item-start,
-.hero-carousel.carousel-fade .active.carousel-item-end {
-  opacity: 0;
-  z-index: 0;
-  transition: opacity 0.8s ease-in-out !important;
-  transform: none !important;
-}
-
+/* Static Hero Slide */
 .hero-slide {
   height: 100%;
   width: 100%;

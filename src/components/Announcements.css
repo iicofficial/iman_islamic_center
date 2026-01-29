@@ -69,16 +69,25 @@
 }
 
 .portal-subtitle {
-    color: #e5e7eb;
-    /* Light gray */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.7);
+    /* Solid semi-transparent black background */
+    padding: 8px 20px;
+    border-radius: 50px;
+    /* Pill shape */
+    display: inline-flex;
+    align-items: center;
     font-size: 1.1rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+    /* Extra clarity */
 }
 
 .admin-name {
-    color: #fbbf24;
-    /* Amber-400 */
-    font-weight: 700;
+    color: #ffffff;
+    /* White text */
+    font-weight: 800;
+    margin-left: 8px;
 }
 
 /* Section Headings */
@@ -177,4 +186,17 @@
 .duty-person {
     color: #15803d;
     font-size: 0.9rem;
+}
+
+/* Static Logout Button (No Hover) */
+.portal-logout-btn,
+.portal-logout-btn:hover,
+.portal-logout-btn:focus,
+.portal-logout-btn:active {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 1 !important;
 }

@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import logo from '../assets/hero.png';
-import bgImage from '../assets/iicmasjed1.png';
+import bgImage from '../assets/iicmasjed4.jpeg';
 import './Announcements.css';
 import { FaBullhorn, FaFileAlt, FaCalendarCheck, FaSignOutAlt, FaLock } from 'react-icons/fa';
 
@@ -58,7 +58,7 @@ const Announcements = () => {
                         <h1 className="portal-title">{t('announcements.portalTitle')}</h1>
                         <div className="d-flex align-items-center flex-wrap gap-3">
                             <p className="portal-subtitle mb-0">{t('announcements.welcome')} <span className="admin-name">{currentUser?.displayName}</span></p>
-                            <button onClick={handleLogout} className="btn btn-outline-danger btn-sm rounded-pill px-3 py-1" style={{ fontSize: '0.8rem' }}>
+                            <button onClick={handleLogout} className="btn btn-danger portal-logout-btn btn-sm rounded-pill px-3 py-1" style={{ fontSize: '0.8rem' }}>
                                 <FaSignOutAlt className="me-2" /> {t('announcements.signOut')}
                             </button>
                         </div>
